@@ -1,40 +1,59 @@
 %{
 #include <stdio.h>
+#include <string.h>
+char *findTag(char *s,int len);
 %}
+
+%option stack yylineno 
+%x aAttVal
+%x fontAttVal
 
 space [ \t\r]
 tags "head"|"body"|"title"|"center"|"br"|"p"|"h1"|"h2"|"h3"|"h4"|"ul"|"li"|"ol"|"ul"|"dl"|"dt"|"dd"|"div"|"u"|"b"|"i"|"em"|"tt"|"strong"|"small"|"sub"|"sup"|"table"|"caption"|"th"|"tr"|"td"
 
-aOpen "<a"{space}*[^>|\n]*{space}*">"
-aClose "</a"{space}*[\n]*{space}*">"
+aOpen "<a"{space}*
+aClose "</a"{space}*[\n]*">"
 
-fontOpen "<font"{space}*[^>|\n]*{space}*">"
-fontClose "</font"{space}*[\n]*{space}*">"
+fontOpen "<font"{space}*
+fontClose "</font"{space}*[\n]*">"
 
-imgOpen "<img"{space}*[^>|\n]*{space}*">"
-imgClose "</img"{space}*[\n]*{space}*">"
+imgOpen "<img"{space}*
+imgClose "</img"{space}*[\n]*">"
 
 %%
 
-"<"{tags}{space}*[^>|\n]*{space}*">" {
-				int l=1;
-				while(l<yyleng){
-										
-				}
+<aAttVal>{
+        "href"{space}*[=] {
+                                yyless(yyleng-1);
+                                printf("%s\n",yytext);
+                        }
+	[=]{space}*[\"\'][a-zA-Z0-9_\-$\~\.]*{space}*[\'\"] { printf("%s\n",yytext+1);}
+        {space}*">" { yy_pop_state(); }
+        .
+
+}
+<fontAttVal>{
+	"size"{space}*[=]   {      yyless(yyleng-1);
+				printf("%s\n",yytext+1);
 			}
-"</"{tags}{space}*[\n]*">" {printf("%s",yytext);}
+	[=]{space}*[\"\'][a-zA-Z0-9_\-$\~\.]*{space}*[\'\"]   {printf("%s\n",yytext+1); }
+	{space}*">"   { yy_pop_state(); }
+	.
+}
 
-{aOpen}  {printf("%s",yytext);}
-{aClose}  {printf("%s",yytext);}
+{imgOpen} { printf("%s",yytext+1);}
+{imgClose} {printf("%s",yytext+2);}
 
-{fontOpen}  {printf("%s",yytext);}
-{fontClose}  {printf("%s",yytext);}
+"<"{tags}{space}*[^>|\n]*">" { printf("%s",findTag(yytext+1,yyleng));}
+"</"{tags}{space}*[\n]*">" {printf("%s",findTag(yytext+2,yyleng));}
 
-{imgOpen}  {printf("%s",yytext);}
-{imgClose}  {printf("%s",yytext);}
+{aOpen}  {yy_push_state(aAttVal);printf("%s",yytext+1);}
+{aClose}  {printf("%s",findTag(yytext+2,yyleng-2));}
 
-[.|\n]
-
+{fontOpen}  {yy_push_state(fontAttVal); printf("%s",yytext+1);}
+{fontClose}  {printf("%s",findTag(yytext+2,yyleng-2));}
+.
+ 
 %%
 int yywrap(){return 1;}	
 int main()
@@ -46,4 +65,16 @@ int main()
 	yyin=fp;
 	yylex();
 	fclose(fp);
+}
+char *findTag(char *s,int len){
+	int l=0;
+        char *tag = (char *)malloc(sizeof(char)*10);
+        while(l<len){
+                if(s[l] == ' ' || s[l]=='>')
+	                break;
+                *(tag+l)=s[l];
+	        l++;
+        }
+        *(tag+l)=0;
+        return tag;
 }
