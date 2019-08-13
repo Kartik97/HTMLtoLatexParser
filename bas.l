@@ -8,40 +8,42 @@ char *findTag(char *s,int len);
 %x aAttVal
 %x fontAttVal
 %x imgAttVal
+%x equal
 
 space [ \t\r]
 tags "head"|"body"|"title"|"center"|"br"|"p"|"h1"|"h2"|"h3"|"h4"|"ul"|"li"|"ol"|"ul"|"dl"|"dt"|"dd"|"div"|"u"|"b"|"i"|"em"|"tt"|"strong"|"small"|"sub"|"sup"|"table"|"caption"|"th"|"tr"|"td"
 
-aOpen "<a"{space}*
+aOpen "<a"{space}+
 aClose "</a"{space}*[\n]*">"
 
-fontOpen "<font"{space}*
+fontOpen "<font"{space}+
 fontClose "</font"({space}+[\n]*">"|">")
 
-imgOpen "<img"
+imgOpen "<img"{space}+
 imgClose "</img"({space}+[\n]*">"|">")
 
 %%
 
+
 <imgAttVal>{
-	{space}+"src"{space}*[=]  { yyless(yyleng-1);
+	{space}*"src"{space}*[=]  { yyless(yyleng-1);
 				printf("%s\n",yytext);
 	}
-	{space}+"width"{space}*[=]  {yyless(yyleng-1);  printf("%s\n",yytext); }
-	{space}+"height"{space}*[=]  {yyless(yyleng-1);  printf("%s\n",yytext); }
-	{space}+"figure"{space}*[=]  {yyless(yyleng-1);  printf("%s\n",yytext); }
-	{space}+"figcaption"{space}*[=]  {yyless(yyleng-1);  printf("%s\n",yytext); }
+	{space}*"width"{space}*[=]  {yyless(yyleng-1);  printf("%s\n",yytext); }
+	{space}*"height"{space}*[=]  {yyless(yyleng-1);  printf("%s\n",yytext); }
+	{space}*"figure"{space}*[=]  {yyless(yyleng-1);  printf("%s\n",yytext); }
+	{space}*"figcaption"{space}*[=]  {yyless(yyleng-1);  printf("%s\n",yytext); }
 	[=]{space}*[\"\'][a-zA-Z0-9_\-$\~\.]*{space}*[\'\"] { printf("%s\n",yytext+1);}
         {space}*">" { yy_pop_state(); }
         .
 }
 
 <aAttVal>{
-        {space}+"href"{space}*[=] {
+        {space}*"href"{space}*[=] {
                                 yyless(yyleng-1);
                                 printf("%s\n",yytext);
                         }
-	[=]{space}*[\"\'][a-zA-Z0-9_\-$\~\.]*{space}*[\'\"] { printf("%s\n",yytext+1);}
+	[=]{space}*[\"\'][a-zA-Z0-9_\-$\~\.]*{space}*[\'\"] {  printf("%s\n",yytext+1);}
         {space}*">" { yy_pop_state(); }
         .
 
