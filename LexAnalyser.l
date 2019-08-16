@@ -32,7 +32,7 @@ space [ \t\r\n]
 		return STARTTAGOPEN;
 	}
 <aTag>{
-	"href"{space}*[=]  {
+	"href"{space}*[=]*  {
 			yylval.value = "href";
 			yyless(yyleng-1);
 			yy_push_state(aInside);
@@ -41,16 +41,22 @@ space [ \t\r\n]
 	{space}*">" { yy_pop_state(); 
 			yylval.value = "closed"; 
 			return STARTTAGCLOSE;
-		 }
+		 }	 
+	[^>]    {} 
 }
 <aInside>{
-	[=]{space}*[\"\']{space}*[a-zA-Z0-9@_\\\/\-]*{space}*[\"\']  {
-			yy_pop_state();
-			yylval.value=findVal(yytext,yyleng);
+                [=]{space}*[\"\']{space}*[a-zA-Z0-9@_\\\/\-]*{space}*[\"\']  {
+                        yy_pop_state();
+                        yylval.value=findVal(yytext,yyleng);
+                        return ATTRIBUTEVAL;
+                }
+		[=]  {	yy_pop_state();
+			yylval.value="";
 			return ATTRIBUTEVAL;
 		}
-}
-.
+		[^>]  {yy_pop_state(); yyless(yyleng-1); }
+        }
+[^<]  {}
 
 %%
 int yywrap(){

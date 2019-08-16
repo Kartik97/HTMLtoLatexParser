@@ -38,10 +38,11 @@ attributes: attributes STARTTAGCLOSE {i++; printf("%s%d\n",$2,i); }
 	;
 
 att: ATTRIBUTE {i++; printf("%s%d\n",$1,i); }
-     | ATTRIBUTE ATTRIBUTEVAL {i++; printf("%s\n%s%d\n",$1,$2,i); }
+     | ATTRIBUTE ATTRIBUTEVAL {i++; printf("%s %s%d\n",$1,$2,i); }
 	;
 
 attTag: STARTTAGOPEN attributes {i++; printf("%s%d\n",$1,i); }
+	| STARTTAGOPEN STARTTAGCLOSE {i++; printf("\n%s %s%d\n",$1,$2,i); }
 	;
 
 content: content tag
