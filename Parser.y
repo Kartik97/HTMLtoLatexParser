@@ -18,10 +18,11 @@ int i=0;
 %token SYMBOL 
 %token TEXT
 %token ATTRIBUTE
-%token TAGCLOSED
+%token TAGCLOSE
 %token IGNORE
+%token ATTRIBUTEVAL
 
-%type <value> ATTRIBUTE STARTTAGOPEN STARTTAGCLOSE TAG
+%type <value> ATTRIBUTE STARTTAGOPEN STARTTAGCLOSE TAG ATTRIBUTEVAL
 
 %%
 
@@ -32,8 +33,12 @@ tag: TAG {i++; printf("%s%d\n",$1,i); }
         ;
 
 attributes: attributes STARTTAGCLOSE {i++; printf("%s%d\n",$2,i); }
-	    | attributes ATTRIBUTE {i++; printf("%s%d\n",$2,i); }
-	    | ATTRIBUTE {i++; printf("%s%d\n",$1,i); }
+	    | attributes att 
+	    | att 
+	;
+
+att: ATTRIBUTE {i++; printf("%s%d\n",$1,i); }
+     | ATTRIBUTE ATTRIBUTEVAL {i++; printf("%s\n%s%d\n",$1,$2,i); }
 	;
 
 attTag: STARTTAGOPEN attributes {i++; printf("%s%d\n",$1,i); }

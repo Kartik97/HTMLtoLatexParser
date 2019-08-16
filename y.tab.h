@@ -54,8 +54,9 @@ extern int yydebug;
     SYMBOL = 264,
     TEXT = 265,
     ATTRIBUTE = 266,
-    TAGCLOSED = 267,
-    IGNORE = 268
+    TAGCLOSE = 267,
+    IGNORE = 268,
+    ATTRIBUTEVAL = 269
   };
 #endif
 /* Tokens.  */
@@ -68,8 +69,9 @@ extern int yydebug;
 #define SYMBOL 264
 #define TEXT 265
 #define ATTRIBUTE 266
-#define TAGCLOSED 267
+#define TAGCLOSE 267
 #define IGNORE 268
+#define ATTRIBUTEVAL 269
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -81,7 +83,7 @@ union YYSTYPE
 	char *object;
 	char *value;
 
-#line 85 "y.tab.h" /* yacc.c:1909  */
+#line 87 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

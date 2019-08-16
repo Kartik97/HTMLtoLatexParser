@@ -2,11 +2,14 @@
 #include <stdio.h>
 #include <string.h>
 #include "y.tab.h"
+
+char *findVal(char *s,int len);
 %}
 %option stack
 %x aTag
+%x aInside
 
-space [ \t\r]
+space [ \t\r\n]
 
 %%
 "<html>"|"<html"{space}+[^>]*">"        {  
@@ -28,14 +31,37 @@ space [ \t\r]
 		yylval.value="a";
 		return STARTTAGOPEN;
 	}
-<aTag>"href"[=][\"\'][a-zA-Z]*[\"\'][^>]* {
+<aTag>{
+	"href"{space}*[=]  {
 			yylval.value = "href";
+			yyless(yyleng-1);
+			yy_push_state(aInside);
 			return ATTRIBUTE;
+		}
+	{space}*">" { yy_pop_state(); 
+			yylval.value = "closed"; 
+			return STARTTAGCLOSE;
+		 }
 }
-<aTag>{space}*">" { yy_pop_state(); return TAGCLOSED; }
+<aInside>{
+	[=]{space}*[\"\']{space}*[a-zA-Z0-9@_\\\/\-]*{space}*[\"\']  {
+			yy_pop_state();
+			yylval.value=findVal(yytext,yyleng);
+			return ATTRIBUTEVAL;
+		}
+}
 .
 
 %%
 int yywrap(){
 	return 1;
+}
+
+char *findVal(char *s,int len){
+	char *new = (char *)malloc(sizeof(char)*len);
+	int i=0;
+	for(i=1;i<len;i++){
+		new[i-1]=s[i];
+	}
+	return new;
 }
