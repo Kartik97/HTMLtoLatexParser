@@ -45,15 +45,46 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    HTML = 258
+    TAG = 258,
+    STARTTAGOPEN = 259,
+    STARTTAGCLOSE = 260,
+    ENDTAGOPEN = 261,
+    ENDTAGCLOSE = 262,
+    COMMENT = 263,
+    SYMBOL = 264,
+    TEXT = 265,
+    ATTRIBUTE = 266,
+    TAGCLOSED = 267,
+    IGNORE = 268
   };
 #endif
 /* Tokens.  */
-#define HTML 258
+#define TAG 258
+#define STARTTAGOPEN 259
+#define STARTTAGCLOSE 260
+#define ENDTAGOPEN 261
+#define ENDTAGCLOSE 262
+#define COMMENT 263
+#define SYMBOL 264
+#define TEXT 265
+#define ATTRIBUTE 266
+#define TAGCLOSED 267
+#define IGNORE 268
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+
+union YYSTYPE
+{
+#line 7 "Parser.y" /* yacc.c:1909  */
+
+	char *object;
+	char *value;
+
+#line 85 "y.tab.h" /* yacc.c:1909  */
+};
+
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
