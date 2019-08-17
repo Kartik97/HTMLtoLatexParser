@@ -1,0 +1,41 @@
+%{
+#include <stdio.h>
+#include <string.h>
+#include "y.tab.h"
+%}
+%option stack
+%x aTag
+
+space [ \t\r]
+
+%%
+"<html>"|"<html"{space}+[^>]*">"        {  
+			yylval.value = "html";
+			return TAG;
+		}
+"<body>"|"<body"{space}+[^>]*">"	{
+			yylval.value = "body";
+			return TAG;
+		}
+"<title>"|"<title"{space}+[^>]*">"	{
+			yylval.value = "title";
+			return TAG;
+		}
+"<a>"		{	yylval.value = "a";
+			return TAG;
+		}
+"<a"{space}+	{ yy_push_state(aTag);
+		yylval.value="a";
+		return STARTTAGOPEN;
+	}
+<aTag>"href"[=][\"\'][a-zA-Z0-9_@]*[\"\'] {
+			yylval. = "href";
+			return ATTRIBUTE;
+}
+<aTag>{space}*">" { yy_pop_state(); yylval.value = "closed"; return STARTTAGCLOSE; }
+.
+
+%%
+int yywrap(){
+	return 1;
+}

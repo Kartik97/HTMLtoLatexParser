@@ -1234,31 +1234,31 @@ yyreduce:
     {
         case 3:
 #line 32 "Parser.y" /* yacc.c:1646  */
-    {i++; printf("%s%d\n",(yyvsp[0].value),i); }
+    {i++; printf("\n%s%d\n",(yyvsp[0].value),i); }
 #line 1239 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
 #line 35 "Parser.y" /* yacc.c:1646  */
-    {i++; printf("%s%d\n",(yyvsp[0].value),i); }
+    {i++; printf("\n%s%d\n",(yyvsp[0].value),i); }
 #line 1245 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
 #line 40 "Parser.y" /* yacc.c:1646  */
-    {i++; printf("%s%d\n",(yyvsp[0].value),i); }
+    {i++; printf("\n%s%d\n",(yyvsp[0].value),i); }
 #line 1251 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
 #line 41 "Parser.y" /* yacc.c:1646  */
-    {i++; printf("%s %s%d\n",(yyvsp[-1].value),(yyvsp[0].value),i); }
+    {i++; printf("\n%s %s%d\n",(yyvsp[-1].value),(yyvsp[0].value),i); }
 #line 1257 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
 #line 44 "Parser.y" /* yacc.c:1646  */
-    {i++; printf("%s%d\n",(yyvsp[-1].value),i); }
+    {i++; printf("\n%s%d\n",(yyvsp[-1].value),i); }
 #line 1263 "y.tab.c" /* yacc.c:1646  */
     break;
 

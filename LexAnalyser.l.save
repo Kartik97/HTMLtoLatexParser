@@ -1,0 +1,31 @@
+%{
+#include <stdio.h>
+#include <string.h>
+%}
+%option stack
+%x tagStart
+
+space [ \t\r]
+
+%%"<html>"     	{  
+			printf("html");
+		}
+"<html"{space}+[^>]*">" 
+		{
+			printf("html"); 
+		}
+.
+	
+%%
+
+int yywrap(){return 1;}	
+int main()
+{
+	FILE *fp;
+	char fn[50];
+	scanf("%s",fn);
+	fp=fopen(fn,"r");
+	yyin=fp;
+	yylex();
+	fclose(fp);
+}

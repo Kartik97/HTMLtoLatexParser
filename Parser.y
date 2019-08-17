@@ -29,19 +29,19 @@ int i=0;
 st: content 
         ;
 
-tag: TAG {i++; printf("%s%d\n",$1,i); }
+tag: TAG {i++; printf("\n%s%d\n",$1,i); }
         ;
 
-attributes: attributes STARTTAGCLOSE {i++; printf("%s%d\n",$2,i); }
+attributes: attributes STARTTAGCLOSE {i++; printf("\n%s%d\n",$2,i); }
 	    | attributes att 
 	    | att 
 	;
 
-att: ATTRIBUTE {i++; printf("%s%d\n",$1,i); }
-     | ATTRIBUTE ATTRIBUTEVAL {i++; printf("%s %s%d\n",$1,$2,i); }
+att: ATTRIBUTE {i++; printf("\n%s%d\n",$1,i); }
+     | ATTRIBUTE ATTRIBUTEVAL {i++; printf("\n%s %s%d\n",$1,$2,i); }
 	;
 
-attTag: STARTTAGOPEN attributes {i++; printf("%s%d\n",$1,i); }
+attTag: STARTTAGOPEN attributes {i++; printf("\n%s%d\n",$1,i); }
 	| STARTTAGOPEN STARTTAGCLOSE {i++; printf("\n%s %s%d\n",$1,$2,i); }
 	;
 
