@@ -5,6 +5,7 @@
 
 char *findVal(char *s,int len);
 char *find(char *s,int len);
+char *findclose(char *s,int len);
 %}
 
 %option stack
@@ -17,8 +18,17 @@ char *find(char *s,int len);
 
 space [ \t\r\n]
 tags "html"|"u"|"b"|"i"|"em"|"tt"|"strong"|"small"|"sub"|"sup"|"table"|"caption"|"th"|"tr"|"td"|"head"|"body"|"title"|"center"|"br"|"p"|"h1"|"h2"|"h3"|"h4"|"ul"|"li"|"ol"|"ul"|"dl"|"dt"|"dd"|"div"|"figure"|"figcaption"
+rest "a"|"font"|"img"
 
 %%
+"</"{tags}">"|"</"{tags}{space}+[^>]*">"      {
+			yylval.value = findclose(yytext,yyleng);
+			return CLOSE;
+}
+"</"{rest}">"|"</"{rest}{space}+[^>]*">"      {
+                        yylval.value = findclose(yytext,yyleng);
+                        return CLOSE;
+}
 "<"{tags}">"|"<"{tags}{space}+[^>]*">"        {  
 			yylval.value = find(yytext,yyleng);
 			return TAG;
@@ -131,6 +141,7 @@ tags "html"|"u"|"b"|"i"|"em"|"tt"|"strong"|"small"|"sub"|"sup"|"table"|"caption"
                 }
                 [^>]  {yy_pop_state(); yyless(yyleng-1); }
 }
+
 [^<]  {}
 
 %%
@@ -159,4 +170,16 @@ char *find(char *s,int len){
 	}
 	new[k++]='\0';
 	return new;
+}
+char *findclose(char *s,int len){
+        char *new = (char *)malloc(sizeof(char)*len);
+        int i=0,k=0;
+        for(i=2,k=0;i<len;i++){
+                if(s[i]!=32 && s[i]!=62)
+                        new[k++]=s[i];
+                else
+                        break;
+        }
+        new[k++]='\0';
+        return new;
 }

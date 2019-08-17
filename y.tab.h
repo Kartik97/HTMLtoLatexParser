@@ -54,7 +54,7 @@ extern int yydebug;
     SYMBOL = 264,
     TEXT = 265,
     ATTRIBUTE = 266,
-    TAGCLOSE = 267,
+    CLOSE = 267,
     IGNORE = 268,
     ATTRIBUTEVAL = 269
   };
@@ -69,7 +69,7 @@ extern int yydebug;
 #define SYMBOL 264
 #define TEXT 265
 #define ATTRIBUTE 266
-#define TAGCLOSE 267
+#define CLOSE 267
 #define IGNORE 268
 #define ATTRIBUTEVAL 269
 

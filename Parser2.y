@@ -45,14 +45,12 @@ attTag: STARTTAGOPEN attributes {i++; printf("\n%s%d\n",$1,i); }
 	| STARTTAGOPEN STARTTAGCLOSE {i++; printf("\n%s %s%d\n",$1,$2,i); }
 	;
 
-end: CLOSE {i++; printf("\n%s%d\n",$1,i); }
+end: CLOSE {i++; printf("\n%s%s\n",$1,i); }
 
 content: content tag
 	 | content attTag
-	 | content end
 	 | tag
 	 | attTag
-	 | end
 	; 
 
 %%
