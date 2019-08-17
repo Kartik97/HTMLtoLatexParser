@@ -12,9 +12,11 @@ char *find(char *s,int len);
 %x aInside
 %x fontTag
 %x fontInside
+%x imgTag
+%x imgInside
 
 space [ \t\r\n]
-tags "html"|"u"|"b"|"i"|"em"|"tt"|"strong"|"small"|"sub"|"sup"|"table"|"caption"|"th"|"tr"|"td"|"head"|"body"|"title"|"center"|"br"|"p"|"h1"|"h2"|"h3"|"h4"|"ul"|"li"|"ol"|"ul"|"dl"|"dt"|"dd"|"div"
+tags "html"|"u"|"b"|"i"|"em"|"tt"|"strong"|"small"|"sub"|"sup"|"table"|"caption"|"th"|"tr"|"td"|"head"|"body"|"title"|"center"|"br"|"p"|"h1"|"h2"|"h3"|"h4"|"ul"|"li"|"ol"|"ul"|"dl"|"dt"|"dd"|"div"|"figure"|"figcaption"
 
 %%
 "<"{tags}">"|"<"{tags}{space}+[^>]*">"        {  
@@ -75,6 +77,50 @@ tags "html"|"u"|"b"|"i"|"em"|"tt"|"strong"|"small"|"sub"|"sup"|"table"|"caption"
 }
 <fontInside>{
                 [=]{space}*[\"\']{space}*[a-zA-Z0-9@_\\\/\-]*{space}*[\"\']  {
+                        yy_pop_state();
+                        yylval.value=findVal(yytext,yyleng);
+                        return ATTRIBUTEVAL;
+                }
+                [=]  {  yy_pop_state();
+                        yylval.value="";
+                        return ATTRIBUTEVAL;
+                }
+                [^>]  {yy_pop_state(); yyless(yyleng-1); }
+}
+"<img>"           {       yylval.value = "img";
+                        return TAG;
+                }
+"<img"{space}+    { yy_push_state(imgTag);
+                yylval.value="img";
+                return STARTTAGOPEN;
+        }
+<imgTag>{
+        "src"{space}*[=]*  {
+                        yylval.value = "src";
+                        yyless(yyleng-1);
+                        yy_push_state(imgInside);
+                        return ATTRIBUTE;
+                }
+	 "width"{space}*[=]*  {
+                        yylval.value = "width";
+                        yyless(yyleng-1);
+                        yy_push_state(imgInside);
+                        return ATTRIBUTE;
+                }
+	 "height"{space}*[=]*  {
+                        yylval.value = "height";
+                        yyless(yyleng-1);
+                        yy_push_state(imgInside);
+                        return ATTRIBUTE;
+                }
+        {space}*">" { yy_pop_state();
+                        yylval.value = "closed";
+                        return STARTTAGCLOSE;
+                 }
+        [^>]    {}
+}
+<imgInside>{
+                [=]{space}*[\"\']{space}*[a-zA-Z0-9@_\\\/\-]*{space}*[^\"^\'][\"\']  {
                         yy_pop_state();
                         yylval.value=findVal(yytext,yyleng);
                         return ATTRIBUTEVAL;
