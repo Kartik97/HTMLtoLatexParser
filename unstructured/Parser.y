@@ -22,7 +22,7 @@ int i=0;
 %token IGNORE
 %token ATTRIBUTEVAL
 
-%type <value> ATTRIBUTE STARTTAGOPEN STARTTAGCLOSE TAG ATTRIBUTEVAL CLOSE
+%type <value> ATTRIBUTE STARTTAGOPEN STARTTAGCLOSE TAG ATTRIBUTEVAL CLOSE COMMENT
 
 %%
 
@@ -47,9 +47,13 @@ attTag: STARTTAGOPEN attributes {i++; printf("\n%s%d\n",$1,i); }
 
 end: CLOSE {i++; printf("\n%s%d\n",$1,i); }
 
+comment: COMMENT {i++; printf("\n%s%d\n",$1,i); }
+	;
+
 content: content tag
 	 | content attTag
 	 | content end
+	 | content comment
 	 | tag
 	 | attTag
 	 | end
