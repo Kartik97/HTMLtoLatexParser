@@ -1,29 +1,16 @@
 %{
-#include<bits/stdc++.h>
 #include<stdio.h>
 #include<string.h>
-#include "Parser.tab.h"
-
-using namespace std;
+#include "y.tab.h"
 %}
 
 space [ \t\r\n]
-newline \n
 html "html"|"HTML"
 head "head"|"HEAD"
 title "title"|"TITLE"
-body "body"|"BODY"
 doctype "!doctype"|"!DOCTYPE"
-special "&"[a-zA-Z]+";"
-
 
 %%
-[a-zA-Z0-9`~!@#$%^&*()-_=+;:'",.?//] {
-	if(yytext != "\n")
-	{	yylval.value = yytext;
-		return TEXT;
-	}
-}
 "<"{doctype}{space}+[^{html}]*{html}">"|"<"{doctype}{space}+[^{html}]*{html}{space}+[^>]*">" {
 	yylval.value = "DOCTYPE";
 	return DOCTYPE;
@@ -52,15 +39,8 @@ special "&"[a-zA-Z]+";"
         yylval.value="TITLECL";
         return TITLECL;
 }
-"<"{body}{space}+[^>]*">"|"<"{body}">"  {
-        yylval.value="BODYOP";
-        return BODYOP;
-}
-"</"{body}{space}+[^>]*">"|"</"{body}">"  {
-        yylval.value="BODYCL";
-        return BODYCL;
-}
 
+[.\n] {}
 %%
 
 int yywrap(){

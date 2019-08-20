@@ -1,20 +1,13 @@
 %{
-#include<bits/stdc++.h>
 #include<stdio.h>
 #include<string.h>
-
-using namespace std;
 int i=0;
-
-extern int yylex();
-extern void yyerror(const char*);
-
 %}
 
 %name parse
 %union{
-	const char *object;
-	const char *value;
+	char *object;
+	char *value;
 }
 %start st
 %token DOCTYPE
@@ -35,19 +28,14 @@ extern void yyerror(const char*);
 %token IGNORE
 %token ATTRIBUTEVAL
 
-%type <value> ATTRIBUTE DOCTYPE HTMLOP HTMLCL HEADOP HEADCL TITLEOP TITLECL TEXT BODYOP BODYCL TAGOP TAGCL
+%type <value> ATTRIBUTE DOCTYPE HTMLOP HTMLCL HEADOP HEADCL TITLEOP TITLECL TEXT
 
 %%
 
-st:	DOCTYPE { printf("%s\n",$1); } 
+st:	DOCTYPE {printf ("%s\n",$1); } 
 	| DOCTYPE HTMLOP HTMLCL {printf("%s %s %s\n",$1,$2,$3); }
 	| HTMLOP HTMLCL {printf("%s %s\n",$1,$2); }
 	| DOCTYPE HTMLOP head HTMLCL {printf("%s %s %s\n",$1,$2,$4); }
-	| HTMLOP head HTMLCL {printf("%s %s\n",$1,$3); }
-	| DOCTYPE HTMLOP head body HTMLCL {printf("%s %s %s\n",$1,$2,$5); }	
-	| HTMLOP head body HTMLCL {printf("%s %s\n",$1,$4); }
-	| DOCTYPE HTMLOP body HTMLCL {printf("%s %s %s\n",$1,$2,$4); }
-	| HTMLOP body HTMLCL {printf("%s %s\n",$1,$3); }
 	;
 
 head:	HEADOP title HEADCL {printf("%s %s\n",$1,$3); } 
@@ -58,19 +46,10 @@ title:	TITLEOP TITLECL {printf("%s %s\n",$1,$2); }
 	| TITLEOP text TITLECL {printf("%s %s\n",$1,$3); }
 	;
 
-text:	text TEXT { printf("%s",$2); }
-	| TEXT { printf("%s",$1); }
-	;
-
-body: BODYOP bodycontent BODYCL  {printf("%s %s\n",$1,$3); }
-	| BODYOP BODYCL {printf("%s %s",$1,$2); }
-	;
-
-bodycontent: TAGOP {}
-	;
+text:	TEXT {printf("%s\n",$1); }
 
 %%
-void yyerror(const char *msg){
+void yyerror(char *msg){
 	printf("%s\n",msg);
 }
 

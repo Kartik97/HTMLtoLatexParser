@@ -1,6 +1,6 @@
 #!/bin/bash
 
 flex LexAnalyser.l
-yacc -d Parser.y
-gcc lex.yy.c y.tab.c -w
+bison -dv Parser.y
+g++ lex.yy.c Parser.tab.c
 ./a.out input.html

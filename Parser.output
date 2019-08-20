@@ -1,0 +1,395 @@
+
+
+Terminals which are not used:
+
+   TAGCL
+   COMMENT
+   SYMBOL
+   ATTRIBUTE
+   IGNORE
+   ATTRIBUTEVAL
+
+
+
+Grammar
+rule 1    st -> DOCTYPE
+rule 2    st -> DOCTYPE HTMLOP HTMLCL
+rule 3    st -> HTMLOP HTMLCL
+rule 4    st -> DOCTYPE HTMLOP head HTMLCL
+rule 5    st -> HTMLOP head HTMLCL
+rule 6    st -> DOCTYPE HTMLOP head body HTMLCL
+rule 7    st -> HTMLOP head body HTMLCL
+rule 8    st -> DOCTYPE HTMLOP body HTMLCL
+rule 9    st -> HTMLOP body HTMLCL
+rule 10   head -> HEADOP title HEADCL
+rule 11   head -> HEADOP HEADCL
+rule 12   title -> TITLEOP TITLECL
+rule 13   title -> TITLEOP text TITLECL
+rule 14   text -> text TEXT
+rule 15   text -> TEXT
+rule 16   body -> BODYOP bodycontent BODYCL
+rule 17   body -> BODYOP BODYCL
+rule 18   bodycontent -> TAGOP
+
+Terminals, with rules where they appear
+
+$ (-1)
+error (256)
+DOCTYPE (258) 1 2 4 6 8
+HTMLOP (259) 2 3 4 5 6 7 8 9
+HTMLCL (260) 2 3 4 5 6 7 8 9
+TAGOP (261) 18
+TAGCL (262)
+HEADOP (263) 10 11
+HEADCL (264) 10 11
+TITLEOP (265) 12 13
+TITLECL (266) 12 13
+BODYOP (267) 16 17
+BODYCL (268) 16 17
+COMMENT (269)
+SYMBOL (270)
+TEXT (271) 14 15
+ATTRIBUTE (272)
+IGNORE (273)
+ATTRIBUTEVAL (274)
+
+Nonterminals, with rules where they appear
+
+st (20)
+    on left: 1 2 3 4 5 6 7 8 9
+head (21)
+    on left: 10 11, on right: 4 5 6 7
+title (22)
+    on left: 12 13, on right: 10
+text (23)
+    on left: 14 15, on right: 13 14
+body (24)
+    on left: 16 17, on right: 6 7 8 9
+bodycontent (25)
+    on left: 18, on right: 16
+
+
+state 0
+
+    DOCTYPE	shift, and go to state 1
+    HTMLOP	shift, and go to state 2
+
+    st  	go to state 33
+
+
+
+state 1
+
+    st  ->  DOCTYPE .   (rule 1)
+    st  ->  DOCTYPE . HTMLOP HTMLCL   (rule 2)
+    st  ->  DOCTYPE . HTMLOP head HTMLCL   (rule 4)
+    st  ->  DOCTYPE . HTMLOP head body HTMLCL   (rule 6)
+    st  ->  DOCTYPE . HTMLOP body HTMLCL   (rule 8)
+
+    HTMLOP	shift, and go to state 3
+
+    $default	reduce using rule 1 (st)
+
+
+
+state 2
+
+    st  ->  HTMLOP . HTMLCL   (rule 3)
+    st  ->  HTMLOP . head HTMLCL   (rule 5)
+    st  ->  HTMLOP . head body HTMLCL   (rule 7)
+    st  ->  HTMLOP . body HTMLCL   (rule 9)
+
+    HTMLCL	shift, and go to state 4
+    HEADOP	shift, and go to state 5
+    BODYOP	shift, and go to state 6
+
+    head	go to state 7
+    body	go to state 8
+
+
+
+state 3
+
+    st  ->  DOCTYPE HTMLOP . HTMLCL   (rule 2)
+    st  ->  DOCTYPE HTMLOP . head HTMLCL   (rule 4)
+    st  ->  DOCTYPE HTMLOP . head body HTMLCL   (rule 6)
+    st  ->  DOCTYPE HTMLOP . body HTMLCL   (rule 8)
+
+    HTMLCL	shift, and go to state 9
+    HEADOP	shift, and go to state 5
+    BODYOP	shift, and go to state 6
+
+    head	go to state 10
+    body	go to state 11
+
+
+
+state 4
+
+    st  ->  HTMLOP HTMLCL .   (rule 3)
+
+    $default	reduce using rule 3 (st)
+
+
+
+state 5
+
+    head  ->  HEADOP . title HEADCL   (rule 10)
+    head  ->  HEADOP . HEADCL   (rule 11)
+
+    HEADCL	shift, and go to state 12
+    TITLEOP	shift, and go to state 13
+
+    title	go to state 14
+
+
+
+state 6
+
+    body  ->  BODYOP . bodycontent BODYCL   (rule 16)
+    body  ->  BODYOP . BODYCL   (rule 17)
+
+    TAGOP	shift, and go to state 15
+    BODYCL	shift, and go to state 16
+
+    bodycontent	go to state 17
+
+
+
+state 7
+
+    st  ->  HTMLOP head . HTMLCL   (rule 5)
+    st  ->  HTMLOP head . body HTMLCL   (rule 7)
+
+    HTMLCL	shift, and go to state 18
+    BODYOP	shift, and go to state 6
+
+    body	go to state 19
+
+
+
+state 8
+
+    st  ->  HTMLOP body . HTMLCL   (rule 9)
+
+    HTMLCL	shift, and go to state 20
+
+
+
+state 9
+
+    st  ->  DOCTYPE HTMLOP HTMLCL .   (rule 2)
+
+    $default	reduce using rule 2 (st)
+
+
+
+state 10
+
+    st  ->  DOCTYPE HTMLOP head . HTMLCL   (rule 4)
+    st  ->  DOCTYPE HTMLOP head . body HTMLCL   (rule 6)
+
+    HTMLCL	shift, and go to state 21
+    BODYOP	shift, and go to state 6
+
+    body	go to state 22
+
+
+
+state 11
+
+    st  ->  DOCTYPE HTMLOP body . HTMLCL   (rule 8)
+
+    HTMLCL	shift, and go to state 23
+
+
+
+state 12
+
+    head  ->  HEADOP HEADCL .   (rule 11)
+
+    $default	reduce using rule 11 (head)
+
+
+
+state 13
+
+    title  ->  TITLEOP . TITLECL   (rule 12)
+    title  ->  TITLEOP . text TITLECL   (rule 13)
+
+    TITLECL	shift, and go to state 24
+    TEXT	shift, and go to state 25
+
+    text	go to state 26
+
+
+
+state 14
+
+    head  ->  HEADOP title . HEADCL   (rule 10)
+
+    HEADCL	shift, and go to state 27
+
+
+
+state 15
+
+    bodycontent  ->  TAGOP .   (rule 18)
+
+    $default	reduce using rule 18 (bodycontent)
+
+
+
+state 16
+
+    body  ->  BODYOP BODYCL .   (rule 17)
+
+    $default	reduce using rule 17 (body)
+
+
+
+state 17
+
+    body  ->  BODYOP bodycontent . BODYCL   (rule 16)
+
+    BODYCL	shift, and go to state 28
+
+
+
+state 18
+
+    st  ->  HTMLOP head HTMLCL .   (rule 5)
+
+    $default	reduce using rule 5 (st)
+
+
+
+state 19
+
+    st  ->  HTMLOP head body . HTMLCL   (rule 7)
+
+    HTMLCL	shift, and go to state 29
+
+
+
+state 20
+
+    st  ->  HTMLOP body HTMLCL .   (rule 9)
+
+    $default	reduce using rule 9 (st)
+
+
+
+state 21
+
+    st  ->  DOCTYPE HTMLOP head HTMLCL .   (rule 4)
+
+    $default	reduce using rule 4 (st)
+
+
+
+state 22
+
+    st  ->  DOCTYPE HTMLOP head body . HTMLCL   (rule 6)
+
+    HTMLCL	shift, and go to state 30
+
+
+
+state 23
+
+    st  ->  DOCTYPE HTMLOP body HTMLCL .   (rule 8)
+
+    $default	reduce using rule 8 (st)
+
+
+
+state 24
+
+    title  ->  TITLEOP TITLECL .   (rule 12)
+
+    $default	reduce using rule 12 (title)
+
+
+
+state 25
+
+    text  ->  TEXT .   (rule 15)
+
+    $default	reduce using rule 15 (text)
+
+
+
+state 26
+
+    title  ->  TITLEOP text . TITLECL   (rule 13)
+    text  ->  text . TEXT   (rule 14)
+
+    TITLECL	shift, and go to state 31
+    TEXT	shift, and go to state 32
+
+
+
+state 27
+
+    head  ->  HEADOP title HEADCL .   (rule 10)
+
+    $default	reduce using rule 10 (head)
+
+
+
+state 28
+
+    body  ->  BODYOP bodycontent BODYCL .   (rule 16)
+
+    $default	reduce using rule 16 (body)
+
+
+
+state 29
+
+    st  ->  HTMLOP head body HTMLCL .   (rule 7)
+
+    $default	reduce using rule 7 (st)
+
+
+
+state 30
+
+    st  ->  DOCTYPE HTMLOP head body HTMLCL .   (rule 6)
+
+    $default	reduce using rule 6 (st)
+
+
+
+state 31
+
+    title  ->  TITLEOP text TITLECL .   (rule 13)
+
+    $default	reduce using rule 13 (title)
+
+
+
+state 32
+
+    text  ->  text TEXT .   (rule 14)
+
+    $default	reduce using rule 14 (text)
+
+
+
+state 33
+
+    $   	go to state 34
+
+
+
+state 34
+
+    $   	go to state 35
+
+
+
+state 35
+
+    $default	accept
