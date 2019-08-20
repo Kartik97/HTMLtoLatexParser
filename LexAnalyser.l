@@ -5,7 +5,7 @@
 #include "Parser.tab.h"
 
 using namespace std;
-
+int phcount=0;
 char *findpos(const char* s,int len,int start);
 %}
 
@@ -18,6 +18,7 @@ body "body"|"BODY"
 doctype "!doctype"|"!DOCTYPE"
 special "&"[a-zA-Z]+";"
 phrasingtags "b"|"B"|"em"|"EM"|"i"|"I"|"small"|"SMALL"|"strong"|"STRONG"|"sub"|"SUB"|"sup"|"SUP"|"u"|"U"
+gtph "p"|"P"|"h1"|"H1"|"h2"|"H2"|"h3"|"H4"|"h5"|"H5"
 
 %%
 [a-zA-Z0-9`~!@#$%^&*()-_=+;:'",.?//] {
@@ -64,12 +65,23 @@ phrasingtags "b"|"B"|"em"|"EM"|"i"|"I"|"small"|"SMALL"|"strong"|"STRONG"|"sub"|"
 }
 "<"{phrasingtags}{space}+[^>]*">"|"<"{phrasingtags}">"  {
         yylval.value=findpos(yytext,yyleng,1);
-        return PHRASEOP;
+	phcount++;
+	if(phcount==1){
+		return BPHRASEOP;
+	}
+	else{
+		return PHRASEOP;
+	}
 }
 "</"{phrasingtags}{space}+[^>]*">"|"</"{phrasingtags}">"  {
 	yylval.value=findpos(yytext,yyleng,2);
-        return PHRASECL;
+	phcount--;
+	if(phcount==0)
+		return BPHRASECL;
+	else
+		return PHRASECL;
 }
+
 
 %%
 

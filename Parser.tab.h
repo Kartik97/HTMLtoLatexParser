@@ -193,22 +193,24 @@ typedef
 #define	DOCTYPE	258
 #define	HTMLOP	259
 #define	HTMLCL	260
-#define	TAGOP	261
-#define	TAGCL	262
+#define	PHTAGOP	261
+#define	PHTAGCL	262
 #define	HEADOP	263
 #define	HEADCL	264
 #define	TITLEOP	265
 #define	TITLECL	266
 #define	BODYOP	267
 #define	BODYCL	268
-#define	PHRASEOP	269
-#define	PHRASECL	270
-#define	COMMENT	271
-#define	SYMBOL	272
-#define	TEXT	273
-#define	ATTRIBUTE	274
-#define	IGNORE	275
-#define	ATTRIBUTEVAL	276
+#define	BPHRASEOP	269
+#define	BPHRASECL	270
+#define	PHRASEOP	271
+#define	PHRASECL	272
+#define	COMMENT	273
+#define	SYMBOL	274
+#define	TEXT	275
+#define	ATTRIBUTE	276
+#define	IGNORE	277
+#define	ATTRIBUTEVAL	278
 
 
 #line 169 "/usr/share/bison++/bison.h"
@@ -260,14 +262,16 @@ public:
 static const int DOCTYPE;
 static const int HTMLOP;
 static const int HTMLCL;
-static const int TAGOP;
-static const int TAGCL;
+static const int PHTAGOP;
+static const int PHTAGCL;
 static const int HEADOP;
 static const int HEADCL;
 static const int TITLEOP;
 static const int TITLECL;
 static const int BODYOP;
 static const int BODYCL;
+static const int BPHRASEOP;
+static const int BPHRASECL;
 static const int PHRASEOP;
 static const int PHRASECL;
 static const int COMMENT;
@@ -287,22 +291,24 @@ static const int ATTRIBUTEVAL;
 	,DOCTYPE=258
 	,HTMLOP=259
 	,HTMLCL=260
-	,TAGOP=261
-	,TAGCL=262
+	,PHTAGOP=261
+	,PHTAGCL=262
 	,HEADOP=263
 	,HEADCL=264
 	,TITLEOP=265
 	,TITLECL=266
 	,BODYOP=267
 	,BODYCL=268
-	,PHRASEOP=269
-	,PHRASECL=270
-	,COMMENT=271
-	,SYMBOL=272
-	,TEXT=273
-	,ATTRIBUTE=274
-	,IGNORE=275
-	,ATTRIBUTEVAL=276
+	,BPHRASEOP=269
+	,BPHRASECL=270
+	,PHRASEOP=271
+	,PHRASECL=272
+	,COMMENT=273
+	,SYMBOL=274
+	,TEXT=275
+	,ATTRIBUTE=276
+	,IGNORE=277
+	,ATTRIBUTEVAL=278
 
 
 #line 215 "/usr/share/bison++/bison.h"

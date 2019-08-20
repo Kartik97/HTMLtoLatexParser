@@ -554,7 +554,7 @@ char *yytext;
 #include "Parser.tab.h"
 
 using namespace std;
-
+int phcount=0;
 char *findpos(const char* s,int len,int start);
 #line 560 "lex.yy.c"
 
@@ -890,23 +890,33 @@ YY_RULE_SETUP
 #line 65 "LexAnalyser.l"
 {
         yylval.value=findpos(yytext,yyleng,1);
-        return PHRASEOP;
+	phcount++;
+	if(phcount==1){
+		return BPHRASEOP;
+	}
+	else{
+		return PHRASEOP;
+	}
 }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 69 "LexAnalyser.l"
+#line 75 "LexAnalyser.l"
 {
 	yylval.value=findpos(yytext,yyleng,2);
-        return PHRASECL;
+	phcount--;
+	if(phcount==0)
+		return BPHRASECL;
+	else
+		return PHRASECL;
 }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 74 "LexAnalyser.l"
+#line 84 "LexAnalyser.l"
 ECHO;
 	YY_BREAK
-#line 910 "lex.yy.c"
+#line 920 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1796,7 +1806,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 74 "LexAnalyser.l"
+#line 84 "LexAnalyser.l"
 
 
 int yywrap(){
