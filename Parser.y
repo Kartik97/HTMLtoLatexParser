@@ -71,17 +71,21 @@ body: BODYOP flow BODYCL  {printf("%s %s\n",$1,$3); }
 	| BODYOP BODYCL {printf("%s %s",$1,$2); }
 	;
 
-flow:   flow BPHRASEOP phrases BPHRASECL {}
-        | BPHRASEOP phrases BPHRASECL {cout<<$1<<" "<<$3; }
-        | flow BPHRASEOP BPHRASECL {cout<<$2<<" "<<$3; }
-        | BPHRASEOP BPHRASECL {cout<<$1<<" "<<$2; }
+flow:   BPHRASEOP  phraseopen{cout<<$1<<" "; }
         | text {}
+	;
+
+phraseopen: phrases BPHRASECL flow {cout<<$2<<" "; }
+	| BPHRASECL flow {cout<<$1<<" "; }
+	| BPHRASECL {cout<<$1<<" "; }
 	;
 
 phrases: phrases PHRASEOP phrases PHRASECL {cout<<$2<<" "<<$4; }
 	 | phrases PHRASEOP PHRASECL { cout<<$2<<" "<<$3; }
 	 | PHRASEOP phrases PHRASECL {cout<<$1<<" "<<$3; }
-	 | PHRASEOP PHRASECL { cout<<$1<<" "<<$2; }
+	 | PHRASEOP PHRASECL { string s1=$1;
+				string s2=$2;
+				$$=s1+" "+s2; }
 	 | text {}
 	;
 

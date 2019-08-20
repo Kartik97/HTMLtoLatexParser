@@ -926,12 +926,13 @@ YY_RULE_SETUP
 #line 84 "LexAnalyser.l"
 {
         yylval.value=findpos(yytext,yyleng,1);
+	string s = yytext;
         return GTPHOP;
 }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 88 "LexAnalyser.l"
+#line 89 "LexAnalyser.l"
 {
         yylval.value=findpos(yytext,yyleng,2);
         return GTPHCL;
@@ -939,10 +940,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 93 "LexAnalyser.l"
+#line 94 "LexAnalyser.l"
 ECHO;
 	YY_BREAK
-#line 946 "lex.yy.c"
+#line 947 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1832,7 +1833,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 93 "LexAnalyser.l"
+#line 94 "LexAnalyser.l"
 
 
 int yywrap(){
