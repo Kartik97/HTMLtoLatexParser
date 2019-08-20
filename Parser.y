@@ -28,6 +28,8 @@ extern void yyerror(const char*);
 %token TITLECL
 %token BODYOP
 %token BODYCL
+%token PHRASEOP
+%token PHRASECL
 %token COMMENT 
 %token SYMBOL 
 %token TEXT
@@ -35,7 +37,7 @@ extern void yyerror(const char*);
 %token IGNORE
 %token ATTRIBUTEVAL
 
-%type <value> ATTRIBUTE DOCTYPE HTMLOP HTMLCL HEADOP HEADCL TITLEOP TITLECL TEXT BODYOP BODYCL TAGOP TAGCL
+%type <value> ATTRIBUTE DOCTYPE HTMLOP HTMLCL HEADOP HEADCL TITLEOP TITLECL TEXT BODYOP BODYCL PHRASEOP PHRASECL
 
 %%
 
@@ -66,7 +68,14 @@ body: BODYOP bodycontent BODYCL  {printf("%s %s\n",$1,$3); }
 	| BODYOP BODYCL {printf("%s %s",$1,$2); }
 	;
 
-bodycontent: TAGOP {}
+bodycontent: phrases {}
+	| text {}
+
+phrases: phrases PHRASEOP phrases PHRASECL {cout<<$2<<" "<<$4; }
+         | phrases PHRASEOP PHRASECL {cout<<$2<<" "<<$3; }
+	 | PHRASEOP phrases PHRASECL {cout<<$1<<" "<<$3; }
+	 | PHRASEOP text PHRASECL {cout<<$1<<" "<<$3; }
+	 | PHRASEOP PHRASECL { cout<<$1<<" "<<$2; }
 	;
 
 %%

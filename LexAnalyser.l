@@ -5,6 +5,8 @@
 #include "Parser.tab.h"
 
 using namespace std;
+
+char *findpos(const char* s,int len,int start);
 %}
 
 space [ \t\r\n]
@@ -15,7 +17,7 @@ title "title"|"TITLE"
 body "body"|"BODY"
 doctype "!doctype"|"!DOCTYPE"
 special "&"[a-zA-Z]+";"
-
+phrasingtags "b"|"B"|"em"|"EM"|"i"|"I"|"small"|"SMALL"|"strong"|"STRONG"|"sub"|"SUB"|"sup"|"SUP"|"u"|"U"
 
 %%
 [a-zA-Z0-9`~!@#$%^&*()-_=+;:'",.?//] {
@@ -60,9 +62,28 @@ special "&"[a-zA-Z]+";"
         yylval.value="BODYCL";
         return BODYCL;
 }
+"<"{phrasingtags}{space}+[^>]*">"|"<"{phrasingtags}">"  {
+        yylval.value=findpos(yytext,yyleng,1);
+        return PHRASEOP;
+}
+"</"{phrasingtags}{space}+[^>]*">"|"</"{phrasingtags}">"  {
+	yylval.value=findpos(yytext,yyleng,2);
+        return PHRASECL;
+}
 
 %%
 
 int yywrap(){
 	return 1;
+}
+char *findpos(const char *s,int len,int start){
+	int i=start,k=0;
+	char *p=(char *)malloc(sizeof(char)*6);
+	for(;i<len;i++){
+		if(s[i]==32 || s[i]==62)
+			break;
+		p[k++]=toupper(s[i]);
+	}
+	p[k]=0;
+	return p;
 }

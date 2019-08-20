@@ -201,12 +201,14 @@ typedef
 #define	TITLECL	266
 #define	BODYOP	267
 #define	BODYCL	268
-#define	COMMENT	269
-#define	SYMBOL	270
-#define	TEXT	271
-#define	ATTRIBUTE	272
-#define	IGNORE	273
-#define	ATTRIBUTEVAL	274
+#define	PHRASEOP	269
+#define	PHRASECL	270
+#define	COMMENT	271
+#define	SYMBOL	272
+#define	TEXT	273
+#define	ATTRIBUTE	274
+#define	IGNORE	275
+#define	ATTRIBUTEVAL	276
 
 
 #line 169 "/usr/share/bison++/bison.h"
@@ -266,6 +268,8 @@ static const int TITLEOP;
 static const int TITLECL;
 static const int BODYOP;
 static const int BODYCL;
+static const int PHRASEOP;
+static const int PHRASECL;
 static const int COMMENT;
 static const int SYMBOL;
 static const int TEXT;
@@ -291,12 +295,14 @@ static const int ATTRIBUTEVAL;
 	,TITLECL=266
 	,BODYOP=267
 	,BODYCL=268
-	,COMMENT=269
-	,SYMBOL=270
-	,TEXT=271
-	,ATTRIBUTE=272
-	,IGNORE=273
-	,ATTRIBUTEVAL=274
+	,PHRASEOP=269
+	,PHRASECL=270
+	,COMMENT=271
+	,SYMBOL=272
+	,TEXT=273
+	,ATTRIBUTE=274
+	,IGNORE=275
+	,ATTRIBUTEVAL=276
 
 
 #line 215 "/usr/share/bison++/bison.h"
