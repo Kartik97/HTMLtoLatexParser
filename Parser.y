@@ -4,6 +4,7 @@
 int i=0;
 %}
 
+%name parse
 %union{
 	char *object;
 	char *value;
