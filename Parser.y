@@ -20,8 +20,6 @@ extern void yyerror(const char*);
 %token DOCTYPE
 %token HTMLOP
 %token HTMLCL
-%token PHTAGOP
-%token PHTAGCL
 %token HEADOP
 %token HEADCL
 %token TITLEOP
@@ -32,6 +30,8 @@ extern void yyerror(const char*);
 %token BPHRASECL
 %token PHRASEOP
 %token PHRASECL
+%token GTPHOP
+%token GTPHCL
 %token COMMENT 
 %token SYMBOL 
 %token TEXT
@@ -39,7 +39,8 @@ extern void yyerror(const char*);
 %token IGNORE
 %token ATTRIBUTEVAL
 
-%type <value> ATTRIBUTE DOCTYPE HTMLOP HTMLCL HEADOP HEADCL TITLEOP TITLECL TEXT BODYOP BODYCL PHRASEOP PHRASECL PHTAGOP PHTAGCL BPHRASEOP BPHRASECL
+%type <value> ATTRIBUTE DOCTYPE HTMLOP HTMLCL HEADOP HEADCL TITLEOP TITLECL TEXT BODYOP BODYCL PHRASEOP PHRASECL BPHRASEOP BPHRASECL
+%type <value> GTPHOP GTPHCL
 
 %%
 
@@ -71,10 +72,10 @@ body: BODYOP flow BODYCL  {printf("%s %s\n",$1,$3); }
 	;
 
 flow:   flow BPHRASEOP phrases BPHRASECL {}
-	| BPHRASEOP phrases BPHRASECL {cout<<$1<<" "<<$3; }
-	| flow BPHRASEOP BPHRASECL {cout<<$2<<" "<<$3; }
-	| BPHRASEOP BPHRASECL {cout<<$1<<" "<<$2; }
-	| text {}
+        | BPHRASEOP phrases BPHRASECL {cout<<$1<<" "<<$3; }
+        | flow BPHRASEOP BPHRASECL {cout<<$2<<" "<<$3; }
+        | BPHRASEOP BPHRASECL {cout<<$1<<" "<<$2; }
+        | text {}
 	;
 
 phrases: phrases PHRASEOP phrases PHRASECL {cout<<$2<<" "<<$4; }

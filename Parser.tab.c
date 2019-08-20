@@ -318,18 +318,18 @@ typedef
 #define	DOCTYPE	258
 #define	HTMLOP	259
 #define	HTMLCL	260
-#define	PHTAGOP	261
-#define	PHTAGCL	262
-#define	HEADOP	263
-#define	HEADCL	264
-#define	TITLEOP	265
-#define	TITLECL	266
-#define	BODYOP	267
-#define	BODYCL	268
-#define	BPHRASEOP	269
-#define	BPHRASECL	270
-#define	PHRASEOP	271
-#define	PHRASECL	272
+#define	HEADOP	261
+#define	HEADCL	262
+#define	TITLEOP	263
+#define	TITLECL	264
+#define	BODYOP	265
+#define	BODYCL	266
+#define	BPHRASEOP	267
+#define	BPHRASECL	268
+#define	PHRASEOP	269
+#define	PHRASECL	270
+#define	GTPHOP	271
+#define	GTPHCL	272
 #define	COMMENT	273
 #define	SYMBOL	274
 #define	TEXT	275
@@ -388,8 +388,6 @@ public:
 static const int DOCTYPE;
 static const int HTMLOP;
 static const int HTMLCL;
-static const int PHTAGOP;
-static const int PHTAGCL;
 static const int HEADOP;
 static const int HEADCL;
 static const int TITLEOP;
@@ -400,6 +398,8 @@ static const int BPHRASEOP;
 static const int BPHRASECL;
 static const int PHRASEOP;
 static const int PHRASECL;
+static const int GTPHOP;
+static const int GTPHCL;
 static const int COMMENT;
 static const int SYMBOL;
 static const int TEXT;
@@ -417,18 +417,18 @@ enum YY_parse_ENUM_TOKEN { YY_parse_NULL_TOKEN=0
 	,DOCTYPE=258
 	,HTMLOP=259
 	,HTMLCL=260
-	,PHTAGOP=261
-	,PHTAGCL=262
-	,HEADOP=263
-	,HEADCL=264
-	,TITLEOP=265
-	,TITLECL=266
-	,BODYOP=267
-	,BODYCL=268
-	,BPHRASEOP=269
-	,BPHRASECL=270
-	,PHRASEOP=271
-	,PHRASECL=272
+	,HEADOP=261
+	,HEADCL=262
+	,TITLEOP=263
+	,TITLECL=264
+	,BODYOP=265
+	,BODYCL=266
+	,BPHRASEOP=267
+	,BPHRASECL=268
+	,PHRASEOP=269
+	,PHRASECL=270
+	,GTPHOP=271
+	,GTPHCL=272
 	,COMMENT=273
 	,SYMBOL=274
 	,TEXT=275
@@ -474,18 +474,18 @@ public:
 const int YY_parse_CLASS::DOCTYPE=258;
 const int YY_parse_CLASS::HTMLOP=259;
 const int YY_parse_CLASS::HTMLCL=260;
-const int YY_parse_CLASS::PHTAGOP=261;
-const int YY_parse_CLASS::PHTAGCL=262;
-const int YY_parse_CLASS::HEADOP=263;
-const int YY_parse_CLASS::HEADCL=264;
-const int YY_parse_CLASS::TITLEOP=265;
-const int YY_parse_CLASS::TITLECL=266;
-const int YY_parse_CLASS::BODYOP=267;
-const int YY_parse_CLASS::BODYCL=268;
-const int YY_parse_CLASS::BPHRASEOP=269;
-const int YY_parse_CLASS::BPHRASECL=270;
-const int YY_parse_CLASS::PHRASEOP=271;
-const int YY_parse_CLASS::PHRASECL=272;
+const int YY_parse_CLASS::HEADOP=261;
+const int YY_parse_CLASS::HEADCL=262;
+const int YY_parse_CLASS::TITLEOP=263;
+const int YY_parse_CLASS::TITLECL=264;
+const int YY_parse_CLASS::BODYOP=265;
+const int YY_parse_CLASS::BODYCL=266;
+const int YY_parse_CLASS::BPHRASEOP=267;
+const int YY_parse_CLASS::BPHRASECL=268;
+const int YY_parse_CLASS::PHRASEOP=269;
+const int YY_parse_CLASS::PHRASECL=270;
+const int YY_parse_CLASS::GTPHOP=271;
+const int YY_parse_CLASS::GTPHCL=272;
 const int YY_parse_CLASS::COMMENT=273;
 const int YY_parse_CLASS::SYMBOL=274;
 const int YY_parse_CLASS::TEXT=275;
@@ -558,29 +558,29 @@ static const short yyrhs[] = {     3,
      0,     3,     4,     5,     0,     4,     5,     0,     3,     4,
     25,     5,     0,     4,    25,     5,     0,     3,     4,    25,
     28,     5,     0,     4,    25,    28,     5,     0,     3,     4,
-    28,     5,     0,     4,    28,     5,     0,     8,    26,     9,
-     0,     8,     9,     0,    10,    11,     0,    10,    27,    11,
-     0,    27,    20,     0,    20,     0,    12,    29,    13,     0,
-    12,    13,     0,    29,    14,    30,    15,     0,    14,    30,
-    15,     0,    29,    14,    15,     0,    14,    15,     0,    27,
-     0,    30,    16,    30,    17,     0,    30,    16,    17,     0,
-    16,    30,    17,     0,    16,    17,     0,    27,     0
+    28,     5,     0,     4,    28,     5,     0,     6,    26,     7,
+     0,     6,     7,     0,     8,     9,     0,     8,    27,     9,
+     0,    27,    20,     0,    20,     0,    10,    29,    11,     0,
+    10,    11,     0,    29,    12,    30,    13,     0,    12,    30,
+    13,     0,    29,    12,    13,     0,    12,    13,     0,    27,
+     0,    30,    14,    30,    15,     0,    30,    14,    15,     0,
+    14,    30,    15,     0,    14,    15,     0,    27,     0
 };
 
 #endif
 
 #if (YY_parse_DEBUG != 0) || defined(YY_parse_ERROR_VERBOSE) 
 static const short yyrline[] = { 0,
-    46,    47,    48,    49,    50,    51,    52,    53,    54,    57,
-    58,    61,    62,    65,    66,    69,    70,    73,    74,    75,
-    76,    77,    80,    81,    82,    83,    84
+    47,    48,    49,    50,    51,    52,    53,    54,    55,    58,
+    59,    62,    63,    66,    67,    70,    71,    74,    75,    76,
+    77,    78,    81,    82,    83,    84,    85
 };
 
 static const char * const yytname[] = {   "$","error","$illegal.","DOCTYPE",
-"HTMLOP","HTMLCL","PHTAGOP","PHTAGCL","HEADOP","HEADCL","TITLEOP","TITLECL",
-"BODYOP","BODYCL","BPHRASEOP","BPHRASECL","PHRASEOP","PHRASECL","COMMENT","SYMBOL",
-"TEXT","ATTRIBUTE","IGNORE","ATTRIBUTEVAL","st","head","title","text","body",
-"flow","phrases",""
+"HTMLOP","HTMLCL","HEADOP","HEADCL","TITLEOP","TITLECL","BODYOP","BODYCL","BPHRASEOP",
+"BPHRASECL","PHRASEOP","PHRASECL","GTPHOP","GTPHCL","COMMENT","SYMBOL","TEXT",
+"ATTRIBUTE","IGNORE","ATTRIBUTEVAL","st","head","title","text","body","flow",
+"phrases",""
 };
 #endif
 
@@ -609,17 +609,17 @@ static const short yydefgoto[] = {    50,
      7,    14,    31,     8,    19,    32
 };
 
-static const short yypact[] = {    29,
-     3,     1,     9,-32768,    33,     2,    13,    23,-32768,    15,
-    35,-32768,   -10,    40,-32768,   -12,-32768,    26,    31,-32768,
-    51,-32768,-32768,    52,-32768,-32768,    -9,-32768,-32768,    19,
-    26,    32,-32768,-32768,    14,-32768,-32768,-32768,-32768,    34,
--32768,    21,-32768,    37,-32768,-32768,    38,-32768,-32768,    58,
+static const short yypact[] = {    35,
+    -3,    25,    27,-32768,    36,    -5,    15,    18,-32768,    31,
+    44,-32768,    -7,    49,-32768,    -4,-32768,    20,    34,-32768,
+    52,-32768,-32768,    53,-32768,-32768,    -6,-32768,-32768,     7,
+    20,    37,-32768,-32768,     4,-32768,-32768,-32768,-32768,    33,
+-32768,    14,-32768,    39,-32768,-32768,    40,-32768,-32768,    42,
     59,-32768
 };
 
 static const short yypgoto[] = {-32768,
-    57,-32768,    18,    16,-32768,   -30
+    57,-32768,    13,     1,-32768,   -30
 };
 
 
@@ -627,21 +627,21 @@ static const short yypgoto[] = {-32768,
 
 
 static const short yytable[] = {    40,
-    26,    38,    29,    30,    44,     4,     3,    17,     5,    17,
-    33,    47,     6,     9,    15,    16,     5,    20,    11,    23,
-     6,    17,    21,    18,     6,    24,     6,    22,    43,    30,
-    27,     1,     2,    17,    30,    39,    30,    46,    17,    25,
-    17,    12,    13,    34,    35,    33,    41,    42,    28,    42,
-    45,    48,    42,    42,    49,    36,    37,    51,    52,    10
+     3,    26,    38,    11,    44,    15,    16,    21,    29,    30,
+    24,    47,    17,    33,    17,    17,    43,    30,    18,    20,
+    30,    39,    22,    17,     6,    27,    17,    30,    46,     4,
+     5,     9,     5,    17,     6,    23,     6,     1,     2,    33,
+     6,    51,    12,    13,    34,    35,    42,    45,    25,    41,
+    42,    48,    42,    42,    49,    28,    36,    37,    52,    10
 };
 
 static const short yycheck[] = {    30,
-    11,    11,    15,    16,    35,     5,     4,    20,     8,    20,
-    20,    42,    12,     5,    13,    14,     8,     5,     3,     5,
-    12,    20,     7,     6,    12,    10,    12,     5,    15,    16,
-    13,     3,     4,    20,    16,    17,    16,    17,    20,     5,
-    20,     9,    10,    13,    14,    20,    15,    16,     9,    16,
-    17,    15,    16,    16,    17,     5,     5,     0,     0,     3
+     4,     9,     9,     3,    35,    11,    12,     7,    13,    14,
+    10,    42,    20,    20,    20,    20,    13,    14,     6,     5,
+    14,    15,     5,    20,    10,    13,    20,    14,    15,     5,
+     6,     5,     6,    20,    10,     5,    10,     3,     4,    20,
+    10,     0,     7,     8,    11,    12,    14,    15,     5,    13,
+    14,    13,    14,    14,    15,     7,     5,     5,     0,     3
 };
 
 #line 352 "/usr/share/bison++/bison.cc"
@@ -1138,111 +1138,111 @@ YYLABEL(yyreduce)
   switch (yyn) {
 
 case 1:
-#line 46 "Parser.y"
+#line 47 "Parser.y"
 { printf("%s\n",yyvsp[0].value); ;
     break;}
 case 2:
-#line 47 "Parser.y"
+#line 48 "Parser.y"
 {printf("%s %s %s\n",yyvsp[-2].value,yyvsp[-1].value,yyvsp[0].value); ;
     break;}
 case 3:
-#line 48 "Parser.y"
+#line 49 "Parser.y"
 {printf("%s %s\n",yyvsp[-1].value,yyvsp[0].value); ;
     break;}
 case 4:
-#line 49 "Parser.y"
+#line 50 "Parser.y"
 {printf("%s %s %s\n",yyvsp[-3].value,yyvsp[-2].value,yyvsp[0].value); ;
     break;}
 case 5:
-#line 50 "Parser.y"
+#line 51 "Parser.y"
 {printf("%s %s\n",yyvsp[-2].value,yyvsp[0].value); ;
     break;}
 case 6:
-#line 51 "Parser.y"
+#line 52 "Parser.y"
 {printf("%s %s %s\n",yyvsp[-4].value,yyvsp[-3].value,yyvsp[0].value); ;
     break;}
 case 7:
-#line 52 "Parser.y"
+#line 53 "Parser.y"
 {printf("%s %s\n",yyvsp[-3].value,yyvsp[0].value); ;
     break;}
 case 8:
-#line 53 "Parser.y"
+#line 54 "Parser.y"
 {printf("%s %s %s\n",yyvsp[-3].value,yyvsp[-2].value,yyvsp[0].value); ;
     break;}
 case 9:
-#line 54 "Parser.y"
+#line 55 "Parser.y"
 {printf("%s %s\n",yyvsp[-2].value,yyvsp[0].value); ;
     break;}
 case 10:
-#line 57 "Parser.y"
+#line 58 "Parser.y"
 {printf("%s %s\n",yyvsp[-2].value,yyvsp[0].value); ;
     break;}
 case 11:
-#line 58 "Parser.y"
+#line 59 "Parser.y"
 {printf("%s %s\n",yyvsp[-1].value,yyvsp[0].value); ;
     break;}
 case 12:
-#line 61 "Parser.y"
+#line 62 "Parser.y"
 {printf("%s %s\n",yyvsp[-1].value,yyvsp[0].value); ;
     break;}
 case 13:
-#line 62 "Parser.y"
+#line 63 "Parser.y"
 {printf("%s %s\n",yyvsp[-2].value,yyvsp[0].value); ;
     break;}
 case 14:
-#line 65 "Parser.y"
-{ printf("%s",yyvsp[0].value); ;
-    break;}
-case 15:
 #line 66 "Parser.y"
 { printf("%s",yyvsp[0].value); ;
     break;}
+case 15:
+#line 67 "Parser.y"
+{ printf("%s",yyvsp[0].value); ;
+    break;}
 case 16:
-#line 69 "Parser.y"
+#line 70 "Parser.y"
 {printf("%s %s\n",yyvsp[-2].value,yyvsp[0].value); ;
     break;}
 case 17:
-#line 70 "Parser.y"
+#line 71 "Parser.y"
 {printf("%s %s",yyvsp[-1].value,yyvsp[0].value); ;
     break;}
 case 18:
-#line 73 "Parser.y"
+#line 74 "Parser.y"
 {;
     break;}
 case 19:
-#line 74 "Parser.y"
+#line 75 "Parser.y"
 {cout<<yyvsp[-2].value<<" "<<yyvsp[0].value; ;
     break;}
 case 20:
-#line 75 "Parser.y"
-{cout<<yyvsp[-1].value<<" "<<yyvsp[0].value; ;
-    break;}
-case 21:
 #line 76 "Parser.y"
 {cout<<yyvsp[-1].value<<" "<<yyvsp[0].value; ;
     break;}
-case 22:
+case 21:
 #line 77 "Parser.y"
+{cout<<yyvsp[-1].value<<" "<<yyvsp[0].value; ;
+    break;}
+case 22:
+#line 78 "Parser.y"
 {;
     break;}
 case 23:
-#line 80 "Parser.y"
+#line 81 "Parser.y"
 {cout<<yyvsp[-2].value<<" "<<yyvsp[0].value; ;
     break;}
 case 24:
-#line 81 "Parser.y"
+#line 82 "Parser.y"
 { cout<<yyvsp[-1].value<<" "<<yyvsp[0].value; ;
     break;}
 case 25:
-#line 82 "Parser.y"
+#line 83 "Parser.y"
 {cout<<yyvsp[-2].value<<" "<<yyvsp[0].value; ;
     break;}
 case 26:
-#line 83 "Parser.y"
+#line 84 "Parser.y"
 { cout<<yyvsp[-1].value<<" "<<yyvsp[0].value; ;
     break;}
 case 27:
-#line 84 "Parser.y"
+#line 85 "Parser.y"
 {;
     break;}
 }
@@ -1449,7 +1449,7 @@ YYLABEL(yyerrhandle)
 /* END */
 
  #line 1038 "/usr/share/bison++/bison.cc"
-#line 87 "Parser.y"
+#line 88 "Parser.y"
 
 void yyerror(const char *msg){
 	printf("%s\n",msg);

@@ -81,7 +81,14 @@ gtph "p"|"P"|"h1"|"H1"|"h2"|"H2"|"h3"|"H4"|"h5"|"H5"
 	else
 		return PHRASECL;
 }
-
+"<"{gtph}{space}+[^>]*">"|"<"{gtph}">"  {
+        yylval.value=findpos(yytext,yyleng,1);
+        return GTPHOP;
+}
+"</"{gtph}{space}+[^>]*">"|"</"{gtph}">"  {
+        yylval.value=findpos(yytext,yyleng,2);
+        return GTPHCL;
+}
 
 %%
 

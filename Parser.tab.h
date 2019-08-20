@@ -193,18 +193,18 @@ typedef
 #define	DOCTYPE	258
 #define	HTMLOP	259
 #define	HTMLCL	260
-#define	PHTAGOP	261
-#define	PHTAGCL	262
-#define	HEADOP	263
-#define	HEADCL	264
-#define	TITLEOP	265
-#define	TITLECL	266
-#define	BODYOP	267
-#define	BODYCL	268
-#define	BPHRASEOP	269
-#define	BPHRASECL	270
-#define	PHRASEOP	271
-#define	PHRASECL	272
+#define	HEADOP	261
+#define	HEADCL	262
+#define	TITLEOP	263
+#define	TITLECL	264
+#define	BODYOP	265
+#define	BODYCL	266
+#define	BPHRASEOP	267
+#define	BPHRASECL	268
+#define	PHRASEOP	269
+#define	PHRASECL	270
+#define	GTPHOP	271
+#define	GTPHCL	272
 #define	COMMENT	273
 #define	SYMBOL	274
 #define	TEXT	275
@@ -262,8 +262,6 @@ public:
 static const int DOCTYPE;
 static const int HTMLOP;
 static const int HTMLCL;
-static const int PHTAGOP;
-static const int PHTAGCL;
 static const int HEADOP;
 static const int HEADCL;
 static const int TITLEOP;
@@ -274,6 +272,8 @@ static const int BPHRASEOP;
 static const int BPHRASECL;
 static const int PHRASEOP;
 static const int PHRASECL;
+static const int GTPHOP;
+static const int GTPHCL;
 static const int COMMENT;
 static const int SYMBOL;
 static const int TEXT;
@@ -291,18 +291,18 @@ static const int ATTRIBUTEVAL;
 	,DOCTYPE=258
 	,HTMLOP=259
 	,HTMLCL=260
-	,PHTAGOP=261
-	,PHTAGCL=262
-	,HEADOP=263
-	,HEADCL=264
-	,TITLEOP=265
-	,TITLECL=266
-	,BODYOP=267
-	,BODYCL=268
-	,BPHRASEOP=269
-	,BPHRASECL=270
-	,PHRASEOP=271
-	,PHRASECL=272
+	,HEADOP=261
+	,HEADCL=262
+	,TITLEOP=263
+	,TITLECL=264
+	,BODYOP=265
+	,BODYCL=266
+	,BPHRASEOP=267
+	,BPHRASECL=268
+	,PHRASEOP=269
+	,PHRASECL=270
+	,GTPHOP=271
+	,GTPHCL=272
 	,COMMENT=273
 	,SYMBOL=274
 	,TEXT=275
