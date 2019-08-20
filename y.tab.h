@@ -45,33 +45,43 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    TAG = 258,
-    STARTTAGOPEN = 259,
-    STARTTAGCLOSE = 260,
-    ENDTAGOPEN = 261,
-    ENDTAGCLOSE = 262,
-    COMMENT = 263,
-    SYMBOL = 264,
-    TEXT = 265,
-    ATTRIBUTE = 266,
-    CLOSE = 267,
-    IGNORE = 268,
-    ATTRIBUTEVAL = 269
+    DOCTYPE = 258,
+    HTMLOP = 259,
+    HTMLCL = 260,
+    TAGOP = 261,
+    TAGCL = 262,
+    HEADOP = 263,
+    HEADCL = 264,
+    TITLEOP = 265,
+    TITLECL = 266,
+    BODYOP = 267,
+    BODYCL = 268,
+    COMMENT = 269,
+    SYMBOL = 270,
+    TEXT = 271,
+    ATTRIBUTE = 272,
+    IGNORE = 273,
+    ATTRIBUTEVAL = 274
   };
 #endif
 /* Tokens.  */
-#define TAG 258
-#define STARTTAGOPEN 259
-#define STARTTAGCLOSE 260
-#define ENDTAGOPEN 261
-#define ENDTAGCLOSE 262
-#define COMMENT 263
-#define SYMBOL 264
-#define TEXT 265
-#define ATTRIBUTE 266
-#define CLOSE 267
-#define IGNORE 268
-#define ATTRIBUTEVAL 269
+#define DOCTYPE 258
+#define HTMLOP 259
+#define HTMLCL 260
+#define TAGOP 261
+#define TAGCL 262
+#define HEADOP 263
+#define HEADCL 264
+#define TITLEOP 265
+#define TITLECL 266
+#define BODYOP 267
+#define BODYCL 268
+#define COMMENT 269
+#define SYMBOL 270
+#define TEXT 271
+#define ATTRIBUTE 272
+#define IGNORE 273
+#define ATTRIBUTEVAL 274
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -83,7 +93,7 @@ union YYSTYPE
 	char *object;
 	char *value;
 
-#line 87 "y.tab.h" /* yacc.c:1909  */
+#line 97 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
