@@ -32,16 +32,15 @@ extern void yyerror(const char*);
 %token PHRASECL
 %token GTPHOP
 %token GTPHCL
-%token COMMENT 
-%token SYMBOL 
 %token TEXT
+%token AOPOP AOP ACL
 %token ATTRIBUTE
-%token IGNORE
 %token ATTRIBUTEVAL
 
 %type <value> ATTRIBUTE DOCTYPE HTMLOP HTMLCL HEADOP HEADCL TITLEOP TITLECL TEXT BODYOP BODYCL PHRASEOP PHRASECL BPHRASEOP BPHRASECL
+%type <value> ATTRIBUTEVAL AOP AOPOP ACL
 %type <value> GTPHOP GTPHCL
-%type <value> head title text body flow phraseopen phrases
+%type <value> head title text body flow phraseopen phrases atag
 
 %%
 
@@ -82,12 +81,25 @@ body: BODYOP flow BODYCL  { cout<<$1<<" "<<$3; }
 
 flow:   BPHRASEOP phraseopen { cout<<$1; }
 	| GTPHOP gtph {cout<<$1; }
+	| AOP atag {cout<<$1; }
         | text {}
+	;
+
+atag:	ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL flow {cout<<$1<<" "<<$2<<" "<<$3<<" "<<$5;}
+	| AOPOP flow ACL flow {cout<<$1<<" "<<$3; }
+	| AOPOP ACL flow {cout<<$1<<" "<<$2<<" "; }
+	| ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL {cout<<$1<<" "<<$2<<" "<<$3<<" "<<$5; }
+        | AOPOP flow ACL {cout<<$1<<" "<<$3; }
+        | AOPOP ACL {cout<<$1<<" "<<$2; }
+	| ATTRIBUTE ATTRIBUTEVAL AOPOP ACL flow {cout<<$1<<" "<<$2<<" "<<$3<<" "<<$4;}
+	| ATTRIBUTE ATTRIBUTEVAL AOPOP ACL {cout<<$1<<" "<<$2<<" "<<$3<<" "<<$4; }
 	;
 
 gtph: phrases GTPHCL flow {cout<<$2; }
 	| GTPHCL flow {cout<<$1; }
+	| phrases GTPHCL {cout<<$2; }
 	| GTPHCL {cout<<$1; }
+	;
 
 phraseopen: phrases BPHRASECL flow {cout<<$2; }
 	| BPHRASECL flow { cout<<$1; }

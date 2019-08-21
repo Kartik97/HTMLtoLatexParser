@@ -205,11 +205,11 @@ typedef
 #define	PHRASECL	270
 #define	GTPHOP	271
 #define	GTPHCL	272
-#define	COMMENT	273
-#define	SYMBOL	274
-#define	TEXT	275
-#define	ATTRIBUTE	276
-#define	IGNORE	277
+#define	TEXT	273
+#define	AOPOP	274
+#define	AOP	275
+#define	ACL	276
+#define	ATTRIBUTE	277
 #define	ATTRIBUTEVAL	278
 
 
@@ -274,11 +274,11 @@ static const int PHRASEOP;
 static const int PHRASECL;
 static const int GTPHOP;
 static const int GTPHCL;
-static const int COMMENT;
-static const int SYMBOL;
 static const int TEXT;
+static const int AOPOP;
+static const int AOP;
+static const int ACL;
 static const int ATTRIBUTE;
-static const int IGNORE;
 static const int ATTRIBUTEVAL;
 
 
@@ -303,11 +303,11 @@ static const int ATTRIBUTEVAL;
 	,PHRASECL=270
 	,GTPHOP=271
 	,GTPHCL=272
-	,COMMENT=273
-	,SYMBOL=274
-	,TEXT=275
-	,ATTRIBUTE=276
-	,IGNORE=277
+	,TEXT=273
+	,AOPOP=274
+	,AOP=275
+	,ACL=276
+	,ATTRIBUTE=277
 	,ATTRIBUTEVAL=278
 
 

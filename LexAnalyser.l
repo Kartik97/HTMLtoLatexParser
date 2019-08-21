@@ -7,8 +7,12 @@
 using namespace std;
 int phcount=0;
 char *findpos(const char* s,int len,int start);
+char *findval(const char* s,int len,int start);
 %}
 
+%option stack
+%x aInside
+%x aAtt
 space [ \t\r\n]
 newline \n
 html "html"|"HTML"
@@ -19,6 +23,7 @@ doctype "!doctype"|"!DOCTYPE"
 special "&"[a-zA-Z]+";"
 phrasingtags "b"|"B"|"em"|"EM"|"i"|"I"|"small"|"SMALL"|"strong"|"STRONG"|"sub"|"SUB"|"sup"|"SUP"|"u"|"U"
 gtph "p"|"P"|"h1"|"H1"|"h2"|"H2"|"h3"|"H4"|"h5"|"H5"
+a "a"|"A"
 
 %%
 [a-zA-Z0-9`~!@#$%^&*()-_=+;:'",.?//] {
@@ -89,6 +94,35 @@ gtph "p"|"P"|"h1"|"H1"|"h2"|"H2"|"h3"|"H4"|"h5"|"H5"
         yylval.value=findpos(yytext,yyleng,2);
         return GTPHCL;
 }
+"<"{a}{space}+|"<"{a} {
+	yy_push_state(aInside);
+	yylval.value="AOP";
+	return AOP;
+}
+"</"{a}{space}+[^>]*">"|"</"{a}">" {
+	yylval.value="ACL";
+	return ACL;
+}
+<aInside>{
+	"href"{space}+[^=]*"="|"href=" {
+		yy_push_state(aAtt);
+		yylval.value="HREF";
+		yyless(yyleng-1);
+		return ATTRIBUTE;
+	}
+	[^"href">]*">" {
+		yy_pop_state();
+		yylval.value="AOPOP";
+		return AOPOP;
+	}
+}
+<aAtt>{
+	[=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()]*[\"\'] {
+		yy_pop_state();
+		yylval.value=findval(yytext,yyleng,1);
+		return ATTRIBUTEVAL;
+	}
+}
 
 %%
 
@@ -107,3 +141,18 @@ char *findpos(const char *s,int len,int start){
 	p[k]=0;
 	return p;
 }
+char *findval(const char *s,int len,int start){
+        int i=start,k=0,flag=0;
+        char *p=(char *)malloc(sizeof(char)*len);
+        for(;i<len;i++){
+		if(flag==1)
+			p[k++]=s[i];
+		if(flag==1 && (s[i]==34 || s[i]==39))
+			break;
+		if(flag==0 && (s[i]==34 || s[i]==39))
+			flag=1;
+        }
+        p[k-1]=0;
+        return p;
+}
+
