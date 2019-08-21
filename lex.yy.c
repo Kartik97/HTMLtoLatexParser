@@ -827,7 +827,7 @@ case 2:
 YY_RULE_SETUP
 #line 30 "LexAnalyser.l"
 {
-	yylval.value = "DOCTYPE";
+	yylval.value = "DOCTYPE ";
 	return DOCTYPE;
 }
 	YY_BREAK
@@ -835,7 +835,7 @@ case 3:
 YY_RULE_SETUP
 #line 34 "LexAnalyser.l"
 {
-	yylval.value="HTMLOP";
+	yylval.value="HTMLOP ";
 	return HTMLOP;
 }
 	YY_BREAK
@@ -843,7 +843,7 @@ case 4:
 YY_RULE_SETUP
 #line 38 "LexAnalyser.l"
 {
-	yylval.value="HTMLCL";
+	yylval.value="HTMLCL ";
 	return HTMLCL;
 }
 	YY_BREAK
@@ -851,7 +851,7 @@ case 5:
 YY_RULE_SETUP
 #line 42 "LexAnalyser.l"
 {
-        yylval.value="HEADOP";
+        yylval.value="HEADOP ";
         return HEADOP;
 }
 	YY_BREAK
@@ -859,7 +859,7 @@ case 6:
 YY_RULE_SETUP
 #line 46 "LexAnalyser.l"
 {
-        yylval.value="HEADCL";
+        yylval.value="HEADCL ";
         return HEADCL;
 }
 	YY_BREAK
@@ -867,7 +867,7 @@ case 7:
 YY_RULE_SETUP
 #line 50 "LexAnalyser.l"
 {
-        yylval.value="TITLEOP";
+        yylval.value="TITLEOP ";
         return TITLEOP;
 }
 	YY_BREAK
@@ -875,7 +875,7 @@ case 8:
 YY_RULE_SETUP
 #line 54 "LexAnalyser.l"
 {
-        yylval.value="TITLECL";
+        yylval.value="TITLECL ";
         return TITLECL;
 }
 	YY_BREAK
@@ -883,7 +883,7 @@ case 9:
 YY_RULE_SETUP
 #line 58 "LexAnalyser.l"
 {
-        yylval.value="BODYOP";
+        yylval.value="BODYOP ";
         return BODYOP;
 }
 	YY_BREAK
@@ -891,7 +891,7 @@ case 10:
 YY_RULE_SETUP
 #line 62 "LexAnalyser.l"
 {
-        yylval.value="BODYCL";
+        yylval.value="BODYCL ";
         return BODYCL;
 }
 	YY_BREAK
@@ -926,13 +926,12 @@ YY_RULE_SETUP
 #line 84 "LexAnalyser.l"
 {
         yylval.value=findpos(yytext,yyleng,1);
-	string s = yytext;
         return GTPHOP;
 }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 89 "LexAnalyser.l"
+#line 88 "LexAnalyser.l"
 {
         yylval.value=findpos(yytext,yyleng,2);
         return GTPHCL;
@@ -940,10 +939,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 94 "LexAnalyser.l"
+#line 93 "LexAnalyser.l"
 ECHO;
 	YY_BREAK
-#line 947 "lex.yy.c"
+#line 946 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1833,7 +1832,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 94 "LexAnalyser.l"
+#line 93 "LexAnalyser.l"
 
 
 int yywrap(){
@@ -1841,12 +1840,13 @@ int yywrap(){
 }
 char *findpos(const char *s,int len,int start){
 	int i=start,k=0;
-	char *p=(char *)malloc(sizeof(char)*6);
+	char *p=(char *)malloc(sizeof(char)*100);
 	for(;i<len;i++){
-		if(s[i]==32 || s[i]==62)
-			break;
-		p[k++]=toupper(s[i]);
+		if((s[i]>=65 && s[i]<=90) || (s[i]>=97 && s[i]<=122))
+			p[k++]=toupper(s[i]);
+		else break;
 	}
+	p[k++]=32;
 	p[k]=0;
 	return p;
 }

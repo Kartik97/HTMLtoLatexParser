@@ -28,39 +28,39 @@ gtph "p"|"P"|"h1"|"H1"|"h2"|"H2"|"h3"|"H4"|"h5"|"H5"
 	}
 }
 "<"{doctype}{space}+[^{html}]*{html}">"|"<"{doctype}{space}+[^{html}]*{html}{space}+[^>]*">" {
-	yylval.value = "DOCTYPE";
+	yylval.value = "DOCTYPE ";
 	return DOCTYPE;
 }
 "<"{html}{space}+[^>]*">"|"<"{html}">"  {
-	yylval.value="HTMLOP";
+	yylval.value="HTMLOP ";
 	return HTMLOP;
 }
 "</"{html}{space}+[^>]*">"|"</"{html}">"  {
-	yylval.value="HTMLCL";
+	yylval.value="HTMLCL ";
 	return HTMLCL;
 }
 "<"{head}{space}+[^>]*">"|"<"{head}">"  {
-        yylval.value="HEADOP";
+        yylval.value="HEADOP ";
         return HEADOP;
 }
 "</"{head}{space}+[^>]*">"|"</"{head}">"  {
-        yylval.value="HEADCL";
+        yylval.value="HEADCL ";
         return HEADCL;
 }
 "<"{title}{space}+[^>]*">"|"<"{title}">"  {
-        yylval.value="TITLEOP";
+        yylval.value="TITLEOP ";
         return TITLEOP;
 }
 "</"{title}{space}+[^>]*">"|"</"{title}">"  {
-        yylval.value="TITLECL";
+        yylval.value="TITLECL ";
         return TITLECL;
 }
 "<"{body}{space}+[^>]*">"|"<"{body}">"  {
-        yylval.value="BODYOP";
+        yylval.value="BODYOP ";
         return BODYOP;
 }
 "</"{body}{space}+[^>]*">"|"</"{body}">"  {
-        yylval.value="BODYCL";
+        yylval.value="BODYCL ";
         return BODYCL;
 }
 "<"{phrasingtags}{space}+[^>]*">"|"<"{phrasingtags}">"  {
@@ -97,12 +97,13 @@ int yywrap(){
 }
 char *findpos(const char *s,int len,int start){
 	int i=start,k=0;
-	char *p=(char *)malloc(sizeof(char)*6);
+	char *p=(char *)malloc(sizeof(char)*100);
 	for(;i<len;i++){
-		if(s[i]==32 || s[i]==62)
-			break;
-		p[k++]=toupper(s[i]);
+		if((s[i]>=65 && s[i]<=90) || (s[i]>=97 && s[i]<=122))
+			p[k++]=toupper(s[i]);
+		else break;
 	}
+	p[k++]=32;
 	p[k]=0;
 	return p;
 }

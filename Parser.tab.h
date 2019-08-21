@@ -15,7 +15,7 @@
 
 #line 15 "Parser.y"
 typedef union{
-	const char *object;
+	char* object;
 	const char *value;
 } yy_parse_stype;
 #define YY_parse_STYPE yy_parse_stype

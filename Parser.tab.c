@@ -113,7 +113,7 @@ extern void yyerror(const char*);
 
 #line 15 "Parser.y"
 typedef union{
-	const char *object;
+	char* object;
 	const char *value;
 } yy_parse_stype;
 #define YY_parse_STYPE yy_parse_stype
@@ -571,9 +571,9 @@ static const short yyrhs[] = {     3,
 
 #if (YY_parse_DEBUG != 0) || defined(YY_parse_ERROR_VERBOSE) 
 static const short yyrline[] = { 0,
-    47,    48,    49,    50,    51,    52,    53,    54,    55,    58,
-    59,    62,    63,    66,    67,    70,    71,    74,    75,    78,
-    79,    80,    83,    84,    85,    86,    87
+    48,    49,    51,    52,    54,    56,    58,    60,    62,    66,
+    68,    71,    72,    75,    76,    79,    80,    83,    84,    87,
+    88,    89,    92,    93,    94,    95,    96
 };
 
 static const char * const yytname[] = {   "$","error","$illegal.","DOCTYPE",
@@ -1138,112 +1138,120 @@ YYLABEL(yyreduce)
   switch (yyn) {
 
 case 1:
-#line 47 "Parser.y"
-{ printf("%s\n",yyvsp[0].value); ;
+#line 48 "Parser.y"
+{ cout<<yyvsp[0].value; ;
     break;}
 case 2:
-#line 48 "Parser.y"
-{printf("%s %s %s\n",yyvsp[-2].value,yyvsp[-1].value,yyvsp[0].value); ;
+#line 49 "Parser.y"
+{
+				cout<<yyvsp[-2].value<<" "<<yyvsp[-1].value<<" "<<yyvsp[0].value; ;
     break;}
 case 3:
-#line 49 "Parser.y"
-{printf("%s %s\n",yyvsp[-1].value,yyvsp[0].value); ;
+#line 51 "Parser.y"
+{ cout<<yyvsp[-1].value<<" "<<yyvsp[0].value; ;
     break;}
 case 4:
-#line 50 "Parser.y"
-{printf("%s %s %s\n",yyvsp[-3].value,yyvsp[-2].value,yyvsp[0].value); ;
+#line 52 "Parser.y"
+{ 
+				       cout<<yyvsp[-3].value<<" "<<yyvsp[-2].value<<" "<<yyvsp[0].value; ;
     break;}
 case 5:
-#line 51 "Parser.y"
-{printf("%s %s\n",yyvsp[-2].value,yyvsp[0].value); ;
+#line 54 "Parser.y"
+{ 
+				cout<<yyvsp[-2].value<<" "<<yyvsp[0].value; ;
     break;}
 case 6:
-#line 52 "Parser.y"
-{printf("%s %s %s\n",yyvsp[-4].value,yyvsp[-3].value,yyvsp[0].value); ;
+#line 56 "Parser.y"
+{
+					cout<<yyvsp[-4].value<<" "<<yyvsp[-3].value<<" "<<yyvsp[0].value; ;
     break;}
 case 7:
-#line 53 "Parser.y"
-{printf("%s %s\n",yyvsp[-3].value,yyvsp[0].value); ;
+#line 58 "Parser.y"
+{
+				 cout<<yyvsp[-3].value<<" "<<yyvsp[0].value; ;
     break;}
 case 8:
-#line 54 "Parser.y"
-{printf("%s %s %s\n",yyvsp[-3].value,yyvsp[-2].value,yyvsp[0].value); ;
+#line 60 "Parser.y"
+{
+				cout<<yyvsp[-3].value<<" "<<yyvsp[-2].value<<" "<<yyvsp[0].value; ;
     break;}
 case 9:
-#line 55 "Parser.y"
-{printf("%s %s\n",yyvsp[-2].value,yyvsp[0].value); ;
+#line 62 "Parser.y"
+{
+				cout<<yyvsp[-2].value<<" "<<yyvsp[0].value; ;
     break;}
 case 10:
-#line 58 "Parser.y"
-{printf("%s %s\n",yyvsp[-2].value,yyvsp[0].value); ;
+#line 66 "Parser.y"
+{
+				cout<<yyvsp[-2].value<<" "<<yyvsp[0].value; ;
     break;}
 case 11:
-#line 59 "Parser.y"
-{printf("%s %s\n",yyvsp[-1].value,yyvsp[0].value); ;
+#line 68 "Parser.y"
+{ cout<<yyvsp[-1].value<<" "<<yyvsp[0].value; ;
     break;}
 case 12:
-#line 62 "Parser.y"
-{printf("%s %s\n",yyvsp[-1].value,yyvsp[0].value); ;
+#line 71 "Parser.y"
+{ cout<<yyvsp[-1].value<<" "<<yyvsp[0].value; ;
     break;}
 case 13:
-#line 63 "Parser.y"
-{printf("%s %s\n",yyvsp[-2].value,yyvsp[0].value); ;
+#line 72 "Parser.y"
+{ cout<<yyvsp[-2].value<<" "<<yyvsp[0].value; ;
     break;}
 case 14:
-#line 66 "Parser.y"
-{ printf("%s",yyvsp[0].value); ;
+#line 75 "Parser.y"
+{ cout<<yyvsp[0].value; ;
     break;}
 case 15:
-#line 67 "Parser.y"
-{ printf("%s",yyvsp[0].value); ;
+#line 76 "Parser.y"
+{cout<<yyvsp[0].value<<" "; ;
     break;}
 case 16:
-#line 70 "Parser.y"
-{printf("%s %s\n",yyvsp[-2].value,yyvsp[0].value); ;
+#line 79 "Parser.y"
+{ cout<<yyvsp[-2].value<<" "<<yyvsp[0].value; ;
     break;}
 case 17:
-#line 71 "Parser.y"
-{printf("%s %s",yyvsp[-1].value,yyvsp[0].value); ;
+#line 80 "Parser.y"
+{ cout<<yyvsp[-1].value<<" "<<yyvsp[0].value; ;
     break;}
 case 18:
-#line 74 "Parser.y"
-{cout<<yyvsp[-1].value<<" "; ;
+#line 83 "Parser.y"
+{ cout<<yyvsp[-1].value; ;
     break;}
 case 19:
-#line 75 "Parser.y"
+#line 84 "Parser.y"
 {;
     break;}
 case 20:
-#line 78 "Parser.y"
-{cout<<yyvsp[-1].value<<" "; ;
+#line 87 "Parser.y"
+{cout<<yyvsp[-1].value; ;
     break;}
 case 21:
-#line 79 "Parser.y"
-{cout<<yyvsp[-1].value<<" "; ;
+#line 88 "Parser.y"
+{ cout<<yyvsp[-1].value; ;
     break;}
 case 22:
-#line 80 "Parser.y"
-{cout<<yyvsp[0].value<<" "; ;
+#line 89 "Parser.y"
+{ cout<<yyvsp[0].value; ;
     break;}
 case 23:
-#line 83 "Parser.y"
-{cout<<yyvsp[-2].value<<" "<<yyvsp[0].value; ;
+#line 92 "Parser.y"
+{ cout<<yyvsp[-2].value<<" "<<yyvsp[0].value; ;
     break;}
 case 24:
-#line 84 "Parser.y"
+#line 93 "Parser.y"
 { cout<<yyvsp[-1].value<<" "<<yyvsp[0].value; ;
     break;}
 case 25:
-#line 85 "Parser.y"
+#line 94 "Parser.y"
 {cout<<yyvsp[-2].value<<" "<<yyvsp[0].value; ;
     break;}
 case 26:
-#line 86 "Parser.y"
-{ cout<<yyvsp[-1].value<<" "<<yyvsp[0].value; ;
+#line 95 "Parser.y"
+{cout<<yyvsp[-1].value<<" "<<yyvsp[0].value; ;
     break;}
 case 27:
-#line 87 "Parser.y"
-{;
+#line 96 "Parser.y"
+{  ;
     break;}
 }
 
@@ -1449,7 +1457,7 @@ YYLABEL(yyerrhandle)
 /* END */
 
  #line 1038 "/usr/share/bison++/bison.cc"
-#line 90 "Parser.y"
+#line 99 "Parser.y"
 
 void yyerror(const char *msg){
 	printf("%s\n",msg);
