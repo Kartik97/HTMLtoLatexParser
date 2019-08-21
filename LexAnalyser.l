@@ -35,6 +35,8 @@ font "font"|"FONT"
 li "li"|"LI"
 ul "ul"|"UL"
 ol "ol"|"OL"
+figure "figure"|"FIGURE"
+figcaption "figcaption"|"FIGCAPTION"
 
 %%
 [a-zA-Z0-9`~!@#$%^&*()-_=+;:'",.?//] {
@@ -242,6 +244,22 @@ ol "ol"|"OL"
 "</"{li}{space}+[^>]*">"|"</"{li}">"  {
         yylval.value="LICL ";
         return LICL;
+}
+"<"{figure}{space}+[^>]*">"|"<"{figure}">"  {
+        yylval.value="FIGUREOP ";
+        return FIGOP;
+}
+"</"{figure}{space}+[^>]*">"|"</"{figure}">"  {
+        yylval.value="FIGURECL ";
+        return FIGCL;
+}
+"<"{figcaption}{space}+[^>]*">"|"<"{figcaption}">"  {
+        yylval.value="FIGCAPTIONOP ";
+        return FIGCAPOP;
+}
+"</"{figcaption}{space}+[^>]*">"|"</"{figcaption}">"  {
+        yylval.value="FIGCAPTIONCL ";
+        return FIGCAPCL;
 }
 
 %%

@@ -40,10 +40,11 @@ extern void yyerror(const char*);
 %token IMGOP IMGCL
 %token FONTOP FONTOOP FONTCL
 %token LOP LCL LIOP LICL
+%token FIGOP FIGCL FIGCAPOP FIGCAPCL
 
 %type <value> ATTRIBUTE DOCTYPE HTMLOP HTMLCL HEADOP HEADCL TITLEOP TITLECL TEXT BODYOP BODYCL PHRASEOP PHRASECL BPHRASEOP BPHRASECL
-%type <value> ATTRIBUTEVAL AOP AOPOP ACL IMGOP IMGCL LOP LCL LIOP LICL
-%type <value> GTPHOP GTPHCL DIVOP DIVCL FONTOP FONTOOP FONTCL
+%type <value> ATTRIBUTEVAL AOP AOPOP ACL IMGOP IMGCL LOP LCL LIOP LICL FIGCAPOP FIGCAPCL
+%type <value> GTPHOP GTPHCL DIVOP DIVCL FONTOP FONTOOP FONTCL FIGOP FIGCL
 %type <value> head title text body flow phraseopen phrases atag
 
 %%
@@ -68,7 +69,8 @@ st:	DOCTYPE { cout<<$1; }
 
 head:	HEADOP title HEADCL {
 				cout<<$1<<" "<<$3; } 
-	| HEADOP HEADCL { cout<<$1<<" "<<$2; }
+	| HEADOP HEADCL {
+			cout<<$1<<" "<<$2; }
 	;
 
 title:	TITLEOP TITLECL { cout<<$1<<" "<<$2; }
@@ -91,6 +93,7 @@ flow:   BPHRASEOP phraseopen { cout<<$1; }
 	| IMGOP img flow {cout<<$1; }
 	| FONTOP font {cout<<$1; }
 	| LOP list {cout<<$1; }
+	| FIGOP figure {cout<<$1; }
         | text {}
 	;
 
@@ -155,6 +158,22 @@ list:  LIOP listitem list {cout<<$1; }
 
 listitem: flow LICL {cout<<$2; }
 	| LICL {cout<<$1; }
+	;
+
+figure: flow FIGCAPOP figcap FIGCL {cout<<$2<<" "<<$4; }
+	| FIGCAPOP figcap FIGCL {cout<<$1<<" "<<$3; }
+	| FIGCAPOP figcap flow FIGCL {cout<<$1<<" "<<$4; }
+	| flow FIGCL {cout<<$2; }
+	| FIGCL {cout<<$1; }
+	| flow FIGCAPOP figcap FIGCL flow {cout<<$2<<" "<<$4; }
+        | FIGCAPOP figcap FIGCL flow {cout<<$1<<" "<<$3; }
+	| FIGCAPOP figcap flow FIGCL flow {cout<<$1<<" "<<$4; }
+        | flow FIGCL flow {cout<<$2; }
+	| FIGCL flow {cout<<$1; }
+	;
+
+figcap: flow FIGCAPCL {cout<<$2; }
+	| FIGCAPCL {cout<<$1; }
 
 %%
 void yyerror(const char *msg){

@@ -222,6 +222,10 @@ typedef
 #define	LCL	287
 #define	LIOP	288
 #define	LICL	289
+#define	FIGOP	290
+#define	FIGCL	291
+#define	FIGCAPOP	292
+#define	FIGCAPCL	293
 
 
 #line 169 "/usr/share/bison++/bison.h"
@@ -302,6 +306,10 @@ static const int LOP;
 static const int LCL;
 static const int LIOP;
 static const int LICL;
+static const int FIGOP;
+static const int FIGCL;
+static const int FIGCAPOP;
+static const int FIGCAPCL;
 
 
 #line 212 "/usr/share/bison++/bison.h"
@@ -342,6 +350,10 @@ static const int LICL;
 	,LCL=287
 	,LIOP=288
 	,LICL=289
+	,FIGOP=290
+	,FIGCL=291
+	,FIGCAPOP=292
+	,FIGCAPCL=293
 
 
 #line 215 "/usr/share/bison++/bison.h"
