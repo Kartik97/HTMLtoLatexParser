@@ -32,6 +32,9 @@ a "a"|"A"
 div "div"|"DIV"
 img "img"|"IMG"
 font "font"|"FONT"
+li "li"|"LI"
+ul "ul"|"UL"
+ol "ol"|"OL"
 
 %%
 [a-zA-Z0-9`~!@#$%^&*()-_=+;:'",.?//] {
@@ -215,6 +218,30 @@ font "font"|"FONT"
                 yylval.value=findval(yytext,yyleng,1);
                 return ATTRIBUTEVAL;
         }
+}
+"<"{ul}{space}+[^>]*">"|"<"{ul}">"  {
+        yylval.value="ULOP ";
+        return LOP;
+}
+"</"{ul}{space}+[^>]*">"|"</"{ul}">"  {
+        yylval.value="ULCL ";
+        return LCL;
+}
+"<"{ol}{space}+[^>]*">"|"<"{ol}">"  {
+        yylval.value="OLOP ";
+        return LOP;
+}
+"</"{ol}{space}+[^>]*">"|"</"{ol}">"  {
+        yylval.value="OLCL ";
+        return LCL;
+}
+"<"{li}{space}+[^>]*">"|"<"{li}">"  {
+        yylval.value="LIOP ";
+        return LIOP;
+}
+"</"{li}{space}+[^>]*">"|"</"{li}">"  {
+        yylval.value="LICL ";
+        return LICL;
 }
 
 %%

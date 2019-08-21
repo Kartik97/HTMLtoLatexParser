@@ -218,6 +218,10 @@ typedef
 #define	FONTOP	283
 #define	FONTOOP	284
 #define	FONTCL	285
+#define	LOP	286
+#define	LCL	287
+#define	LIOP	288
+#define	LICL	289
 
 
 #line 169 "/usr/share/bison++/bison.h"
@@ -294,6 +298,10 @@ static const int IMGCL;
 static const int FONTOP;
 static const int FONTOOP;
 static const int FONTCL;
+static const int LOP;
+static const int LCL;
+static const int LIOP;
+static const int LICL;
 
 
 #line 212 "/usr/share/bison++/bison.h"
@@ -330,6 +338,10 @@ static const int FONTCL;
 	,FONTOP=283
 	,FONTOOP=284
 	,FONTCL=285
+	,LOP=286
+	,LCL=287
+	,LIOP=288
+	,LICL=289
 
 
 #line 215 "/usr/share/bison++/bison.h"

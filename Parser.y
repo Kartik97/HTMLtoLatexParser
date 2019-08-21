@@ -39,9 +39,10 @@ extern void yyerror(const char*);
 %token DIVOP DIVCL
 %token IMGOP IMGCL
 %token FONTOP FONTOOP FONTCL
+%token LOP LCL LIOP LICL
 
 %type <value> ATTRIBUTE DOCTYPE HTMLOP HTMLCL HEADOP HEADCL TITLEOP TITLECL TEXT BODYOP BODYCL PHRASEOP PHRASECL BPHRASEOP BPHRASECL
-%type <value> ATTRIBUTEVAL AOP AOPOP ACL IMGOP IMGCL
+%type <value> ATTRIBUTEVAL AOP AOPOP ACL IMGOP IMGCL LOP LCL LIOP LICL
 %type <value> GTPHOP GTPHCL DIVOP DIVCL FONTOP FONTOOP FONTCL
 %type <value> head title text body flow phraseopen phrases atag
 
@@ -89,6 +90,7 @@ flow:   BPHRASEOP phraseopen { cout<<$1; }
 	| IMGOP img {cout<<$1; }
 	| IMGOP img flow {cout<<$1; }
 	| FONTOP font {cout<<$1; }
+	| LOP list {cout<<$1; }
         | text {}
 	;
 
@@ -146,6 +148,13 @@ font: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL {cout<<$1<<" "<<$2<<" "<<$3<<" "<<$4
         | ATTRIBUTE ATTRIBUTEVAL FONTOOP phrases BPHRASECL {cout<<$1<<" "<<$2<<" "<<$3<<" "<<$5; }  
         | FONTOOP phrases BPHRASECL {cout<<$1<<" "<<$3; }
 	;
+
+list:  LIOP listitem list {cout<<$1; }
+	| LCL {cout<<$1; }
+	;
+
+listitem: flow LICL {cout<<$2; }
+	| LICL {cout<<$1; }
 
 %%
 void yyerror(const char *msg){
