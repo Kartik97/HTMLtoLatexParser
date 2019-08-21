@@ -215,6 +215,9 @@ typedef
 #define	DIVCL	280
 #define	IMGOP	281
 #define	IMGCL	282
+#define	FONTOP	283
+#define	FONTOOP	284
+#define	FONTCL	285
 
 
 #line 169 "/usr/share/bison++/bison.h"
@@ -288,6 +291,9 @@ static const int DIVOP;
 static const int DIVCL;
 static const int IMGOP;
 static const int IMGCL;
+static const int FONTOP;
+static const int FONTOOP;
+static const int FONTCL;
 
 
 #line 212 "/usr/share/bison++/bison.h"
@@ -321,6 +327,9 @@ static const int IMGCL;
 	,DIVCL=280
 	,IMGOP=281
 	,IMGCL=282
+	,FONTOP=283
+	,FONTOOP=284
+	,FONTCL=285
 
 
 #line 215 "/usr/share/bison++/bison.h"

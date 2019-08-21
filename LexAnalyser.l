@@ -15,6 +15,8 @@ char *findval(const char* s,int len,int start);
 %x aAtt
 %x imgInside
 %x imgAtt
+%x fontInside
+%x fontAtt
 
 space [ \t\r\n]
 newline \n
@@ -24,11 +26,12 @@ title "title"|"TITLE"
 body "body"|"BODY"
 doctype "!doctype"|"!DOCTYPE"
 special "&"[a-zA-Z]+";"
-phrasingtags "b"|"B"|"em"|"EM"|"i"|"I"|"small"|"SMALL"|"strong"|"STRONG"|"sub"|"SUB"|"sup"|"SUP"|"u"|"U"|"tt"|"TT"
+phrasingtags "b"|"B"|"em"|"EM"|"i"|"I"|"small"|"SMALL"|"strong"|"STRONG"|"sub"|"SUB"|"sup"|"SUP"|"u"|"U"|"tt"|"TT"|"center"|"CENTER"
 gtph "p"|"P"|"h1"|"H1"|"h2"|"H2"|"h3"|"H4"|"h5"|"H5"
 a "a"|"A"
 div "div"|"DIV"
 img "img"|"IMG"
+font "font"|"FONT"
 
 %%
 [a-zA-Z0-9`~!@#$%^&*()-_=+;:'",.?//] {
@@ -175,7 +178,44 @@ img "img"|"IMG"
                 return ATTRIBUTEVAL;
         }
 }
-
+"<"{font}{space}+|"<"{font} {
+        yy_push_state(fontInside);
+        yylval.value="FONTOP";
+	phcount++;
+	if(phcount==1)
+		return BPHRASEOP;
+	else
+		return FONTOP;
+}
+"</"{font}{space}+[^>]*">"|"</"{font}">" {
+        yylval.value="FONTCL";
+	phcount--;
+	if(phcount==0)
+		return BPHRASECL;
+	else
+		return FONTCL;
+}
+<fontInside>{
+        "size"{space}+[^=]*"="|"size=" {
+                yy_push_state(fontAtt);
+                yylval.value="SIZE";
+                yyless(yyleng-1);
+                return ATTRIBUTE;
+        }
+        [^"size">]*">" {
+                yy_pop_state();
+                yylval.value="FONTOOP";
+                return FONTOOP;
+        }
+        . {}
+}
+<fontAtt>{
+        [=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()]*[\"\'] {
+                yy_pop_state();
+                yylval.value=findval(yytext,yyleng,1);
+                return ATTRIBUTEVAL;
+        }
+}
 
 %%
 
