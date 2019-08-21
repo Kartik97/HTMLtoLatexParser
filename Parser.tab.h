@@ -211,6 +211,10 @@ typedef
 #define	ACL	276
 #define	ATTRIBUTE	277
 #define	ATTRIBUTEVAL	278
+#define	DIVOP	279
+#define	DIVCL	280
+#define	IMGOP	281
+#define	IMGCL	282
 
 
 #line 169 "/usr/share/bison++/bison.h"
@@ -280,6 +284,10 @@ static const int AOP;
 static const int ACL;
 static const int ATTRIBUTE;
 static const int ATTRIBUTEVAL;
+static const int DIVOP;
+static const int DIVCL;
+static const int IMGOP;
+static const int IMGCL;
 
 
 #line 212 "/usr/share/bison++/bison.h"
@@ -309,6 +317,10 @@ static const int ATTRIBUTEVAL;
 	,ACL=276
 	,ATTRIBUTE=277
 	,ATTRIBUTEVAL=278
+	,DIVOP=279
+	,DIVCL=280
+	,IMGOP=281
+	,IMGCL=282
 
 
 #line 215 "/usr/share/bison++/bison.h"

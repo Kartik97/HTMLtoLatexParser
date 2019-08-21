@@ -13,6 +13,9 @@ char *findval(const char* s,int len,int start);
 %option stack
 %x aInside
 %x aAtt
+%x imgInside
+%x imgAtt
+
 space [ \t\r\n]
 newline \n
 html "html"|"HTML"
@@ -21,9 +24,11 @@ title "title"|"TITLE"
 body "body"|"BODY"
 doctype "!doctype"|"!DOCTYPE"
 special "&"[a-zA-Z]+";"
-phrasingtags "b"|"B"|"em"|"EM"|"i"|"I"|"small"|"SMALL"|"strong"|"STRONG"|"sub"|"SUB"|"sup"|"SUP"|"u"|"U"
+phrasingtags "b"|"B"|"em"|"EM"|"i"|"I"|"small"|"SMALL"|"strong"|"STRONG"|"sub"|"SUB"|"sup"|"SUP"|"u"|"U"|"tt"|"TT"
 gtph "p"|"P"|"h1"|"H1"|"h2"|"H2"|"h3"|"H4"|"h5"|"H5"
 a "a"|"A"
+div "div"|"DIV"
+img "img"|"IMG"
 
 %%
 [a-zA-Z0-9`~!@#$%^&*()-_=+;:'",.?//] {
@@ -67,6 +72,14 @@ a "a"|"A"
 "</"{body}{space}+[^>]*">"|"</"{body}">"  {
         yylval.value="BODYCL ";
         return BODYCL;
+}
+"<"{div}{space}+[^>]*">"|"<"{div}">"  {
+        yylval.value="DIVOP ";
+        return DIVOP;
+}
+"</"{div}{space}+[^>]*">"|"</"{div}">"  {
+        yylval.value="DIVCL ";
+        return DIVCL;
 }
 "<"{phrasingtags}{space}+[^>]*">"|"<"{phrasingtags}">"  {
         yylval.value=findpos(yytext,yyleng,1);
@@ -115,6 +128,7 @@ a "a"|"A"
 		yylval.value="AOPOP";
 		return AOPOP;
 	}
+	. {}
 }
 <aAtt>{
 	[=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()]*[\"\'] {
@@ -123,6 +137,45 @@ a "a"|"A"
 		return ATTRIBUTEVAL;
 	}
 }
+"<"{img}{space}+|"<"{img} {
+	yy_push_state(imgInside);
+	yylval.value="IMGOP";
+	return IMGOP;
+}
+<imgInside>{
+	"src"{space}+[^=]*"="|"src=" {
+                yy_push_state(imgAtt);
+                yylval.value="SRC";
+                yyless(yyleng-1);
+                return ATTRIBUTE;
+        }
+	"width"{space}+[^=]*"="|"width=" {
+                yy_push_state(imgAtt);
+                yylval.value="WIDTH";
+                yyless(yyleng-1);
+                return ATTRIBUTE;
+        }
+	"height"{space}+[^=]*"="|"height=" {
+                yy_push_state(imgAtt);
+                yylval.value="HEIGHT";
+                yyless(yyleng-1);
+                return ATTRIBUTE;
+        }
+        [^"src""width""height">]*[">""\>"] {
+                yy_pop_state();
+                yylval.value="IMGCL";
+                return IMGCL;
+        }
+        . {}
+}
+<imgAtt>{
+	 [=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()]*[\"\'] {
+                yy_pop_state();
+                yylval.value=findval(yytext,yyleng,1);
+                return ATTRIBUTEVAL;
+        }
+}
+
 
 %%
 

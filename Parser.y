@@ -36,10 +36,13 @@ extern void yyerror(const char*);
 %token AOPOP AOP ACL
 %token ATTRIBUTE
 %token ATTRIBUTEVAL
+%token DIVOP
+%token DIVCL
+%token IMGOP IMGCL
 
 %type <value> ATTRIBUTE DOCTYPE HTMLOP HTMLCL HEADOP HEADCL TITLEOP TITLECL TEXT BODYOP BODYCL PHRASEOP PHRASECL BPHRASEOP BPHRASECL
-%type <value> ATTRIBUTEVAL AOP AOPOP ACL
-%type <value> GTPHOP GTPHCL
+%type <value> ATTRIBUTEVAL AOP AOPOP ACL IMGOP IMGCL
+%type <value> GTPHOP GTPHCL DIVOP DIVCL
 %type <value> head title text body flow phraseopen phrases atag
 
 %%
@@ -82,7 +85,16 @@ body: BODYOP flow BODYCL  { cout<<$1<<" "<<$3; }
 flow:   BPHRASEOP phraseopen { cout<<$1; }
 	| GTPHOP gtph {cout<<$1; }
 	| AOP atag {cout<<$1; }
+	| DIVOP div {cout<<$1; }
+	| IMGOP img {cout<<$1; }
+	| IMGOP img flow {cout<<$1; }
         | text {}
+	;
+
+div: DIVCL {cout<<$1; }
+	| DIVCL flow {cout<<$1; }
+	| flow DIVCL flow {cout<<$2; }
+	| flow DIVCL {cout<<$2; }
 	;
 
 atag:	ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL flow {cout<<$1<<" "<<$2<<" "<<$3<<" "<<$5;}
@@ -110,8 +122,14 @@ phrases: phrases PHRASEOP phrases PHRASECL { cout<<$2<<" "<<$4; }
 	 | phrases PHRASEOP PHRASECL { cout<<$2<<" "<<$3; }
 	 | PHRASEOP phrases PHRASECL {cout<<$1<<" "<<$3; }
 	 | PHRASEOP PHRASECL {cout<<$1<<" "<<$2; }
-	 | text {  }
+	 | phrases IMGOP img {cout<<$2; }
+	 | IMGOP img {cout<<$1; }
+	 | text {}
 	;
+
+img:  ATTRIBUTE ATTRIBUTEVAL img {cout<<$1<<" "<<$2; }
+	| IMGCL {cout<<$1; }
+	; 
 
 %%
 void yyerror(const char *msg){
