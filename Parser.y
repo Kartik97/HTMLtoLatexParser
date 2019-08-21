@@ -81,8 +81,13 @@ body: BODYOP flow BODYCL  { cout<<$1<<" "<<$3; }
 	;
 
 flow:   BPHRASEOP phraseopen { cout<<$1; }
+	| GTPHOP gtph {cout<<$1; }
         | text {}
 	;
+
+gtph: phrases GTPHCL flow {cout<<$2; }
+	| GTPHCL flow {cout<<$1; }
+	| GTPHCL {cout<<$1; }
 
 phraseopen: phrases BPHRASECL flow {cout<<$2; }
 	| BPHRASECL flow { cout<<$1; }
