@@ -43,7 +43,8 @@ extern void yyerror(const char*);
 %token LOP LCL LIOP LICL
 %token FIGOP FIGCL FIGCAPOP FIGCAPCL
 %token DLOP DLCL DTOP DTCL DDOP DDCL
-%token <value> TABOP TABCL CAPOP CAPCL TROP TRCL THOP THCL TDOP TDCL
+%token <value> TABOP TABCL CAPOP CAPCL TROP TRCL THOP THCL TDOP TDCL BR
+%token <value> COMMENT SPCHAR
 
 %type <value> ATTRIBUTE DOCTYPE HTMLOP HTMLCL HEADOP HEADCL TITLEOP TITLECL TEXT BODYOP BODYCL PHRASEOP PHRASECL BPHRASEOP BPHRASECL
 %type <value> ATTRIBUTEVAL AOP AOPOP ACL IMGOP IMGCL LOP LCL LIOP LICL FIGCAPOP FIGCAPCL
@@ -93,7 +94,16 @@ flow:   BPHRASEOP phraseopen { cout<<$1; }
 	| FIGOP figure {cout<<$1; }
 	| DLOP dl {cout<<$1; }
 	| TABOP table {cout<<$1; }
+	| misc flow {}
+	| misc {}
         | text {}
+	;
+
+misc: COMMENT {cout<<$1; }
+	| br {}
+	;
+
+br: BR {cout<<$1; }
 	;
 
 table: CAPOP caption TABCL{cout<<$1; }
@@ -116,6 +126,12 @@ tr: TRCL {cout<<$1; }
 	| TRCL TROP tr {cout<<$1<<" "<<$2; }
         | THOP th TRCL TROP tr {cout<<$1<<" "<<$3<<" "<<$4; }
         | TDOP td TRCL TROP tr {cout<<$1<<" "<<$3<<" "<<$4; }
+	| misc TRCL {cout<<$2; }
+        | misc THOP th TRCL {cout<<$2<<" "<<$4; }
+        | misc TDOP td TRCL {cout<<$2<<" "<<$4; }
+        | misc TRCL TROP tr {cout<<$2<<" "<<$3; }
+        | misc THOP th TRCL TROP tr {cout<<$2<<" "<<$4<<" "<<$5; }
+        | misc TDOP td TRCL TROP tr {cout<<$2<<" "<<$4<<" "<<$5; }
 	;
 
 th: THCL {cout<<$1; }
@@ -157,7 +173,8 @@ gtph: phrases GTPHCL flow {cout<<$2; }
 phraseopen: phrases BPHRASECL flow {cout<<$2; }
 	| BPHRASECL flow { cout<<$1; }
 	| BPHRASECL { cout<<$1; }
-	| font {} 
+	| font {}
+	| phrases BPHRASECL {cout<<$2; }
 	;
 
 phrases: phrases PHRASEOP phrases PHRASECL { cout<<$2<<" "<<$4; }
@@ -171,6 +188,18 @@ phrases: phrases PHRASEOP phrases PHRASECL { cout<<$2<<" "<<$4; }
 	 | font {} 
 	 | IMGOP img {cout<<$1; }
 	 | text {}
+	 | misc { }
+	 | phrases PHRASEOP phrases PHRASECL misc { cout<<$2<<" "<<$4; }
+         | phrases PHRASEOP PHRASECL misc { cout<<$2<<" "<<$3; }
+         | PHRASEOP phrases PHRASECL misc {cout<<$1<<" "<<$3; }
+         | PHRASEOP PHRASECL misc {cout<<$1<<" "<<$2; }
+         | phrases IMGOP img misc {cout<<$2; }
+         | phrases font misc {}
+         | phrases FONTOP font misc {cout<<$2; }
+         | FONTOP font misc {cout<<$1; }
+         | font misc {}
+         | IMGOP img misc {cout<<$1; }
+         | text misc {}
 	;
 
 img:  ATTRIBUTE ATTRIBUTEVAL img {cout<<$1<<" "<<$2; }

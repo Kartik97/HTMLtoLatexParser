@@ -45,6 +45,8 @@ caption "caption"|"CAPTION"
 tr "tr"|"TR"
 th "th"|"TH"
 td "td"|"TD"
+br "br"|"BR"
+comm "-->"
 
 %%
 [a-zA-Z0-9`~!@#$%^&*()-_=+;:'",.?//] {
@@ -52,6 +54,10 @@ td "td"|"TD"
 	{	yylval.value = strdup(yytext);
 		return TEXT;
 	}
+}
+"<!--"[^{comm}]*"-->"  {
+	yylval.value=yytext;
+        return COMMENT;
 }
 "<"{doctype}{space}+[^{html}]*{html}">"|"<"{doctype}{space}+[^{html}]*{html}{space}+[^>]*">" {
 	yylval.value = strdup("DOCTYPE ");
@@ -325,6 +331,10 @@ td "td"|"TD"
 "</"{td}{space}+[^>]*">"|"</"{td}">"  {
         yylval.value=strdup("TDCL ");
         return TDCL;
+}
+"<"{br}{space}+[^>]*">"|"<"{br}">"  {
+        yylval.value=strdup("BR ");
+        return BR;
 }
 
 %%

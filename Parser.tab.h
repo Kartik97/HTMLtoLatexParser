@@ -242,6 +242,9 @@ typedef
 #define	THCL	307
 #define	TDOP	308
 #define	TDCL	309
+#define	BR	310
+#define	COMMENT	311
+#define	SPCHAR	312
 
 
 #line 169 "/usr/share/bison++/bison.h"
@@ -342,6 +345,9 @@ static const int THOP;
 static const int THCL;
 static const int TDOP;
 static const int TDCL;
+static const int BR;
+static const int COMMENT;
+static const int SPCHAR;
 
 
 #line 212 "/usr/share/bison++/bison.h"
@@ -402,6 +408,9 @@ static const int TDCL;
 	,THCL=307
 	,TDOP=308
 	,TDCL=309
+	,BR=310
+	,COMMENT=311
+	,SPCHAR=312
 
 
 #line 215 "/usr/share/bison++/bison.h"
