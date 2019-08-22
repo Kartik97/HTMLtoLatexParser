@@ -1500,30 +1500,22 @@ YY_RULE_SETUP
 #line 194 "LexAnalyser.l"
 {
         yy_push_state(fontInside);
-//        yylval.value=strdup("FONTOP");
-	phcount++;
-	if(phcount==1)
-	{ yylval.value=strdup("BPHRASEOP");	return BPHRASEOP; }
-	else
-	{ yylval.value=strdup("FONTOP");	return FONTOP;}
+	yylval.value=strdup("FONTOP");	
+	return FONTOP;
 }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 203 "LexAnalyser.l"
+#line 199 "LexAnalyser.l"
 {
-  //      yylval.value=strdup("FONTCL");
-	phcount--;
-	if(phcount==0)
-	{ yylval.value=strdup("BPHRASECL");	return BPHRASECL;}
-	else
-	{ yylval.value=strdup("FONTCL");	return FONTCL;  }
+	yylval.value=strdup("FONTCL");	
+	return FONTCL;
 }
 	YY_BREAK
 
 case 32:
 YY_RULE_SETUP
-#line 212 "LexAnalyser.l"
+#line 204 "LexAnalyser.l"
 {
                 yy_push_state(fontAtt);
                 yylval.value=strdup("SIZE");
@@ -1533,7 +1525,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 218 "LexAnalyser.l"
+#line 210 "LexAnalyser.l"
 {
                 yy_pop_state();
                 yylval.value=strdup("FONTOOP");
@@ -1542,14 +1534,14 @@ YY_RULE_SETUP
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 223 "LexAnalyser.l"
+#line 215 "LexAnalyser.l"
 {}
 	YY_BREAK
 
 
 case 35:
 YY_RULE_SETUP
-#line 226 "LexAnalyser.l"
+#line 218 "LexAnalyser.l"
 {
                 yy_pop_state();
                 yylval.value=strdup(findval(yytext,yyleng,1));
@@ -1559,7 +1551,7 @@ YY_RULE_SETUP
 
 case 36:
 YY_RULE_SETUP
-#line 232 "LexAnalyser.l"
+#line 224 "LexAnalyser.l"
 {
         yylval.value=strdup("ULOP ");
         return LOP;
@@ -1567,7 +1559,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 236 "LexAnalyser.l"
+#line 228 "LexAnalyser.l"
 {
         yylval.value=strdup("ULCL ");
         return LCL;
@@ -1575,7 +1567,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 240 "LexAnalyser.l"
+#line 232 "LexAnalyser.l"
 {
         yylval.value=strdup("OLOP ");
         return LOP;
@@ -1583,7 +1575,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 244 "LexAnalyser.l"
+#line 236 "LexAnalyser.l"
 {
         yylval.value=strdup("OLCL ");
         return LCL;
@@ -1591,7 +1583,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 248 "LexAnalyser.l"
+#line 240 "LexAnalyser.l"
 {
         yylval.value=strdup("LIOP ");
         return LIOP;
@@ -1599,7 +1591,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 252 "LexAnalyser.l"
+#line 244 "LexAnalyser.l"
 {
         yylval.value=strdup("LICL ");
         return LICL;
@@ -1607,7 +1599,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 256 "LexAnalyser.l"
+#line 248 "LexAnalyser.l"
 {
         yylval.value=strdup("FIGUREOP ");
         return FIGOP;
@@ -1615,7 +1607,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 260 "LexAnalyser.l"
+#line 252 "LexAnalyser.l"
 {
         yylval.value=strdup("FIGURECL ");
         return FIGCL;
@@ -1623,7 +1615,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 264 "LexAnalyser.l"
+#line 256 "LexAnalyser.l"
 {
         yylval.value=strdup("FIGCAPTIONOP ");
         return FIGCAPOP;
@@ -1631,7 +1623,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 268 "LexAnalyser.l"
+#line 260 "LexAnalyser.l"
 {
 	yylval.value=strdup("FIGCAPTIONCL");
         //yylval.value="FIGCAPTIONCL ";
@@ -1640,7 +1632,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 273 "LexAnalyser.l"
+#line 265 "LexAnalyser.l"
 {
         yylval.value=strdup("DLOP ");
         return DLOP;
@@ -1648,7 +1640,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 277 "LexAnalyser.l"
+#line 269 "LexAnalyser.l"
 {
         yylval.value=strdup("DLCL ");
         return DLCL;
@@ -1656,7 +1648,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 281 "LexAnalyser.l"
+#line 273 "LexAnalyser.l"
 {
         yylval.value=strdup("DTOP ");
         return DTOP;
@@ -1664,7 +1656,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 285 "LexAnalyser.l"
+#line 277 "LexAnalyser.l"
 {
         yylval.value=strdup("DTCL ");
         return DTCL;
@@ -1672,7 +1664,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 289 "LexAnalyser.l"
+#line 281 "LexAnalyser.l"
 {
         yylval.value=strdup("DDOP ");
         return DDOP;
@@ -1680,7 +1672,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 293 "LexAnalyser.l"
+#line 285 "LexAnalyser.l"
 {
         yylval.value=strdup("DDCL ");
         return DDCL;
@@ -1688,7 +1680,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 297 "LexAnalyser.l"
+#line 289 "LexAnalyser.l"
 {
         yylval.value=strdup("TABLEOP ");
         return TABOP;
@@ -1696,7 +1688,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 301 "LexAnalyser.l"
+#line 293 "LexAnalyser.l"
 {
         yylval.value=strdup("TABLECL ");
         return TABCL;
@@ -1704,7 +1696,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 305 "LexAnalyser.l"
+#line 297 "LexAnalyser.l"
 {
         yylval.value=strdup("CAPOP ");
         return CAPOP;
@@ -1712,7 +1704,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 309 "LexAnalyser.l"
+#line 301 "LexAnalyser.l"
 {
         yylval.value=strdup("CAPCL ");
         return CAPCL;
@@ -1720,7 +1712,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 313 "LexAnalyser.l"
+#line 305 "LexAnalyser.l"
 {
         yylval.value=strdup("TROP ");
         return TROP;
@@ -1728,7 +1720,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 317 "LexAnalyser.l"
+#line 309 "LexAnalyser.l"
 {
         yylval.value=strdup("THCL ");
         return THCL;
@@ -1736,7 +1728,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 321 "LexAnalyser.l"
+#line 313 "LexAnalyser.l"
 {
         yylval.value=strdup("TDOP ");
         return TDOP;
@@ -1744,7 +1736,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 325 "LexAnalyser.l"
+#line 317 "LexAnalyser.l"
 {
         yylval.value=strdup("TDCL ");
         return TDCL;
@@ -1752,10 +1744,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 330 "LexAnalyser.l"
+#line 322 "LexAnalyser.l"
 ECHO;
 	YY_BREAK
-#line 1759 "lex.yy.c"
+#line 1751 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(aInside):
 case YY_STATE_EOF(aAtt):
@@ -2651,7 +2643,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 330 "LexAnalyser.l"
+#line 322 "LexAnalyser.l"
 
 
 int yywrap(){

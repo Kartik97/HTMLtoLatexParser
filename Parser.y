@@ -88,7 +88,7 @@ flow:   BPHRASEOP phraseopen { cout<<$1; }
 	| DIVOP div {cout<<$1; }
 	| IMGOP img {cout<<$1; }
 	| IMGOP img flow {cout<<$1; }
-	| FONTOP font {cout<<$1; }
+	| FONTOP fontsub {cout<<$1; }
 	| LOP list {cout<<$1; }
 	| FIGOP figure {cout<<$1; }
 	| DLOP dl {cout<<$1; }
@@ -177,12 +177,13 @@ img:  ATTRIBUTE ATTRIBUTEVAL img {cout<<$1<<" "<<$2; }
 	| IMGCL {cout<<$1; }
 	; 
 
+fontsub: font {}
+	| font flow {}
+	;
+
 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL {cout<<$1<<" "<<$2<<" "<<$3<<" "<<$4;}
 	| ATTRIBUTE ATTRIBUTEVAL FONTOOP phrases FONTCL {cout<<$1<<" "<<$2<<" "<<$3<<" "<<$5;}
 	| FONTOOP phrases FONTCL {cout<<$1<<" "<<$3; }
-	| ATTRIBUTE ATTRIBUTEVAL FONTOOP BPHRASECL {cout<<$1<<" "<<$2<<" "<<$3; } 
-        | ATTRIBUTE ATTRIBUTEVAL FONTOOP phrases BPHRASECL {cout<<$1<<" "<<$2<<" "<<$3; }  
-        | FONTOOP phrases BPHRASECL {cout<<$1; }
 	;
 
 list:  LIOP listitem list {cout<<$1; }

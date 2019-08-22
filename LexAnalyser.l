@@ -193,20 +193,12 @@ td "td"|"TD"
 }
 "<"{font}{space}+|"<"{font} {
         yy_push_state(fontInside);
-//        yylval.value=strdup("FONTOP");
-	phcount++;
-	if(phcount==1)
-	{ yylval.value=strdup("BPHRASEOP");	return BPHRASEOP; }
-	else
-	{ yylval.value=strdup("FONTOP");	return FONTOP;}
+	yylval.value=strdup("FONTOP");	
+	return FONTOP;
 }
 "</"{font}{space}+[^>]*">"|"</"{font}">" {
-  //      yylval.value=strdup("FONTCL");
-	phcount--;
-	if(phcount==0)
-	{ yylval.value=strdup("BPHRASECL");	return BPHRASECL;}
-	else
-	{ yylval.value=strdup("FONTCL");	return FONTCL;  }
+	yylval.value=strdup("FONTCL");	
+	return FONTCL;
 }
 <fontInside>{
         "size"{space}+[^=]*"="|"size=" {
