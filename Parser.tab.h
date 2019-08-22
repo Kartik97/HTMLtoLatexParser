@@ -16,7 +16,7 @@
 #line 15 "Parser.y"
 typedef union{
 	char* object;
-	const char *value;
+	char* value;
 } yy_parse_stype;
 #define YY_parse_STYPE yy_parse_stype
 #ifndef YY_USE_CLASS
@@ -226,6 +226,22 @@ typedef
 #define	FIGCL	291
 #define	FIGCAPOP	292
 #define	FIGCAPCL	293
+#define	DLOP	294
+#define	DLCL	295
+#define	DTOP	296
+#define	DTCL	297
+#define	DDOP	298
+#define	DDCL	299
+#define	TABOP	300
+#define	TABCL	301
+#define	CAPOP	302
+#define	CAPCL	303
+#define	TROP	304
+#define	TRCL	305
+#define	THOP	306
+#define	THCL	307
+#define	TDOP	308
+#define	TDCL	309
 
 
 #line 169 "/usr/share/bison++/bison.h"
@@ -310,6 +326,22 @@ static const int FIGOP;
 static const int FIGCL;
 static const int FIGCAPOP;
 static const int FIGCAPCL;
+static const int DLOP;
+static const int DLCL;
+static const int DTOP;
+static const int DTCL;
+static const int DDOP;
+static const int DDCL;
+static const int TABOP;
+static const int TABCL;
+static const int CAPOP;
+static const int CAPCL;
+static const int TROP;
+static const int TRCL;
+static const int THOP;
+static const int THCL;
+static const int TDOP;
+static const int TDCL;
 
 
 #line 212 "/usr/share/bison++/bison.h"
@@ -354,6 +386,22 @@ static const int FIGCAPCL;
 	,FIGCL=291
 	,FIGCAPOP=292
 	,FIGCAPCL=293
+	,DLOP=294
+	,DLCL=295
+	,DTOP=296
+	,DTCL=297
+	,DDOP=298
+	,DDCL=299
+	,TABOP=300
+	,TABCL=301
+	,CAPOP=302
+	,CAPCL=303
+	,TROP=304
+	,TRCL=305
+	,THOP=306
+	,THCL=307
+	,TDOP=308
+	,TDCL=309
 
 
 #line 215 "/usr/share/bison++/bison.h"

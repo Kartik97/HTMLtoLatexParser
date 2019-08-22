@@ -1,0 +1,443 @@
+%{
+#include<bits/stdc++.h>
+#include<stdio.h>
+#include<string.h>
+
+using namespace std;
+int i=0;
+
+extern int yylex();
+extern void yyerror(const char*);
+
+%}
+
+%name parse
+%union{
+	char* object;
+	char* value;
+}
+%start st
+%token DOCTYPE
+%token HTMLOP
+%token HTMLCL
+%token HEADOP
+%token HEADCL
+%token TITLEOP
+%token TITLECL
+%token BODYOP
+%token BODYCL
+%token BPHRASEOP
+%token BPHRASECL
+%token PHRASEOP
+%token PHRASECL
+%token GTPHOP
+%token GTPHCL
+%token TEXT
+%token AOPOP AOP ACL
+%token ATTRIBUTE
+%token ATTRIBUTEVAL
+%token DIVOP DIVCL
+%token IMGOP IMGCL
+%token FONTOP FONTOOP FONTCL
+%token LOP LCL LIOP LICL
+%token FIGOP FIGCL FIGCAPOP FIGCAPCL
+
+%type <value> ATTRIBUTE DOCTYPE HTMLOP HTMLCL HEADOP HEADCL TITLEOP TITLECL TEXT BODYOP BODYCL PHRASEOP PHRASECL BPHRASEOP BPHRASECL
+%type <value> ATTRIBUTEVAL AOP AOPOP ACL IMGOP IMGCL LOP LCL LIOP LICL FIGCAPOP FIGCAPCL
+%type <value> GTPHOP GTPHCL DIVOP DIVCL FONTOP FONTOOP FONTCL FIGOP FIGCL
+%type <value> head title text body flow phraseopen phrases atag figure figcap img font list listitem div gtph
+
+%%
+
+st:	DOCTYPE { cout<<$1; } 
+	| DOCTYPE HTMLOP HTMLCL {
+				 string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  cout<<s; }
+	| HTMLOP HTMLCL { string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  cout<<s; }
+	| DOCTYPE HTMLOP head HTMLCL { string s1($1),s2($2),s3($3),s4($4),s5=s1+" "+s2+" "+s3+" "+s4;
+                                          char *s=new char [s5.length()+1];
+                                           s5.copy(s,s5.length());
+                                                  cout<<s; }
+	| HTMLOP head HTMLCL { 
+				string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  cout<<s; }
+	| DOCTYPE HTMLOP head body HTMLCL {
+					string s1($1),s2($2),s3($3),s4($4),s5($5),s6=s1+" "+s2+" "+s3+" "+s4+" "+s5;
+                                          char *s=new char [s6.length()+1];
+                                           s6.copy(s,s6.length());
+                                                  cout<<s; }	
+	| HTMLOP head body HTMLCL {
+				 string s1($1),s2($2),s3($3),s4($4),s5=s1+" "+s2+" "+s3+" "+s4;
+                                          char *s=new char [s5.length()+1];
+                                           s5.copy(s,s5.length());
+                                                  cout<<s; }
+	| DOCTYPE HTMLOP body HTMLCL { string s1($1),s2($2),s3($3),s4($4),s5=s1+" "+s2+" "+s3+" "+s4;
+                                          char *s=new char [s5.length()+1];
+                                           s5.copy(s,s5.length());
+                                                  cout<<s;		 }
+	| HTMLOP body HTMLCL {
+			 string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  cout<<s;		}
+	;
+
+head:	HEADOP title HEADCL { string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s;
+				} 
+	| HEADOP HEADCL {
+		string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s;}
+	;
+
+title:	TITLEOP TITLECL { string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s;}
+	| TITLEOP text TITLECL { string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s; }
+	;
+
+text:	text TEXT {string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s; }
+	| TEXT { string s1($1);
+                char *s=new char [s1.length()+1];
+                s1.copy(s,s1.length();
+                 $$=s; }
+	;
+
+body: BODYOP flow BODYCL  { string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s;}
+	| BODYOP BODYCL { string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s; }
+	;
+
+flow:   BPHRASEOP phraseopen {string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s; }
+	| GTPHOP gtph {string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s; }
+	| AOP atag {string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s; }
+	| DIVOP div {string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s; }
+	| IMGOP img {string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s; }
+	| IMGOP img flow {string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s; }
+	| FONTOP font {string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s; }
+	| LOP list {string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s; }
+	| FIGOP figure {string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s; }
+        | text { string s1($1);
+                char *s=new char [s1.length()+1];
+                s1.copy(s,s1.length();
+                 $$=s;	}
+	;
+
+div: DIVCL { string s1($1);
+                char *s=new char [s1.length()+1];
+                s1.copy(s,s1.length();
+                 $$=s; }
+	| DIVCL flow {string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s;}
+	| flow DIVCL flow {string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s; }
+	| flow DIVCL { string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s;}
+	;
+
+atag:	ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL flow {string s1($1),s2($2),s3($3),s4=($4),s5=($5),s6=(s1+" "+s2+" "+s3+" "+s4+" "+s5);
+                                           char *s=new char [s6.length()+1];
+                                           s6.copy(s,s6.length());
+                                           $$=s;	}
+	| AOPOP flow ACL flow {string s1($1),s2($2),s3($3),s4($4),s5=s1+" "+s2+" "+s3+" "+s4;
+                                          char *s=new char [s5.length()+1];
+                                           s5.copy(s,s5.length());
+                                                  $$=s; }
+	| AOPOP ACL flow {string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s; }
+	| ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL {string s1($1),s2($2),s3($3),s4=($4),s5=($5),s6=(s1+" "+s2+" "+s3+" "+s4+" "+s5);
+                                           char *s=new char [s6.length()+1];
+                                           s6.copy(s,s6.length());
+                                           $$=s; }
+        | AOPOP flow ACL {string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s; }
+        | AOPOP ACL { string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s;  }
+	| ATTRIBUTE ATTRIBUTEVAL AOPOP ACL flow {string s1($1),s2($2),s3($3),s4($4),s5=s1+" "+s2+" "+s3+" "+s4;
+                                          char *s=new char [s5.length()+1];
+                                           s5.copy(s,s5.length());
+                                                  $$=s;}
+	| ATTRIBUTE ATTRIBUTEVAL AOPOP ACL {string s1($1),s2($2),s3($3),s4($4),s5=s1+" "+s2+" "+s3+" "+s4;
+                                          char *s=new char [s5.length()+1];
+                                           s5.copy(s,s5.length());
+                                                  $$=s; }
+	;
+
+gtph: phrases GTPHCL flow {string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s; }
+	| GTPHCL flow { string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s; }
+	| phrases GTPHCL { string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s; }
+	| GTPHCL { string s1($1);
+                char *s=new char [s1.length()+1];
+                s1.copy(s,s1.length();
+                 $$=s; }
+	| BPHRASEOP phraseopen GTPHCL flow {string s1($1),s2($2),s3($3),s4($4),s5=s1+" "+s2+" "+s3+" "+s4;
+                                          char *s=new char [s5.length()+1];
+                                           s5.copy(s,s5.length());
+                                                  $$=s; }
+	| BPHRASEOP phraseopen GTPHCL {string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s; }
+	;
+
+phraseopen: phrases BPHRASECL flow {string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s; }
+	| BPHRASECL flow { string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s; }
+	| BPHRASECL { string s1($1);
+                char *s=new char [s1.length()+1];
+                s1.copy(s,s1.length();
+                 $$=s; }
+	| font { string s1($1);
+                char *s=new char [s1.length()+1];
+                s1.copy(s,s1.length();
+                 $$=s; } 
+	;
+
+phrases: phrases PHRASEOP phrases PHRASECL { string s1($1),s2($2),s3($3),s4($4),s5=s1+" "+s2+" "+s3+" "+s4;
+                                          char *s=new char [s5.length()+1];
+                                           s5.copy(s,s5.length());
+                                                  $$=s;}
+	 | phrases PHRASEOP PHRASECL { string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s; }
+	 | PHRASEOP phrases PHRASECL {string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s; }
+	 | PHRASEOP PHRASECL {string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s; }
+	 | phrases IMGOP img {string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s;}
+	 | phrases font {string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s;}
+	 | phrases FONTOP font {string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s; }
+	 | FONTOP font {string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s; }
+	 | font { string s1($1);
+                char *s=new char [s1.length()+1];
+                s1.copy(s,s1.length();
+                 $$=s;	} 
+	 | IMGOP img {string s1($1),s2($2),s3=s1+" "+s2;
+                                          char *s=new char [s3.length()+1];
+                                           s3.copy(s,s3.length());
+                                                  $$=s; }
+	 | text { string s1($1);
+                char *s=new char [s1.length()+1];
+                s1.copy(s,s1.length();
+                 $$=s;	}
+	;
+
+img:  ATTRIBUTE ATTRIBUTEVAL img {string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s;}
+	| IMGCL { string s1($1);
+                char *s=new char [s1.length()+1];
+                s1.copy(s,s1.length();
+                 $$=s; }
+	; 
+
+font: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL { string s1($1),s2($2),s3($3),s4=($4),s5=(s1+" "+s2+" "+s3+" "+s4);
+                                           char *s=new char [s5.length()+1];
+                                           s5.copy(s,s5.length());
+                                           $$=s;   }
+	| ATTRIBUTE ATTRIBUTEVAL FONTOOP phrases FONTCL {string s1($1),s2($2),s3($3),s4=($4),s5=($5),s6=(s1+" "+s2+" "+s3+" "+s4+" "+s5);
+                                           char *s=new char [s6.length()+1];
+                                           s6.copy(s,s6.length());
+                                           $$=s;   }
+	| FONTOOP phrases FONTCL {string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s; }
+	| ATTRIBUTE ATTRIBUTEVAL FONTOOP BPHRASECL {string s1($1),s2($2),s3($3),s4=($4),s5=(s1+" "+s2+" "+s3+" "+s4);
+                                           char *s=new char [s5.length()+1];
+                                           s5.copy(s,s5.length());
+                                           $$=s; } 
+        | ATTRIBUTE ATTRIBUTEVAL FONTOOP phrases BPHRASECL {string s1($1),s2($2),s3($3),s4=($4),s5=($5),s6=(s1+" "+s2+" "+s3+" "+s4+" "+s5);
+                                           char *s=new char [s6.length()+1];
+                                           s6.copy(s,s6.length());
+                                           $$=s; }  
+        | FONTOOP phrases BPHRASECL {string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s; }
+	;
+
+list:  LIOP listitem list {string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s; }
+	| LCL { string s1($1);
+                char *s=new char [s1.length()+1];
+                s1.copy(s,s1.length();
+                 $$=s;	}
+	;
+
+listitem: flow LICL {string s1($1),s2($2),s3=(s1+" "+s2);
+                        char *s=new char [s3.length()+1];
+                        s3.copy(s,s3.length());
+                        $$=s; }
+	| LICL { string s1($1);
+                char *s=new char [s1.length()+1];
+                s1.copy(s,s1.length();
+                 $$=s; }
+	;
+
+figure: flow FIGCAPOP figcap FIGCL {string s1($1),s2($2),s3($3),s4($4),s5=s1+" "+s2+" "+s3+" "+s4;
+                                          char *s=new char [s5.length()+1];
+                                           s5.copy(s,s5.length());
+                                                  $$=s; }
+	| FIGCAPOP figcap FIGCL {string s1($1),s2($2),s3($3),s4=s1+" "+s2+" "+s3;
+                                          char *s=new char [s4.length()+1];
+                                           s4.copy(s,s4.length());
+                                                  $$=s; }
+	| FIGCAPOP figcap flow FIGCL {string s1($1),s2($2),s3($3),s4($4),s5=s1+" "+s2+" "+s3+" "+s4;
+                                          char *s=new char [s5.length()+1];
+                                      
+     s5.copy(s,s5.length());
+                                                  $$=s;   }
+	| flow FIGCL {string s1($1),s2($2),s3=(s1+" "+s2);
+                        char *s=new char [s3.length()+1];
+                        s3.copy(s,s3.length());
+                        $$=s; }
+	| FIGCL { string s1($1);
+                char *s=new char [s1.length()+1];
+                s1.copy(s,s1.length());
+                 $$=s;}
+	| flow FIGCAPOP figcap FIGCL flow {string s1($1),s2($2),s3($3),s4=($4),s5=($5),s6=(s1+" "+s2+" "+s3+" "+s4+" "+s5);
+                                           char *s=new char [s6.length()+1];
+                                           s6.copy(s,s6.length());
+                                           $$=s; }
+        | FIGCAPOP figcap FIGCL flow {string s1($1),s2($2),s3($3),s4($4),s5=s1+" "+s2+" "+s3+" "+s4;
+                                          char *s=new char [s5.length()+1];
+                                           s5.copy(s,s5.length());
+                                                  $$=s; }
+	| FIGCAPOP figcap flow FIGCL flow {string s1($1),s2($2),s3($3),s4=($4),s5=($5),s6=(s1+" "+s2+" "+s3+" "+s4+" "+s5);
+                                           char *s=new char [s6.length()+1];
+                                           s6.copy(s,s6.length());
+                                           $$=s;  }
+        | flow FIGCL flow {string s1($1),s2($2),s3($3),s4=(s1+" "+s2+" "+s3); 
+				char *s=new char [s4.length()+1];
+                        s4.copy(s,s4.length());
+                        $$=s;  }
+	| FIGCL flow {string s1($1),s2($2),s3=(s1+" "+s2);
+			char *s=new char [s3.length()+1];
+                        s3.copy(s,s3.length());
+                        $$=s;  }
+	;
+
+figcap: flow FIGCAPCL { string s1($1),s2($2),s3=(s1+" "+s2);
+			char *s=new char [s3.length()+1];
+			s3.copy(s,s3.length());
+			$$=s;	 }
+	| FIGCAPCL { string s1($1);
+		char *s=new char [s1.length()+1];
+		s1.copy(s,s1.length());
+		 $$=s; }
+
+%%
+void yyerror(const char *msg){
+	printf("%s\n",msg);
+}
+
+int main(int argc,char **argv){
+	extern FILE *yyin;
+	if(argc >= 2){
+		if(!(yyin = fopen(argv[1],"r"))){
+			printf("File Error");
+			return 0;
+		}
+	}
+	yyparse();
+	return 0;
+}  
+
+

@@ -37,68 +37,60 @@ ul "ul"|"UL"
 ol "ol"|"OL"
 figure "figure"|"FIGURE"
 figcaption "figcaption"|"FIGCAPTION"
-dl "dl"|"DL"
-dt "dt"|"DT"
-dd "dd"|"DD"
-table "table"|"TABLE"
-caption "caption"|"CAPTION"
-tr "tr"|"TR"
-th "th"|"TH"
-td "td"|"TD"
 
 %%
 [a-zA-Z0-9`~!@#$%^&*()-_=+;:'",.?//] {
 	if(yytext != "\n")
-	{	yylval.value = strdup(yytext);
+	{	yylval.value = yytext;
 		return TEXT;
 	}
 }
 "<"{doctype}{space}+[^{html}]*{html}">"|"<"{doctype}{space}+[^{html}]*{html}{space}+[^>]*">" {
-	yylval.value = strdup("DOCTYPE ");
+	yylval.value = "DOCTYPE ";
 	return DOCTYPE;
 }
 "<"{html}{space}+[^>]*">"|"<"{html}">"  {
-	yylval.value=strdup("HTMLOP ");
+	yylval.value="HTMLOP ";
 	return HTMLOP;
 }
 "</"{html}{space}+[^>]*">"|"</"{html}">"  {
-	yylval.value=strdup("HTMLCL ");
+	yylval.value="HTMLCL ";
 	return HTMLCL;
 }
 "<"{head}{space}+[^>]*">"|"<"{head}">"  {
-        yylval.value=strdup("HEADOP ");
+        yylval.value="HEADOP ";
         return HEADOP;
 }
 "</"{head}{space}+[^>]*">"|"</"{head}">"  {
-        yylval.value=strdup("HEADCL ");
+        yylval.value="HEADCL ";
         return HEADCL;
 }
 "<"{title}{space}+[^>]*">"|"<"{title}">"  {
-        yylval.value=strdup("TITLEOP ");
+        yylval.value="TITLEOP ";
         return TITLEOP;
 }
 "</"{title}{space}+[^>]*">"|"</"{title}">"  {
-        yylval.value=strdup("TITLECL ");
+        yylval.value="TITLECL ";
         return TITLECL;
 }
 "<"{body}{space}+[^>]*">"|"<"{body}">"  {
-        yylval.value=strdup("BODYOP ");
+        yylval.value="BODYOP ";
         return BODYOP;
 }
 "</"{body}{space}+[^>]*">"|"</"{body}">"  {
-        yylval.value=strdup("BODYCL ");
+        yylval.value="BODYCL ";
         return BODYCL;
 }
 "<"{div}{space}+[^>]*">"|"<"{div}">"  {
-        yylval.value=strdup("DIVOP ");
+        yylval.value="DIVOP ";
         return DIVOP;
 }
 "</"{div}{space}+[^>]*">"|"</"{div}">"  {
-        yylval.value=strdup("DIVCL ");
+        yylval.value="DIVCL ";
         return DIVCL;
 }
 "<"{phrasingtags}{space}+[^>]*">"|"<"{phrasingtags}">"  {
-        yylval.value=strdup(findpos(yytext,yyleng,1));
+        yylval.value=findpos(yytext,yyleng,1);
 	phcount++;
 	if(phcount==1){
 		return BPHRASEOP;
@@ -108,7 +100,7 @@ td "td"|"TD"
 	}
 }
 "</"{phrasingtags}{space}+[^>]*">"|"</"{phrasingtags}">"  {
-	yylval.value=strdup(findpos(yytext,yyleng,2));
+	yylval.value=findpos(yytext,yyleng,2);
 	phcount--;
 	if(phcount==0)
 		return BPHRASECL;
@@ -116,32 +108,32 @@ td "td"|"TD"
 		return PHRASECL;
 }
 "<"{gtph}{space}+[^>]*">"|"<"{gtph}">"  {
-        yylval.value=strdup(findpos(yytext,yyleng,1));
+        yylval.value=findpos(yytext,yyleng,1);
         return GTPHOP;
 }
 "</"{gtph}{space}+[^>]*">"|"</"{gtph}">"  {
-        yylval.value=strdup(findpos(yytext,yyleng,2));
+        yylval.value=findpos(yytext,yyleng,2);
         return GTPHCL;
 }
 "<"{a}{space}+|"<"{a} {
 	yy_push_state(aInside);
-	yylval.value=strdup("AOP");
+	yylval.value="AOP";
 	return AOP;
 }
 "</"{a}{space}+[^>]*">"|"</"{a}">" {
-	yylval.value=strdup("ACL");
+	yylval.value="ACL";
 	return ACL;
 }
 <aInside>{
 	"href"{space}+[^=]*"="|"href=" {
 		yy_push_state(aAtt);
-		yylval.value=strdup("HREF");
+		yylval.value="HREF";
 		yyless(yyleng-1);
 		return ATTRIBUTE;
 	}
 	[^"href">]*">" {
 		yy_pop_state();
-		yylval.value=strdup("AOPOP");
+		yylval.value="AOPOP";
 		return AOPOP;
 	}
 	. {}
@@ -149,37 +141,37 @@ td "td"|"TD"
 <aAtt>{
 	[=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()]*[\"\'] {
 		yy_pop_state();
-		yylval.value=strdup(findval(yytext,yyleng,1));
+		yylval.value=findval(yytext,yyleng,1);
 		return ATTRIBUTEVAL;
 	}
 }
 "<"{img}{space}+|"<"{img} {
 	yy_push_state(imgInside);
-	yylval.value=strdup("IMGOP");
+	yylval.value="IMGOP";
 	return IMGOP;
 }
 <imgInside>{
 	"src"{space}+[^=]*"="|"src=" {
                 yy_push_state(imgAtt);
-                yylval.value=strdup("SRC");
+                yylval.value="SRC";
                 yyless(yyleng-1);
                 return ATTRIBUTE;
         }
 	"width"{space}+[^=]*"="|"width=" {
                 yy_push_state(imgAtt);
-                yylval.value=strdup("WIDTH");
+                yylval.value="WIDTH";
                 yyless(yyleng-1);
                 return ATTRIBUTE;
         }
 	"height"{space}+[^=]*"="|"height=" {
                 yy_push_state(imgAtt);
-                yylval.value=strdup("HEIGHT");
+                yylval.value="HEIGHT";
                 yyless(yyleng-1);
                 return ATTRIBUTE;
         }
         [^"src""width""height">]*[">""\>"] {
                 yy_pop_state();
-                yylval.value=strdup("IMGCL");
+                yylval.value="IMGCL";
                 return IMGCL;
         }
         . {}
@@ -187,37 +179,37 @@ td "td"|"TD"
 <imgAtt>{
 	 [=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()]*[\"\'] {
                 yy_pop_state();
-                yylval.value=strdup(findval(yytext,yyleng,1));
+                yylval.value=findval(yytext,yyleng,1);
                 return ATTRIBUTEVAL;
         }
 }
 "<"{font}{space}+|"<"{font} {
         yy_push_state(fontInside);
-//        yylval.value=strdup("FONTOP");
+        yylval.value="FONTOP";
 	phcount++;
 	if(phcount==1)
-	{ yylval.value=strdup("BPHRASEOP");	return BPHRASEOP; }
+		return BPHRASEOP;
 	else
-	{ yylval.value=strdup("FONTOP");	return FONTOP;}
+		return FONTOP;
 }
 "</"{font}{space}+[^>]*">"|"</"{font}">" {
-  //      yylval.value=strdup("FONTCL");
+        yylval.value="FONTCL";
 	phcount--;
 	if(phcount==0)
-	{ yylval.value=strdup("BPHRASECL");	return BPHRASECL;}
+		return BPHRASECL;
 	else
-	{ yylval.value=strdup("FONTCL");	return FONTCL;  }
+		return FONTCL;
 }
 <fontInside>{
         "size"{space}+[^=]*"="|"size=" {
                 yy_push_state(fontAtt);
-                yylval.value=strdup("SIZE");
+                yylval.value="SIZE";
                 yyless(yyleng-1);
                 return ATTRIBUTE;
         }
         [^"size">]*">" {
                 yy_pop_state();
-                yylval.value=strdup("FONTOOP");
+                yylval.value="FONTOOP";
                 return FONTOOP;
         }
         . {}
@@ -225,106 +217,50 @@ td "td"|"TD"
 <fontAtt>{
         [=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()]*[\"\'] {
                 yy_pop_state();
-                yylval.value=strdup(findval(yytext,yyleng,1));
+                yylval.value=findval(yytext,yyleng,1);
                 return ATTRIBUTEVAL;
         }
 }
 "<"{ul}{space}+[^>]*">"|"<"{ul}">"  {
-        yylval.value=strdup("ULOP ");
+        yylval.value="ULOP ";
         return LOP;
 }
 "</"{ul}{space}+[^>]*">"|"</"{ul}">"  {
-        yylval.value=strdup("ULCL ");
+        yylval.value="ULCL ";
         return LCL;
 }
 "<"{ol}{space}+[^>]*">"|"<"{ol}">"  {
-        yylval.value=strdup("OLOP ");
+        yylval.value="OLOP ";
         return LOP;
 }
 "</"{ol}{space}+[^>]*">"|"</"{ol}">"  {
-        yylval.value=strdup("OLCL ");
+        yylval.value="OLCL ";
         return LCL;
 }
 "<"{li}{space}+[^>]*">"|"<"{li}">"  {
-        yylval.value=strdup("LIOP ");
+        yylval.value="LIOP ";
         return LIOP;
 }
 "</"{li}{space}+[^>]*">"|"</"{li}">"  {
-        yylval.value=strdup("LICL ");
+        yylval.value="LICL ";
         return LICL;
 }
 "<"{figure}{space}+[^>]*">"|"<"{figure}">"  {
-        yylval.value=strdup("FIGUREOP ");
+        yylval.value="FIGUREOP ";
         return FIGOP;
 }
 "</"{figure}{space}+[^>]*">"|"</"{figure}">"  {
-        yylval.value=strdup("FIGURECL ");
+        yylval.value="FIGURECL ";
         return FIGCL;
 }
 "<"{figcaption}{space}+[^>]*">"|"<"{figcaption}">"  {
-        yylval.value=strdup("FIGCAPTIONOP ");
+        yylval.value="FIGCAPTIONOP ";
         return FIGCAPOP;
 }
 "</"{figcaption}{space}+[^>]*">"|"</"{figcaption}">"  {
 	yylval.value=strdup("FIGCAPTIONCL");
         //yylval.value="FIGCAPTIONCL ";
         return FIGCAPCL;
-}
-"<"{dl}{space}+[^>]*">"|"<"{dl}">"  {
-        yylval.value=strdup("DLOP ");
-        return DLOP;
-}
-"</"{dl}{space}+[^>]*">"|"</"{dl}">"  {
-        yylval.value=strdup("DLCL ");
-        return DLCL;
-}
-"<"{dt}{space}+[^>]*">"|"<"{dt}">"  {
-        yylval.value=strdup("DTOP ");
-        return DTOP;
-}
-"</"{dt}{space}+[^>]*">"|"</"{dt}">"  {
-        yylval.value=strdup("DTCL ");
-        return DTCL;
-}
-"<"{dd}{space}+[^>]*">"|"<"{dd}">"  {
-        yylval.value=strdup("DDOP ");
-        return DDOP;
-}
-"</"{dd}{space}+[^>]*">"|"</"{dd}">"  {
-        yylval.value=strdup("DDCL ");
-        return DDCL;
-}
-"<"{table}{space}+[^>]*">"|"<"{table}">"  {
-        yylval.value=strdup("TABLEOP ");
-        return TABOP;
-}
-"</"{table}{space}+[^>]*">"|"</"{table}">"  {
-        yylval.value=strdup("TABLECL ");
-        return TABCL;
-}
-"<"{caption}{space}+[^>]*">"|"<"{caption}">"  {
-        yylval.value=strdup("CAPOP ");
-        return CAPOP;
-}
-"</"{caption}{space}+[^>]*">"|"</"{caption}">"  {
-        yylval.value=strdup("CAPCL ");
-        return CAPCL;
-}
-"<"{tr}{space}+[^>]*">"|"<"{tr}">"  {
-        yylval.value=strdup("TROP ");
-        return TROP;
-}
-"</"{th}{space}+[^>]*">"|"</"{th}">"  {
-        yylval.value=strdup("THCL ");
-        return THCL;
-}
-"<"{td}{space}+[^>]*">"|"<"{td}">"  {
-        yylval.value=strdup("TDOP ");
-        return TDOP;
-}
-"</"{td}{space}+[^>]*">"|"</"{td}">"  {
-        yylval.value=strdup("TDCL ");
-        return TDCL;
 }
 
 %%
