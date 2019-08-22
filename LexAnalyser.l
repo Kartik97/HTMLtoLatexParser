@@ -306,6 +306,14 @@ td "td"|"TD"
         yylval.value=strdup("TROP ");
         return TROP;
 }
+"</"{tr}{space}+[^>]*">"|"</"{tr}">"  {
+        yylval.value=strdup("TRCL ");
+        return TRCL;
+}
+"<"{th}{space}+[^>]*">"|"<"{th}">"  {
+        yylval.value=strdup("THOP ");
+        return THOP;
+}
 "</"{th}{space}+[^>]*">"|"</"{th}">"  {
         yylval.value=strdup("THCL ");
         return THCL;

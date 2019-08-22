@@ -126,7 +126,7 @@ th: THCL {cout<<$1; }
 
 td: TDCL {cout<<$1; }
         | flow TDCL {cout<<$2; }
-        | THCL TDOP td {cout<<$1<<" "<<$2; }
+        | TDCL TDOP td {cout<<$1<<" "<<$2; }
         | flow TDCL TDOP td {cout<<$2<<" "<<$3; }
         ;
 
