@@ -11,7 +11,7 @@ extern void yyerror(const char*);
 
 %}
 
-%name parse
+// %name parse
 %union{
 	char* object;
 	char* value;
@@ -83,7 +83,7 @@ body: BODYOP flow BODYCL  { cout<<$1<<" "<<$3; }
 	| BODYOP BODYCL { cout<<$1<<" "<<$2; }
 	;
 
-flow:   BPHRASEOP phraseopen { cout<<$1; }
+flow: BPHRASEOP phraseopen { cout<<$1; }
 	| GTPHOP gtph {cout<<$1; }
 	| AOP atag {cout<<$1; }
 	| DIVOP div {cout<<$1; }
@@ -96,22 +96,19 @@ flow:   BPHRASEOP phraseopen { cout<<$1; }
 	| TABOP table {cout<<$1; }
 	| misc flow {}
 	| misc {}
-        | text {}
+    | text {}
 	;
 
 misc: COMMENT {cout<<$1; }
-	| br {}
-	;
-
-br: BR {cout<<$1; }
+	| BR {cout<<$1; }
 	;
 
 table: CAPOP caption TABCL{cout<<$1; }
 	| CAPOP caption TROP tr TABCL {cout<<$1<<" "<<$3<<" "<<$5; }
 	| TROP tr TABCL {cout<<$1<<" "<<$3; }
 	| CAPOP caption TABCL flow {cout<<$1; }
-        | CAPOP caption TROP tr TABCL flow {cout<<$1<<" "<<$3<<" "<<$5; }
-        | TROP tr TABCL flow {cout<<$1<<" "<<$3; }
+    | CAPOP caption TROP tr TABCL flow {cout<<$1<<" "<<$3<<" "<<$5; }
+    | TROP tr TABCL flow {cout<<$1<<" "<<$3; }
 	| TABCL {cout<<$1; }
 	| TABCL flow {cout<<$1; }
 	;
@@ -124,14 +121,14 @@ tr: TRCL {cout<<$1; }
 	| THOP th TRCL {cout<<$1<<" "<<$3; }
 	| TDOP td TRCL {cout<<$1<<" "<<$3; }
 	| TRCL TROP tr {cout<<$1<<" "<<$2; }
-        | THOP th TRCL TROP tr {cout<<$1<<" "<<$3<<" "<<$4; }
-        | TDOP td TRCL TROP tr {cout<<$1<<" "<<$3<<" "<<$4; }
+    | THOP th TRCL TROP tr {cout<<$1<<" "<<$3<<" "<<$4; }
+    | TDOP td TRCL TROP tr {cout<<$1<<" "<<$3<<" "<<$4; }
 	| misc TRCL {cout<<$2; }
-        | misc THOP th TRCL {cout<<$2<<" "<<$4; }
-        | misc TDOP td TRCL {cout<<$2<<" "<<$4; }
-        | misc TRCL TROP tr {cout<<$2<<" "<<$3; }
-        | misc THOP th TRCL TROP tr {cout<<$2<<" "<<$4<<" "<<$5; }
-        | misc TDOP td TRCL TROP tr {cout<<$2<<" "<<$4<<" "<<$5; }
+    | misc THOP th TRCL {cout<<$2<<" "<<$4; }
+    | misc TDOP td TRCL {cout<<$2<<" "<<$4; }
+    | misc TRCL TROP tr {cout<<$2<<" "<<$3; }
+    | misc THOP th TRCL TROP tr {cout<<$2<<" "<<$4<<" "<<$5; }
+    | misc TDOP td TRCL TROP tr {cout<<$2<<" "<<$4<<" "<<$5; }
 	;
 
 th: THCL {cout<<$1; }
@@ -141,10 +138,10 @@ th: THCL {cout<<$1; }
 	;
 
 td: TDCL {cout<<$1; }
-        | flow TDCL {cout<<$2; }
-        | TDCL TDOP td {cout<<$1<<" "<<$2; }
-        | flow TDCL TDOP td {cout<<$2<<" "<<$3; }
-        ;
+    | flow TDCL {cout<<$2; }
+    | TDCL TDOP td {cout<<$1<<" "<<$2; }
+    | flow TDCL TDOP td {cout<<$2<<" "<<$3; }
+    ;
 
 div: DIVCL {cout<<$1; }
 	| DIVCL flow {cout<<$1; }
@@ -156,8 +153,8 @@ atag:	ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL flow {cout<<$1<<" "<<$2<<" "<<$3<<" 
 	| AOPOP flow ACL flow {cout<<$1<<" "<<$3; }
 	| AOPOP ACL flow {cout<<$1<<" "<<$2<<" "; }
 	| ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL {cout<<$1<<" "<<$2<<" "<<$3<<" "<<$5; }
-        | AOPOP flow ACL {cout<<$1<<" "<<$3; }
-        | AOPOP ACL {cout<<$1<<" "<<$2; }
+    | AOPOP flow ACL {cout<<$1<<" "<<$3; }
+    | AOPOP ACL {cout<<$1<<" "<<$2; }
 	| ATTRIBUTE ATTRIBUTEVAL AOPOP ACL flow {cout<<$1<<" "<<$2<<" "<<$3<<" "<<$4;}
 	| ATTRIBUTE ATTRIBUTEVAL AOPOP ACL {cout<<$1<<" "<<$2<<" "<<$3<<" "<<$4; }
 	;
@@ -168,6 +165,8 @@ gtph: phrases GTPHCL flow {cout<<$2; }
 	| GTPHCL {cout<<$1; }
 	| BPHRASEOP phraseopen GTPHCL flow {cout<<$1<<" "<<$3; }
 	| BPHRASEOP phraseopen GTPHCL {cout<<$1<<" "<<$3; }
+	| phrasecom BPHRASEOP phraseopen GTPHCL flow {cout<<$2<<" "<<$4; }
+	| phrasecom BPHRASEOP phraseopen GTPHCL {cout<<$2<<" "<<$4; }
 	;
 
 phraseopen: phrases BPHRASECL flow {cout<<$2; }
@@ -188,18 +187,22 @@ phrases: phrases PHRASEOP phrases PHRASECL { cout<<$2<<" "<<$4; }
 	 | font {} 
 	 | IMGOP img {cout<<$1; }
 	 | text {}
-	 | misc { }
-	 | phrases PHRASEOP phrases PHRASECL misc { cout<<$2<<" "<<$4; }
-         | phrases PHRASEOP PHRASECL misc { cout<<$2<<" "<<$3; }
-         | PHRASEOP phrases PHRASECL misc {cout<<$1<<" "<<$3; }
-         | PHRASEOP PHRASECL misc {cout<<$1<<" "<<$2; }
-         | phrases IMGOP img misc {cout<<$2; }
-         | phrases font misc {}
-         | phrases FONTOP font misc {cout<<$2; }
-         | FONTOP font misc {cout<<$1; }
-         | font misc {}
-         | IMGOP img misc {cout<<$1; }
-         | text misc {}
+	 | phrasecom {}
+	 | phrases PHRASEOP phrases PHRASECL phrasecom { cout<<$2<<" "<<$4; }
+     | phrases PHRASEOP PHRASECL phrasecom { cout<<$2<<" "<<$3; }
+     | PHRASEOP phrases PHRASECL phrasecom {cout<<$1<<" "<<$3; }
+     | PHRASEOP PHRASECL phrasecom {cout<<$1<<" "<<$2; }
+     | phrases IMGOP img phrasecom {cout<<$2; }
+     | phrases font phrasecom {}
+     | phrases FONTOP font phrasecom {cout<<$2; }
+     | FONTOP font phrasecom {cout<<$1; }
+     | font phrasecom {}
+     | IMGOP img phrasecom {cout<<$1; }
+     | text phrasecom {}
+	;
+
+phrasecom: misc {}
+	| phrasecom misc {}
 	;
 
 img:  ATTRIBUTE ATTRIBUTEVAL img {cout<<$1<<" "<<$2; }
@@ -229,9 +232,9 @@ figure: flow FIGCAPOP figcap FIGCL {cout<<$2<<" "<<$4; }
 	| flow FIGCL {cout<<$2; }
 	| FIGCL {cout<<$1; }
 	| flow FIGCAPOP figcap FIGCL flow {cout<<$2<<" "<<$4; }
-        | FIGCAPOP figcap FIGCL flow {cout<<$1<<" "<<$3; }
+    | FIGCAPOP figcap FIGCL flow {cout<<$1<<" "<<$3; }
 	| FIGCAPOP figcap flow FIGCL flow {cout<<$1<<" "<<$4; }
-        | flow FIGCL flow {cout<<$2; }
+    | flow FIGCL flow {cout<<$2; }
 	| FIGCL flow {cout<<$1; }
 	;
 
@@ -241,16 +244,16 @@ figcap: flow FIGCAPCL {cout<<$2; }
 
 dl: DLCL {cout<<$1; }
 	| DIVOP div DLCL {cout<<$1<<" "<<$3; }
-	| DTOP dt DLCL {cout<<$1<<" "<<$3};
+	| DTOP dt DLCL {cout<<$1<<" "<<$3; }
 	| DLCL flow {cout<<$1; }
-        | DIVOP div DLCL flow {cout<<$1<<" "<<$3; }
-        | DTOP dt DLCL flow {cout<<$1<<" "<<$3; }
+    | DIVOP div DLCL flow {cout<<$1<<" "<<$3; }
+    | DTOP dt DLCL flow {cout<<$1<<" "<<$3; }
 	;
 
 dt: flow DTCL DDOP dd {cout<<$2<<" "<<$3; }
 	| flow DTCL DDOP dd DTOP dt {cout<<$2<<" "<<$3<<" "<<$5; }
 	| DTCL DDOP dd {cout<<$1<<" "<<$2; } 
-        | DTCL DDOP dd DTOP dt {cout<<$1<<" "<<$2<<" "<<$4; }
+    | DTCL DDOP dd DTOP dt {cout<<$1<<" "<<$2<<" "<<$4; }
 	;
 
 dd: flow DDCL {cout<<$2; }
@@ -275,5 +278,3 @@ int main(int argc,char **argv){
 	yyparse();
 	return 0;
 }  
-
-
