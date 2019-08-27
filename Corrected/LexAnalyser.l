@@ -53,7 +53,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
 
 %%
 {space}+ {}
-"<!--"[^>]*"-->"  {
+"<!--"(.*?)"-->"  {
         yylval.value=strdup(yytext);
         return COMMENT;
 }
@@ -343,11 +343,11 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         yylval.value=strdup("TDCL ");
         return TDCL;
 }
-"<"{br}{space}+[^>]*">"|"<"{br}">"  {
+"<"{br}{space}+[^>]*">"|"<"{br}">"|"<"{br}{space}+[^>]*"/>"|"<"{br}"/>"  {
         yylval.value=strdup("BR ");
         return BR;
 }
-
+. {}
 %%
 
 int yywrap(){

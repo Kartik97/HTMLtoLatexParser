@@ -115,7 +115,7 @@ phraseopen: phrases BPHRASECL flow { char *p=concat($1,$2); $$=concat(p,$3); }
 	| BPHRASECL flow { $$=concat($1,$2); }
 	| BPHRASECL { $$=$1; }
 	| phrases BPHRASECL { $$=concat($1,$2); }
-	| consumeph BPHRASECL flow { $$=concat($1,$2); }
+	| consumeph BPHRASECL flow { char *p=concat($1,$2); $$=concat(p,$3); }
 	| consumeph BPHRASECL { $$=concat($1,$2); }
 	;
 
@@ -295,6 +295,9 @@ atag: ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL flow { char *p=concat($1,$2),*x=conc
 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL { char *p=concat($1,$2),*x=concat(p,$3);$$=concat(x,$4); }
 	| ATTRIBUTE ATTRIBUTEVAL FONTOOP flow FONTCL { char *p=concat($1,$2),*x=concat(p,$3),*y=concat(x,$4); $$=concat(y,$5); }
 	| FONTOOP flow FONTCL { char *p=concat($1,$2); $$=concat(p,$3); }
+	|ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL flow { char *p=concat($1,$2),*x=concat(p,$3),*y=concat(x,$4); $$=concat(y,$5); }
+	| ATTRIBUTE ATTRIBUTEVAL FONTOOP flow FONTCL flow { char *p=concat($1,$2),*x=concat(p,$3),*y=concat(x,$4),*z=concat(y,$5); $$=concat(z,$6); }
+	| FONTOOP flow FONTCL flow { char *p=concat($1,$2),*x=concat(p,$3);$$=concat(x,$4); }
 	;
 
 %%

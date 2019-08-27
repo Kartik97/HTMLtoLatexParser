@@ -217,6 +217,9 @@ Grammar
   178 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL
   179     | ATTRIBUTE ATTRIBUTEVAL FONTOOP flow FONTCL
   180     | FONTOOP flow FONTCL
+  181     | ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL flow
+  182     | ATTRIBUTE ATTRIBUTEVAL FONTOOP flow FONTCL flow
+  183     | FONTOOP flow FONTCL flow
 
 
 Terminals, with rules where they appear
@@ -242,15 +245,15 @@ TEXT (273) 18
 AOPOP (274) 59 60 61 62 170 171 172 173 174 175 176 177
 AOP (275) 24 37
 ACL (276) 59 60 61 62 170 171 172 173 174 175 176 177
-ATTRIBUTE (277) 54 55 57 59 62 168 170 173 176 177 178 179
-ATTRIBUTEVAL (278) 54 55 57 59 62 168 170 173 176 177 178 179
+ATTRIBUTE (277) 54 55 57 59 62 168 170 173 176 177 178 179 181 182
+ATTRIBUTEVAL (278) 54 55 57 59 62 168 170 173 176 177 178 179 181 182
 DIVOP (279) 33 87 88 91 92
 DIVCL (280) 81 82 83 84
 IMGOP (281) 19
 IMGCL (282) 169
 FONTOP (283) 25 38
-FONTOOP (284) 54 55 56 57 58 178 179 180
-FONTCL (285) 54 55 56 57 58 178 179 180
+FONTOOP (284) 54 55 56 57 58 178 179 180 181 182 183
+FONTCL (285) 54 55 56 57 58 178 179 180 181 182 183
 LOP (286) 30
 LCL (287) 74 76 77 78
 LIOP (288) 73 75
@@ -309,7 +312,7 @@ flow (68)
     43 63 65 68 69 71 77 78 79 82 83 84 89 90 91 92 94 96 97 98 99
     102 103 106 107 110 112 115 117 120 121 123 139 141 143 145 147
     149 151 153 154 156 157 159 160 161 162 163 164 165 166 170 171
-    172 173 174 176 179 180
+    172 173 174 176 179 180 181 182 183
 phraseopen (69)
     on left: 39 40 41 42 43 44, on right: 28 69 70 71 72
 phrases (70)
@@ -358,7 +361,7 @@ img (88)
 atag (89)
     on left: 170 171 172 173 174 175 176 177, on right: 37
 font (90)
-    on left: 178 179 180, on right: 38
+    on left: 178 179 180 181 182 183, on right: 38
 
 
 State 0
@@ -1181,6 +1184,8 @@ State 67
 
   178 font: ATTRIBUTE . ATTRIBUTEVAL FONTOOP FONTCL
   179     | ATTRIBUTE . ATTRIBUTEVAL FONTOOP flow FONTCL
+  181     | ATTRIBUTE . ATTRIBUTEVAL FONTOOP FONTCL flow
+  182     | ATTRIBUTE . ATTRIBUTEVAL FONTOOP flow FONTCL flow
 
     ATTRIBUTEVAL  shift, and go to state 120
 
@@ -1188,6 +1193,7 @@ State 67
 State 68
 
   180 font: FONTOOP . flow FONTCL
+  183     | FONTOOP . flow FONTCL flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -2008,6 +2014,8 @@ State 120
 
   178 font: ATTRIBUTE ATTRIBUTEVAL . FONTOOP FONTCL
   179     | ATTRIBUTE ATTRIBUTEVAL . FONTOOP flow FONTCL
+  181     | ATTRIBUTE ATTRIBUTEVAL . FONTOOP FONTCL flow
+  182     | ATTRIBUTE ATTRIBUTEVAL . FONTOOP flow FONTCL flow
 
     FONTOOP  shift, and go to state 175
 
@@ -2015,6 +2023,7 @@ State 120
 State 121
 
   180 font: FONTOOP flow . FONTCL
+  183     | FONTOOP flow . FONTCL flow
 
     FONTCL  shift, and go to state 176
 
@@ -2778,6 +2787,8 @@ State 175
 
   178 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP . FONTCL
   179     | ATTRIBUTE ATTRIBUTEVAL FONTOOP . flow FONTCL
+  181     | ATTRIBUTE ATTRIBUTEVAL FONTOOP . FONTCL flow
+  182     | ATTRIBUTE ATTRIBUTEVAL FONTOOP . flow FONTCL flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -2802,8 +2813,27 @@ State 175
 State 176
 
   180 font: FONTOOP flow FONTCL .
+  183     | FONTOOP flow FONTCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+    SYMBOL     shift, and go to state 31
 
     $default  reduce using rule 180 (font)
+
+    misc  go to state 32
+    flow  go to state 222
 
 
 State 177
@@ -2841,7 +2871,7 @@ State 180
 
     misc     go to state 41
     consume  go to state 72
-    list     go to state 222
+    list     go to state 223
 
 
 State 181
@@ -2874,7 +2904,7 @@ State 182
     $default  reduce using rule 155 (figure)
 
     misc  go to state 32
-    flow  go to state 223
+    flow  go to state 224
 
 
 State 183
@@ -2882,7 +2912,7 @@ State 183
   156 figure: FIGCAPOP figcap flow . FIGCL
   161       | FIGCAPOP figcap flow . FIGCL flow
 
-    FIGCL  shift, and go to state 224
+    FIGCL  shift, and go to state 225
 
 
 State 184
@@ -2908,7 +2938,7 @@ State 185
     FONTOP     shift, and go to state 24
     LOP        shift, and go to state 25
     FIGOP      shift, and go to state 26
-    FIGCL      shift, and go to state 225
+    FIGCL      shift, and go to state 226
     DLOP       shift, and go to state 27
     TABOP      shift, and go to state 28
     BR         shift, and go to state 29
@@ -2916,7 +2946,7 @@ State 185
     SYMBOL     shift, and go to state 31
 
     misc  go to state 32
-    flow  go to state 226
+    flow  go to state 227
 
 
 State 186
@@ -2942,7 +2972,7 @@ State 186
     $default  reduce using rule 87 (dl)
 
     misc  go to state 32
-    flow  go to state 227
+    flow  go to state 228
 
 
 State 187
@@ -2960,15 +2990,15 @@ State 187
     LOP        shift, and go to state 25
     FIGOP      shift, and go to state 26
     DLOP       shift, and go to state 27
-    DDCL       shift, and go to state 228
+    DDCL       shift, and go to state 229
     TABOP      shift, and go to state 28
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
     SYMBOL     shift, and go to state 31
 
     misc  go to state 32
-    flow  go to state 229
-    dd    go to state 230
+    flow  go to state 230
+    dd    go to state 231
 
 
 State 188
@@ -2979,13 +3009,13 @@ State 188
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    DDOP     shift, and go to state 231
+    DDOP     shift, and go to state 232
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
 
     misc     go to state 41
-    consume  go to state 232
+    consume  go to state 233
 
 
 State 189
@@ -3011,7 +3041,7 @@ State 189
     $default  reduce using rule 93 (dl)
 
     misc  go to state 32
-    flow  go to state 233
+    flow  go to state 234
 
 
 State 190
@@ -3019,7 +3049,7 @@ State 190
    88 dl: consume DIVOP div . DLCL
    92   | consume DIVOP div . DLCL flow
 
-    DLCL  shift, and go to state 234
+    DLCL  shift, and go to state 235
 
 
 State 191
@@ -3034,7 +3064,7 @@ State 192
    95 dl: consume DTOP dt . DLCL
    96   | consume DTOP dt . DLCL flow
 
-    DLCL  shift, and go to state 235
+    DLCL  shift, and go to state 236
 
 
 State 193
@@ -3067,7 +3097,7 @@ State 194
     $default  reduce using rule 110 (caption)
 
     misc     go to state 41
-    consume  go to state 236
+    consume  go to state 237
 
 
 State 195
@@ -3093,7 +3123,7 @@ State 195
     $default  reduce using rule 114 (table)
 
     misc  go to state 32
-    flow  go to state 237
+    flow  go to state 238
 
 
 State 196
@@ -3112,7 +3142,7 @@ State 196
 
     misc     go to state 41
     consume  go to state 149
-    tr       go to state 238
+    tr       go to state 239
 
 
 State 197
@@ -3130,7 +3160,7 @@ State 197
 
     misc     go to state 41
     consume  go to state 149
-    tr       go to state 239
+    tr       go to state 240
 
 
 State 198
@@ -3141,7 +3171,7 @@ State 198
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    TROP     shift, and go to state 240
+    TROP     shift, and go to state 241
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -3160,7 +3190,7 @@ State 199
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    THOP     shift, and go to state 241
+    THOP     shift, and go to state 242
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -3168,7 +3198,7 @@ State 199
     $default  reduce using rule 138 (th)
 
     misc     go to state 41
-    consume  go to state 242
+    consume  go to state 243
 
 
 State 200
@@ -3178,7 +3208,7 @@ State 200
   143   | flow . THCL THOP th
   145   | flow . THCL consume THOP th
 
-    THCL  shift, and go to state 243
+    THCL  shift, and go to state 244
 
 
 State 201
@@ -3188,7 +3218,7 @@ State 201
   134   | THOP th . TRCL TROP tr
   136   | THOP th . TRCL consume TROP tr
 
-    TRCL  shift, and go to state 244
+    TRCL  shift, and go to state 245
 
 
 State 202
@@ -3200,7 +3230,7 @@ State 202
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    TDOP     shift, and go to state 245
+    TDOP     shift, and go to state 246
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -3208,7 +3238,7 @@ State 202
     $default  reduce using rule 146 (td)
 
     misc     go to state 41
-    consume  go to state 246
+    consume  go to state 247
 
 
 State 203
@@ -3218,7 +3248,7 @@ State 203
   151   | flow . TDCL TDOP td
   153   | flow . TDCL consume TDOP td
 
-    TDCL  shift, and go to state 247
+    TDCL  shift, and go to state 248
 
 
 State 204
@@ -3228,7 +3258,7 @@ State 204
   135   | TDOP td . TRCL TROP tr
   137   | TDOP td . TRCL consume TROP tr
 
-    TRCL  shift, and go to state 248
+    TRCL  shift, and go to state 249
 
 
 State 205
@@ -3245,7 +3275,7 @@ State 205
     $default  reduce using rule 125 (tr)
 
     misc     go to state 41
-    consume  go to state 249
+    consume  go to state 250
 
 
 State 206
@@ -3271,7 +3301,7 @@ State 206
     $default  reduce using rule 119 (table)
 
     misc  go to state 32
-    flow  go to state 250
+    flow  go to state 251
 
 
 State 207
@@ -3279,7 +3309,7 @@ State 207
   116 table: consume CAPOP caption . TABCL
   117      | consume CAPOP caption . TABCL flow
 
-    TABCL  shift, and go to state 251
+    TABCL  shift, and go to state 252
 
 
 State 208
@@ -3325,7 +3355,7 @@ State 211
     PHRASEOP  shift, and go to state 45
     TEXT      shift, and go to state 20
     AOP       shift, and go to state 46
-    ACL       shift, and go to state 252
+    ACL       shift, and go to state 253
     IMGOP     shift, and go to state 23
     FONTOP    shift, and go to state 47
     BR        shift, and go to state 29
@@ -3335,7 +3365,7 @@ State 211
     misc       go to state 48
     miscph     go to state 49
     consumeph  go to state 157
-    phrases    go to state 253
+    phrases    go to state 254
 
 
 State 212
@@ -3349,15 +3379,15 @@ State 212
     AOP       shift, and go to state 46
     IMGOP     shift, and go to state 23
     FONTOP    shift, and go to state 47
-    FONTCL    shift, and go to state 254
+    FONTCL    shift, and go to state 255
     BR        shift, and go to state 29
     COMMENT   shift, and go to state 30
     SYMBOL    shift, and go to state 31
 
     misc       go to state 48
     miscph     go to state 49
-    consumeph  go to state 255
-    phrases    go to state 256
+    consumeph  go to state 256
+    phrases    go to state 257
 
 
 State 213
@@ -3404,7 +3434,7 @@ State 216
     $default  reduce using rule 72 (gtph)
 
     misc  go to state 32
-    flow  go to state 257
+    flow  go to state 258
 
 
 State 217
@@ -3437,7 +3467,7 @@ State 218
     $default  reduce using rule 177 (atag)
 
     misc  go to state 32
-    flow  go to state 258
+    flow  go to state 259
 
 
 State 219
@@ -3445,38 +3475,65 @@ State 219
   170 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP flow . ACL flow
   173     | ATTRIBUTE ATTRIBUTEVAL AOPOP flow . ACL
 
-    ACL  shift, and go to state 259
+    ACL  shift, and go to state 260
 
 
 State 220
 
   178 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL .
+  181     | ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+    SYMBOL     shift, and go to state 31
 
     $default  reduce using rule 178 (font)
+
+    misc  go to state 32
+    flow  go to state 261
 
 
 State 221
 
   179 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP flow . FONTCL
+  182     | ATTRIBUTE ATTRIBUTEVAL FONTOOP flow . FONTCL flow
 
-    FONTCL  shift, and go to state 260
+    FONTCL  shift, and go to state 262
 
 
 State 222
+
+  183 font: FONTOOP flow FONTCL flow .
+
+    $default  reduce using rule 183 (font)
+
+
+State 223
 
    75 list: consume LIOP listitem list .
 
     $default  reduce using rule 75 (list)
 
 
-State 223
+State 224
 
   160 figure: FIGCAPOP figcap FIGCL flow .
 
     $default  reduce using rule 160 (figure)
 
 
-State 224
+State 225
 
   156 figure: FIGCAPOP figcap flow FIGCL .
   161       | FIGCAPOP figcap flow FIGCL . flow
@@ -3499,10 +3556,10 @@ State 224
     $default  reduce using rule 156 (figure)
 
     misc  go to state 32
-    flow  go to state 261
+    flow  go to state 263
 
 
-State 225
+State 226
 
   154 figure: flow FIGCAPOP figcap FIGCL .
   159       | flow FIGCAPOP figcap FIGCL . flow
@@ -3525,25 +3582,25 @@ State 225
     $default  reduce using rule 154 (figure)
 
     misc  go to state 32
-    flow  go to state 262
+    flow  go to state 264
 
 
-State 226
+State 227
 
   164 figure: flow FIGCAPOP figcap flow . FIGCL flow
   165       | flow FIGCAPOP figcap flow . FIGCL
 
-    FIGCL  shift, and go to state 263
+    FIGCL  shift, and go to state 265
 
 
-State 227
+State 228
 
    91 dl: DIVOP div DLCL flow .
 
     $default  reduce using rule 91 (dl)
 
 
-State 228
+State 229
 
   104 dd: DDCL .
   105   | DDCL . DDOP dd
@@ -3552,7 +3609,7 @@ State 228
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    DDOP     shift, and go to state 264
+    DDOP     shift, and go to state 266
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -3560,30 +3617,30 @@ State 228
     $default  reduce using rule 104 (dd)
 
     misc     go to state 41
-    consume  go to state 265
+    consume  go to state 267
 
 
-State 229
+State 230
 
   102 dd: flow . DDCL
   103   | flow . DDCL DDOP dd
   106   | flow . DDCL consume
   107   | flow . DDCL consume DDOP dd
 
-    DDCL  shift, and go to state 266
+    DDCL  shift, and go to state 268
 
 
-State 230
+State 231
 
   100 dt: DTCL DDOP dd .
   101   | DTCL DDOP dd . DTOP dt
 
-    DTOP  shift, and go to state 267
+    DTOP  shift, and go to state 269
 
     $default  reduce using rule 100 (dt)
 
 
-State 231
+State 232
 
    97 dt: flow DTCL DDOP . dd
    99   | flow DTCL DDOP . dd DTOP dt
@@ -3598,25 +3655,25 @@ State 231
     LOP        shift, and go to state 25
     FIGOP      shift, and go to state 26
     DLOP       shift, and go to state 27
-    DDCL       shift, and go to state 228
+    DDCL       shift, and go to state 229
     TABOP      shift, and go to state 28
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
     SYMBOL     shift, and go to state 31
 
     misc  go to state 32
-    flow  go to state 229
-    dd    go to state 268
+    flow  go to state 230
+    dd    go to state 270
 
 
-State 232
+State 233
 
    21 consume: consume . misc
    98 dt: flow DTCL consume . DDOP dd
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    DDOP     shift, and go to state 269
+    DDOP     shift, and go to state 271
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -3624,14 +3681,14 @@ State 232
     misc  go to state 93
 
 
-State 233
+State 234
 
    94 dl: DTOP dt DLCL flow .
 
     $default  reduce using rule 94 (dl)
 
 
-State 234
+State 235
 
    88 dl: consume DIVOP div DLCL .
    92   | consume DIVOP div DLCL . flow
@@ -3654,10 +3711,10 @@ State 234
     $default  reduce using rule 88 (dl)
 
     misc  go to state 32
-    flow  go to state 270
+    flow  go to state 272
 
 
-State 235
+State 236
 
    95 dl: consume DTOP dt DLCL .
    96   | consume DTOP dt DLCL . flow
@@ -3680,10 +3737,10 @@ State 235
     $default  reduce using rule 95 (dl)
 
     misc  go to state 32
-    flow  go to state 271
+    flow  go to state 273
 
 
-State 236
+State 237
 
    21 consume: consume . misc
   112 caption: flow CAPCL consume .
@@ -3699,29 +3756,29 @@ State 236
     misc  go to state 93
 
 
-State 237
+State 238
 
   115 table: CAPOP caption TABCL flow .
 
     $default  reduce using rule 115 (table)
 
 
-State 238
+State 239
 
   118 table: CAPOP caption TROP tr . TABCL
   120      | CAPOP caption TROP tr . TABCL flow
 
-    TABCL  shift, and go to state 272
+    TABCL  shift, and go to state 274
 
 
-State 239
+State 240
 
   132 tr: TRCL TROP tr .
 
     $default  reduce using rule 132 (tr)
 
 
-State 240
+State 241
 
   133 tr: TRCL consume TROP . tr
 
@@ -3736,10 +3793,10 @@ State 240
 
     misc     go to state 41
     consume  go to state 149
-    tr       go to state 273
+    tr       go to state 275
 
 
-State 241
+State 242
 
   142 th: THCL THOP . th
 
@@ -3761,10 +3818,10 @@ State 241
 
     misc  go to state 32
     flow  go to state 200
-    th    go to state 274
+    th    go to state 276
 
 
-State 242
+State 243
 
    21 consume: consume . misc
   140 th: THCL consume .
@@ -3772,7 +3829,7 @@ State 242
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    THOP     shift, and go to state 275
+    THOP     shift, and go to state 277
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -3782,7 +3839,7 @@ State 242
     misc  go to state 93
 
 
-State 243
+State 244
 
   139 th: flow THCL .
   141   | flow THCL . consume
@@ -3791,7 +3848,7 @@ State 243
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    THOP     shift, and go to state 276
+    THOP     shift, and go to state 278
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -3799,10 +3856,10 @@ State 243
     $default  reduce using rule 139 (th)
 
     misc     go to state 41
-    consume  go to state 277
+    consume  go to state 279
 
 
-State 244
+State 245
 
   126 tr: THOP th TRCL .
   130   | THOP th TRCL . consume
@@ -3811,7 +3868,7 @@ State 244
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    TROP     shift, and go to state 278
+    TROP     shift, and go to state 280
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -3819,10 +3876,10 @@ State 244
     $default  reduce using rule 126 (tr)
 
     misc     go to state 41
-    consume  go to state 279
+    consume  go to state 281
 
 
-State 245
+State 246
 
   150 td: TDCL TDOP . td
 
@@ -3844,10 +3901,10 @@ State 245
 
     misc  go to state 32
     flow  go to state 203
-    td    go to state 280
+    td    go to state 282
 
 
-State 246
+State 247
 
    21 consume: consume . misc
   148 td: TDCL consume .
@@ -3855,7 +3912,7 @@ State 246
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    TDOP     shift, and go to state 281
+    TDOP     shift, and go to state 283
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -3865,7 +3922,7 @@ State 246
     misc  go to state 93
 
 
-State 247
+State 248
 
   147 td: flow TDCL .
   149   | flow TDCL . consume
@@ -3874,7 +3931,7 @@ State 247
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    TDOP     shift, and go to state 282
+    TDOP     shift, and go to state 284
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -3882,10 +3939,10 @@ State 247
     $default  reduce using rule 147 (td)
 
     misc     go to state 41
-    consume  go to state 283
+    consume  go to state 285
 
 
-State 248
+State 249
 
   127 tr: TDOP td TRCL .
   131   | TDOP td TRCL . consume
@@ -3894,7 +3951,7 @@ State 248
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    TROP     shift, and go to state 284
+    TROP     shift, and go to state 286
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -3902,10 +3959,10 @@ State 248
     $default  reduce using rule 127 (tr)
 
     misc     go to state 41
-    consume  go to state 285
+    consume  go to state 287
 
 
-State 249
+State 250
 
    21 consume: consume . misc
   129 tr: consume TRCL consume .
@@ -3921,14 +3978,14 @@ State 249
     misc  go to state 93
 
 
-State 250
+State 251
 
   121 table: TROP tr TABCL flow .
 
     $default  reduce using rule 121 (table)
 
 
-State 251
+State 252
 
   116 table: consume CAPOP caption TABCL .
   117      | consume CAPOP caption TABCL . flow
@@ -3951,31 +4008,31 @@ State 251
     $default  reduce using rule 116 (table)
 
     misc  go to state 32
-    flow  go to state 286
+    flow  go to state 288
 
 
-State 252
+State 253
 
    62 atagph: ATTRIBUTE ATTRIBUTEVAL AOPOP ACL .
 
     $default  reduce using rule 62 (atagph)
 
 
-State 253
+State 254
 
    59 atagph: ATTRIBUTE ATTRIBUTEVAL AOPOP phrases . ACL
 
-    ACL  shift, and go to state 287
+    ACL  shift, and go to state 289
 
 
-State 254
+State 255
 
    54 fontph: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL .
 
     $default  reduce using rule 54 (fontph)
 
 
-State 255
+State 256
 
    26 consumeph: consumeph . miscph
    46 phrases: consumeph . PHRASEOP phr
@@ -3986,7 +4043,7 @@ State 255
     AOP       shift, and go to state 46
     IMGOP     shift, and go to state 23
     FONTOP    shift, and go to state 47
-    FONTCL    shift, and go to state 288
+    FONTCL    shift, and go to state 290
     BR        shift, and go to state 29
     COMMENT   shift, and go to state 30
     SYMBOL    shift, and go to state 31
@@ -3995,28 +4052,28 @@ State 255
     miscph  go to state 107
 
 
-State 256
+State 257
 
    55 fontph: ATTRIBUTE ATTRIBUTEVAL FONTOOP phrases . FONTCL
 
-    FONTCL  shift, and go to state 289
+    FONTCL  shift, and go to state 291
 
 
-State 257
+State 258
 
    71 gtph: consumeph BPHRASEOP phraseopen GTPHCL flow .
 
     $default  reduce using rule 71 (gtph)
 
 
-State 258
+State 259
 
   176 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP ACL flow .
 
     $default  reduce using rule 176 (atag)
 
 
-State 259
+State 260
 
   170 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL . flow
   173     | ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL .
@@ -4039,31 +4096,57 @@ State 259
     $default  reduce using rule 173 (atag)
 
     misc  go to state 32
-    flow  go to state 290
-
-
-State 260
-
-  179 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP flow FONTCL .
-
-    $default  reduce using rule 179 (font)
+    flow  go to state 292
 
 
 State 261
+
+  181 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL flow .
+
+    $default  reduce using rule 181 (font)
+
+
+State 262
+
+  179 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP flow FONTCL .
+  182     | ATTRIBUTE ATTRIBUTEVAL FONTOOP flow FONTCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+    SYMBOL     shift, and go to state 31
+
+    $default  reduce using rule 179 (font)
+
+    misc  go to state 32
+    flow  go to state 293
+
+
+State 263
 
   161 figure: FIGCAPOP figcap flow FIGCL flow .
 
     $default  reduce using rule 161 (figure)
 
 
-State 262
+State 264
 
   159 figure: flow FIGCAPOP figcap FIGCL flow .
 
     $default  reduce using rule 159 (figure)
 
 
-State 263
+State 265
 
   164 figure: flow FIGCAPOP figcap flow FIGCL . flow
   165       | flow FIGCAPOP figcap flow FIGCL .
@@ -4086,10 +4169,10 @@ State 263
     $default  reduce using rule 165 (figure)
 
     misc  go to state 32
-    flow  go to state 291
+    flow  go to state 294
 
 
-State 264
+State 266
 
   105 dd: DDCL DDOP . dd
 
@@ -4103,18 +4186,18 @@ State 264
     LOP        shift, and go to state 25
     FIGOP      shift, and go to state 26
     DLOP       shift, and go to state 27
-    DDCL       shift, and go to state 228
+    DDCL       shift, and go to state 229
     TABOP      shift, and go to state 28
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
     SYMBOL     shift, and go to state 31
 
     misc  go to state 32
-    flow  go to state 229
-    dd    go to state 292
+    flow  go to state 230
+    dd    go to state 295
 
 
-State 265
+State 267
 
    21 consume: consume . misc
   108 dd: DDCL consume .
@@ -4122,7 +4205,7 @@ State 265
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    DDOP     shift, and go to state 293
+    DDOP     shift, and go to state 296
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -4132,7 +4215,7 @@ State 265
     misc  go to state 93
 
 
-State 266
+State 268
 
   102 dd: flow DDCL .
   103   | flow DDCL . DDOP dd
@@ -4141,7 +4224,7 @@ State 266
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    DDOP     shift, and go to state 294
+    DDOP     shift, and go to state 297
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -4149,10 +4232,10 @@ State 266
     $default  reduce using rule 102 (dd)
 
     misc     go to state 41
-    consume  go to state 295
+    consume  go to state 298
 
 
-State 267
+State 269
 
   101 dt: DTCL DDOP dd DTOP . dt
 
@@ -4174,20 +4257,20 @@ State 267
 
     misc  go to state 32
     flow  go to state 137
-    dt    go to state 296
+    dt    go to state 299
 
 
-State 268
+State 270
 
    97 dt: flow DTCL DDOP dd .
    99   | flow DTCL DDOP dd . DTOP dt
 
-    DTOP  shift, and go to state 297
+    DTOP  shift, and go to state 300
 
     $default  reduce using rule 97 (dt)
 
 
-State 269
+State 271
 
    98 dt: flow DTCL consume DDOP . dd
 
@@ -4201,32 +4284,32 @@ State 269
     LOP        shift, and go to state 25
     FIGOP      shift, and go to state 26
     DLOP       shift, and go to state 27
-    DDCL       shift, and go to state 228
+    DDCL       shift, and go to state 229
     TABOP      shift, and go to state 28
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
     SYMBOL     shift, and go to state 31
 
     misc  go to state 32
-    flow  go to state 229
-    dd    go to state 298
+    flow  go to state 230
+    dd    go to state 301
 
 
-State 270
+State 272
 
    92 dl: consume DIVOP div DLCL flow .
 
     $default  reduce using rule 92 (dl)
 
 
-State 271
+State 273
 
    96 dl: consume DTOP dt DLCL flow .
 
     $default  reduce using rule 96 (dl)
 
 
-State 272
+State 274
 
   118 table: CAPOP caption TROP tr TABCL .
   120      | CAPOP caption TROP tr TABCL . flow
@@ -4249,24 +4332,24 @@ State 272
     $default  reduce using rule 118 (table)
 
     misc  go to state 32
-    flow  go to state 299
+    flow  go to state 302
 
 
-State 273
+State 275
 
   133 tr: TRCL consume TROP tr .
 
     $default  reduce using rule 133 (tr)
 
 
-State 274
+State 276
 
   142 th: THCL THOP th .
 
     $default  reduce using rule 142 (th)
 
 
-State 275
+State 277
 
   144 th: THCL consume THOP . th
 
@@ -4288,10 +4371,10 @@ State 275
 
     misc  go to state 32
     flow  go to state 200
-    th    go to state 300
+    th    go to state 303
 
 
-State 276
+State 278
 
   143 th: flow THCL THOP . th
 
@@ -4313,10 +4396,10 @@ State 276
 
     misc  go to state 32
     flow  go to state 200
-    th    go to state 301
+    th    go to state 304
 
 
-State 277
+State 279
 
    21 consume: consume . misc
   141 th: flow THCL consume .
@@ -4324,7 +4407,7 @@ State 277
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    THOP     shift, and go to state 302
+    THOP     shift, and go to state 305
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -4334,7 +4417,7 @@ State 277
     misc  go to state 93
 
 
-State 278
+State 280
 
   134 tr: THOP th TRCL TROP . tr
 
@@ -4349,10 +4432,10 @@ State 278
 
     misc     go to state 41
     consume  go to state 149
-    tr       go to state 303
+    tr       go to state 306
 
 
-State 279
+State 281
 
    21 consume: consume . misc
   130 tr: THOP th TRCL consume .
@@ -4360,7 +4443,7 @@ State 279
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    TROP     shift, and go to state 304
+    TROP     shift, and go to state 307
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -4370,14 +4453,14 @@ State 279
     misc  go to state 93
 
 
-State 280
+State 282
 
   150 td: TDCL TDOP td .
 
     $default  reduce using rule 150 (td)
 
 
-State 281
+State 283
 
   152 td: TDCL consume TDOP . td
 
@@ -4399,10 +4482,10 @@ State 281
 
     misc  go to state 32
     flow  go to state 203
-    td    go to state 305
+    td    go to state 308
 
 
-State 282
+State 284
 
   151 td: flow TDCL TDOP . td
 
@@ -4424,10 +4507,10 @@ State 282
 
     misc  go to state 32
     flow  go to state 203
-    td    go to state 306
+    td    go to state 309
 
 
-State 283
+State 285
 
    21 consume: consume . misc
   149 td: flow TDCL consume .
@@ -4435,7 +4518,7 @@ State 283
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    TDOP     shift, and go to state 307
+    TDOP     shift, and go to state 310
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -4445,7 +4528,7 @@ State 283
     misc  go to state 93
 
 
-State 284
+State 286
 
   135 tr: TDOP td TRCL TROP . tr
 
@@ -4460,10 +4543,10 @@ State 284
 
     misc     go to state 41
     consume  go to state 149
-    tr       go to state 308
+    tr       go to state 311
 
 
-State 285
+State 287
 
    21 consume: consume . misc
   131 tr: TDOP td TRCL consume .
@@ -4471,7 +4554,7 @@ State 285
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    TROP     shift, and go to state 309
+    TROP     shift, and go to state 312
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -4481,56 +4564,63 @@ State 285
     misc  go to state 93
 
 
-State 286
+State 288
 
   117 table: consume CAPOP caption TABCL flow .
 
     $default  reduce using rule 117 (table)
 
 
-State 287
+State 289
 
    59 atagph: ATTRIBUTE ATTRIBUTEVAL AOPOP phrases ACL .
 
     $default  reduce using rule 59 (atagph)
 
 
-State 288
+State 290
 
    57 fontph: ATTRIBUTE ATTRIBUTEVAL FONTOOP consumeph FONTCL .
 
     $default  reduce using rule 57 (fontph)
 
 
-State 289
+State 291
 
    55 fontph: ATTRIBUTE ATTRIBUTEVAL FONTOOP phrases FONTCL .
 
     $default  reduce using rule 55 (fontph)
 
 
-State 290
+State 292
 
   170 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL flow .
 
     $default  reduce using rule 170 (atag)
 
 
-State 291
+State 293
+
+  182 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP flow FONTCL flow .
+
+    $default  reduce using rule 182 (font)
+
+
+State 294
 
   164 figure: flow FIGCAPOP figcap flow FIGCL flow .
 
     $default  reduce using rule 164 (figure)
 
 
-State 292
+State 295
 
   105 dd: DDCL DDOP dd .
 
     $default  reduce using rule 105 (dd)
 
 
-State 293
+State 296
 
   109 dd: DDCL consume DDOP . dd
 
@@ -4544,18 +4634,18 @@ State 293
     LOP        shift, and go to state 25
     FIGOP      shift, and go to state 26
     DLOP       shift, and go to state 27
-    DDCL       shift, and go to state 228
+    DDCL       shift, and go to state 229
     TABOP      shift, and go to state 28
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
     SYMBOL     shift, and go to state 31
 
     misc  go to state 32
-    flow  go to state 229
-    dd    go to state 310
+    flow  go to state 230
+    dd    go to state 313
 
 
-State 294
+State 297
 
   103 dd: flow DDCL DDOP . dd
 
@@ -4569,18 +4659,18 @@ State 294
     LOP        shift, and go to state 25
     FIGOP      shift, and go to state 26
     DLOP       shift, and go to state 27
-    DDCL       shift, and go to state 228
+    DDCL       shift, and go to state 229
     TABOP      shift, and go to state 28
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
     SYMBOL     shift, and go to state 31
 
     misc  go to state 32
-    flow  go to state 229
-    dd    go to state 311
+    flow  go to state 230
+    dd    go to state 314
 
 
-State 295
+State 298
 
    21 consume: consume . misc
   106 dd: flow DDCL consume .
@@ -4588,7 +4678,7 @@ State 295
 
     TEXT     shift, and go to state 20
     IMGOP    shift, and go to state 23
-    DDOP     shift, and go to state 312
+    DDOP     shift, and go to state 315
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
     SYMBOL   shift, and go to state 31
@@ -4598,14 +4688,14 @@ State 295
     misc  go to state 93
 
 
-State 296
+State 299
 
   101 dt: DTCL DDOP dd DTOP dt .
 
     $default  reduce using rule 101 (dt)
 
 
-State 297
+State 300
 
    99 dt: flow DTCL DDOP dd DTOP . dt
 
@@ -4627,38 +4717,38 @@ State 297
 
     misc  go to state 32
     flow  go to state 137
-    dt    go to state 313
+    dt    go to state 316
 
 
-State 298
+State 301
 
    98 dt: flow DTCL consume DDOP dd .
 
     $default  reduce using rule 98 (dt)
 
 
-State 299
+State 302
 
   120 table: CAPOP caption TROP tr TABCL flow .
 
     $default  reduce using rule 120 (table)
 
 
-State 300
+State 303
 
   144 th: THCL consume THOP th .
 
     $default  reduce using rule 144 (th)
 
 
-State 301
+State 304
 
   143 th: flow THCL THOP th .
 
     $default  reduce using rule 143 (th)
 
 
-State 302
+State 305
 
   145 th: flow THCL consume THOP . th
 
@@ -4680,17 +4770,17 @@ State 302
 
     misc  go to state 32
     flow  go to state 200
-    th    go to state 314
+    th    go to state 317
 
 
-State 303
+State 306
 
   134 tr: THOP th TRCL TROP tr .
 
     $default  reduce using rule 134 (tr)
 
 
-State 304
+State 307
 
   136 tr: THOP th TRCL consume TROP . tr
 
@@ -4705,24 +4795,24 @@ State 304
 
     misc     go to state 41
     consume  go to state 149
-    tr       go to state 315
+    tr       go to state 318
 
 
-State 305
+State 308
 
   152 td: TDCL consume TDOP td .
 
     $default  reduce using rule 152 (td)
 
 
-State 306
+State 309
 
   151 td: flow TDCL TDOP td .
 
     $default  reduce using rule 151 (td)
 
 
-State 307
+State 310
 
   153 td: flow TDCL consume TDOP . td
 
@@ -4744,17 +4834,17 @@ State 307
 
     misc  go to state 32
     flow  go to state 203
-    td    go to state 316
+    td    go to state 319
 
 
-State 308
+State 311
 
   135 tr: TDOP td TRCL TROP tr .
 
     $default  reduce using rule 135 (tr)
 
 
-State 309
+State 312
 
   137 tr: TDOP td TRCL consume TROP . tr
 
@@ -4769,24 +4859,24 @@ State 309
 
     misc     go to state 41
     consume  go to state 149
-    tr       go to state 317
+    tr       go to state 320
 
 
-State 310
+State 313
 
   109 dd: DDCL consume DDOP dd .
 
     $default  reduce using rule 109 (dd)
 
 
-State 311
+State 314
 
   103 dd: flow DDCL DDOP dd .
 
     $default  reduce using rule 103 (dd)
 
 
-State 312
+State 315
 
   107 dd: flow DDCL consume DDOP . dd
 
@@ -4800,53 +4890,53 @@ State 312
     LOP        shift, and go to state 25
     FIGOP      shift, and go to state 26
     DLOP       shift, and go to state 27
-    DDCL       shift, and go to state 228
+    DDCL       shift, and go to state 229
     TABOP      shift, and go to state 28
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
     SYMBOL     shift, and go to state 31
 
     misc  go to state 32
-    flow  go to state 229
-    dd    go to state 318
+    flow  go to state 230
+    dd    go to state 321
 
 
-State 313
+State 316
 
    99 dt: flow DTCL DDOP dd DTOP dt .
 
     $default  reduce using rule 99 (dt)
 
 
-State 314
+State 317
 
   145 th: flow THCL consume THOP th .
 
     $default  reduce using rule 145 (th)
 
 
-State 315
+State 318
 
   136 tr: THOP th TRCL consume TROP tr .
 
     $default  reduce using rule 136 (tr)
 
 
-State 316
+State 319
 
   153 td: flow TDCL consume TDOP td .
 
     $default  reduce using rule 153 (td)
 
 
-State 317
+State 320
 
   137 tr: TDOP td TRCL consume TROP tr .
 
     $default  reduce using rule 137 (tr)
 
 
-State 318
+State 321
 
   107 dd: flow DDCL consume DDOP dd .
 
