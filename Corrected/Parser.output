@@ -3,10 +3,6 @@ Terminals unused in grammar
    AOPOP
    AOP
    ACL
-   ATTRIBUTE
-   ATTRIBUTEVAL
-   IMGOP
-   IMGCL
    FONTOP
    FONTOOP
    FONTCL
@@ -39,153 +35,159 @@ Grammar
    16 misc: COMMENT
    17     | BR
    18     | TEXT
+   19     | IMGOP img
 
-   19 consume: consume misc
-   20        | misc
+   20 consume: consume misc
+   21        | misc
 
-   21 flow: BPHRASEOP phraseopen
-   22     | GTPHOP gtph
-   23     | LOP list
-   24     | misc flow
-   25     | misc
-   26     | DIVOP div
-   27     | DLOP dl
-   28     | TABOP table
-   29     | FIGOP figure
+   22 flow: BPHRASEOP phraseopen
+   23     | GTPHOP gtph
+   24     | LOP list
+   25     | misc flow
+   26     | misc
+   27     | DIVOP div
+   28     | DLOP dl
+   29     | TABOP table
+   30     | FIGOP figure
 
-   30 phraseopen: phrases BPHRASECL flow
-   31           | BPHRASECL flow
-   32           | BPHRASECL
-   33           | phrases BPHRASECL
+   31 phraseopen: phrases BPHRASECL flow
+   32           | BPHRASECL flow
+   33           | BPHRASECL
+   34           | phrases BPHRASECL
+   35           | consume BPHRASECL flow
+   36           | consume BPHRASECL
 
-   34 phrases: PHRASEOP phr
-   35        | consume PHRASEOP phr
+   37 phrases: PHRASEOP phr
+   38        | consume PHRASEOP phr
 
-   36 phr: PHRASECL
-   37    | phrases PHRASECL
-   38    | PHRASECL phrases
-   39    | PHRASECL consume
-   40    | consume PHRASECL
-   41    | consume PHRASECL phrases
-   42    | consume PHRASECL consume
+   39 phr: PHRASECL
+   40    | phrases PHRASECL
+   41    | PHRASECL phrases
+   42    | PHRASECL consume
+   43    | consume PHRASECL
+   44    | consume PHRASECL phrases
+   45    | consume PHRASECL consume
 
-   43 gtph: phrases GTPHCL flow
-   44     | GTPHCL flow
-   45     | phrases GTPHCL
-   46     | GTPHCL
-   47     | consume GTPHCL
-   48     | BPHRASEOP phraseopen GTPHCL flow
-   49     | BPHRASEOP phraseopen GTPHCL
-   50     | consume BPHRASEOP phraseopen GTPHCL flow
-   51     | consume BPHRASEOP phraseopen GTPHCL
+   46 gtph: phrases GTPHCL flow
+   47     | GTPHCL flow
+   48     | phrases GTPHCL
+   49     | GTPHCL
+   50     | consume GTPHCL
+   51     | BPHRASEOP phraseopen GTPHCL flow
+   52     | BPHRASEOP phraseopen GTPHCL
+   53     | consume BPHRASEOP phraseopen GTPHCL flow
+   54     | consume BPHRASEOP phraseopen GTPHCL
 
-   52 list: LIOP listitem list
-   53     | LCL
-   54     | consume LIOP listitem list
-   55     | consume LCL
-   56     | LCL flow
-   57     | consume LCL flow
+   55 list: LIOP listitem list
+   56     | LCL
+   57     | consume LIOP listitem list
+   58     | consume LCL
+   59     | LCL flow
+   60     | consume LCL flow
 
-   58 listitem: flow LICL
-   59         | LICL
+   61 listitem: flow LICL
+   62         | LICL
 
-   60 div: DIVCL
-   61    | DIVCL flow
-   62    | flow DIVCL flow
-   63    | flow DIVCL
+   63 div: DIVCL
+   64    | DIVCL flow
+   65    | flow DIVCL flow
+   66    | flow DIVCL
 
-   64 dl: DLCL
-   65   | consume DLCL
-   66   | DIVOP div DLCL
-   67   | consume DIVOP div DLCL
-   68   | DLCL flow
-   69   | consume DLCL flow
-   70   | DIVOP div DLCL flow
-   71   | consume DIVOP div DLCL flow
-   72   | DTOP dt DLCL
-   73   | DTOP dt DLCL flow
-   74   | consume DTOP dt DLCL
-   75   | consume DTOP dt DLCL flow
+   67 dl: DLCL
+   68   | consume DLCL
+   69   | DIVOP div DLCL
+   70   | consume DIVOP div DLCL
+   71   | DLCL flow
+   72   | consume DLCL flow
+   73   | DIVOP div DLCL flow
+   74   | consume DIVOP div DLCL flow
+   75   | DTOP dt DLCL
+   76   | DTOP dt DLCL flow
+   77   | consume DTOP dt DLCL
+   78   | consume DTOP dt DLCL flow
 
-   76 dt: flow DTCL DDOP dd
-   77   | flow DTCL consume DDOP dd
-   78   | flow DTCL DDOP dd DTOP dt
-   79   | DTCL DDOP dd
-   80   | DTCL DDOP dd DTOP dt
+   79 dt: flow DTCL DDOP dd
+   80   | flow DTCL consume DDOP dd
+   81   | flow DTCL DDOP dd DTOP dt
+   82   | DTCL DDOP dd
+   83   | DTCL DDOP dd DTOP dt
 
-   81 dd: flow DDCL
-   82   | flow DDCL DDOP dd
-   83   | DDCL
-   84   | DDCL DDOP dd
-   85   | flow DDCL consume
-   86   | flow DDCL consume DDOP dd
-   87   | DDCL consume
-   88   | DDCL consume DDOP dd
+   84 dd: flow DDCL
+   85   | flow DDCL DDOP dd
+   86   | DDCL
+   87   | DDCL DDOP dd
+   88   | flow DDCL consume
+   89   | flow DDCL consume DDOP dd
+   90   | DDCL consume
+   91   | DDCL consume DDOP dd
 
-   89 caption: flow CAPCL
-   90        | CAPCL
-   91        | flow CAPCL consume
-   92        | CAPCL consume
+   92 caption: flow CAPCL
+   93        | CAPCL
+   94        | flow CAPCL consume
+   95        | CAPCL consume
 
-   93 table: CAPOP caption TABCL
-   94      | CAPOP caption TABCL flow
-   95      | consume CAPOP caption TABCL
-   96      | consume CAPOP caption TABCL flow
-   97      | CAPOP caption TROP tr TABCL
-   98      | TROP tr TABCL
-   99      | CAPOP caption TROP tr TABCL flow
-  100      | TROP tr TABCL flow
-  101      | TABCL
-  102      | TABCL flow
+   96 table: CAPOP caption TABCL
+   97      | CAPOP caption TABCL flow
+   98      | consume CAPOP caption TABCL
+   99      | consume CAPOP caption TABCL flow
+  100      | CAPOP caption TROP tr TABCL
+  101      | TROP tr TABCL
+  102      | CAPOP caption TROP tr TABCL flow
+  103      | TROP tr TABCL flow
+  104      | TABCL
+  105      | TABCL flow
 
-  103 tr: TRCL
-  104   | consume TRCL
-  105   | THOP th TRCL
-  106   | TDOP td TRCL
-  107   | TRCL consume
-  108   | consume TRCL consume
-  109   | THOP th TRCL consume
-  110   | TDOP td TRCL consume
-  111   | TRCL TROP tr
-  112   | TRCL consume TROP tr
-  113   | THOP th TRCL TROP tr
-  114   | TDOP td TRCL TROP tr
-  115   | THOP th TRCL consume TROP tr
-  116   | TDOP td TRCL consume TROP tr
+  106 tr: TRCL
+  107   | consume TRCL
+  108   | THOP th TRCL
+  109   | TDOP td TRCL
+  110   | TRCL consume
+  111   | consume TRCL consume
+  112   | THOP th TRCL consume
+  113   | TDOP td TRCL consume
+  114   | TRCL TROP tr
+  115   | TRCL consume TROP tr
+  116   | THOP th TRCL TROP tr
+  117   | TDOP td TRCL TROP tr
+  118   | THOP th TRCL consume TROP tr
+  119   | TDOP td TRCL consume TROP tr
 
-  117 th: THCL
-  118   | flow THCL
-  119   | THCL consume
-  120   | flow THCL consume
-  121   | THCL THOP th
-  122   | flow THCL THOP th
-  123   | THCL consume THOP th
-  124   | flow THCL consume THOP th
+  120 th: THCL
+  121   | flow THCL
+  122   | THCL consume
+  123   | flow THCL consume
+  124   | THCL THOP th
+  125   | flow THCL THOP th
+  126   | THCL consume THOP th
+  127   | flow THCL consume THOP th
 
-  125 td: TDCL
-  126   | flow TDCL
-  127   | TDCL consume
-  128   | flow TDCL consume
-  129   | TDCL TDOP td
-  130   | flow TDCL TDOP td
-  131   | TDCL consume TDOP td
-  132   | flow TDCL consume TDOP td
+  128 td: TDCL
+  129   | flow TDCL
+  130   | TDCL consume
+  131   | flow TDCL consume
+  132   | TDCL TDOP td
+  133   | flow TDCL TDOP td
+  134   | TDCL consume TDOP td
+  135   | flow TDCL consume TDOP td
 
-  133 figure: flow FIGCAPOP figcap FIGCL
-  134       | FIGCAPOP figcap FIGCL
-  135       | FIGCAPOP figcap flow FIGCL
-  136       | flow FIGCL
-  137       | FIGCL
-  138       | flow FIGCAPOP figcap FIGCL flow
-  139       | FIGCAPOP figcap FIGCL flow
-  140       | FIGCAPOP figcap flow FIGCL flow
-  141       | flow FIGCL flow
-  142       | FIGCL flow
-  143       | flow FIGCAPOP figcap flow FIGCL flow
-  144       | flow FIGCAPOP figcap flow FIGCL
+  136 figure: flow FIGCAPOP figcap FIGCL
+  137       | FIGCAPOP figcap FIGCL
+  138       | FIGCAPOP figcap flow FIGCL
+  139       | flow FIGCL
+  140       | FIGCL
+  141       | flow FIGCAPOP figcap FIGCL flow
+  142       | FIGCAPOP figcap FIGCL flow
+  143       | FIGCAPOP figcap flow FIGCL flow
+  144       | flow FIGCL flow
+  145       | FIGCL flow
+  146       | flow FIGCAPOP figcap flow FIGCL flow
+  147       | flow FIGCAPOP figcap flow FIGCL
 
-  145 figcap: flow FIGCAPCL
-  146       | FIGCAPCL
+  148 figcap: flow FIGCAPCL
+  149       | FIGCAPCL
+
+  150 img: ATTRIBUTE ATTRIBUTEVAL img
+  151    | IMGCL
 
 
 Terminals, with rules where they appear
@@ -201,49 +203,49 @@ TITLEOP (263) 12 13
 TITLECL (264) 12 13
 BODYOP (265) 14 15
 BODYCL (266) 14 15
-BPHRASEOP (267) 21 48 49 50 51
-BPHRASECL (268) 30 31 32 33
-PHRASEOP (269) 34 35
-PHRASECL (270) 36 37 38 39 40 41 42
-GTPHOP (271) 22
-GTPHCL (272) 43 44 45 46 47 48 49 50 51
+BPHRASEOP (267) 22 51 52 53 54
+BPHRASECL (268) 31 32 33 34 35 36
+PHRASEOP (269) 37 38
+PHRASECL (270) 39 40 41 42 43 44 45
+GTPHOP (271) 23
+GTPHCL (272) 46 47 48 49 50 51 52 53 54
 TEXT (273) 18
 AOPOP (274)
 AOP (275)
 ACL (276)
-ATTRIBUTE (277)
-ATTRIBUTEVAL (278)
-DIVOP (279) 26 66 67 70 71
-DIVCL (280) 60 61 62 63
-IMGOP (281)
-IMGCL (282)
+ATTRIBUTE (277) 150
+ATTRIBUTEVAL (278) 150
+DIVOP (279) 27 69 70 73 74
+DIVCL (280) 63 64 65 66
+IMGOP (281) 19
+IMGCL (282) 151
 FONTOP (283)
 FONTOOP (284)
 FONTCL (285)
-LOP (286) 23
-LCL (287) 53 55 56 57
-LIOP (288) 52 54
-LICL (289) 58 59
-FIGOP (290) 29
-FIGCL (291) 133 134 135 136 137 138 139 140 141 142 143 144
-FIGCAPOP (292) 133 134 135 138 139 140 143 144
-FIGCAPCL (293) 145 146
-DLOP (294) 27
-DLCL (295) 64 65 66 67 68 69 70 71 72 73 74 75
-DTOP (296) 72 73 74 75 78 80
-DTCL (297) 76 77 78 79 80
-DDOP (298) 76 77 78 79 80 82 84 86 88
-DDCL (299) 81 82 83 84 85 86 87 88
-TABOP (300) 28
-TABCL (301) 93 94 95 96 97 98 99 100 101 102
-CAPOP (302) 93 94 95 96 97 99
-CAPCL (303) 89 90 91 92
-TROP (304) 97 98 99 100 111 112 113 114 115 116
-TRCL (305) 103 104 105 106 107 108 109 110 111 112 113 114 115 116
-THOP (306) 105 109 113 115 121 122 123 124
-THCL (307) 117 118 119 120 121 122 123 124
-TDOP (308) 106 110 114 116 129 130 131 132
-TDCL (309) 125 126 127 128 129 130 131 132
+LOP (286) 24
+LCL (287) 56 58 59 60
+LIOP (288) 55 57
+LICL (289) 61 62
+FIGOP (290) 30
+FIGCL (291) 136 137 138 139 140 141 142 143 144 145 146 147
+FIGCAPOP (292) 136 137 138 141 142 143 146 147
+FIGCAPCL (293) 148 149
+DLOP (294) 28
+DLCL (295) 67 68 69 70 71 72 73 74 75 76 77 78
+DTOP (296) 75 76 77 78 81 83
+DTCL (297) 79 80 81 82 83
+DDOP (298) 79 80 81 82 83 85 87 89 91
+DDCL (299) 84 85 86 87 88 89 90 91
+TABOP (300) 29
+TABCL (301) 96 97 98 99 100 101 102 103 104 105
+CAPOP (302) 96 97 98 99 100 102
+CAPCL (303) 92 93 94 95
+TROP (304) 100 101 102 103 114 115 116 117 118 119
+TRCL (305) 106 107 108 109 110 111 112 113 114 115 116 117 118 119
+THOP (306) 108 112 116 118 124 125 126 127
+THCL (307) 120 121 122 123 124 125 126 127
+TDOP (308) 109 113 117 119 132 133 134 135
+TDCL (309) 128 129 130 131 132 133 134 135
 BR (310) 17
 COMMENT (311) 16
 SPCHAR (312)
@@ -262,55 +264,57 @@ title (61)
 body (62)
     on left: 14 15, on right: 6 7 8 9
 misc (63)
-    on left: 16 17 18, on right: 19 20 24 25
+    on left: 16 17 18 19, on right: 20 21 25 26
 consume (64)
-    on left: 19 20, on right: 13 19 35 39 40 41 42 47 50 51 54 55 57
-    65 67 69 71 74 75 77 85 86 87 88 91 92 95 96 104 107 108 109 110
-    112 115 116 119 120 123 124 127 128 131 132
+    on left: 20 21, on right: 13 20 35 36 38 42 43 44 45 50 53 54 57
+    58 60 68 70 72 74 77 78 80 88 89 90 91 94 95 98 99 107 110 111
+    112 113 115 118 119 122 123 126 127 130 131 134 135
 flow (65)
-    on left: 21 22 23 24 25 26 27 28 29, on right: 14 24 30 31 43 44
-    48 50 56 57 58 61 62 63 68 69 70 71 73 75 76 77 78 81 82 85 86
-    89 91 94 96 99 100 102 118 120 122 124 126 128 130 132 133 135
-    136 138 139 140 141 142 143 144 145
+    on left: 22 23 24 25 26 27 28 29 30, on right: 14 25 31 32 35 46
+    47 51 53 59 60 61 64 65 66 71 72 73 74 76 78 79 80 81 84 85 88
+    89 92 94 97 99 102 103 105 121 123 125 127 129 131 133 135 136
+    138 139 141 142 143 144 145 146 147 148
 phraseopen (66)
-    on left: 30 31 32 33, on right: 21 48 49 50 51
+    on left: 31 32 33 34 35 36, on right: 22 51 52 53 54
 phrases (67)
-    on left: 34 35, on right: 30 33 37 38 41 43 45
+    on left: 37 38, on right: 31 34 40 41 44 46 48
 phr (68)
-    on left: 36 37 38 39 40 41 42, on right: 34 35
+    on left: 39 40 41 42 43 44 45, on right: 37 38
 gtph (69)
-    on left: 43 44 45 46 47 48 49 50 51, on right: 22
+    on left: 46 47 48 49 50 51 52 53 54, on right: 23
 list (70)
-    on left: 52 53 54 55 56 57, on right: 23 52 54
+    on left: 55 56 57 58 59 60, on right: 24 55 57
 listitem (71)
-    on left: 58 59, on right: 52 54
+    on left: 61 62, on right: 55 57
 div (72)
-    on left: 60 61 62 63, on right: 26 66 67 70 71
+    on left: 63 64 65 66, on right: 27 69 70 73 74
 dl (73)
-    on left: 64 65 66 67 68 69 70 71 72 73 74 75, on right: 27
+    on left: 67 68 69 70 71 72 73 74 75 76 77 78, on right: 28
 dt (74)
-    on left: 76 77 78 79 80, on right: 72 73 74 75 78 80
+    on left: 79 80 81 82 83, on right: 75 76 77 78 81 83
 dd (75)
-    on left: 81 82 83 84 85 86 87 88, on right: 76 77 78 79 80 82 84
-    86 88
+    on left: 84 85 86 87 88 89 90 91, on right: 79 80 81 82 83 85 87
+    89 91
 caption (76)
-    on left: 89 90 91 92, on right: 93 94 95 96 97 99
+    on left: 92 93 94 95, on right: 96 97 98 99 100 102
 table (77)
-    on left: 93 94 95 96 97 98 99 100 101 102, on right: 28
+    on left: 96 97 98 99 100 101 102 103 104 105, on right: 29
 tr (78)
-    on left: 103 104 105 106 107 108 109 110 111 112 113 114 115 116,
-    on right: 97 98 99 100 111 112 113 114 115 116
+    on left: 106 107 108 109 110 111 112 113 114 115 116 117 118 119,
+    on right: 100 101 102 103 114 115 116 117 118 119
 th (79)
-    on left: 117 118 119 120 121 122 123 124, on right: 105 109 113
-    115 121 122 123 124
+    on left: 120 121 122 123 124 125 126 127, on right: 108 112 116
+    118 124 125 126 127
 td (80)
-    on left: 125 126 127 128 129 130 131 132, on right: 106 110 114
-    116 129 130 131 132
+    on left: 128 129 130 131 132 133 134 135, on right: 109 113 117
+    119 132 133 134 135
 figure (81)
-    on left: 133 134 135 136 137 138 139 140 141 142 143 144, on right:
-    29
+    on left: 136 137 138 139 140 141 142 143 144 145 146 147, on right:
+    30
 figcap (82)
-    on left: 145 146, on right: 133 134 135 138 139 140 143 144
+    on left: 148 149, on right: 136 137 138 141 142 143 146 147
+img (83)
+    on left: 150 151, on right: 19 150
 
 
 State 0
@@ -401,15 +405,16 @@ State 7
     GTPHOP     shift, and go to state 19
     TEXT       shift, and go to state 20
     DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
-    misc  go to state 28
-    flow  go to state 29
+    misc  go to state 29
+    flow  go to state 30
 
 
 State 8
@@ -417,17 +422,17 @@ State 8
     5 st: HTMLOP head . HTMLCL
     7   | HTMLOP head . body HTMLCL
 
-    HTMLCL  shift, and go to state 30
+    HTMLCL  shift, and go to state 31
     BODYOP  shift, and go to state 7
 
-    body  go to state 31
+    body  go to state 32
 
 
 State 9
 
     9 st: HTMLOP body . HTMLCL
 
-    HTMLCL  shift, and go to state 32
+    HTMLCL  shift, and go to state 33
 
 
 State 10
@@ -449,17 +454,17 @@ State 12
     4 st: DOCTYPE HTMLOP head . HTMLCL
     6   | DOCTYPE HTMLOP head . body HTMLCL
 
-    HTMLCL  shift, and go to state 33
+    HTMLCL  shift, and go to state 34
     BODYOP  shift, and go to state 7
 
-    body  go to state 34
+    body  go to state 35
 
 
 State 13
 
     8 st: DOCTYPE HTMLOP body . HTMLCL
 
-    HTMLCL  shift, and go to state 35
+    HTMLCL  shift, and go to state 36
 
 
 State 14
@@ -474,20 +479,21 @@ State 15
    12 title: TITLEOP . TITLECL
    13      | TITLEOP . consume TITLECL
 
-    TITLECL  shift, and go to state 36
+    TITLECL  shift, and go to state 37
     TEXT     shift, and go to state 20
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
+    IMGOP    shift, and go to state 22
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
 
-    misc     go to state 37
-    consume  go to state 38
+    misc     go to state 38
+    consume  go to state 39
 
 
 State 16
 
    10 head: HEADOP title . HEADCL
 
-    HEADCL  shift, and go to state 39
+    HEADCL  shift, and go to state 40
 
 
 State 17
@@ -499,35 +505,37 @@ State 17
 
 State 18
 
-   21 flow: BPHRASEOP . phraseopen
+   22 flow: BPHRASEOP . phraseopen
 
-    BPHRASECL  shift, and go to state 40
-    PHRASEOP   shift, and go to state 41
+    BPHRASECL  shift, and go to state 41
+    PHRASEOP   shift, and go to state 42
     TEXT       shift, and go to state 20
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    IMGOP      shift, and go to state 22
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
-    misc        go to state 37
-    consume     go to state 42
-    phraseopen  go to state 43
-    phrases     go to state 44
+    misc        go to state 38
+    consume     go to state 43
+    phraseopen  go to state 44
+    phrases     go to state 45
 
 
 State 19
 
-   22 flow: GTPHOP . gtph
+   23 flow: GTPHOP . gtph
 
-    BPHRASEOP  shift, and go to state 45
-    PHRASEOP   shift, and go to state 41
-    GTPHCL     shift, and go to state 46
+    BPHRASEOP  shift, and go to state 46
+    PHRASEOP   shift, and go to state 42
+    GTPHCL     shift, and go to state 47
     TEXT       shift, and go to state 20
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    IMGOP      shift, and go to state 22
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
-    misc     go to state 37
-    consume  go to state 47
-    phrases  go to state 48
-    gtph     go to state 49
+    misc     go to state 38
+    consume  go to state 48
+    phrases  go to state 49
+    gtph     go to state 50
 
 
 State 20
@@ -539,3069 +547,3266 @@ State 20
 
 State 21
 
-   26 flow: DIVOP . div
+   27 flow: DIVOP . div
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
     TEXT       shift, and go to state 20
     DIVOP      shift, and go to state 21
-    DIVCL      shift, and go to state 50
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    DIVCL      shift, and go to state 51
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
-    misc  go to state 28
-    flow  go to state 51
-    div   go to state 52
+    misc  go to state 29
+    flow  go to state 52
+    div   go to state 53
 
 
 State 22
 
-   23 flow: LOP . list
+   19 misc: IMGOP . img
 
-    TEXT     shift, and go to state 20
-    LCL      shift, and go to state 53
-    LIOP     shift, and go to state 54
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
+    ATTRIBUTE  shift, and go to state 54
+    IMGCL      shift, and go to state 55
 
-    misc     go to state 37
-    consume  go to state 55
-    list     go to state 56
+    img  go to state 56
 
 
 State 23
 
-   29 flow: FIGOP . figure
+   24 flow: LOP . list
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    LCL      shift, and go to state 57
+    LIOP     shift, and go to state 58
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    misc     go to state 38
+    consume  go to state 59
+    list     go to state 60
+
+
+State 24
+
+   30 flow: FIGOP . figure
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
     TEXT       shift, and go to state 20
     DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    FIGCL      shift, and go to state 57
-    FIGCAPOP   shift, and go to state 58
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    FIGCL      shift, and go to state 61
+    FIGCAPOP   shift, and go to state 62
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
-    misc    go to state 28
-    flow    go to state 59
-    figure  go to state 60
-
-
-State 24
-
-   27 flow: DLOP . dl
-
-    TEXT     shift, and go to state 20
-    DIVOP    shift, and go to state 61
-    DLCL     shift, and go to state 62
-    DTOP     shift, and go to state 63
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    misc     go to state 37
-    consume  go to state 64
-    dl       go to state 65
+    misc    go to state 29
+    flow    go to state 63
+    figure  go to state 64
 
 
 State 25
 
-   28 flow: TABOP . table
+   28 flow: DLOP . dl
 
     TEXT     shift, and go to state 20
-    TABCL    shift, and go to state 66
-    CAPOP    shift, and go to state 67
-    TROP     shift, and go to state 68
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
+    DIVOP    shift, and go to state 65
+    IMGOP    shift, and go to state 22
+    DLCL     shift, and go to state 66
+    DTOP     shift, and go to state 67
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
 
-    misc     go to state 37
-    consume  go to state 69
-    table    go to state 70
+    misc     go to state 38
+    consume  go to state 68
+    dl       go to state 69
 
 
 State 26
+
+   29 flow: TABOP . table
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    TABCL    shift, and go to state 70
+    CAPOP    shift, and go to state 71
+    TROP     shift, and go to state 72
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    misc     go to state 38
+    consume  go to state 73
+    table    go to state 74
+
+
+State 27
 
    17 misc: BR .
 
     $default  reduce using rule 17 (misc)
 
 
-State 27
+State 28
 
    16 misc: COMMENT .
 
     $default  reduce using rule 16 (misc)
 
 
-State 28
+State 29
 
-   24 flow: misc . flow
-   25     | misc .
+   25 flow: misc . flow
+   26     | misc .
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
     TEXT       shift, and go to state 20
     DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
-    $default  reduce using rule 25 (flow)
+    $default  reduce using rule 26 (flow)
 
-    misc  go to state 28
-    flow  go to state 71
-
-
-State 29
-
-   14 body: BODYOP flow . BODYCL
-
-    BODYCL  shift, and go to state 72
+    misc  go to state 29
+    flow  go to state 75
 
 
 State 30
+
+   14 body: BODYOP flow . BODYCL
+
+    BODYCL  shift, and go to state 76
+
+
+State 31
 
     5 st: HTMLOP head HTMLCL .
 
     $default  reduce using rule 5 (st)
 
 
-State 31
+State 32
 
     7 st: HTMLOP head body . HTMLCL
 
-    HTMLCL  shift, and go to state 73
+    HTMLCL  shift, and go to state 77
 
 
-State 32
+State 33
 
     9 st: HTMLOP body HTMLCL .
 
     $default  reduce using rule 9 (st)
 
 
-State 33
+State 34
 
     4 st: DOCTYPE HTMLOP head HTMLCL .
 
     $default  reduce using rule 4 (st)
 
 
-State 34
+State 35
 
     6 st: DOCTYPE HTMLOP head body . HTMLCL
 
-    HTMLCL  shift, and go to state 74
+    HTMLCL  shift, and go to state 78
 
 
-State 35
+State 36
 
     8 st: DOCTYPE HTMLOP body HTMLCL .
 
     $default  reduce using rule 8 (st)
 
 
-State 36
+State 37
 
    12 title: TITLEOP TITLECL .
 
     $default  reduce using rule 12 (title)
 
 
-State 37
-
-   20 consume: misc .
-
-    $default  reduce using rule 20 (consume)
-
-
 State 38
 
-   13 title: TITLEOP consume . TITLECL
-   19 consume: consume . misc
+   21 consume: misc .
 
-    TITLECL  shift, and go to state 75
-    TEXT     shift, and go to state 20
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    misc  go to state 76
+    $default  reduce using rule 21 (consume)
 
 
 State 39
+
+   13 title: TITLEOP consume . TITLECL
+   20 consume: consume . misc
+
+    TITLECL  shift, and go to state 79
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    misc  go to state 80
+
+
+State 40
 
    10 head: HEADOP title HEADCL .
 
     $default  reduce using rule 10 (head)
 
 
-State 40
+State 41
 
-   31 phraseopen: BPHRASECL . flow
-   32           | BPHRASECL .
+   32 phraseopen: BPHRASECL . flow
+   33           | BPHRASECL .
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
     TEXT       shift, and go to state 20
     DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
-    $default  reduce using rule 32 (phraseopen)
+    $default  reduce using rule 33 (phraseopen)
 
-    misc  go to state 28
-    flow  go to state 77
-
-
-State 41
-
-   34 phrases: PHRASEOP . phr
-
-    PHRASEOP  shift, and go to state 41
-    PHRASECL  shift, and go to state 78
-    TEXT      shift, and go to state 20
-    BR        shift, and go to state 26
-    COMMENT   shift, and go to state 27
-
-    misc     go to state 37
-    consume  go to state 79
-    phrases  go to state 80
-    phr      go to state 81
+    misc  go to state 29
+    flow  go to state 81
 
 
 State 42
 
-   19 consume: consume . misc
-   35 phrases: consume . PHRASEOP phr
+   37 phrases: PHRASEOP . phr
 
-    PHRASEOP  shift, and go to state 82
+    PHRASEOP  shift, and go to state 42
+    PHRASECL  shift, and go to state 82
     TEXT      shift, and go to state 20
-    BR        shift, and go to state 26
-    COMMENT   shift, and go to state 27
+    IMGOP     shift, and go to state 22
+    BR        shift, and go to state 27
+    COMMENT   shift, and go to state 28
 
-    misc  go to state 76
+    misc     go to state 38
+    consume  go to state 83
+    phrases  go to state 84
+    phr      go to state 85
 
 
 State 43
 
-   21 flow: BPHRASEOP phraseopen .
+   20 consume: consume . misc
+   35 phraseopen: consume . BPHRASECL flow
+   36           | consume . BPHRASECL
+   38 phrases: consume . PHRASEOP phr
 
-    $default  reduce using rule 21 (flow)
+    BPHRASECL  shift, and go to state 86
+    PHRASEOP   shift, and go to state 87
+    TEXT       shift, and go to state 20
+    IMGOP      shift, and go to state 22
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 80
 
 
 State 44
 
-   30 phraseopen: phrases . BPHRASECL flow
-   33           | phrases . BPHRASECL
-
-    BPHRASECL  shift, and go to state 83
-
-
-State 45
-
-   48 gtph: BPHRASEOP . phraseopen GTPHCL flow
-   49     | BPHRASEOP . phraseopen GTPHCL
-
-    BPHRASECL  shift, and go to state 40
-    PHRASEOP   shift, and go to state 41
-    TEXT       shift, and go to state 20
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc        go to state 37
-    consume     go to state 42
-    phraseopen  go to state 84
-    phrases     go to state 44
-
-
-State 46
-
-   44 gtph: GTPHCL . flow
-   46     | GTPHCL .
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 46 (gtph)
-
-    misc  go to state 28
-    flow  go to state 85
-
-
-State 47
-
-   19 consume: consume . misc
-   35 phrases: consume . PHRASEOP phr
-   47 gtph: consume . GTPHCL
-   50     | consume . BPHRASEOP phraseopen GTPHCL flow
-   51     | consume . BPHRASEOP phraseopen GTPHCL
-
-    BPHRASEOP  shift, and go to state 86
-    PHRASEOP   shift, and go to state 82
-    GTPHCL     shift, and go to state 87
-    TEXT       shift, and go to state 20
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 76
-
-
-State 48
-
-   43 gtph: phrases . GTPHCL flow
-   45     | phrases . GTPHCL
-
-    GTPHCL  shift, and go to state 88
-
-
-State 49
-
-   22 flow: GTPHOP gtph .
+   22 flow: BPHRASEOP phraseopen .
 
     $default  reduce using rule 22 (flow)
 
 
+State 45
+
+   31 phraseopen: phrases . BPHRASECL flow
+   34           | phrases . BPHRASECL
+
+    BPHRASECL  shift, and go to state 88
+
+
+State 46
+
+   51 gtph: BPHRASEOP . phraseopen GTPHCL flow
+   52     | BPHRASEOP . phraseopen GTPHCL
+
+    BPHRASECL  shift, and go to state 41
+    PHRASEOP   shift, and go to state 42
+    TEXT       shift, and go to state 20
+    IMGOP      shift, and go to state 22
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc        go to state 38
+    consume     go to state 43
+    phraseopen  go to state 89
+    phrases     go to state 45
+
+
+State 47
+
+   47 gtph: GTPHCL . flow
+   49     | GTPHCL .
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 49 (gtph)
+
+    misc  go to state 29
+    flow  go to state 90
+
+
+State 48
+
+   20 consume: consume . misc
+   38 phrases: consume . PHRASEOP phr
+   50 gtph: consume . GTPHCL
+   53     | consume . BPHRASEOP phraseopen GTPHCL flow
+   54     | consume . BPHRASEOP phraseopen GTPHCL
+
+    BPHRASEOP  shift, and go to state 91
+    PHRASEOP   shift, and go to state 87
+    GTPHCL     shift, and go to state 92
+    TEXT       shift, and go to state 20
+    IMGOP      shift, and go to state 22
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 80
+
+
+State 49
+
+   46 gtph: phrases . GTPHCL flow
+   48     | phrases . GTPHCL
+
+    GTPHCL  shift, and go to state 93
+
+
 State 50
 
-   60 div: DIVCL .
-   61    | DIVCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 60 (div)
-
-    misc  go to state 28
-    flow  go to state 89
-
-
-State 51
-
-   62 div: flow . DIVCL flow
-   63    | flow . DIVCL
-
-    DIVCL  shift, and go to state 90
-
-
-State 52
-
-   26 flow: DIVOP div .
-
-    $default  reduce using rule 26 (flow)
-
-
-State 53
-
-   53 list: LCL .
-   56     | LCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 53 (list)
-
-    misc  go to state 28
-    flow  go to state 91
-
-
-State 54
-
-   52 list: LIOP . listitem list
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    LICL       shift, and go to state 92
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc      go to state 28
-    flow      go to state 93
-    listitem  go to state 94
-
-
-State 55
-
-   19 consume: consume . misc
-   54 list: consume . LIOP listitem list
-   55     | consume . LCL
-   57     | consume . LCL flow
-
-    TEXT     shift, and go to state 20
-    LCL      shift, and go to state 95
-    LIOP     shift, and go to state 96
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    misc  go to state 76
-
-
-State 56
-
-   23 flow: LOP list .
+   23 flow: GTPHOP gtph .
 
     $default  reduce using rule 23 (flow)
 
 
-State 57
+State 51
 
-  137 figure: FIGCL .
-  142       | FIGCL . flow
+   63 div: DIVCL .
+   64    | DIVCL . flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
     TEXT       shift, and go to state 20
     DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
-    $default  reduce using rule 137 (figure)
+    $default  reduce using rule 63 (div)
 
-    misc  go to state 28
+    misc  go to state 29
+    flow  go to state 94
+
+
+State 52
+
+   65 div: flow . DIVCL flow
+   66    | flow . DIVCL
+
+    DIVCL  shift, and go to state 95
+
+
+State 53
+
+   27 flow: DIVOP div .
+
+    $default  reduce using rule 27 (flow)
+
+
+State 54
+
+  150 img: ATTRIBUTE . ATTRIBUTEVAL img
+
+    ATTRIBUTEVAL  shift, and go to state 96
+
+
+State 55
+
+  151 img: IMGCL .
+
+    $default  reduce using rule 151 (img)
+
+
+State 56
+
+   19 misc: IMGOP img .
+
+    $default  reduce using rule 19 (misc)
+
+
+State 57
+
+   56 list: LCL .
+   59     | LCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 56 (list)
+
+    misc  go to state 29
     flow  go to state 97
 
 
 State 58
 
-  134 figure: FIGCAPOP . figcap FIGCL
-  135       | FIGCAPOP . figcap flow FIGCL
-  139       | FIGCAPOP . figcap FIGCL flow
-  140       | FIGCAPOP . figcap flow FIGCL flow
+   55 list: LIOP . listitem list
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
     TEXT       shift, and go to state 20
     DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    FIGCAPCL   shift, and go to state 98
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    LICL       shift, and go to state 98
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
-    misc    go to state 28
-    flow    go to state 99
-    figcap  go to state 100
+    misc      go to state 29
+    flow      go to state 99
+    listitem  go to state 100
 
 
 State 59
 
-  133 figure: flow . FIGCAPOP figcap FIGCL
-  136       | flow . FIGCL
-  138       | flow . FIGCAPOP figcap FIGCL flow
-  141       | flow . FIGCL flow
-  143       | flow . FIGCAPOP figcap flow FIGCL flow
-  144       | flow . FIGCAPOP figcap flow FIGCL
+   20 consume: consume . misc
+   57 list: consume . LIOP listitem list
+   58     | consume . LCL
+   60     | consume . LCL flow
 
-    FIGCL     shift, and go to state 101
-    FIGCAPOP  shift, and go to state 102
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    LCL      shift, and go to state 101
+    LIOP     shift, and go to state 102
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    misc  go to state 80
 
 
 State 60
 
-   29 flow: FIGOP figure .
-
-    $default  reduce using rule 29 (flow)
-
-
-State 61
-
-   66 dl: DIVOP . div DLCL
-   70   | DIVOP . div DLCL flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    DIVCL      shift, and go to state 50
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 51
-    div   go to state 103
-
-
-State 62
-
-   64 dl: DLCL .
-   68   | DLCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 64 (dl)
-
-    misc  go to state 28
-    flow  go to state 104
-
-
-State 63
-
-   72 dl: DTOP . dt DLCL
-   73   | DTOP . dt DLCL flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    DTCL       shift, and go to state 105
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 106
-    dt    go to state 107
-
-
-State 64
-
-   19 consume: consume . misc
-   65 dl: consume . DLCL
-   67   | consume . DIVOP div DLCL
-   69   | consume . DLCL flow
-   71   | consume . DIVOP div DLCL flow
-   74   | consume . DTOP dt DLCL
-   75   | consume . DTOP dt DLCL flow
-
-    TEXT     shift, and go to state 20
-    DIVOP    shift, and go to state 108
-    DLCL     shift, and go to state 109
-    DTOP     shift, and go to state 110
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    misc  go to state 76
-
-
-State 65
-
-   27 flow: DLOP dl .
-
-    $default  reduce using rule 27 (flow)
-
-
-State 66
-
-  101 table: TABCL .
-  102      | TABCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 101 (table)
-
-    misc  go to state 28
-    flow  go to state 111
-
-
-State 67
-
-   93 table: CAPOP . caption TABCL
-   94      | CAPOP . caption TABCL flow
-   97      | CAPOP . caption TROP tr TABCL
-   99      | CAPOP . caption TROP tr TABCL flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    CAPCL      shift, and go to state 112
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc     go to state 28
-    flow     go to state 113
-    caption  go to state 114
-
-
-State 68
-
-   98 table: TROP . tr TABCL
-  100      | TROP . tr TABCL flow
-
-    TEXT     shift, and go to state 20
-    TRCL     shift, and go to state 115
-    THOP     shift, and go to state 116
-    TDOP     shift, and go to state 117
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    misc     go to state 37
-    consume  go to state 118
-    tr       go to state 119
-
-
-State 69
-
-   19 consume: consume . misc
-   95 table: consume . CAPOP caption TABCL
-   96      | consume . CAPOP caption TABCL flow
-
-    TEXT     shift, and go to state 20
-    CAPOP    shift, and go to state 120
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    misc  go to state 76
-
-
-State 70
-
-   28 flow: TABOP table .
-
-    $default  reduce using rule 28 (flow)
-
-
-State 71
-
-   24 flow: misc flow .
+   24 flow: LOP list .
 
     $default  reduce using rule 24 (flow)
 
 
+State 61
+
+  140 figure: FIGCL .
+  145       | FIGCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 140 (figure)
+
+    misc  go to state 29
+    flow  go to state 103
+
+
+State 62
+
+  137 figure: FIGCAPOP . figcap FIGCL
+  138       | FIGCAPOP . figcap flow FIGCL
+  142       | FIGCAPOP . figcap FIGCL flow
+  143       | FIGCAPOP . figcap flow FIGCL flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    FIGCAPCL   shift, and go to state 104
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc    go to state 29
+    flow    go to state 105
+    figcap  go to state 106
+
+
+State 63
+
+  136 figure: flow . FIGCAPOP figcap FIGCL
+  139       | flow . FIGCL
+  141       | flow . FIGCAPOP figcap FIGCL flow
+  144       | flow . FIGCL flow
+  146       | flow . FIGCAPOP figcap flow FIGCL flow
+  147       | flow . FIGCAPOP figcap flow FIGCL
+
+    FIGCL     shift, and go to state 107
+    FIGCAPOP  shift, and go to state 108
+
+
+State 64
+
+   30 flow: FIGOP figure .
+
+    $default  reduce using rule 30 (flow)
+
+
+State 65
+
+   69 dl: DIVOP . div DLCL
+   73   | DIVOP . div DLCL flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    DIVCL      shift, and go to state 51
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 52
+    div   go to state 109
+
+
+State 66
+
+   67 dl: DLCL .
+   71   | DLCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 67 (dl)
+
+    misc  go to state 29
+    flow  go to state 110
+
+
+State 67
+
+   75 dl: DTOP . dt DLCL
+   76   | DTOP . dt DLCL flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    DTCL       shift, and go to state 111
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 112
+    dt    go to state 113
+
+
+State 68
+
+   20 consume: consume . misc
+   68 dl: consume . DLCL
+   70   | consume . DIVOP div DLCL
+   72   | consume . DLCL flow
+   74   | consume . DIVOP div DLCL flow
+   77   | consume . DTOP dt DLCL
+   78   | consume . DTOP dt DLCL flow
+
+    TEXT     shift, and go to state 20
+    DIVOP    shift, and go to state 114
+    IMGOP    shift, and go to state 22
+    DLCL     shift, and go to state 115
+    DTOP     shift, and go to state 116
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    misc  go to state 80
+
+
+State 69
+
+   28 flow: DLOP dl .
+
+    $default  reduce using rule 28 (flow)
+
+
+State 70
+
+  104 table: TABCL .
+  105      | TABCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 104 (table)
+
+    misc  go to state 29
+    flow  go to state 117
+
+
+State 71
+
+   96 table: CAPOP . caption TABCL
+   97      | CAPOP . caption TABCL flow
+  100      | CAPOP . caption TROP tr TABCL
+  102      | CAPOP . caption TROP tr TABCL flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    CAPCL      shift, and go to state 118
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc     go to state 29
+    flow     go to state 119
+    caption  go to state 120
+
+
 State 72
+
+  101 table: TROP . tr TABCL
+  103      | TROP . tr TABCL flow
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    TRCL     shift, and go to state 121
+    THOP     shift, and go to state 122
+    TDOP     shift, and go to state 123
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    misc     go to state 38
+    consume  go to state 124
+    tr       go to state 125
+
+
+State 73
+
+   20 consume: consume . misc
+   98 table: consume . CAPOP caption TABCL
+   99      | consume . CAPOP caption TABCL flow
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    CAPOP    shift, and go to state 126
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    misc  go to state 80
+
+
+State 74
+
+   29 flow: TABOP table .
+
+    $default  reduce using rule 29 (flow)
+
+
+State 75
+
+   25 flow: misc flow .
+
+    $default  reduce using rule 25 (flow)
+
+
+State 76
 
    14 body: BODYOP flow BODYCL .
 
     $default  reduce using rule 14 (body)
 
 
-State 73
+State 77
 
     7 st: HTMLOP head body HTMLCL .
 
     $default  reduce using rule 7 (st)
 
 
-State 74
+State 78
 
     6 st: DOCTYPE HTMLOP head body HTMLCL .
 
     $default  reduce using rule 6 (st)
 
 
-State 75
+State 79
 
    13 title: TITLEOP consume TITLECL .
 
     $default  reduce using rule 13 (title)
 
 
-State 76
-
-   19 consume: consume misc .
-
-    $default  reduce using rule 19 (consume)
-
-
-State 77
-
-   31 phraseopen: BPHRASECL flow .
-
-    $default  reduce using rule 31 (phraseopen)
-
-
-State 78
-
-   36 phr: PHRASECL .
-   38    | PHRASECL . phrases
-   39    | PHRASECL . consume
-
-    PHRASEOP  shift, and go to state 41
-    TEXT      shift, and go to state 20
-    BR        shift, and go to state 26
-    COMMENT   shift, and go to state 27
-
-    $default  reduce using rule 36 (phr)
-
-    misc     go to state 37
-    consume  go to state 121
-    phrases  go to state 122
-
-
-State 79
-
-   19 consume: consume . misc
-   35 phrases: consume . PHRASEOP phr
-   40 phr: consume . PHRASECL
-   41    | consume . PHRASECL phrases
-   42    | consume . PHRASECL consume
-
-    PHRASEOP  shift, and go to state 82
-    PHRASECL  shift, and go to state 123
-    TEXT      shift, and go to state 20
-    BR        shift, and go to state 26
-    COMMENT   shift, and go to state 27
-
-    misc  go to state 76
-
-
 State 80
 
-   37 phr: phrases . PHRASECL
+   20 consume: consume misc .
 
-    PHRASECL  shift, and go to state 124
+    $default  reduce using rule 20 (consume)
 
 
 State 81
 
-   34 phrases: PHRASEOP phr .
+   32 phraseopen: BPHRASECL flow .
 
-    $default  reduce using rule 34 (phrases)
+    $default  reduce using rule 32 (phraseopen)
 
 
 State 82
 
-   35 phrases: consume PHRASEOP . phr
+   39 phr: PHRASECL .
+   41    | PHRASECL . phrases
+   42    | PHRASECL . consume
 
-    PHRASEOP  shift, and go to state 41
-    PHRASECL  shift, and go to state 78
+    PHRASEOP  shift, and go to state 42
     TEXT      shift, and go to state 20
-    BR        shift, and go to state 26
-    COMMENT   shift, and go to state 27
+    IMGOP     shift, and go to state 22
+    BR        shift, and go to state 27
+    COMMENT   shift, and go to state 28
 
-    misc     go to state 37
-    consume  go to state 79
-    phrases  go to state 80
-    phr      go to state 125
+    $default  reduce using rule 39 (phr)
+
+    misc     go to state 38
+    consume  go to state 127
+    phrases  go to state 128
 
 
 State 83
 
-   30 phraseopen: phrases BPHRASECL . flow
-   33           | phrases BPHRASECL .
+   20 consume: consume . misc
+   38 phrases: consume . PHRASEOP phr
+   43 phr: consume . PHRASECL
+   44    | consume . PHRASECL phrases
+   45    | consume . PHRASECL consume
 
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    PHRASEOP  shift, and go to state 87
+    PHRASECL  shift, and go to state 129
+    TEXT      shift, and go to state 20
+    IMGOP     shift, and go to state 22
+    BR        shift, and go to state 27
+    COMMENT   shift, and go to state 28
 
-    $default  reduce using rule 33 (phraseopen)
-
-    misc  go to state 28
-    flow  go to state 126
+    misc  go to state 80
 
 
 State 84
 
-   48 gtph: BPHRASEOP phraseopen . GTPHCL flow
-   49     | BPHRASEOP phraseopen . GTPHCL
+   40 phr: phrases . PHRASECL
 
-    GTPHCL  shift, and go to state 127
+    PHRASECL  shift, and go to state 130
 
 
 State 85
 
-   44 gtph: GTPHCL flow .
+   37 phrases: PHRASEOP phr .
 
-    $default  reduce using rule 44 (gtph)
+    $default  reduce using rule 37 (phrases)
 
 
 State 86
 
-   50 gtph: consume BPHRASEOP . phraseopen GTPHCL flow
-   51     | consume BPHRASEOP . phraseopen GTPHCL
+   35 phraseopen: consume BPHRASECL . flow
+   36           | consume BPHRASECL .
 
-    BPHRASECL  shift, and go to state 40
-    PHRASEOP   shift, and go to state 41
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
     TEXT       shift, and go to state 20
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
-    misc        go to state 37
-    consume     go to state 42
-    phraseopen  go to state 128
-    phrases     go to state 44
+    $default  reduce using rule 36 (phraseopen)
+
+    misc  go to state 29
+    flow  go to state 131
 
 
 State 87
 
-   47 gtph: consume GTPHCL .
+   38 phrases: consume PHRASEOP . phr
 
-    $default  reduce using rule 47 (gtph)
+    PHRASEOP  shift, and go to state 42
+    PHRASECL  shift, and go to state 82
+    TEXT      shift, and go to state 20
+    IMGOP     shift, and go to state 22
+    BR        shift, and go to state 27
+    COMMENT   shift, and go to state 28
+
+    misc     go to state 38
+    consume  go to state 83
+    phrases  go to state 84
+    phr      go to state 132
 
 
 State 88
 
-   43 gtph: phrases GTPHCL . flow
-   45     | phrases GTPHCL .
+   31 phraseopen: phrases BPHRASECL . flow
+   34           | phrases BPHRASECL .
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
     TEXT       shift, and go to state 20
     DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
-    $default  reduce using rule 45 (gtph)
+    $default  reduce using rule 34 (phraseopen)
 
-    misc  go to state 28
-    flow  go to state 129
+    misc  go to state 29
+    flow  go to state 133
 
 
 State 89
 
-   61 div: DIVCL flow .
+   51 gtph: BPHRASEOP phraseopen . GTPHCL flow
+   52     | BPHRASEOP phraseopen . GTPHCL
 
-    $default  reduce using rule 61 (div)
+    GTPHCL  shift, and go to state 134
 
 
 State 90
 
-   62 div: flow DIVCL . flow
-   63    | flow DIVCL .
+   47 gtph: GTPHCL flow .
 
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 63 (div)
-
-    misc  go to state 28
-    flow  go to state 130
+    $default  reduce using rule 47 (gtph)
 
 
 State 91
 
-   56 list: LCL flow .
+   53 gtph: consume BPHRASEOP . phraseopen GTPHCL flow
+   54     | consume BPHRASEOP . phraseopen GTPHCL
 
-    $default  reduce using rule 56 (list)
+    BPHRASECL  shift, and go to state 41
+    PHRASEOP   shift, and go to state 42
+    TEXT       shift, and go to state 20
+    IMGOP      shift, and go to state 22
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc        go to state 38
+    consume     go to state 43
+    phraseopen  go to state 135
+    phrases     go to state 45
 
 
 State 92
 
-   59 listitem: LICL .
-
-    $default  reduce using rule 59 (listitem)
-
-
-State 93
-
-   58 listitem: flow . LICL
-
-    LICL  shift, and go to state 131
-
-
-State 94
-
-   52 list: LIOP listitem . list
-
-    TEXT     shift, and go to state 20
-    LCL      shift, and go to state 53
-    LIOP     shift, and go to state 54
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    misc     go to state 37
-    consume  go to state 55
-    list     go to state 132
-
-
-State 95
-
-   55 list: consume LCL .
-   57     | consume LCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 55 (list)
-
-    misc  go to state 28
-    flow  go to state 133
-
-
-State 96
-
-   54 list: consume LIOP . listitem list
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    LICL       shift, and go to state 92
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc      go to state 28
-    flow      go to state 93
-    listitem  go to state 134
-
-
-State 97
-
-  142 figure: FIGCL flow .
-
-    $default  reduce using rule 142 (figure)
-
-
-State 98
-
-  146 figcap: FIGCAPCL .
-
-    $default  reduce using rule 146 (figcap)
-
-
-State 99
-
-  145 figcap: flow . FIGCAPCL
-
-    FIGCAPCL  shift, and go to state 135
-
-
-State 100
-
-  134 figure: FIGCAPOP figcap . FIGCL
-  135       | FIGCAPOP figcap . flow FIGCL
-  139       | FIGCAPOP figcap . FIGCL flow
-  140       | FIGCAPOP figcap . flow FIGCL flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    FIGCL      shift, and go to state 136
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 137
-
-
-State 101
-
-  136 figure: flow FIGCL .
-  141       | flow FIGCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 136 (figure)
-
-    misc  go to state 28
-    flow  go to state 138
-
-
-State 102
-
-  133 figure: flow FIGCAPOP . figcap FIGCL
-  138       | flow FIGCAPOP . figcap FIGCL flow
-  143       | flow FIGCAPOP . figcap flow FIGCL flow
-  144       | flow FIGCAPOP . figcap flow FIGCL
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    FIGCAPCL   shift, and go to state 98
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc    go to state 28
-    flow    go to state 99
-    figcap  go to state 139
-
-
-State 103
-
-   66 dl: DIVOP div . DLCL
-   70   | DIVOP div . DLCL flow
-
-    DLCL  shift, and go to state 140
-
-
-State 104
-
-   68 dl: DLCL flow .
-
-    $default  reduce using rule 68 (dl)
-
-
-State 105
-
-   79 dt: DTCL . DDOP dd
-   80   | DTCL . DDOP dd DTOP dt
-
-    DDOP  shift, and go to state 141
-
-
-State 106
-
-   76 dt: flow . DTCL DDOP dd
-   77   | flow . DTCL consume DDOP dd
-   78   | flow . DTCL DDOP dd DTOP dt
-
-    DTCL  shift, and go to state 142
-
-
-State 107
-
-   72 dl: DTOP dt . DLCL
-   73   | DTOP dt . DLCL flow
-
-    DLCL  shift, and go to state 143
-
-
-State 108
-
-   67 dl: consume DIVOP . div DLCL
-   71   | consume DIVOP . div DLCL flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    DIVCL      shift, and go to state 50
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 51
-    div   go to state 144
-
-
-State 109
-
-   65 dl: consume DLCL .
-   69   | consume DLCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 65 (dl)
-
-    misc  go to state 28
-    flow  go to state 145
-
-
-State 110
-
-   74 dl: consume DTOP . dt DLCL
-   75   | consume DTOP . dt DLCL flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    DTCL       shift, and go to state 105
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 106
-    dt    go to state 146
-
-
-State 111
-
-  102 table: TABCL flow .
-
-    $default  reduce using rule 102 (table)
-
-
-State 112
-
-   90 caption: CAPCL .
-   92        | CAPCL . consume
-
-    TEXT     shift, and go to state 20
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 90 (caption)
-
-    misc     go to state 37
-    consume  go to state 147
-
-
-State 113
-
-   89 caption: flow . CAPCL
-   91        | flow . CAPCL consume
-
-    CAPCL  shift, and go to state 148
-
-
-State 114
-
-   93 table: CAPOP caption . TABCL
-   94      | CAPOP caption . TABCL flow
-   97      | CAPOP caption . TROP tr TABCL
-   99      | CAPOP caption . TROP tr TABCL flow
-
-    TABCL  shift, and go to state 149
-    TROP   shift, and go to state 150
-
-
-State 115
-
-  103 tr: TRCL .
-  107   | TRCL . consume
-  111   | TRCL . TROP tr
-  112   | TRCL . consume TROP tr
-
-    TEXT     shift, and go to state 20
-    TROP     shift, and go to state 151
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 103 (tr)
-
-    misc     go to state 37
-    consume  go to state 152
-
-
-State 116
-
-  105 tr: THOP . th TRCL
-  109   | THOP . th TRCL consume
-  113   | THOP . th TRCL TROP tr
-  115   | THOP . th TRCL consume TROP tr
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    THCL       shift, and go to state 153
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 154
-    th    go to state 155
-
-
-State 117
-
-  106 tr: TDOP . td TRCL
-  110   | TDOP . td TRCL consume
-  114   | TDOP . td TRCL TROP tr
-  116   | TDOP . td TRCL consume TROP tr
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    TDCL       shift, and go to state 156
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 157
-    td    go to state 158
-
-
-State 118
-
-   19 consume: consume . misc
-  104 tr: consume . TRCL
-  108   | consume . TRCL consume
-
-    TEXT     shift, and go to state 20
-    TRCL     shift, and go to state 159
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    misc  go to state 76
-
-
-State 119
-
-   98 table: TROP tr . TABCL
-  100      | TROP tr . TABCL flow
-
-    TABCL  shift, and go to state 160
-
-
-State 120
-
-   95 table: consume CAPOP . caption TABCL
-   96      | consume CAPOP . caption TABCL flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    CAPCL      shift, and go to state 112
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc     go to state 28
-    flow     go to state 113
-    caption  go to state 161
-
-
-State 121
-
-   19 consume: consume . misc
-   35 phrases: consume . PHRASEOP phr
-   39 phr: PHRASECL consume .
-
-    PHRASEOP  shift, and go to state 82
-    TEXT      shift, and go to state 20
-    BR        shift, and go to state 26
-    COMMENT   shift, and go to state 27
-
-    $default  reduce using rule 39 (phr)
-
-    misc  go to state 76
-
-
-State 122
-
-   38 phr: PHRASECL phrases .
-
-    $default  reduce using rule 38 (phr)
-
-
-State 123
-
-   40 phr: consume PHRASECL .
-   41    | consume PHRASECL . phrases
-   42    | consume PHRASECL . consume
-
-    PHRASEOP  shift, and go to state 41
-    TEXT      shift, and go to state 20
-    BR        shift, and go to state 26
-    COMMENT   shift, and go to state 27
-
-    $default  reduce using rule 40 (phr)
-
-    misc     go to state 37
-    consume  go to state 162
-    phrases  go to state 163
-
-
-State 124
-
-   37 phr: phrases PHRASECL .
-
-    $default  reduce using rule 37 (phr)
-
-
-State 125
-
-   35 phrases: consume PHRASEOP phr .
-
-    $default  reduce using rule 35 (phrases)
-
-
-State 126
-
-   30 phraseopen: phrases BPHRASECL flow .
-
-    $default  reduce using rule 30 (phraseopen)
-
-
-State 127
-
-   48 gtph: BPHRASEOP phraseopen GTPHCL . flow
-   49     | BPHRASEOP phraseopen GTPHCL .
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 49 (gtph)
-
-    misc  go to state 28
-    flow  go to state 164
-
-
-State 128
-
-   50 gtph: consume BPHRASEOP phraseopen . GTPHCL flow
-   51     | consume BPHRASEOP phraseopen . GTPHCL
-
-    GTPHCL  shift, and go to state 165
-
-
-State 129
-
-   43 gtph: phrases GTPHCL flow .
-
-    $default  reduce using rule 43 (gtph)
-
-
-State 130
-
-   62 div: flow DIVCL flow .
-
-    $default  reduce using rule 62 (div)
-
-
-State 131
-
-   58 listitem: flow LICL .
-
-    $default  reduce using rule 58 (listitem)
-
-
-State 132
-
-   52 list: LIOP listitem list .
-
-    $default  reduce using rule 52 (list)
-
-
-State 133
-
-   57 list: consume LCL flow .
-
-    $default  reduce using rule 57 (list)
-
-
-State 134
-
-   54 list: consume LIOP listitem . list
-
-    TEXT     shift, and go to state 20
-    LCL      shift, and go to state 53
-    LIOP     shift, and go to state 54
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    misc     go to state 37
-    consume  go to state 55
-    list     go to state 166
-
-
-State 135
-
-  145 figcap: flow FIGCAPCL .
-
-    $default  reduce using rule 145 (figcap)
-
-
-State 136
-
-  134 figure: FIGCAPOP figcap FIGCL .
-  139       | FIGCAPOP figcap FIGCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 134 (figure)
-
-    misc  go to state 28
-    flow  go to state 167
-
-
-State 137
-
-  135 figure: FIGCAPOP figcap flow . FIGCL
-  140       | FIGCAPOP figcap flow . FIGCL flow
-
-    FIGCL  shift, and go to state 168
-
-
-State 138
-
-  141 figure: flow FIGCL flow .
-
-    $default  reduce using rule 141 (figure)
-
-
-State 139
-
-  133 figure: flow FIGCAPOP figcap . FIGCL
-  138       | flow FIGCAPOP figcap . FIGCL flow
-  143       | flow FIGCAPOP figcap . flow FIGCL flow
-  144       | flow FIGCAPOP figcap . flow FIGCL
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    FIGCL      shift, and go to state 169
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 170
-
-
-State 140
-
-   66 dl: DIVOP div DLCL .
-   70   | DIVOP div DLCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 66 (dl)
-
-    misc  go to state 28
-    flow  go to state 171
-
-
-State 141
-
-   79 dt: DTCL DDOP . dd
-   80   | DTCL DDOP . dd DTOP dt
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    DDCL       shift, and go to state 172
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 173
-    dd    go to state 174
-
-
-State 142
-
-   76 dt: flow DTCL . DDOP dd
-   77   | flow DTCL . consume DDOP dd
-   78   | flow DTCL . DDOP dd DTOP dt
-
-    TEXT     shift, and go to state 20
-    DDOP     shift, and go to state 175
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    misc     go to state 37
-    consume  go to state 176
-
-
-State 143
-
-   72 dl: DTOP dt DLCL .
-   73   | DTOP dt DLCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 72 (dl)
-
-    misc  go to state 28
-    flow  go to state 177
-
-
-State 144
-
-   67 dl: consume DIVOP div . DLCL
-   71   | consume DIVOP div . DLCL flow
-
-    DLCL  shift, and go to state 178
-
-
-State 145
-
-   69 dl: consume DLCL flow .
-
-    $default  reduce using rule 69 (dl)
-
-
-State 146
-
-   74 dl: consume DTOP dt . DLCL
-   75   | consume DTOP dt . DLCL flow
-
-    DLCL  shift, and go to state 179
-
-
-State 147
-
-   19 consume: consume . misc
-   92 caption: CAPCL consume .
-
-    TEXT     shift, and go to state 20
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 92 (caption)
-
-    misc  go to state 76
-
-
-State 148
-
-   89 caption: flow CAPCL .
-   91        | flow CAPCL . consume
-
-    TEXT     shift, and go to state 20
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 89 (caption)
-
-    misc     go to state 37
-    consume  go to state 180
-
-
-State 149
-
-   93 table: CAPOP caption TABCL .
-   94      | CAPOP caption TABCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 93 (table)
-
-    misc  go to state 28
-    flow  go to state 181
-
-
-State 150
-
-   97 table: CAPOP caption TROP . tr TABCL
-   99      | CAPOP caption TROP . tr TABCL flow
-
-    TEXT     shift, and go to state 20
-    TRCL     shift, and go to state 115
-    THOP     shift, and go to state 116
-    TDOP     shift, and go to state 117
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    misc     go to state 37
-    consume  go to state 118
-    tr       go to state 182
-
-
-State 151
-
-  111 tr: TRCL TROP . tr
-
-    TEXT     shift, and go to state 20
-    TRCL     shift, and go to state 115
-    THOP     shift, and go to state 116
-    TDOP     shift, and go to state 117
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    misc     go to state 37
-    consume  go to state 118
-    tr       go to state 183
-
-
-State 152
-
-   19 consume: consume . misc
-  107 tr: TRCL consume .
-  112   | TRCL consume . TROP tr
-
-    TEXT     shift, and go to state 20
-    TROP     shift, and go to state 184
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 107 (tr)
-
-    misc  go to state 76
-
-
-State 153
-
-  117 th: THCL .
-  119   | THCL . consume
-  121   | THCL . THOP th
-  123   | THCL . consume THOP th
-
-    TEXT     shift, and go to state 20
-    THOP     shift, and go to state 185
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 117 (th)
-
-    misc     go to state 37
-    consume  go to state 186
-
-
-State 154
-
-  118 th: flow . THCL
-  120   | flow . THCL consume
-  122   | flow . THCL THOP th
-  124   | flow . THCL consume THOP th
-
-    THCL  shift, and go to state 187
-
-
-State 155
-
-  105 tr: THOP th . TRCL
-  109   | THOP th . TRCL consume
-  113   | THOP th . TRCL TROP tr
-  115   | THOP th . TRCL consume TROP tr
-
-    TRCL  shift, and go to state 188
-
-
-State 156
-
-  125 td: TDCL .
-  127   | TDCL . consume
-  129   | TDCL . TDOP td
-  131   | TDCL . consume TDOP td
-
-    TEXT     shift, and go to state 20
-    TDOP     shift, and go to state 189
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 125 (td)
-
-    misc     go to state 37
-    consume  go to state 190
-
-
-State 157
-
-  126 td: flow . TDCL
-  128   | flow . TDCL consume
-  130   | flow . TDCL TDOP td
-  132   | flow . TDCL consume TDOP td
-
-    TDCL  shift, and go to state 191
-
-
-State 158
-
-  106 tr: TDOP td . TRCL
-  110   | TDOP td . TRCL consume
-  114   | TDOP td . TRCL TROP tr
-  116   | TDOP td . TRCL consume TROP tr
-
-    TRCL  shift, and go to state 192
-
-
-State 159
-
-  104 tr: consume TRCL .
-  108   | consume TRCL . consume
-
-    TEXT     shift, and go to state 20
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 104 (tr)
-
-    misc     go to state 37
-    consume  go to state 193
-
-
-State 160
-
-   98 table: TROP tr TABCL .
-  100      | TROP tr TABCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 98 (table)
-
-    misc  go to state 28
-    flow  go to state 194
-
-
-State 161
-
-   95 table: consume CAPOP caption . TABCL
-   96      | consume CAPOP caption . TABCL flow
-
-    TABCL  shift, and go to state 195
-
-
-State 162
-
-   19 consume: consume . misc
-   35 phrases: consume . PHRASEOP phr
-   42 phr: consume PHRASECL consume .
-
-    PHRASEOP  shift, and go to state 82
-    TEXT      shift, and go to state 20
-    BR        shift, and go to state 26
-    COMMENT   shift, and go to state 27
-
-    $default  reduce using rule 42 (phr)
-
-    misc  go to state 76
-
-
-State 163
-
-   41 phr: consume PHRASECL phrases .
-
-    $default  reduce using rule 41 (phr)
-
-
-State 164
-
-   48 gtph: BPHRASEOP phraseopen GTPHCL flow .
-
-    $default  reduce using rule 48 (gtph)
-
-
-State 165
-
-   50 gtph: consume BPHRASEOP phraseopen GTPHCL . flow
-   51     | consume BPHRASEOP phraseopen GTPHCL .
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 51 (gtph)
-
-    misc  go to state 28
-    flow  go to state 196
-
-
-State 166
-
-   54 list: consume LIOP listitem list .
-
-    $default  reduce using rule 54 (list)
-
-
-State 167
-
-  139 figure: FIGCAPOP figcap FIGCL flow .
-
-    $default  reduce using rule 139 (figure)
-
-
-State 168
-
-  135 figure: FIGCAPOP figcap flow FIGCL .
-  140       | FIGCAPOP figcap flow FIGCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 135 (figure)
-
-    misc  go to state 28
-    flow  go to state 197
-
-
-State 169
-
-  133 figure: flow FIGCAPOP figcap FIGCL .
-  138       | flow FIGCAPOP figcap FIGCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 133 (figure)
-
-    misc  go to state 28
-    flow  go to state 198
-
-
-State 170
-
-  143 figure: flow FIGCAPOP figcap flow . FIGCL flow
-  144       | flow FIGCAPOP figcap flow . FIGCL
-
-    FIGCL  shift, and go to state 199
-
-
-State 171
-
-   70 dl: DIVOP div DLCL flow .
-
-    $default  reduce using rule 70 (dl)
-
-
-State 172
-
-   83 dd: DDCL .
-   84   | DDCL . DDOP dd
-   87   | DDCL . consume
-   88   | DDCL . consume DDOP dd
-
-    TEXT     shift, and go to state 20
-    DDOP     shift, and go to state 200
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 83 (dd)
-
-    misc     go to state 37
-    consume  go to state 201
-
-
-State 173
-
-   81 dd: flow . DDCL
-   82   | flow . DDCL DDOP dd
-   85   | flow . DDCL consume
-   86   | flow . DDCL consume DDOP dd
-
-    DDCL  shift, and go to state 202
-
-
-State 174
-
-   79 dt: DTCL DDOP dd .
-   80   | DTCL DDOP dd . DTOP dt
-
-    DTOP  shift, and go to state 203
-
-    $default  reduce using rule 79 (dt)
-
-
-State 175
-
-   76 dt: flow DTCL DDOP . dd
-   78   | flow DTCL DDOP . dd DTOP dt
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    DDCL       shift, and go to state 172
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 173
-    dd    go to state 204
-
-
-State 176
-
-   19 consume: consume . misc
-   77 dt: flow DTCL consume . DDOP dd
-
-    TEXT     shift, and go to state 20
-    DDOP     shift, and go to state 205
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    misc  go to state 76
-
-
-State 177
-
-   73 dl: DTOP dt DLCL flow .
-
-    $default  reduce using rule 73 (dl)
-
-
-State 178
-
-   67 dl: consume DIVOP div DLCL .
-   71   | consume DIVOP div DLCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 67 (dl)
-
-    misc  go to state 28
-    flow  go to state 206
-
-
-State 179
-
-   74 dl: consume DTOP dt DLCL .
-   75   | consume DTOP dt DLCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 74 (dl)
-
-    misc  go to state 28
-    flow  go to state 207
-
-
-State 180
-
-   19 consume: consume . misc
-   91 caption: flow CAPCL consume .
-
-    TEXT     shift, and go to state 20
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 91 (caption)
-
-    misc  go to state 76
-
-
-State 181
-
-   94 table: CAPOP caption TABCL flow .
-
-    $default  reduce using rule 94 (table)
-
-
-State 182
-
-   97 table: CAPOP caption TROP tr . TABCL
-   99      | CAPOP caption TROP tr . TABCL flow
-
-    TABCL  shift, and go to state 208
-
-
-State 183
-
-  111 tr: TRCL TROP tr .
-
-    $default  reduce using rule 111 (tr)
-
-
-State 184
-
-  112 tr: TRCL consume TROP . tr
-
-    TEXT     shift, and go to state 20
-    TRCL     shift, and go to state 115
-    THOP     shift, and go to state 116
-    TDOP     shift, and go to state 117
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    misc     go to state 37
-    consume  go to state 118
-    tr       go to state 209
-
-
-State 185
-
-  121 th: THCL THOP . th
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    THCL       shift, and go to state 153
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 154
-    th    go to state 210
-
-
-State 186
-
-   19 consume: consume . misc
-  119 th: THCL consume .
-  123   | THCL consume . THOP th
-
-    TEXT     shift, and go to state 20
-    THOP     shift, and go to state 211
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 119 (th)
-
-    misc  go to state 76
-
-
-State 187
-
-  118 th: flow THCL .
-  120   | flow THCL . consume
-  122   | flow THCL . THOP th
-  124   | flow THCL . consume THOP th
-
-    TEXT     shift, and go to state 20
-    THOP     shift, and go to state 212
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 118 (th)
-
-    misc     go to state 37
-    consume  go to state 213
-
-
-State 188
-
-  105 tr: THOP th TRCL .
-  109   | THOP th TRCL . consume
-  113   | THOP th TRCL . TROP tr
-  115   | THOP th TRCL . consume TROP tr
-
-    TEXT     shift, and go to state 20
-    TROP     shift, and go to state 214
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 105 (tr)
-
-    misc     go to state 37
-    consume  go to state 215
-
-
-State 189
-
-  129 td: TDCL TDOP . td
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    TDCL       shift, and go to state 156
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 157
-    td    go to state 216
-
-
-State 190
-
-   19 consume: consume . misc
-  127 td: TDCL consume .
-  131   | TDCL consume . TDOP td
-
-    TEXT     shift, and go to state 20
-    TDOP     shift, and go to state 217
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 127 (td)
-
-    misc  go to state 76
-
-
-State 191
-
-  126 td: flow TDCL .
-  128   | flow TDCL . consume
-  130   | flow TDCL . TDOP td
-  132   | flow TDCL . consume TDOP td
-
-    TEXT     shift, and go to state 20
-    TDOP     shift, and go to state 218
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 126 (td)
-
-    misc     go to state 37
-    consume  go to state 219
-
-
-State 192
-
-  106 tr: TDOP td TRCL .
-  110   | TDOP td TRCL . consume
-  114   | TDOP td TRCL . TROP tr
-  116   | TDOP td TRCL . consume TROP tr
-
-    TEXT     shift, and go to state 20
-    TROP     shift, and go to state 220
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 106 (tr)
-
-    misc     go to state 37
-    consume  go to state 221
-
-
-State 193
-
-   19 consume: consume . misc
-  108 tr: consume TRCL consume .
-
-    TEXT     shift, and go to state 20
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 108 (tr)
-
-    misc  go to state 76
-
-
-State 194
-
-  100 table: TROP tr TABCL flow .
-
-    $default  reduce using rule 100 (table)
-
-
-State 195
-
-   95 table: consume CAPOP caption TABCL .
-   96      | consume CAPOP caption TABCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 95 (table)
-
-    misc  go to state 28
-    flow  go to state 222
-
-
-State 196
-
-   50 gtph: consume BPHRASEOP phraseopen GTPHCL flow .
+   50 gtph: consume GTPHCL .
 
     $default  reduce using rule 50 (gtph)
 
 
-State 197
+State 93
 
-  140 figure: FIGCAPOP figcap flow FIGCL flow .
-
-    $default  reduce using rule 140 (figure)
-
-
-State 198
-
-  138 figure: flow FIGCAPOP figcap FIGCL flow .
-
-    $default  reduce using rule 138 (figure)
-
-
-State 199
-
-  143 figure: flow FIGCAPOP figcap flow FIGCL . flow
-  144       | flow FIGCAPOP figcap flow FIGCL .
+   46 gtph: phrases GTPHCL . flow
+   48     | phrases GTPHCL .
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
     TEXT       shift, and go to state 20
     DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
-    $default  reduce using rule 144 (figure)
+    $default  reduce using rule 48 (gtph)
 
-    misc  go to state 28
-    flow  go to state 223
+    misc  go to state 29
+    flow  go to state 136
 
 
-State 200
+State 94
 
-   84 dd: DDCL DDOP . dd
+   64 div: DIVCL flow .
+
+    $default  reduce using rule 64 (div)
+
+
+State 95
+
+   65 div: flow DIVCL . flow
+   66    | flow DIVCL .
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
     TEXT       shift, and go to state 20
     DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    DDCL       shift, and go to state 172
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
-    misc  go to state 28
-    flow  go to state 173
-    dd    go to state 224
+    $default  reduce using rule 66 (div)
+
+    misc  go to state 29
+    flow  go to state 137
 
 
-State 201
+State 96
 
-   19 consume: consume . misc
-   87 dd: DDCL consume .
-   88   | DDCL consume . DDOP dd
+  150 img: ATTRIBUTE ATTRIBUTEVAL . img
+
+    ATTRIBUTE  shift, and go to state 54
+    IMGCL      shift, and go to state 55
+
+    img  go to state 138
+
+
+State 97
+
+   59 list: LCL flow .
+
+    $default  reduce using rule 59 (list)
+
+
+State 98
+
+   62 listitem: LICL .
+
+    $default  reduce using rule 62 (listitem)
+
+
+State 99
+
+   61 listitem: flow . LICL
+
+    LICL  shift, and go to state 139
+
+
+State 100
+
+   55 list: LIOP listitem . list
 
     TEXT     shift, and go to state 20
-    DDOP     shift, and go to state 225
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
+    IMGOP    shift, and go to state 22
+    LCL      shift, and go to state 57
+    LIOP     shift, and go to state 58
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
 
-    $default  reduce using rule 87 (dd)
-
-    misc  go to state 76
-
-
-State 202
-
-   81 dd: flow DDCL .
-   82   | flow DDCL . DDOP dd
-   85   | flow DDCL . consume
-   86   | flow DDCL . consume DDOP dd
-
-    TEXT     shift, and go to state 20
-    DDOP     shift, and go to state 226
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 81 (dd)
-
-    misc     go to state 37
-    consume  go to state 227
+    misc     go to state 38
+    consume  go to state 59
+    list     go to state 140
 
 
-State 203
+State 101
 
-   80 dt: DTCL DDOP dd DTOP . dt
+   58 list: consume LCL .
+   60     | consume LCL . flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
     TEXT       shift, and go to state 20
     DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    DTCL       shift, and go to state 105
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
-    misc  go to state 28
-    flow  go to state 106
-    dt    go to state 228
+    $default  reduce using rule 58 (list)
 
-
-State 204
-
-   76 dt: flow DTCL DDOP dd .
-   78   | flow DTCL DDOP dd . DTOP dt
-
-    DTOP  shift, and go to state 229
-
-    $default  reduce using rule 76 (dt)
+    misc  go to state 29
+    flow  go to state 141
 
 
-State 205
+State 102
 
-   77 dt: flow DTCL consume DDOP . dd
+   57 list: consume LIOP . listitem list
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
     TEXT       shift, and go to state 20
     DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    DDCL       shift, and go to state 172
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    LICL       shift, and go to state 98
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
-    misc  go to state 28
-    flow  go to state 173
-    dd    go to state 230
+    misc      go to state 29
+    flow      go to state 99
+    listitem  go to state 142
 
 
-State 206
+State 103
 
-   71 dl: consume DIVOP div DLCL flow .
+  145 figure: FIGCL flow .
+
+    $default  reduce using rule 145 (figure)
+
+
+State 104
+
+  149 figcap: FIGCAPCL .
+
+    $default  reduce using rule 149 (figcap)
+
+
+State 105
+
+  148 figcap: flow . FIGCAPCL
+
+    FIGCAPCL  shift, and go to state 143
+
+
+State 106
+
+  137 figure: FIGCAPOP figcap . FIGCL
+  138       | FIGCAPOP figcap . flow FIGCL
+  142       | FIGCAPOP figcap . FIGCL flow
+  143       | FIGCAPOP figcap . flow FIGCL flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    FIGCL      shift, and go to state 144
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 145
+
+
+State 107
+
+  139 figure: flow FIGCL .
+  144       | flow FIGCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 139 (figure)
+
+    misc  go to state 29
+    flow  go to state 146
+
+
+State 108
+
+  136 figure: flow FIGCAPOP . figcap FIGCL
+  141       | flow FIGCAPOP . figcap FIGCL flow
+  146       | flow FIGCAPOP . figcap flow FIGCL flow
+  147       | flow FIGCAPOP . figcap flow FIGCL
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    FIGCAPCL   shift, and go to state 104
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc    go to state 29
+    flow    go to state 105
+    figcap  go to state 147
+
+
+State 109
+
+   69 dl: DIVOP div . DLCL
+   73   | DIVOP div . DLCL flow
+
+    DLCL  shift, and go to state 148
+
+
+State 110
+
+   71 dl: DLCL flow .
 
     $default  reduce using rule 71 (dl)
 
 
-State 207
+State 111
 
-   75 dl: consume DTOP dt DLCL flow .
+   82 dt: DTCL . DDOP dd
+   83   | DTCL . DDOP dd DTOP dt
+
+    DDOP  shift, and go to state 149
+
+
+State 112
+
+   79 dt: flow . DTCL DDOP dd
+   80   | flow . DTCL consume DDOP dd
+   81   | flow . DTCL DDOP dd DTOP dt
+
+    DTCL  shift, and go to state 150
+
+
+State 113
+
+   75 dl: DTOP dt . DLCL
+   76   | DTOP dt . DLCL flow
+
+    DLCL  shift, and go to state 151
+
+
+State 114
+
+   70 dl: consume DIVOP . div DLCL
+   74   | consume DIVOP . div DLCL flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    DIVCL      shift, and go to state 51
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 52
+    div   go to state 152
+
+
+State 115
+
+   68 dl: consume DLCL .
+   72   | consume DLCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 68 (dl)
+
+    misc  go to state 29
+    flow  go to state 153
+
+
+State 116
+
+   77 dl: consume DTOP . dt DLCL
+   78   | consume DTOP . dt DLCL flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    DTCL       shift, and go to state 111
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 112
+    dt    go to state 154
+
+
+State 117
+
+  105 table: TABCL flow .
+
+    $default  reduce using rule 105 (table)
+
+
+State 118
+
+   93 caption: CAPCL .
+   95        | CAPCL . consume
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 93 (caption)
+
+    misc     go to state 38
+    consume  go to state 155
+
+
+State 119
+
+   92 caption: flow . CAPCL
+   94        | flow . CAPCL consume
+
+    CAPCL  shift, and go to state 156
+
+
+State 120
+
+   96 table: CAPOP caption . TABCL
+   97      | CAPOP caption . TABCL flow
+  100      | CAPOP caption . TROP tr TABCL
+  102      | CAPOP caption . TROP tr TABCL flow
+
+    TABCL  shift, and go to state 157
+    TROP   shift, and go to state 158
+
+
+State 121
+
+  106 tr: TRCL .
+  110   | TRCL . consume
+  114   | TRCL . TROP tr
+  115   | TRCL . consume TROP tr
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    TROP     shift, and go to state 159
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 106 (tr)
+
+    misc     go to state 38
+    consume  go to state 160
+
+
+State 122
+
+  108 tr: THOP . th TRCL
+  112   | THOP . th TRCL consume
+  116   | THOP . th TRCL TROP tr
+  118   | THOP . th TRCL consume TROP tr
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    THCL       shift, and go to state 161
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 162
+    th    go to state 163
+
+
+State 123
+
+  109 tr: TDOP . td TRCL
+  113   | TDOP . td TRCL consume
+  117   | TDOP . td TRCL TROP tr
+  119   | TDOP . td TRCL consume TROP tr
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    TDCL       shift, and go to state 164
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 165
+    td    go to state 166
+
+
+State 124
+
+   20 consume: consume . misc
+  107 tr: consume . TRCL
+  111   | consume . TRCL consume
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    TRCL     shift, and go to state 167
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    misc  go to state 80
+
+
+State 125
+
+  101 table: TROP tr . TABCL
+  103      | TROP tr . TABCL flow
+
+    TABCL  shift, and go to state 168
+
+
+State 126
+
+   98 table: consume CAPOP . caption TABCL
+   99      | consume CAPOP . caption TABCL flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    CAPCL      shift, and go to state 118
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc     go to state 29
+    flow     go to state 119
+    caption  go to state 169
+
+
+State 127
+
+   20 consume: consume . misc
+   38 phrases: consume . PHRASEOP phr
+   42 phr: PHRASECL consume .
+
+    PHRASEOP  shift, and go to state 87
+    TEXT      shift, and go to state 20
+    IMGOP     shift, and go to state 22
+    BR        shift, and go to state 27
+    COMMENT   shift, and go to state 28
+
+    $default  reduce using rule 42 (phr)
+
+    misc  go to state 80
+
+
+State 128
+
+   41 phr: PHRASECL phrases .
+
+    $default  reduce using rule 41 (phr)
+
+
+State 129
+
+   43 phr: consume PHRASECL .
+   44    | consume PHRASECL . phrases
+   45    | consume PHRASECL . consume
+
+    PHRASEOP  shift, and go to state 42
+    TEXT      shift, and go to state 20
+    IMGOP     shift, and go to state 22
+    BR        shift, and go to state 27
+    COMMENT   shift, and go to state 28
+
+    $default  reduce using rule 43 (phr)
+
+    misc     go to state 38
+    consume  go to state 170
+    phrases  go to state 171
+
+
+State 130
+
+   40 phr: phrases PHRASECL .
+
+    $default  reduce using rule 40 (phr)
+
+
+State 131
+
+   35 phraseopen: consume BPHRASECL flow .
+
+    $default  reduce using rule 35 (phraseopen)
+
+
+State 132
+
+   38 phrases: consume PHRASEOP phr .
+
+    $default  reduce using rule 38 (phrases)
+
+
+State 133
+
+   31 phraseopen: phrases BPHRASECL flow .
+
+    $default  reduce using rule 31 (phraseopen)
+
+
+State 134
+
+   51 gtph: BPHRASEOP phraseopen GTPHCL . flow
+   52     | BPHRASEOP phraseopen GTPHCL .
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 52 (gtph)
+
+    misc  go to state 29
+    flow  go to state 172
+
+
+State 135
+
+   53 gtph: consume BPHRASEOP phraseopen . GTPHCL flow
+   54     | consume BPHRASEOP phraseopen . GTPHCL
+
+    GTPHCL  shift, and go to state 173
+
+
+State 136
+
+   46 gtph: phrases GTPHCL flow .
+
+    $default  reduce using rule 46 (gtph)
+
+
+State 137
+
+   65 div: flow DIVCL flow .
+
+    $default  reduce using rule 65 (div)
+
+
+State 138
+
+  150 img: ATTRIBUTE ATTRIBUTEVAL img .
+
+    $default  reduce using rule 150 (img)
+
+
+State 139
+
+   61 listitem: flow LICL .
+
+    $default  reduce using rule 61 (listitem)
+
+
+State 140
+
+   55 list: LIOP listitem list .
+
+    $default  reduce using rule 55 (list)
+
+
+State 141
+
+   60 list: consume LCL flow .
+
+    $default  reduce using rule 60 (list)
+
+
+State 142
+
+   57 list: consume LIOP listitem . list
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    LCL      shift, and go to state 57
+    LIOP     shift, and go to state 58
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    misc     go to state 38
+    consume  go to state 59
+    list     go to state 174
+
+
+State 143
+
+  148 figcap: flow FIGCAPCL .
+
+    $default  reduce using rule 148 (figcap)
+
+
+State 144
+
+  137 figure: FIGCAPOP figcap FIGCL .
+  142       | FIGCAPOP figcap FIGCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 137 (figure)
+
+    misc  go to state 29
+    flow  go to state 175
+
+
+State 145
+
+  138 figure: FIGCAPOP figcap flow . FIGCL
+  143       | FIGCAPOP figcap flow . FIGCL flow
+
+    FIGCL  shift, and go to state 176
+
+
+State 146
+
+  144 figure: flow FIGCL flow .
+
+    $default  reduce using rule 144 (figure)
+
+
+State 147
+
+  136 figure: flow FIGCAPOP figcap . FIGCL
+  141       | flow FIGCAPOP figcap . FIGCL flow
+  146       | flow FIGCAPOP figcap . flow FIGCL flow
+  147       | flow FIGCAPOP figcap . flow FIGCL
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    FIGCL      shift, and go to state 177
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 178
+
+
+State 148
+
+   69 dl: DIVOP div DLCL .
+   73   | DIVOP div DLCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 69 (dl)
+
+    misc  go to state 29
+    flow  go to state 179
+
+
+State 149
+
+   82 dt: DTCL DDOP . dd
+   83   | DTCL DDOP . dd DTOP dt
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    DDCL       shift, and go to state 180
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 181
+    dd    go to state 182
+
+
+State 150
+
+   79 dt: flow DTCL . DDOP dd
+   80   | flow DTCL . consume DDOP dd
+   81   | flow DTCL . DDOP dd DTOP dt
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    DDOP     shift, and go to state 183
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    misc     go to state 38
+    consume  go to state 184
+
+
+State 151
+
+   75 dl: DTOP dt DLCL .
+   76   | DTOP dt DLCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
     $default  reduce using rule 75 (dl)
 
+    misc  go to state 29
+    flow  go to state 185
 
-State 208
 
-   97 table: CAPOP caption TROP tr TABCL .
-   99      | CAPOP caption TROP tr TABCL . flow
+State 152
+
+   70 dl: consume DIVOP div . DLCL
+   74   | consume DIVOP div . DLCL flow
+
+    DLCL  shift, and go to state 186
+
+
+State 153
+
+   72 dl: consume DLCL flow .
+
+    $default  reduce using rule 72 (dl)
+
+
+State 154
+
+   77 dl: consume DTOP dt . DLCL
+   78   | consume DTOP dt . DLCL flow
+
+    DLCL  shift, and go to state 187
+
+
+State 155
+
+   20 consume: consume . misc
+   95 caption: CAPCL consume .
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 95 (caption)
+
+    misc  go to state 80
+
+
+State 156
+
+   92 caption: flow CAPCL .
+   94        | flow CAPCL . consume
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 92 (caption)
+
+    misc     go to state 38
+    consume  go to state 188
+
+
+State 157
+
+   96 table: CAPOP caption TABCL .
+   97      | CAPOP caption TABCL . flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
     TEXT       shift, and go to state 20
     DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    $default  reduce using rule 97 (table)
-
-    misc  go to state 28
-    flow  go to state 231
-
-
-State 209
-
-  112 tr: TRCL consume TROP tr .
-
-    $default  reduce using rule 112 (tr)
-
-
-State 210
-
-  121 th: THCL THOP th .
-
-    $default  reduce using rule 121 (th)
-
-
-State 211
-
-  123 th: THCL consume THOP . th
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    THCL       shift, and go to state 153
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 154
-    th    go to state 232
-
-
-State 212
-
-  122 th: flow THCL THOP . th
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    THCL       shift, and go to state 153
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 154
-    th    go to state 233
-
-
-State 213
-
-   19 consume: consume . misc
-  120 th: flow THCL consume .
-  124   | flow THCL consume . THOP th
-
-    TEXT     shift, and go to state 20
-    THOP     shift, and go to state 234
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 120 (th)
-
-    misc  go to state 76
-
-
-State 214
-
-  113 tr: THOP th TRCL TROP . tr
-
-    TEXT     shift, and go to state 20
-    TRCL     shift, and go to state 115
-    THOP     shift, and go to state 116
-    TDOP     shift, and go to state 117
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    misc     go to state 37
-    consume  go to state 118
-    tr       go to state 235
-
-
-State 215
-
-   19 consume: consume . misc
-  109 tr: THOP th TRCL consume .
-  115   | THOP th TRCL consume . TROP tr
-
-    TEXT     shift, and go to state 20
-    TROP     shift, and go to state 236
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 109 (tr)
-
-    misc  go to state 76
-
-
-State 216
-
-  129 td: TDCL TDOP td .
-
-    $default  reduce using rule 129 (td)
-
-
-State 217
-
-  131 td: TDCL consume TDOP . td
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    TDCL       shift, and go to state 156
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 157
-    td    go to state 237
-
-
-State 218
-
-  130 td: flow TDCL TDOP . td
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    TDCL       shift, and go to state 156
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 157
-    td    go to state 238
-
-
-State 219
-
-   19 consume: consume . misc
-  128 td: flow TDCL consume .
-  132   | flow TDCL consume . TDOP td
-
-    TEXT     shift, and go to state 20
-    TDOP     shift, and go to state 239
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 128 (td)
-
-    misc  go to state 76
-
-
-State 220
-
-  114 tr: TDOP td TRCL TROP . tr
-
-    TEXT     shift, and go to state 20
-    TRCL     shift, and go to state 115
-    THOP     shift, and go to state 116
-    TDOP     shift, and go to state 117
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    misc     go to state 37
-    consume  go to state 118
-    tr       go to state 240
-
-
-State 221
-
-   19 consume: consume . misc
-  110 tr: TDOP td TRCL consume .
-  116   | TDOP td TRCL consume . TROP tr
-
-    TEXT     shift, and go to state 20
-    TROP     shift, and go to state 241
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
-
-    $default  reduce using rule 110 (tr)
-
-    misc  go to state 76
-
-
-State 222
-
-   96 table: consume CAPOP caption TABCL flow .
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
     $default  reduce using rule 96 (table)
 
-
-State 223
-
-  143 figure: flow FIGCAPOP figcap flow FIGCL flow .
-
-    $default  reduce using rule 143 (figure)
+    misc  go to state 29
+    flow  go to state 189
 
 
-State 224
+State 158
 
-   84 dd: DDCL DDOP dd .
-
-    $default  reduce using rule 84 (dd)
-
-
-State 225
-
-   88 dd: DDCL consume DDOP . dd
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    DDCL       shift, and go to state 172
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 173
-    dd    go to state 242
-
-
-State 226
-
-   82 dd: flow DDCL DDOP . dd
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    DDCL       shift, and go to state 172
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 173
-    dd    go to state 243
-
-
-State 227
-
-   19 consume: consume . misc
-   85 dd: flow DDCL consume .
-   86   | flow DDCL consume . DDOP dd
+  100 table: CAPOP caption TROP . tr TABCL
+  102      | CAPOP caption TROP . tr TABCL flow
 
     TEXT     shift, and go to state 20
-    DDOP     shift, and go to state 244
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
+    IMGOP    shift, and go to state 22
+    TRCL     shift, and go to state 121
+    THOP     shift, and go to state 122
+    TDOP     shift, and go to state 123
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
 
-    $default  reduce using rule 85 (dd)
-
-    misc  go to state 76
-
-
-State 228
-
-   80 dt: DTCL DDOP dd DTOP dt .
-
-    $default  reduce using rule 80 (dt)
+    misc     go to state 38
+    consume  go to state 124
+    tr       go to state 190
 
 
-State 229
+State 159
 
-   78 dt: flow DTCL DDOP dd DTOP . dt
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    DTCL       shift, and go to state 105
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 106
-    dt    go to state 245
-
-
-State 230
-
-   77 dt: flow DTCL consume DDOP dd .
-
-    $default  reduce using rule 77 (dt)
-
-
-State 231
-
-   99 table: CAPOP caption TROP tr TABCL flow .
-
-    $default  reduce using rule 99 (table)
-
-
-State 232
-
-  123 th: THCL consume THOP th .
-
-    $default  reduce using rule 123 (th)
-
-
-State 233
-
-  122 th: flow THCL THOP th .
-
-    $default  reduce using rule 122 (th)
-
-
-State 234
-
-  124 th: flow THCL consume THOP . th
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    THCL       shift, and go to state 153
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
-
-    misc  go to state 28
-    flow  go to state 154
-    th    go to state 246
-
-
-State 235
-
-  113 tr: THOP th TRCL TROP tr .
-
-    $default  reduce using rule 113 (tr)
-
-
-State 236
-
-  115 tr: THOP th TRCL consume TROP . tr
+  114 tr: TRCL TROP . tr
 
     TEXT     shift, and go to state 20
-    TRCL     shift, and go to state 115
-    THOP     shift, and go to state 116
-    TDOP     shift, and go to state 117
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
+    IMGOP    shift, and go to state 22
+    TRCL     shift, and go to state 121
+    THOP     shift, and go to state 122
+    TDOP     shift, and go to state 123
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
 
-    misc     go to state 37
-    consume  go to state 118
-    tr       go to state 247
-
-
-State 237
-
-  131 td: TDCL consume TDOP td .
-
-    $default  reduce using rule 131 (td)
+    misc     go to state 38
+    consume  go to state 124
+    tr       go to state 191
 
 
-State 238
+State 160
 
-  130 td: flow TDCL TDOP td .
+   20 consume: consume . misc
+  110 tr: TRCL consume .
+  115   | TRCL consume . TROP tr
 
-    $default  reduce using rule 130 (td)
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    TROP     shift, and go to state 192
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 110 (tr)
+
+    misc  go to state 80
 
 
-State 239
+State 161
 
-  132 td: flow TDCL consume TDOP . td
+  120 th: THCL .
+  122   | THCL . consume
+  124   | THCL . THOP th
+  126   | THCL . consume THOP th
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    THOP     shift, and go to state 193
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 120 (th)
+
+    misc     go to state 38
+    consume  go to state 194
+
+
+State 162
+
+  121 th: flow . THCL
+  123   | flow . THCL consume
+  125   | flow . THCL THOP th
+  127   | flow . THCL consume THOP th
+
+    THCL  shift, and go to state 195
+
+
+State 163
+
+  108 tr: THOP th . TRCL
+  112   | THOP th . TRCL consume
+  116   | THOP th . TRCL TROP tr
+  118   | THOP th . TRCL consume TROP tr
+
+    TRCL  shift, and go to state 196
+
+
+State 164
+
+  128 td: TDCL .
+  130   | TDCL . consume
+  132   | TDCL . TDOP td
+  134   | TDCL . consume TDOP td
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    TDOP     shift, and go to state 197
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 128 (td)
+
+    misc     go to state 38
+    consume  go to state 198
+
+
+State 165
+
+  129 td: flow . TDCL
+  131   | flow . TDCL consume
+  133   | flow . TDCL TDOP td
+  135   | flow . TDCL consume TDOP td
+
+    TDCL  shift, and go to state 199
+
+
+State 166
+
+  109 tr: TDOP td . TRCL
+  113   | TDOP td . TRCL consume
+  117   | TDOP td . TRCL TROP tr
+  119   | TDOP td . TRCL consume TROP tr
+
+    TRCL  shift, and go to state 200
+
+
+State 167
+
+  107 tr: consume TRCL .
+  111   | consume TRCL . consume
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 107 (tr)
+
+    misc     go to state 38
+    consume  go to state 201
+
+
+State 168
+
+  101 table: TROP tr TABCL .
+  103      | TROP tr TABCL . flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
     TEXT       shift, and go to state 20
     DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    TABOP      shift, and go to state 25
-    TDCL       shift, and go to state 156
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
-    misc  go to state 28
-    flow  go to state 157
-    td    go to state 248
+    $default  reduce using rule 101 (table)
+
+    misc  go to state 29
+    flow  go to state 202
 
 
-State 240
+State 169
 
-  114 tr: TDOP td TRCL TROP tr .
+   98 table: consume CAPOP caption . TABCL
+   99      | consume CAPOP caption . TABCL flow
+
+    TABCL  shift, and go to state 203
+
+
+State 170
+
+   20 consume: consume . misc
+   38 phrases: consume . PHRASEOP phr
+   45 phr: consume PHRASECL consume .
+
+    PHRASEOP  shift, and go to state 87
+    TEXT      shift, and go to state 20
+    IMGOP     shift, and go to state 22
+    BR        shift, and go to state 27
+    COMMENT   shift, and go to state 28
+
+    $default  reduce using rule 45 (phr)
+
+    misc  go to state 80
+
+
+State 171
+
+   44 phr: consume PHRASECL phrases .
+
+    $default  reduce using rule 44 (phr)
+
+
+State 172
+
+   51 gtph: BPHRASEOP phraseopen GTPHCL flow .
+
+    $default  reduce using rule 51 (gtph)
+
+
+State 173
+
+   53 gtph: consume BPHRASEOP phraseopen GTPHCL . flow
+   54     | consume BPHRASEOP phraseopen GTPHCL .
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 54 (gtph)
+
+    misc  go to state 29
+    flow  go to state 204
+
+
+State 174
+
+   57 list: consume LIOP listitem list .
+
+    $default  reduce using rule 57 (list)
+
+
+State 175
+
+  142 figure: FIGCAPOP figcap FIGCL flow .
+
+    $default  reduce using rule 142 (figure)
+
+
+State 176
+
+  138 figure: FIGCAPOP figcap flow FIGCL .
+  143       | FIGCAPOP figcap flow FIGCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 138 (figure)
+
+    misc  go to state 29
+    flow  go to state 205
+
+
+State 177
+
+  136 figure: flow FIGCAPOP figcap FIGCL .
+  141       | flow FIGCAPOP figcap FIGCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 136 (figure)
+
+    misc  go to state 29
+    flow  go to state 206
+
+
+State 178
+
+  146 figure: flow FIGCAPOP figcap flow . FIGCL flow
+  147       | flow FIGCAPOP figcap flow . FIGCL
+
+    FIGCL  shift, and go to state 207
+
+
+State 179
+
+   73 dl: DIVOP div DLCL flow .
+
+    $default  reduce using rule 73 (dl)
+
+
+State 180
+
+   86 dd: DDCL .
+   87   | DDCL . DDOP dd
+   90   | DDCL . consume
+   91   | DDCL . consume DDOP dd
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    DDOP     shift, and go to state 208
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 86 (dd)
+
+    misc     go to state 38
+    consume  go to state 209
+
+
+State 181
+
+   84 dd: flow . DDCL
+   85   | flow . DDCL DDOP dd
+   88   | flow . DDCL consume
+   89   | flow . DDCL consume DDOP dd
+
+    DDCL  shift, and go to state 210
+
+
+State 182
+
+   82 dt: DTCL DDOP dd .
+   83   | DTCL DDOP dd . DTOP dt
+
+    DTOP  shift, and go to state 211
+
+    $default  reduce using rule 82 (dt)
+
+
+State 183
+
+   79 dt: flow DTCL DDOP . dd
+   81   | flow DTCL DDOP . dd DTOP dt
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    DDCL       shift, and go to state 180
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 181
+    dd    go to state 212
+
+
+State 184
+
+   20 consume: consume . misc
+   80 dt: flow DTCL consume . DDOP dd
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    DDOP     shift, and go to state 213
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    misc  go to state 80
+
+
+State 185
+
+   76 dl: DTOP dt DLCL flow .
+
+    $default  reduce using rule 76 (dl)
+
+
+State 186
+
+   70 dl: consume DIVOP div DLCL .
+   74   | consume DIVOP div DLCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 70 (dl)
+
+    misc  go to state 29
+    flow  go to state 214
+
+
+State 187
+
+   77 dl: consume DTOP dt DLCL .
+   78   | consume DTOP dt DLCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 77 (dl)
+
+    misc  go to state 29
+    flow  go to state 215
+
+
+State 188
+
+   20 consume: consume . misc
+   94 caption: flow CAPCL consume .
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 94 (caption)
+
+    misc  go to state 80
+
+
+State 189
+
+   97 table: CAPOP caption TABCL flow .
+
+    $default  reduce using rule 97 (table)
+
+
+State 190
+
+  100 table: CAPOP caption TROP tr . TABCL
+  102      | CAPOP caption TROP tr . TABCL flow
+
+    TABCL  shift, and go to state 216
+
+
+State 191
+
+  114 tr: TRCL TROP tr .
 
     $default  reduce using rule 114 (tr)
 
 
-State 241
+State 192
 
-  116 tr: TDOP td TRCL consume TROP . tr
+  115 tr: TRCL consume TROP . tr
 
     TEXT     shift, and go to state 20
-    TRCL     shift, and go to state 115
-    THOP     shift, and go to state 116
-    TDOP     shift, and go to state 117
-    BR       shift, and go to state 26
-    COMMENT  shift, and go to state 27
+    IMGOP    shift, and go to state 22
+    TRCL     shift, and go to state 121
+    THOP     shift, and go to state 122
+    TDOP     shift, and go to state 123
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
 
-    misc     go to state 37
-    consume  go to state 118
-    tr       go to state 249
-
-
-State 242
-
-   88 dd: DDCL consume DDOP dd .
-
-    $default  reduce using rule 88 (dd)
+    misc     go to state 38
+    consume  go to state 124
+    tr       go to state 217
 
 
-State 243
+State 193
 
-   82 dd: flow DDCL DDOP dd .
-
-    $default  reduce using rule 82 (dd)
-
-
-State 244
-
-   86 dd: flow DDCL consume DDOP . dd
+  124 th: THCL THOP . th
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
     TEXT       shift, and go to state 20
     DIVOP      shift, and go to state 21
-    LOP        shift, and go to state 22
-    FIGOP      shift, and go to state 23
-    DLOP       shift, and go to state 24
-    DDCL       shift, and go to state 172
-    TABOP      shift, and go to state 25
-    BR         shift, and go to state 26
-    COMMENT    shift, and go to state 27
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    THCL       shift, and go to state 161
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
 
-    misc  go to state 28
-    flow  go to state 173
-    dd    go to state 250
-
-
-State 245
-
-   78 dt: flow DTCL DDOP dd DTOP dt .
-
-    $default  reduce using rule 78 (dt)
+    misc  go to state 29
+    flow  go to state 162
+    th    go to state 218
 
 
-State 246
+State 194
 
-  124 th: flow THCL consume THOP th .
+   20 consume: consume . misc
+  122 th: THCL consume .
+  126   | THCL consume . THOP th
 
-    $default  reduce using rule 124 (th)
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    THOP     shift, and go to state 219
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 122 (th)
+
+    misc  go to state 80
 
 
-State 247
+State 195
 
-  115 tr: THOP th TRCL consume TROP tr .
+  121 th: flow THCL .
+  123   | flow THCL . consume
+  125   | flow THCL . THOP th
+  127   | flow THCL . consume THOP th
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    THOP     shift, and go to state 220
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 121 (th)
+
+    misc     go to state 38
+    consume  go to state 221
+
+
+State 196
+
+  108 tr: THOP th TRCL .
+  112   | THOP th TRCL . consume
+  116   | THOP th TRCL . TROP tr
+  118   | THOP th TRCL . consume TROP tr
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    TROP     shift, and go to state 222
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 108 (tr)
+
+    misc     go to state 38
+    consume  go to state 223
+
+
+State 197
+
+  132 td: TDCL TDOP . td
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    TDCL       shift, and go to state 164
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 165
+    td    go to state 224
+
+
+State 198
+
+   20 consume: consume . misc
+  130 td: TDCL consume .
+  134   | TDCL consume . TDOP td
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    TDOP     shift, and go to state 225
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 130 (td)
+
+    misc  go to state 80
+
+
+State 199
+
+  129 td: flow TDCL .
+  131   | flow TDCL . consume
+  133   | flow TDCL . TDOP td
+  135   | flow TDCL . consume TDOP td
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    TDOP     shift, and go to state 226
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 129 (td)
+
+    misc     go to state 38
+    consume  go to state 227
+
+
+State 200
+
+  109 tr: TDOP td TRCL .
+  113   | TDOP td TRCL . consume
+  117   | TDOP td TRCL . TROP tr
+  119   | TDOP td TRCL . consume TROP tr
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    TROP     shift, and go to state 228
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 109 (tr)
+
+    misc     go to state 38
+    consume  go to state 229
+
+
+State 201
+
+   20 consume: consume . misc
+  111 tr: consume TRCL consume .
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 111 (tr)
+
+    misc  go to state 80
+
+
+State 202
+
+  103 table: TROP tr TABCL flow .
+
+    $default  reduce using rule 103 (table)
+
+
+State 203
+
+   98 table: consume CAPOP caption TABCL .
+   99      | consume CAPOP caption TABCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 98 (table)
+
+    misc  go to state 29
+    flow  go to state 230
+
+
+State 204
+
+   53 gtph: consume BPHRASEOP phraseopen GTPHCL flow .
+
+    $default  reduce using rule 53 (gtph)
+
+
+State 205
+
+  143 figure: FIGCAPOP figcap flow FIGCL flow .
+
+    $default  reduce using rule 143 (figure)
+
+
+State 206
+
+  141 figure: flow FIGCAPOP figcap FIGCL flow .
+
+    $default  reduce using rule 141 (figure)
+
+
+State 207
+
+  146 figure: flow FIGCAPOP figcap flow FIGCL . flow
+  147       | flow FIGCAPOP figcap flow FIGCL .
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 147 (figure)
+
+    misc  go to state 29
+    flow  go to state 231
+
+
+State 208
+
+   87 dd: DDCL DDOP . dd
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    DDCL       shift, and go to state 180
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 181
+    dd    go to state 232
+
+
+State 209
+
+   20 consume: consume . misc
+   90 dd: DDCL consume .
+   91   | DDCL consume . DDOP dd
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    DDOP     shift, and go to state 233
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 90 (dd)
+
+    misc  go to state 80
+
+
+State 210
+
+   84 dd: flow DDCL .
+   85   | flow DDCL . DDOP dd
+   88   | flow DDCL . consume
+   89   | flow DDCL . consume DDOP dd
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    DDOP     shift, and go to state 234
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 84 (dd)
+
+    misc     go to state 38
+    consume  go to state 235
+
+
+State 211
+
+   83 dt: DTCL DDOP dd DTOP . dt
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    DTCL       shift, and go to state 111
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 112
+    dt    go to state 236
+
+
+State 212
+
+   79 dt: flow DTCL DDOP dd .
+   81   | flow DTCL DDOP dd . DTOP dt
+
+    DTOP  shift, and go to state 237
+
+    $default  reduce using rule 79 (dt)
+
+
+State 213
+
+   80 dt: flow DTCL consume DDOP . dd
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    DDCL       shift, and go to state 180
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 181
+    dd    go to state 238
+
+
+State 214
+
+   74 dl: consume DIVOP div DLCL flow .
+
+    $default  reduce using rule 74 (dl)
+
+
+State 215
+
+   78 dl: consume DTOP dt DLCL flow .
+
+    $default  reduce using rule 78 (dl)
+
+
+State 216
+
+  100 table: CAPOP caption TROP tr TABCL .
+  102      | CAPOP caption TROP tr TABCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    $default  reduce using rule 100 (table)
+
+    misc  go to state 29
+    flow  go to state 239
+
+
+State 217
+
+  115 tr: TRCL consume TROP tr .
 
     $default  reduce using rule 115 (tr)
 
 
-State 248
+State 218
 
-  132 td: flow TDCL consume TDOP td .
+  124 th: THCL THOP th .
+
+    $default  reduce using rule 124 (th)
+
+
+State 219
+
+  126 th: THCL consume THOP . th
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    THCL       shift, and go to state 161
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 162
+    th    go to state 240
+
+
+State 220
+
+  125 th: flow THCL THOP . th
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    THCL       shift, and go to state 161
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 162
+    th    go to state 241
+
+
+State 221
+
+   20 consume: consume . misc
+  123 th: flow THCL consume .
+  127   | flow THCL consume . THOP th
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    THOP     shift, and go to state 242
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 123 (th)
+
+    misc  go to state 80
+
+
+State 222
+
+  116 tr: THOP th TRCL TROP . tr
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    TRCL     shift, and go to state 121
+    THOP     shift, and go to state 122
+    TDOP     shift, and go to state 123
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    misc     go to state 38
+    consume  go to state 124
+    tr       go to state 243
+
+
+State 223
+
+   20 consume: consume . misc
+  112 tr: THOP th TRCL consume .
+  118   | THOP th TRCL consume . TROP tr
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    TROP     shift, and go to state 244
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 112 (tr)
+
+    misc  go to state 80
+
+
+State 224
+
+  132 td: TDCL TDOP td .
 
     $default  reduce using rule 132 (td)
 
 
-State 249
+State 225
 
-  116 tr: TDOP td TRCL consume TROP tr .
+  134 td: TDCL consume TDOP . td
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    TDCL       shift, and go to state 164
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 165
+    td    go to state 245
+
+
+State 226
+
+  133 td: flow TDCL TDOP . td
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    TDCL       shift, and go to state 164
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 165
+    td    go to state 246
+
+
+State 227
+
+   20 consume: consume . misc
+  131 td: flow TDCL consume .
+  135   | flow TDCL consume . TDOP td
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    TDOP     shift, and go to state 247
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 131 (td)
+
+    misc  go to state 80
+
+
+State 228
+
+  117 tr: TDOP td TRCL TROP . tr
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    TRCL     shift, and go to state 121
+    THOP     shift, and go to state 122
+    TDOP     shift, and go to state 123
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    misc     go to state 38
+    consume  go to state 124
+    tr       go to state 248
+
+
+State 229
+
+   20 consume: consume . misc
+  113 tr: TDOP td TRCL consume .
+  119   | TDOP td TRCL consume . TROP tr
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    TROP     shift, and go to state 249
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 113 (tr)
+
+    misc  go to state 80
+
+
+State 230
+
+   99 table: consume CAPOP caption TABCL flow .
+
+    $default  reduce using rule 99 (table)
+
+
+State 231
+
+  146 figure: flow FIGCAPOP figcap flow FIGCL flow .
+
+    $default  reduce using rule 146 (figure)
+
+
+State 232
+
+   87 dd: DDCL DDOP dd .
+
+    $default  reduce using rule 87 (dd)
+
+
+State 233
+
+   91 dd: DDCL consume DDOP . dd
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    DDCL       shift, and go to state 180
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 181
+    dd    go to state 250
+
+
+State 234
+
+   85 dd: flow DDCL DDOP . dd
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    DDCL       shift, and go to state 180
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 181
+    dd    go to state 251
+
+
+State 235
+
+   20 consume: consume . misc
+   88 dd: flow DDCL consume .
+   89   | flow DDCL consume . DDOP dd
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    DDOP     shift, and go to state 252
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    $default  reduce using rule 88 (dd)
+
+    misc  go to state 80
+
+
+State 236
+
+   83 dt: DTCL DDOP dd DTOP dt .
+
+    $default  reduce using rule 83 (dt)
+
+
+State 237
+
+   81 dt: flow DTCL DDOP dd DTOP . dt
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    DTCL       shift, and go to state 111
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 112
+    dt    go to state 253
+
+
+State 238
+
+   80 dt: flow DTCL consume DDOP dd .
+
+    $default  reduce using rule 80 (dt)
+
+
+State 239
+
+  102 table: CAPOP caption TROP tr TABCL flow .
+
+    $default  reduce using rule 102 (table)
+
+
+State 240
+
+  126 th: THCL consume THOP th .
+
+    $default  reduce using rule 126 (th)
+
+
+State 241
+
+  125 th: flow THCL THOP th .
+
+    $default  reduce using rule 125 (th)
+
+
+State 242
+
+  127 th: flow THCL consume THOP . th
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    THCL       shift, and go to state 161
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 162
+    th    go to state 254
+
+
+State 243
+
+  116 tr: THOP th TRCL TROP tr .
 
     $default  reduce using rule 116 (tr)
 
 
+State 244
+
+  118 tr: THOP th TRCL consume TROP . tr
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    TRCL     shift, and go to state 121
+    THOP     shift, and go to state 122
+    TDOP     shift, and go to state 123
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    misc     go to state 38
+    consume  go to state 124
+    tr       go to state 255
+
+
+State 245
+
+  134 td: TDCL consume TDOP td .
+
+    $default  reduce using rule 134 (td)
+
+
+State 246
+
+  133 td: flow TDCL TDOP td .
+
+    $default  reduce using rule 133 (td)
+
+
+State 247
+
+  135 td: flow TDCL consume TDOP . td
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    TABOP      shift, and go to state 26
+    TDCL       shift, and go to state 164
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 165
+    td    go to state 256
+
+
+State 248
+
+  117 tr: TDOP td TRCL TROP tr .
+
+    $default  reduce using rule 117 (tr)
+
+
+State 249
+
+  119 tr: TDOP td TRCL consume TROP . tr
+
+    TEXT     shift, and go to state 20
+    IMGOP    shift, and go to state 22
+    TRCL     shift, and go to state 121
+    THOP     shift, and go to state 122
+    TDOP     shift, and go to state 123
+    BR       shift, and go to state 27
+    COMMENT  shift, and go to state 28
+
+    misc     go to state 38
+    consume  go to state 124
+    tr       go to state 257
+
+
 State 250
 
-   86 dd: flow DDCL consume DDOP dd .
+   91 dd: DDCL consume DDOP dd .
 
-    $default  reduce using rule 86 (dd)
+    $default  reduce using rule 91 (dd)
+
+
+State 251
+
+   85 dd: flow DDCL DDOP dd .
+
+    $default  reduce using rule 85 (dd)
+
+
+State 252
+
+   89 dd: flow DDCL consume DDOP . dd
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    DIVOP      shift, and go to state 21
+    IMGOP      shift, and go to state 22
+    LOP        shift, and go to state 23
+    FIGOP      shift, and go to state 24
+    DLOP       shift, and go to state 25
+    DDCL       shift, and go to state 180
+    TABOP      shift, and go to state 26
+    BR         shift, and go to state 27
+    COMMENT    shift, and go to state 28
+
+    misc  go to state 29
+    flow  go to state 181
+    dd    go to state 258
+
+
+State 253
+
+   81 dt: flow DTCL DDOP dd DTOP dt .
+
+    $default  reduce using rule 81 (dt)
+
+
+State 254
+
+  127 th: flow THCL consume THOP th .
+
+    $default  reduce using rule 127 (th)
+
+
+State 255
+
+  118 tr: THOP th TRCL consume TROP tr .
+
+    $default  reduce using rule 118 (tr)
+
+
+State 256
+
+  135 td: flow TDCL consume TDOP td .
+
+    $default  reduce using rule 135 (td)
+
+
+State 257
+
+  119 tr: TDOP td TRCL consume TROP tr .
+
+    $default  reduce using rule 119 (tr)
+
+
+State 258
+
+   89 dd: flow DDCL consume DDOP dd .
+
+    $default  reduce using rule 89 (dd)

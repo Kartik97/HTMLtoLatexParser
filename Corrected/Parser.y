@@ -51,20 +51,20 @@ char* concat(char *s1,char *s2);
 %type <value> GTPHOP GTPHCL DIVOP DIVCL FONTOP FONTOOP FONTCL FIGOP FIGCL
 %type <value> DLOP DLCL DTOP DTCL DDOP DDCL 
 %type <value> head title body flow phraseopen phrases listitem list misc consume gtph phr div dl dt dd table caption tr th td figure
-%type <value> figcap
+%type <value> figcap img
 
 
 %%
 
-st:	DOCTYPE { cout<<$1; } 
-	| DOCTYPE HTMLOP HTMLCL { char *p=concat($1,$2); cout<<concat(p,$3); }
-	| HTMLOP HTMLCL { cout<<concat($1,$2); }
-	| DOCTYPE HTMLOP head HTMLCL { char *p=concat($1,$2),*y=concat(p,$3); cout<<concat(y,$4); }
-	| HTMLOP head HTMLCL { char *p=concat($1,$2); cout<<concat(p,$3); }
-	| DOCTYPE HTMLOP head body HTMLCL { char *p=concat($1,$2),*y=concat(p,$3),*x=concat(y,$4); cout<<concat(x,$5);}
-	| HTMLOP head body HTMLCL { char *p=concat($1,$2),*y=concat(p,$3); cout<<concat(y,$4); }
-	| DOCTYPE HTMLOP body HTMLCL { char *p=concat($1,$2),*y=concat(p,$3); cout<<concat(y,$4); }
-	| HTMLOP body HTMLCL { char *p=concat($1,$2); cout<<concat(p,$3); }
+st:	DOCTYPE { cout<<$1<<endl; } 
+	| DOCTYPE HTMLOP HTMLCL { char *p=concat($1,$2); cout<<concat(p,$3)<<endl; }
+	| HTMLOP HTMLCL { cout<<concat($1,$2)<<endl; }
+	| DOCTYPE HTMLOP head HTMLCL { char *p=concat($1,$2),*y=concat(p,$3); cout<<concat(y,$4)<<endl; }
+	| HTMLOP head HTMLCL { char *p=concat($1,$2); cout<<concat(p,$3)<<endl; }
+	| DOCTYPE HTMLOP head body HTMLCL { char *p=concat($1,$2),*y=concat(p,$3),*x=concat(y,$4); cout<<concat(x,$5)<<endl;}
+	| HTMLOP head body HTMLCL { char *p=concat($1,$2),*y=concat(p,$3); cout<<concat(y,$4)<<endl; }
+	| DOCTYPE HTMLOP body HTMLCL { char *p=concat($1,$2),*y=concat(p,$3); cout<<concat(y,$4)<<endl; }
+	| HTMLOP body HTMLCL { char *p=concat($1,$2); cout<<concat(p,$3)<<endl; }
 	;
 
 head: HEADOP title HEADCL { char *p=concat($1,$2); $$=concat(p,$3); } 
@@ -82,6 +82,7 @@ body: BODYOP flow BODYCL  { char *p=concat($1,$2); $$=concat(p,$3); }
 misc: COMMENT {$$=$1; }
 	| BR {$$=$1; }
 	| TEXT {$$=$1; }
+	| IMGOP img {$$=strcat($1,$2); }
 	;
 
 consume: consume misc { $$=concat($1,$2); }
@@ -103,10 +104,12 @@ phraseopen: phrases BPHRASECL flow { char *p=concat($1,$2); $$=concat(p,$3); }
 	| BPHRASECL flow { $$=concat($1,$2); }
 	| BPHRASECL { $$=$1; }
 	| phrases BPHRASECL { $$=concat($1,$2); }
+	| consume BPHRASECL flow { $$=concat($1,$2); }
+	| consume BPHRASECL { $$=$1; }
 	;
 
 phrases: PHRASEOP phr { $$=concat($1,$2); }
-	| consume PHRASEOP phr { char *p=concat($1,$2); $$=concat(p,$3); }
+	| consume PHRASEOP phr { char *p=concat($1,$2); $$=concat(p,$3); } 
 	;
 
 phr: PHRASECL {$$=$1; }
@@ -117,6 +120,8 @@ phr: PHRASECL {$$=$1; }
 	| consume PHRASECL phrases { char *p=concat($1,$2); $$=concat(p,$3); }
 	| consume PHRASECL consume { char *p=concat($1,$2); $$=concat(p,$3); }
 	;
+
+
 
 gtph: phrases GTPHCL flow { char *p=concat($1,$2); $$=concat(p,$3); }
 	| GTPHCL flow { $$=concat($1,$2); }
@@ -249,6 +254,10 @@ figure: flow FIGCAPOP figcap FIGCL { char *p=concat($1,$2),*x=concat(p,$3);$$=co
 figcap: flow FIGCAPCL {$$=concat($1,$2); }
 	| FIGCAPCL {$$=$1; }
 	;
+
+img:  ATTRIBUTE ATTRIBUTEVAL img { char *p=concat($1,$2); $$=concat(p,$3); }
+	| IMGCL {$$=$1; }
+	; 
 
 %%
 void yyerror(const char *msg){

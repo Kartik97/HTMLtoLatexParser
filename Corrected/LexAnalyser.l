@@ -26,10 +26,10 @@ title "title"|"TITLE"
 body "body"|"BODY"
 doctype "!doctype"|"!DOCTYPE"
 special "&"[a-zA-Z]+";"
-phrasingtags "b"|"B"|"em"|"EM"|"i"|"I"|"small"|"SMALL"|"strong"|"STRONG"|"sub"|"SUB"|"sup"|"SUP"|"u"|"U"|"tt"|"TT"|"center"|"CENTER"
+phrasingtags "b"|"B"|"em"|"EM"|"i"|"I"|"small"|"SMALL"|"strong"|"STRONG"|"sub"|"SUB"|"sup"|"SUP"|"u"|"U"|"tt"|"TT"
 gtph "p"|"P"|"h1"|"H1"|"h2"|"H2"|"h3"|"H4"|"h5"|"H5"
 a "a"|"A"
-div "div"|"DIV"
+div "div"|"DIV"|"center"|"CENTER"
 img "img"|"IMG"
 font "font"|"FONT"
 li "li"|"LI"
@@ -97,11 +97,11 @@ comm "-->"
         return BODYCL;
 }
 "<"{div}{space}+[^>]*">"|"<"{div}">"  {
-        yylval.value=strdup("DIVOP ");
+        yylval.value=strdup(findpos(yytext,yyleng,1));
         return DIVOP;
 }
 "</"{div}{space}+[^>]*">"|"</"{div}">"  {
-        yylval.value=strdup("DIVCL ");
+        yylval.value=strdup(findpos(yytext,yyleng,2));
         return DIVCL;
 }
 "<"{phrasingtags}{space}+[^>]*">"|"<"{phrasingtags}">"  {
