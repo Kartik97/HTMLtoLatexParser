@@ -195,7 +195,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
                 yyless(yyleng-1);
                 return ATTRIBUTE;
         }
-        [^"src""width""height">]*[">""\>"] {
+        [^"src""width""height">]*[">""/>"] {
                 yy_pop_state();
                 yylval.value=strdup("IMGCL ");
                 return IMGCL;

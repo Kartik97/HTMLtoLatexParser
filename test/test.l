@@ -5,9 +5,12 @@ space [ \n\t\r]
 word [a-zA-Z\`\~\!\@\#\$\%\^\&\*\(\)\-\_\+\=\{\}\[\]\|\\\:\;\"\'\,\.\/\?]*[^<]
 
 %% 
-{word} {
+"<!--"(.*?)"-->"  {
 	printf("%d%s\n",count++, yytext); 
-	} 
+	}
+{word} {
+	printf("wrod");
+} 
 %% 
 
 int yywrap(){} 
