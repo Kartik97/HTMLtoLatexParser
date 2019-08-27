@@ -1,10 +1,12 @@
 %{ 
 int count = 0; 
 %} 
+space [ \n\t\r]
+word [a-zA-Z\`\~\!\@\#\$\%\^\&\*\(\)\-\_\+\=\{\}\[\]\|\\\:\;\"\'\,\.\/\?]*[^<]
 
 %% 
-. {
-	printf("%d%s",count++, yytext); 
+{word} {
+	printf("%d%s\n",count++, yytext); 
 	} 
 %% 
 

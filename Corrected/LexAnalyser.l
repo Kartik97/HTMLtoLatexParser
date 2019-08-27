@@ -5,7 +5,7 @@
 #include "Parser.tab.h"
 
 using namespace std;
-int phcount=0;
+int phcount=0,temp=0;
 char *findpos(const char* s,int len,int start);
 char *findval(const char* s,int len,int start);
 %}
@@ -61,10 +61,15 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         yylval.value = strdup(findpos(yytext,yyleng,1));
         return SYMBOL;
 }
-
-{word}  {
-        ECHO;
-        cout<<endl;
+[a-zA-Z\`\~\!\@\#\$\%\^\&\*\(\)\-\_\+\=\{\}\[\]\|\\\:\;\"\'\,\.\/\?]*[^<]  {
+        if(yytext[0]!=32 && yytext[yyleng-2]!=59) {
+                yylval.value=strdup(yytext);
+                return TEXT;
+        }
+        else{
+                yylval.value = strdup(findpos(yytext,yyleng,1));
+                return SYMBOL;
+        }
 }
 "<"{doctype}{space}+[^{html}]*{html}">"|"<"{doctype}{space}+[^{html}]*{html}{space}+[^>]*">" {
 	yylval.value = strdup("DOCTYPE ");
