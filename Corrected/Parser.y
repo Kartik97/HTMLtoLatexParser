@@ -51,8 +51,7 @@ char* concat(char *s1,char *s2);
 %type <value> GTPHOP GTPHCL DIVOP DIVCL FONTOP FONTOOP FONTCL FIGOP FIGCL
 %type <value> DLOP DLCL DTOP DTCL DDOP DDCL 
 %type <value> head title body flow phraseopen phrases listitem list misc consume gtph phr div dl dt dd table caption tr th td figure
-%type <value> figcap img
-
+%type <value> figcap img atag miscph consumeph atagph font fontph
 
 %%
 
@@ -82,11 +81,19 @@ body: BODYOP flow BODYCL  { char *p=concat($1,$2); $$=concat(p,$3); }
 misc: COMMENT {$$=$1; }
 	| BR {$$=$1; }
 	| TEXT {$$=$1; }
-	| IMGOP img {$$=strcat($1,$2); }
+	| IMGOP img {$$=concat($1,$2); }
 	;
 
 consume: consume misc { $$=concat($1,$2); }
 	| misc {$$=$1; }
+	;
+
+miscph: misc {$$=$1; } 
+	| AOP atagph {$$=concat($1,$2); }
+	| FONTOP fontph {$$=concat($1,$2); }
+	;
+consumeph: consumeph miscph {$$=concat($1,$2); }
+	| miscph {$$=$1; }
 	;
 
 flow: BPHRASEOP phraseopen { $$=concat($1,$2); }
@@ -98,40 +105,54 @@ flow: BPHRASEOP phraseopen { $$=concat($1,$2); }
 	| DLOP dl {$$=concat($1,$2); }
 	| TABOP table {$$=concat($1,$2); }
 	| FIGOP figure {$$=concat($1,$2); }
+	| AOP atag { $$=concat($1,$2); }
+	| FONTOP font { $$=concat($1,$2); }
 	;
 
 phraseopen: phrases BPHRASECL flow { char *p=concat($1,$2); $$=concat(p,$3); }
 	| BPHRASECL flow { $$=concat($1,$2); }
 	| BPHRASECL { $$=$1; }
 	| phrases BPHRASECL { $$=concat($1,$2); }
-	| consume BPHRASECL flow { $$=concat($1,$2); }
-	| consume BPHRASECL { $$=$1; }
+	| consumeph BPHRASECL flow { $$=concat($1,$2); }
+	| consumeph BPHRASECL { $$=concat($1,$2); }
 	;
 
 phrases: PHRASEOP phr { $$=concat($1,$2); }
-	| consume PHRASEOP phr { char *p=concat($1,$2); $$=concat(p,$3); } 
+	| consumeph PHRASEOP phr { char *p=concat($1,$2); $$=concat(p,$3); } 
 	;
 
 phr: PHRASECL {$$=$1; }
 	| phrases PHRASECL { $$=concat($1,$2); }
 	| PHRASECL phrases { $$=concat($1,$2); }
-	| PHRASECL consume { $$=concat($1,$2); }
-	| consume PHRASECL { $$=concat($1,$2); }
-	| consume PHRASECL phrases { char *p=concat($1,$2); $$=concat(p,$3); }
-	| consume PHRASECL consume { char *p=concat($1,$2); $$=concat(p,$3); }
+	| PHRASECL consumeph { $$=concat($1,$2); }
+	| consumeph PHRASECL { $$=concat($1,$2); }
+	| consumeph PHRASECL phrases { char *p=concat($1,$2); $$=concat(p,$3); }
+	| consumeph PHRASECL consumeph { char *p=concat($1,$2); $$=concat(p,$3); }
 	;
 
+fontph: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL { char *p=concat($1,$2),*x=concat(p,$3);$$=concat(x,$4); }
+	| ATTRIBUTE ATTRIBUTEVAL FONTOOP phrases FONTCL { char *p=concat($1,$2),*x=concat(p,$3),*y=concat(x,$4); $$=concat(y,$5); }
+	| FONTOOP phrases FONTCL { char *p=concat($1,$2); $$=concat(p,$3); }
+	| ATTRIBUTE ATTRIBUTEVAL FONTOOP consumeph FONTCL { char *p=concat($1,$2),*x=concat(p,$3),*y=concat(x,$4); $$=concat(y,$5); }
+	| FONTOOP consumeph FONTCL { char *p=concat($1,$2); $$=concat(p,$3); }
+	;
 
+atagph: ATTRIBUTE ATTRIBUTEVAL AOPOP phrases ACL { char *p=concat($1,$2),*x=concat(p,$3),*y=concat(x,$4); $$=concat(y,$5); }
+    | AOPOP phrases ACL { char *p=concat($1,$2); $$=concat(p,$3); }
+    | AOPOP ACL {$$=concat($1,$2); }
+	| ATTRIBUTE ATTRIBUTEVAL AOPOP ACL { char *p=concat($1,$2),*x=concat(p,$3);$$=concat(x,$4); }
+	;
 
 gtph: phrases GTPHCL flow { char *p=concat($1,$2); $$=concat(p,$3); }
-	| GTPHCL flow { $$=concat($1,$2); }
 	| phrases GTPHCL { $$=concat($1,$2); }
+	| GTPHCL flow { $$=concat($1,$2); }
 	| GTPHCL {$$=$1; }
-	| consume GTPHCL { $$=concat($1,$2); }
+	| consumeph GTPHCL { $$=concat($1,$2); }
+	| consumeph GTPHCL flow { char *p=concat($1,$2); $$=concat(p,$3); }
 	| BPHRASEOP phraseopen GTPHCL flow { char *p=concat($1,$2),*x=concat(p,$3); $$=concat(x,$4); }
 	| BPHRASEOP phraseopen GTPHCL { char *p=concat($1,$2); $$=concat(p,$3); }
-	| consume BPHRASEOP phraseopen GTPHCL flow { char *p=concat($1,$2),*x=concat(p,$3),*y=concat(x,$4); $$=concat(y,$5);}
-	| consume BPHRASEOP phraseopen GTPHCL { char *p=concat($1,$2),*x=concat(p,$3); $$=concat(x,$4); }
+	| consumeph BPHRASEOP phraseopen GTPHCL flow { char *p=concat($1,$2),*x=concat(p,$3),*y=concat(x,$4); $$=concat(y,$5);}
+	| consumeph BPHRASEOP phraseopen GTPHCL { char *p=concat($1,$2),*x=concat(p,$3); $$=concat(x,$4); }
 	;
 
 list: LIOP listitem list { char *p=concat($1,$2); $$=concat(p,$3); }
@@ -256,8 +277,23 @@ figcap: flow FIGCAPCL {$$=concat($1,$2); }
 	;
 
 img:  ATTRIBUTE ATTRIBUTEVAL img { char *p=concat($1,$2); $$=concat(p,$3); }
-	| IMGCL {$$=$1; }
+	| IMGCL {$$=$1; } 
 	; 
+
+atag: ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL flow { char *p=concat($1,$2),*x=concat(p,$3),*y=concat(x,$4),*z=concat(y,$5); $$=concat(z,$6); }
+	| AOPOP flow ACL flow { char *p=concat($1,$2),*x=concat(p,$3);$$=concat(x,$4); }
+	| AOPOP ACL flow { char *p=concat($1,$2); $$=concat(p,$3); }
+	| ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL { char *p=concat($1,$2),*x=concat(p,$3),*y=concat(x,$4); $$=concat(y,$5); }
+    | AOPOP flow ACL { char *p=concat($1,$2); $$=concat(p,$3); }
+    | AOPOP ACL {$$=concat($1,$2); }
+	| ATTRIBUTE ATTRIBUTEVAL AOPOP ACL flow { char *p=concat($1,$2),*x=concat(p,$3),*y=concat(x,$4); $$=concat(y,$5); }
+	| ATTRIBUTE ATTRIBUTEVAL AOPOP ACL { char *p=concat($1,$2),*x=concat(p,$3);$$=concat(x,$4); }
+	;
+
+font: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL { char *p=concat($1,$2),*x=concat(p,$3);$$=concat(x,$4); }
+	| ATTRIBUTE ATTRIBUTEVAL FONTOOP flow FONTCL { char *p=concat($1,$2),*x=concat(p,$3),*y=concat(x,$4); $$=concat(y,$5); }
+	| FONTOOP flow FONTCL { char *p=concat($1,$2); $$=concat(p,$3); }
+	;
 
 %%
 void yyerror(const char *msg){
