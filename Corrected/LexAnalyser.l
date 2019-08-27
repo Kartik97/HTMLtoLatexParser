@@ -47,6 +47,8 @@ th "th"|"TH"
 td "td"|"TD"
 br "br"|"BR"
 comm "-->"
+symbol1 "alpha"|"beta"|"chi"|"delta"|"epsilon"|"eta"|"gamma"|"iota"|"kappa"|"lambda"|"mu"|"nu"|"omega"|"phi"|"pi"|"psi"|"rho"|"sigma"|"tau"
+symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"Sigma"|"Theta"
 
 %%
 {space}+ {}
@@ -54,11 +56,9 @@ comm "-->"
         yylval.value=strdup(yytext);
         return COMMENT;
 }
-[a-zA-Z0-9`~!@#$%\^&*()-_=+;:'",.?\/] {
-	if(yytext != "\n")
-	{	yylval.value = strdup(yytext);
-		return TEXT;
-	}
+"&"{symbol1}";"|"&"{symbol2}";" {
+        yylval.value = strdup(findpos(yytext,yyleng,1));
+        return SYMBOL;
 }
 "<"{doctype}{space}+[^{html}]*{html}">"|"<"{doctype}{space}+[^{html}]*{html}{space}+[^>]*">" {
 	yylval.value = strdup("DOCTYPE ");
@@ -336,7 +336,7 @@ comm "-->"
         yylval.value=strdup("BR ");
         return BR;
 }
-
+. {}
 %%
 
 int yywrap(){
@@ -347,7 +347,7 @@ char *findpos(const char *s,int len,int start){
 	char *p=(char *)malloc(sizeof(char)*100);
 	for(;i<len;i++){
 		if((s[i]>=65 && s[i]<=90) || (s[i]>=97 && s[i]<=122) || (s[i]>=48 && s[i]<=57))
-			p[k++]=toupper(s[i]);
+			p[k++]=(s[i]);
 		else break;
 	}
         if(start==2){

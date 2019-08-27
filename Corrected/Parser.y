@@ -44,7 +44,7 @@ char* concat(char *s1,char *s2);
 %token FIGOP FIGCL FIGCAPOP FIGCAPCL
 %token DLOP DLCL DTOP DTCL DDOP DDCL
 %token <value> TABOP TABCL CAPOP CAPCL TROP TRCL THOP THCL TDOP TDCL BR
-%token <value> COMMENT SPCHAR
+%token <value> COMMENT SPCHAR SYMBOL
 
 %type <value> ATTRIBUTE DOCTYPE HTMLOP HTMLCL HEADOP HEADCL TITLEOP TITLECL TEXT BODYOP BODYCL PHRASEOP PHRASECL BPHRASEOP BPHRASECL
 %type <value> ATTRIBUTEVAL AOP AOPOP ACL IMGOP IMGCL LOP LCL LIOP LICL FIGCAPOP FIGCAPCL
@@ -82,6 +82,7 @@ misc: COMMENT {$$=$1; }
 	| BR {$$=$1; }
 	| TEXT {$$=$1; }
 	| IMGOP img {$$=concat($1,$2); }
+	| SYMBOL {$$=$1; }
 	;
 
 consume: consume misc { $$=concat($1,$2); }
@@ -92,6 +93,7 @@ miscph: misc {$$=$1; }
 	| AOP atagph {$$=concat($1,$2); }
 	| FONTOP fontph {$$=concat($1,$2); }
 	;
+	
 consumeph: consumeph miscph {$$=concat($1,$2); }
 	| miscph {$$=$1; }
 	;
