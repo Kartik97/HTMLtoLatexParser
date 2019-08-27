@@ -47,6 +47,7 @@ th "th"|"TH"
 td "td"|"TD"
 br "br"|"BR"
 comm "-->"
+word \b[^{space}<]+\b
 symbol1 "alpha"|"beta"|"chi"|"delta"|"epsilon"|"eta"|"gamma"|"iota"|"kappa"|"lambda"|"mu"|"nu"|"omega"|"phi"|"pi"|"psi"|"rho"|"sigma"|"tau"
 symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"Sigma"|"Theta"
 
@@ -59,6 +60,11 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
 "&"{symbol1}";"|"&"{symbol2}";" {
         yylval.value = strdup(findpos(yytext,yyleng,1));
         return SYMBOL;
+}
+
+{word}  {
+        ECHO;
+        cout<<endl;
 }
 "<"{doctype}{space}+[^{html}]*{html}">"|"<"{doctype}{space}+[^{html}]*{html}{space}+[^>]*">" {
 	yylval.value = strdup("DOCTYPE ");
@@ -336,7 +342,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         yylval.value=strdup("BR ");
         return BR;
 }
-. {}
+
 %%
 
 int yywrap(){
