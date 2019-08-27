@@ -100,7 +100,8 @@ flow: BPHRASEOP phraseopen { cout<<$1; }
 	;
 
 misc: COMMENT {cout<<$1; }
-	| BR {cout<<$1; }
+	| misc BR {cout<<$2; }
+	| BR {}
 	;
 
 table: CAPOP caption TABCL{cout<<$1; }

@@ -3,6 +3,11 @@ Terminals unused in grammar
    SPCHAR
 
 
+State 50 conflicts: 1 shift/reduce
+State 89 conflicts: 27 reduce/reduce
+State 108 conflicts: 1 shift/reduce
+
+
 Grammar
 
     0 $accept: st $end
@@ -45,145 +50,146 @@ Grammar
    31     | text
 
    32 misc: COMMENT
-   33     | BR
+   33     | misc BR
+   34     | BR
 
-   34 table: CAPOP caption TABCL
-   35      | CAPOP caption TROP tr TABCL
-   36      | TROP tr TABCL
-   37      | CAPOP caption TABCL flow
-   38      | CAPOP caption TROP tr TABCL flow
-   39      | TROP tr TABCL flow
-   40      | TABCL
-   41      | TABCL flow
+   35 table: CAPOP caption TABCL
+   36      | CAPOP caption TROP tr TABCL
+   37      | TROP tr TABCL
+   38      | CAPOP caption TABCL flow
+   39      | CAPOP caption TROP tr TABCL flow
+   40      | TROP tr TABCL flow
+   41      | TABCL
+   42      | TABCL flow
 
-   42 caption: flow CAPCL
-   43        | CAPCL
+   43 caption: flow CAPCL
+   44        | CAPCL
 
-   44 tr: TRCL
-   45   | THOP th TRCL
-   46   | TDOP td TRCL
-   47   | TRCL TROP tr
-   48   | THOP th TRCL TROP tr
-   49   | TDOP td TRCL TROP tr
-   50   | misc TRCL
-   51   | misc THOP th TRCL
-   52   | misc TDOP td TRCL
-   53   | misc TRCL TROP tr
-   54   | misc THOP th TRCL TROP tr
-   55   | misc TDOP td TRCL TROP tr
+   45 tr: TRCL
+   46   | THOP th TRCL
+   47   | TDOP td TRCL
+   48   | TRCL TROP tr
+   49   | THOP th TRCL TROP tr
+   50   | TDOP td TRCL TROP tr
+   51   | misc TRCL
+   52   | misc THOP th TRCL
+   53   | misc TDOP td TRCL
+   54   | misc TRCL TROP tr
+   55   | misc THOP th TRCL TROP tr
+   56   | misc TDOP td TRCL TROP tr
 
-   56 th: THCL
-   57   | flow THCL
-   58   | THCL THOP th
-   59   | flow THCL THOP th
+   57 th: THCL
+   58   | flow THCL
+   59   | THCL THOP th
+   60   | flow THCL THOP th
 
-   60 td: TDCL
-   61   | flow TDCL
-   62   | TDCL TDOP td
-   63   | flow TDCL TDOP td
+   61 td: TDCL
+   62   | flow TDCL
+   63   | TDCL TDOP td
+   64   | flow TDCL TDOP td
 
-   64 div: DIVCL
-   65    | DIVCL flow
-   66    | flow DIVCL flow
-   67    | flow DIVCL
+   65 div: DIVCL
+   66    | DIVCL flow
+   67    | flow DIVCL flow
+   68    | flow DIVCL
 
-   68 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL flow
-   69     | AOPOP flow ACL flow
-   70     | AOPOP ACL flow
-   71     | ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL
-   72     | AOPOP flow ACL
-   73     | AOPOP ACL
-   74     | ATTRIBUTE ATTRIBUTEVAL AOPOP ACL flow
-   75     | ATTRIBUTE ATTRIBUTEVAL AOPOP ACL
+   69 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL flow
+   70     | AOPOP flow ACL flow
+   71     | AOPOP ACL flow
+   72     | ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL
+   73     | AOPOP flow ACL
+   74     | AOPOP ACL
+   75     | ATTRIBUTE ATTRIBUTEVAL AOPOP ACL flow
+   76     | ATTRIBUTE ATTRIBUTEVAL AOPOP ACL
 
-   76 gtph: phrases GTPHCL flow
-   77     | GTPHCL flow
-   78     | phrases GTPHCL
-   79     | GTPHCL
-   80     | BPHRASEOP phraseopen GTPHCL flow
-   81     | BPHRASEOP phraseopen GTPHCL
-   82     | phrasecom BPHRASEOP phraseopen GTPHCL flow
-   83     | phrasecom BPHRASEOP phraseopen GTPHCL
+   77 gtph: phrases GTPHCL flow
+   78     | GTPHCL flow
+   79     | phrases GTPHCL
+   80     | GTPHCL
+   81     | BPHRASEOP phraseopen GTPHCL flow
+   82     | BPHRASEOP phraseopen GTPHCL
+   83     | phrasecom BPHRASEOP phraseopen GTPHCL flow
+   84     | phrasecom BPHRASEOP phraseopen GTPHCL
 
-   84 phraseopen: phrases BPHRASECL flow
-   85           | BPHRASECL flow
-   86           | BPHRASECL
-   87           | font
-   88           | phrases BPHRASECL
+   85 phraseopen: phrases BPHRASECL flow
+   86           | BPHRASECL flow
+   87           | BPHRASECL
+   88           | font
+   89           | phrases BPHRASECL
 
-   89 phrases: phrases PHRASEOP phrases PHRASECL
-   90        | phrases PHRASEOP PHRASECL
-   91        | PHRASEOP phrases PHRASECL
-   92        | PHRASEOP PHRASECL
-   93        | phrases IMGOP img
-   94        | phrases font
-   95        | phrases FONTOP font
-   96        | FONTOP font
-   97        | font
-   98        | IMGOP img
-   99        | text
-  100        | phrasecom
-  101        | phrases PHRASEOP phrases PHRASECL phrasecom
-  102        | phrases PHRASEOP PHRASECL phrasecom
-  103        | PHRASEOP phrases PHRASECL phrasecom
-  104        | PHRASEOP PHRASECL phrasecom
-  105        | phrases IMGOP img phrasecom
-  106        | phrases font phrasecom
-  107        | phrases FONTOP font phrasecom
-  108        | FONTOP font phrasecom
-  109        | font phrasecom
-  110        | IMGOP img phrasecom
-  111        | text phrasecom
+   90 phrases: phrases PHRASEOP phrases PHRASECL
+   91        | phrases PHRASEOP PHRASECL
+   92        | PHRASEOP phrases PHRASECL
+   93        | PHRASEOP PHRASECL
+   94        | phrases IMGOP img
+   95        | phrases font
+   96        | phrases FONTOP font
+   97        | FONTOP font
+   98        | font
+   99        | IMGOP img
+  100        | text
+  101        | phrasecom
+  102        | phrases PHRASEOP phrases PHRASECL phrasecom
+  103        | phrases PHRASEOP PHRASECL phrasecom
+  104        | PHRASEOP phrases PHRASECL phrasecom
+  105        | PHRASEOP PHRASECL phrasecom
+  106        | phrases IMGOP img phrasecom
+  107        | phrases font phrasecom
+  108        | phrases FONTOP font phrasecom
+  109        | FONTOP font phrasecom
+  110        | font phrasecom
+  111        | IMGOP img phrasecom
+  112        | text phrasecom
 
-  112 phrasecom: misc
-  113          | phrasecom misc
+  113 phrasecom: misc
+  114          | phrasecom misc
 
-  114 img: ATTRIBUTE ATTRIBUTEVAL img
-  115    | IMGCL
+  115 img: ATTRIBUTE ATTRIBUTEVAL img
+  116    | IMGCL
 
-  116 fontsub: font
-  117        | font flow
+  117 fontsub: font
+  118        | font flow
 
-  118 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL
-  119     | ATTRIBUTE ATTRIBUTEVAL FONTOOP phrases FONTCL
-  120     | FONTOOP phrases FONTCL
+  119 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL
+  120     | ATTRIBUTE ATTRIBUTEVAL FONTOOP phrases FONTCL
+  121     | FONTOOP phrases FONTCL
 
-  121 list: LIOP listitem list
-  122     | LCL
+  122 list: LIOP listitem list
+  123     | LCL
 
-  123 listitem: flow LICL
-  124         | LICL
+  124 listitem: flow LICL
+  125         | LICL
 
-  125 figure: flow FIGCAPOP figcap FIGCL
-  126       | FIGCAPOP figcap FIGCL
-  127       | FIGCAPOP figcap flow FIGCL
-  128       | flow FIGCL
-  129       | FIGCL
-  130       | flow FIGCAPOP figcap FIGCL flow
-  131       | FIGCAPOP figcap FIGCL flow
-  132       | FIGCAPOP figcap flow FIGCL flow
-  133       | flow FIGCL flow
-  134       | FIGCL flow
+  126 figure: flow FIGCAPOP figcap FIGCL
+  127       | FIGCAPOP figcap FIGCL
+  128       | FIGCAPOP figcap flow FIGCL
+  129       | flow FIGCL
+  130       | FIGCL
+  131       | flow FIGCAPOP figcap FIGCL flow
+  132       | FIGCAPOP figcap FIGCL flow
+  133       | FIGCAPOP figcap flow FIGCL flow
+  134       | flow FIGCL flow
+  135       | FIGCL flow
 
-  135 figcap: flow FIGCAPCL
-  136       | FIGCAPCL
+  136 figcap: flow FIGCAPCL
+  137       | FIGCAPCL
 
-  137 dl: DLCL
-  138   | DIVOP div DLCL
-  139   | DTOP dt DLCL
-  140   | DLCL flow
-  141   | DIVOP div DLCL flow
-  142   | DTOP dt DLCL flow
+  138 dl: DLCL
+  139   | DIVOP div DLCL
+  140   | DTOP dt DLCL
+  141   | DLCL flow
+  142   | DIVOP div DLCL flow
+  143   | DTOP dt DLCL flow
 
-  143 dt: flow DTCL DDOP dd
-  144   | flow DTCL DDOP dd DTOP dt
-  145   | DTCL DDOP dd
-  146   | DTCL DDOP dd DTOP dt
+  144 dt: flow DTCL DDOP dd
+  145   | flow DTCL DDOP dd DTOP dt
+  146   | DTCL DDOP dd
+  147   | DTCL DDOP dd DTOP dt
 
-  147 dd: flow DDCL
-  148   | flow DDCL DDOP dd
-  149   | DDCL
-  150   | DDCL DDOP dd
+  148 dd: flow DDCL
+  149   | flow DDCL DDOP dd
+  150   | DDCL
+  151   | DDCL DDOP dd
 
 
 Terminals, with rules where they appear
@@ -199,50 +205,50 @@ TITLEOP (263) 12 13
 TITLECL (264) 12 13
 BODYOP (265) 16 17
 BODYCL (266) 16 17
-BPHRASEOP (267) 18 80 81 82 83
-BPHRASECL (268) 84 85 86 88
-PHRASEOP (269) 89 90 91 92 101 102 103 104
-PHRASECL (270) 89 90 91 92 101 102 103 104
+BPHRASEOP (267) 18 81 82 83 84
+BPHRASECL (268) 85 86 87 89
+PHRASEOP (269) 90 91 92 93 102 103 104 105
+PHRASECL (270) 90 91 92 93 102 103 104 105
 GTPHOP (271) 19
-GTPHCL (272) 76 77 78 79 80 81 82 83
+GTPHCL (272) 77 78 79 80 81 82 83 84
 TEXT (273) 14 15
-AOPOP (274) 68 69 70 71 72 73 74 75
+AOPOP (274) 69 70 71 72 73 74 75 76
 AOP (275) 20
-ACL (276) 68 69 70 71 72 73 74 75
-ATTRIBUTE (277) 68 71 74 75 114 118 119
-ATTRIBUTEVAL (278) 68 71 74 75 114 118 119
-DIVOP (279) 21 138 141
-DIVCL (280) 64 65 66 67
-IMGOP (281) 22 23 93 98 105 110
-IMGCL (282) 115
-FONTOP (283) 24 95 96 107 108
-FONTOOP (284) 118 119 120
-FONTCL (285) 118 119 120
+ACL (276) 69 70 71 72 73 74 75 76
+ATTRIBUTE (277) 69 72 75 76 115 119 120
+ATTRIBUTEVAL (278) 69 72 75 76 115 119 120
+DIVOP (279) 21 139 142
+DIVCL (280) 65 66 67 68
+IMGOP (281) 22 23 94 99 106 111
+IMGCL (282) 116
+FONTOP (283) 24 96 97 108 109
+FONTOOP (284) 119 120 121
+FONTCL (285) 119 120 121
 LOP (286) 25
-LCL (287) 122
-LIOP (288) 121
-LICL (289) 123 124
+LCL (287) 123
+LIOP (288) 122
+LICL (289) 124 125
 FIGOP (290) 26
-FIGCL (291) 125 126 127 128 129 130 131 132 133 134
-FIGCAPOP (292) 125 126 127 130 131 132
-FIGCAPCL (293) 135 136
+FIGCL (291) 126 127 128 129 130 131 132 133 134 135
+FIGCAPOP (292) 126 127 128 131 132 133
+FIGCAPCL (293) 136 137
 DLOP (294) 27
-DLCL (295) 137 138 139 140 141 142
-DTOP (296) 139 142 144 146
-DTCL (297) 143 144 145 146
-DDOP (298) 143 144 145 146 148 150
-DDCL (299) 147 148 149 150
+DLCL (295) 138 139 140 141 142 143
+DTOP (296) 140 143 145 147
+DTCL (297) 144 145 146 147
+DDOP (298) 144 145 146 147 149 151
+DDCL (299) 148 149 150 151
 TABOP (300) 28
-TABCL (301) 34 35 36 37 38 39 40 41
-CAPOP (302) 34 35 37 38
-CAPCL (303) 42 43
-TROP (304) 35 36 38 39 47 48 49 53 54 55
-TRCL (305) 44 45 46 47 48 49 50 51 52 53 54 55
-THOP (306) 45 48 51 54 58 59
-THCL (307) 56 57 58 59
-TDOP (308) 46 49 52 55 62 63
-TDCL (309) 60 61 62 63
-BR (310) 33
+TABCL (301) 35 36 37 38 39 40 41 42
+CAPOP (302) 35 36 38 39
+CAPCL (303) 43 44
+TROP (304) 36 37 39 40 48 49 50 54 55 56
+TRCL (305) 45 46 47 48 49 50 51 52 53 54 55 56
+THOP (306) 46 49 52 55 59 60
+THCL (307) 57 58 59 60
+TDOP (308) 47 50 53 56 63 64
+TDCL (309) 61 62 63 64
+BR (310) 33 34
 COMMENT (311) 32
 SPCHAR (312)
 
@@ -258,63 +264,63 @@ head (60)
 title (61)
     on left: 12 13, on right: 10
 text (62)
-    on left: 14 15, on right: 13 14 31 99 111
+    on left: 14 15, on right: 13 14 31 100 112
 body (63)
     on left: 16 17, on right: 6 7 8 9
 flow (64)
     on left: 18 19 20 21 22 23 24 25 26 27 28 29 30 31, on right: 16
-    23 29 37 38 39 41 42 57 59 61 63 65 66 67 68 69 70 71 72 74 76
-    77 80 82 84 85 117 123 125 127 128 130 131 132 133 134 135 140
-    141 142 143 144 147 148
+    23 29 38 39 40 42 43 58 60 62 64 66 67 68 69 70 71 72 73 75 77
+    78 81 83 85 86 118 124 126 128 129 131 132 133 134 135 136 141
+    142 143 144 145 148 149
 misc (65)
-    on left: 32 33, on right: 29 30 50 51 52 53 54 55 112 113
+    on left: 32 33 34, on right: 29 30 33 51 52 53 54 55 56 113 114
 table (66)
-    on left: 34 35 36 37 38 39 40 41, on right: 28
+    on left: 35 36 37 38 39 40 41 42, on right: 28
 caption (67)
-    on left: 42 43, on right: 34 35 37 38
+    on left: 43 44, on right: 35 36 38 39
 tr (68)
-    on left: 44 45 46 47 48 49 50 51 52 53 54 55, on right: 35 36 38
-    39 47 48 49 53 54 55
+    on left: 45 46 47 48 49 50 51 52 53 54 55 56, on right: 36 37 39
+    40 48 49 50 54 55 56
 th (69)
-    on left: 56 57 58 59, on right: 45 48 51 54 58 59
+    on left: 57 58 59 60, on right: 46 49 52 55 59 60
 td (70)
-    on left: 60 61 62 63, on right: 46 49 52 55 62 63
+    on left: 61 62 63 64, on right: 47 50 53 56 63 64
 div (71)
-    on left: 64 65 66 67, on right: 21 138 141
+    on left: 65 66 67 68, on right: 21 139 142
 atag (72)
-    on left: 68 69 70 71 72 73 74 75, on right: 20
+    on left: 69 70 71 72 73 74 75 76, on right: 20
 gtph (73)
-    on left: 76 77 78 79 80 81 82 83, on right: 19
+    on left: 77 78 79 80 81 82 83 84, on right: 19
 phraseopen (74)
-    on left: 84 85 86 87 88, on right: 18 80 81 82 83
+    on left: 85 86 87 88 89, on right: 18 81 82 83 84
 phrases (75)
-    on left: 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105
-    106 107 108 109 110 111, on right: 76 78 84 88 89 90 91 93 94 95
-    101 102 103 105 106 107 119 120
+    on left: 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105
+    106 107 108 109 110 111 112, on right: 77 79 85 89 90 91 92 94
+    95 96 102 103 104 106 107 108 120 121
 phrasecom (76)
-    on left: 112 113, on right: 82 83 100 101 102 103 104 105 106 107
-    108 109 110 111 113
+    on left: 113 114, on right: 83 84 101 102 103 104 105 106 107 108
+    109 110 111 112 114
 img (77)
-    on left: 114 115, on right: 22 23 93 98 105 110 114
+    on left: 115 116, on right: 22 23 94 99 106 111 115
 fontsub (78)
-    on left: 116 117, on right: 24
+    on left: 117 118, on right: 24
 font (79)
-    on left: 118 119 120, on right: 87 94 95 96 97 106 107 108 109
-    116 117
+    on left: 119 120 121, on right: 88 95 96 97 98 107 108 109 110
+    117 118
 list (80)
-    on left: 121 122, on right: 25 121
+    on left: 122 123, on right: 25 122
 listitem (81)
-    on left: 123 124, on right: 121
+    on left: 124 125, on right: 122
 figure (82)
-    on left: 125 126 127 128 129 130 131 132 133 134, on right: 26
+    on left: 126 127 128 129 130 131 132 133 134 135, on right: 26
 figcap (83)
-    on left: 135 136, on right: 125 126 127 130 131 132
+    on left: 136 137, on right: 126 127 128 131 132 133
 dl (84)
-    on left: 137 138 139 140 141 142, on right: 27
+    on left: 138 139 140 141 142 143, on right: 27
 dt (85)
-    on left: 143 144 145 146, on right: 139 142 144 146
+    on left: 144 145 146 147, on right: 140 143 145 147
 dd (86)
-    on left: 147 148 149 150, on right: 143 144 145 146 148 150
+    on left: 148 149 150 151, on right: 144 145 146 147 149 151
 
 
 State 0
@@ -671,9 +677,9 @@ State 28
 
 State 29
 
-   33 misc: BR .
+   34 misc: BR .
 
-    $default  reduce using rule 33 (misc)
+    $default  reduce using rule 34 (misc)
 
 
 State 30
@@ -704,6 +710,7 @@ State 33
 
    29 flow: misc . flow
    30     | misc .
+   33 misc: misc . BR
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -716,13 +723,13 @@ State 33
     FIGOP      shift, and go to state 26
     DLOP       shift, and go to state 27
     TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
+    BR         shift, and go to state 89
     COMMENT    shift, and go to state 30
 
     $default  reduce using rule 30 (flow)
 
     text  go to state 31
-    flow  go to state 89
+    flow  go to state 90
     misc  go to state 33
 
 
@@ -737,7 +744,7 @@ State 35
 
     7 st: HTMLOP head body . HTMLCL
 
-    HTMLCL  shift, and go to state 90
+    HTMLCL  shift, and go to state 91
 
 
 State 36
@@ -758,7 +765,7 @@ State 38
 
     6 st: DOCTYPE HTMLOP head body . HTMLCL
 
-    HTMLCL  shift, and go to state 91
+    HTMLCL  shift, and go to state 92
 
 
 State 39
@@ -780,7 +787,7 @@ State 41
    13 title: TITLEOP text . TITLECL
    14 text: text . TEXT
 
-    TITLECL  shift, and go to state 92
+    TITLECL  shift, and go to state 93
     TEXT     shift, and go to state 87
 
 
@@ -793,8 +800,8 @@ State 42
 
 State 43
 
-   85 phraseopen: BPHRASECL . flow
-   86           | BPHRASECL .
+   86 phraseopen: BPHRASECL . flow
+   87           | BPHRASECL .
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -810,22 +817,22 @@ State 43
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
 
-    $default  reduce using rule 86 (phraseopen)
+    $default  reduce using rule 87 (phraseopen)
 
     text  go to state 31
-    flow  go to state 93
+    flow  go to state 94
     misc  go to state 33
 
 
 State 44
 
-   91 phrases: PHRASEOP . phrases PHRASECL
-   92        | PHRASEOP . PHRASECL
-  103        | PHRASEOP . phrases PHRASECL phrasecom
-  104        | PHRASEOP . PHRASECL phrasecom
+   92 phrases: PHRASEOP . phrases PHRASECL
+   93        | PHRASEOP . PHRASECL
+  104        | PHRASEOP . phrases PHRASECL phrasecom
+  105        | PHRASEOP . PHRASECL phrasecom
 
     PHRASEOP   shift, and go to state 44
-    PHRASECL   shift, and go to state 94
+    PHRASECL   shift, and go to state 95
     TEXT       shift, and go to state 20
     ATTRIBUTE  shift, and go to state 45
     IMGOP      shift, and go to state 46
@@ -836,44 +843,44 @@ State 44
 
     text       go to state 49
     misc       go to state 50
-    phrases    go to state 95
+    phrases    go to state 96
     phrasecom  go to state 53
     font       go to state 60
 
 
 State 45
 
-  118 font: ATTRIBUTE . ATTRIBUTEVAL FONTOOP FONTCL
-  119     | ATTRIBUTE . ATTRIBUTEVAL FONTOOP phrases FONTCL
+  119 font: ATTRIBUTE . ATTRIBUTEVAL FONTOOP FONTCL
+  120     | ATTRIBUTE . ATTRIBUTEVAL FONTOOP phrases FONTCL
 
-    ATTRIBUTEVAL  shift, and go to state 96
+    ATTRIBUTEVAL  shift, and go to state 97
 
 
 State 46
 
-   98 phrases: IMGOP . img
-  110        | IMGOP . img phrasecom
+   99 phrases: IMGOP . img
+  111        | IMGOP . img phrasecom
 
     ATTRIBUTE  shift, and go to state 67
     IMGCL      shift, and go to state 68
 
-    img  go to state 97
+    img  go to state 98
 
 
 State 47
 
-   96 phrases: FONTOP . font
-  108        | FONTOP . font phrasecom
+   97 phrases: FONTOP . font
+  109        | FONTOP . font phrasecom
 
     ATTRIBUTE  shift, and go to state 45
     FONTOOP    shift, and go to state 48
 
-    font  go to state 98
+    font  go to state 99
 
 
 State 48
 
-  120 font: FONTOOP . phrases FONTCL
+  121 font: FONTOOP . phrases FONTCL
 
     PHRASEOP   shift, and go to state 44
     TEXT       shift, and go to state 20
@@ -886,7 +893,7 @@ State 48
 
     text       go to state 49
     misc       go to state 50
-    phrases    go to state 99
+    phrases    go to state 100
     phrasecom  go to state 53
     font       go to state 60
 
@@ -894,24 +901,28 @@ State 48
 State 49
 
    14 text: text . TEXT
-   99 phrases: text .
-  111        | text . phrasecom
+  100 phrases: text .
+  112        | text . phrasecom
 
     TEXT     shift, and go to state 87
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
 
-    $default  reduce using rule 99 (phrases)
+    $default  reduce using rule 100 (phrases)
 
     misc       go to state 50
-    phrasecom  go to state 100
+    phrasecom  go to state 101
 
 
 State 50
 
-  112 phrasecom: misc .
+   33 misc: misc . BR
+  113 phrasecom: misc .
 
-    $default  reduce using rule 112 (phrasecom)
+    BR  shift, and go to state 102
+
+    BR        [reduce using rule 113 (phrasecom)]
+    $default  reduce using rule 113 (phrasecom)
 
 
 State 51
@@ -923,67 +934,67 @@ State 51
 
 State 52
 
-   84 phraseopen: phrases . BPHRASECL flow
-   88           | phrases . BPHRASECL
-   89 phrases: phrases . PHRASEOP phrases PHRASECL
-   90        | phrases . PHRASEOP PHRASECL
-   93        | phrases . IMGOP img
-   94        | phrases . font
-   95        | phrases . FONTOP font
-  101        | phrases . PHRASEOP phrases PHRASECL phrasecom
-  102        | phrases . PHRASEOP PHRASECL phrasecom
-  105        | phrases . IMGOP img phrasecom
-  106        | phrases . font phrasecom
-  107        | phrases . FONTOP font phrasecom
+   85 phraseopen: phrases . BPHRASECL flow
+   89           | phrases . BPHRASECL
+   90 phrases: phrases . PHRASEOP phrases PHRASECL
+   91        | phrases . PHRASEOP PHRASECL
+   94        | phrases . IMGOP img
+   95        | phrases . font
+   96        | phrases . FONTOP font
+  102        | phrases . PHRASEOP phrases PHRASECL phrasecom
+  103        | phrases . PHRASEOP PHRASECL phrasecom
+  106        | phrases . IMGOP img phrasecom
+  107        | phrases . font phrasecom
+  108        | phrases . FONTOP font phrasecom
 
-    BPHRASECL  shift, and go to state 101
-    PHRASEOP   shift, and go to state 102
+    BPHRASECL  shift, and go to state 103
+    PHRASEOP   shift, and go to state 104
     ATTRIBUTE  shift, and go to state 45
-    IMGOP      shift, and go to state 103
-    FONTOP     shift, and go to state 104
+    IMGOP      shift, and go to state 105
+    FONTOP     shift, and go to state 106
     FONTOOP    shift, and go to state 48
 
-    font  go to state 105
+    font  go to state 107
 
 
 State 53
 
-  100 phrases: phrasecom .
-  113 phrasecom: phrasecom . misc
+  101 phrases: phrasecom .
+  114 phrasecom: phrasecom . misc
 
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
 
-    $default  reduce using rule 100 (phrases)
+    $default  reduce using rule 101 (phrases)
 
-    misc  go to state 106
+    misc  go to state 108
 
 
 State 54
 
-   87 phraseopen: font .
-   97 phrases: font .
-  109        | font . phrasecom
+   88 phraseopen: font .
+   98 phrases: font .
+  110        | font . phrasecom
 
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
 
-    BPHRASECL  reduce using rule 97 (phrases)
-    PHRASEOP   reduce using rule 97 (phrases)
-    ATTRIBUTE  reduce using rule 97 (phrases)
-    IMGOP      reduce using rule 97 (phrases)
-    FONTOP     reduce using rule 97 (phrases)
-    FONTOOP    reduce using rule 97 (phrases)
-    $default   reduce using rule 87 (phraseopen)
+    BPHRASECL  reduce using rule 98 (phrases)
+    PHRASEOP   reduce using rule 98 (phrases)
+    ATTRIBUTE  reduce using rule 98 (phrases)
+    IMGOP      reduce using rule 98 (phrases)
+    FONTOP     reduce using rule 98 (phrases)
+    FONTOOP    reduce using rule 98 (phrases)
+    $default   reduce using rule 88 (phraseopen)
 
     misc       go to state 50
-    phrasecom  go to state 107
+    phrasecom  go to state 109
 
 
 State 55
 
-   80 gtph: BPHRASEOP . phraseopen GTPHCL flow
-   81     | BPHRASEOP . phraseopen GTPHCL
+   81 gtph: BPHRASEOP . phraseopen GTPHCL flow
+   82     | BPHRASEOP . phraseopen GTPHCL
 
     BPHRASECL  shift, and go to state 43
     PHRASEOP   shift, and go to state 44
@@ -997,7 +1008,7 @@ State 55
 
     text        go to state 49
     misc        go to state 50
-    phraseopen  go to state 108
+    phraseopen  go to state 110
     phrases     go to state 52
     phrasecom   go to state 53
     font        go to state 54
@@ -1005,8 +1016,8 @@ State 55
 
 State 56
 
-   77 gtph: GTPHCL . flow
-   79     | GTPHCL .
+   78 gtph: GTPHCL . flow
+   80     | GTPHCL .
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -1022,10 +1033,10 @@ State 56
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
 
-    $default  reduce using rule 79 (gtph)
+    $default  reduce using rule 80 (gtph)
 
     text  go to state 31
-    flow  go to state 109
+    flow  go to state 111
     misc  go to state 33
 
 
@@ -1038,71 +1049,71 @@ State 57
 
 State 58
 
-   76 gtph: phrases . GTPHCL flow
-   78     | phrases . GTPHCL
-   89 phrases: phrases . PHRASEOP phrases PHRASECL
-   90        | phrases . PHRASEOP PHRASECL
-   93        | phrases . IMGOP img
-   94        | phrases . font
-   95        | phrases . FONTOP font
-  101        | phrases . PHRASEOP phrases PHRASECL phrasecom
-  102        | phrases . PHRASEOP PHRASECL phrasecom
-  105        | phrases . IMGOP img phrasecom
-  106        | phrases . font phrasecom
-  107        | phrases . FONTOP font phrasecom
+   77 gtph: phrases . GTPHCL flow
+   79     | phrases . GTPHCL
+   90 phrases: phrases . PHRASEOP phrases PHRASECL
+   91        | phrases . PHRASEOP PHRASECL
+   94        | phrases . IMGOP img
+   95        | phrases . font
+   96        | phrases . FONTOP font
+  102        | phrases . PHRASEOP phrases PHRASECL phrasecom
+  103        | phrases . PHRASEOP PHRASECL phrasecom
+  106        | phrases . IMGOP img phrasecom
+  107        | phrases . font phrasecom
+  108        | phrases . FONTOP font phrasecom
 
-    PHRASEOP   shift, and go to state 102
-    GTPHCL     shift, and go to state 110
+    PHRASEOP   shift, and go to state 104
+    GTPHCL     shift, and go to state 112
     ATTRIBUTE  shift, and go to state 45
-    IMGOP      shift, and go to state 103
-    FONTOP     shift, and go to state 104
+    IMGOP      shift, and go to state 105
+    FONTOP     shift, and go to state 106
     FONTOOP    shift, and go to state 48
 
-    font  go to state 105
+    font  go to state 107
 
 
 State 59
 
-   82 gtph: phrasecom . BPHRASEOP phraseopen GTPHCL flow
-   83     | phrasecom . BPHRASEOP phraseopen GTPHCL
-  100 phrases: phrasecom .
-  113 phrasecom: phrasecom . misc
+   83 gtph: phrasecom . BPHRASEOP phraseopen GTPHCL flow
+   84     | phrasecom . BPHRASEOP phraseopen GTPHCL
+  101 phrases: phrasecom .
+  114 phrasecom: phrasecom . misc
 
-    BPHRASEOP  shift, and go to state 111
+    BPHRASEOP  shift, and go to state 113
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
 
-    $default  reduce using rule 100 (phrases)
+    $default  reduce using rule 101 (phrases)
 
-    misc  go to state 106
+    misc  go to state 108
 
 
 State 60
 
-   97 phrases: font .
-  109        | font . phrasecom
+   98 phrases: font .
+  110        | font . phrasecom
 
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
 
-    $default  reduce using rule 97 (phrases)
+    $default  reduce using rule 98 (phrases)
 
     misc       go to state 50
-    phrasecom  go to state 107
+    phrasecom  go to state 109
 
 
 State 61
 
-   69 atag: AOPOP . flow ACL flow
-   70     | AOPOP . ACL flow
-   72     | AOPOP . flow ACL
-   73     | AOPOP . ACL
+   70 atag: AOPOP . flow ACL flow
+   71     | AOPOP . ACL flow
+   73     | AOPOP . flow ACL
+   74     | AOPOP . ACL
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
     TEXT       shift, and go to state 20
     AOP        shift, and go to state 21
-    ACL        shift, and go to state 112
+    ACL        shift, and go to state 114
     DIVOP      shift, and go to state 22
     IMGOP      shift, and go to state 23
     FONTOP     shift, and go to state 24
@@ -1114,18 +1125,18 @@ State 61
     COMMENT    shift, and go to state 30
 
     text  go to state 31
-    flow  go to state 113
+    flow  go to state 115
     misc  go to state 33
 
 
 State 62
 
-   68 atag: ATTRIBUTE . ATTRIBUTEVAL AOPOP flow ACL flow
-   71     | ATTRIBUTE . ATTRIBUTEVAL AOPOP flow ACL
-   74     | ATTRIBUTE . ATTRIBUTEVAL AOPOP ACL flow
-   75     | ATTRIBUTE . ATTRIBUTEVAL AOPOP ACL
+   69 atag: ATTRIBUTE . ATTRIBUTEVAL AOPOP flow ACL flow
+   72     | ATTRIBUTE . ATTRIBUTEVAL AOPOP flow ACL
+   75     | ATTRIBUTE . ATTRIBUTEVAL AOPOP ACL flow
+   76     | ATTRIBUTE . ATTRIBUTEVAL AOPOP ACL
 
-    ATTRIBUTEVAL  shift, and go to state 114
+    ATTRIBUTEVAL  shift, and go to state 116
 
 
 State 63
@@ -1137,8 +1148,8 @@ State 63
 
 State 64
 
-   64 div: DIVCL .
-   65    | DIVCL . flow
+   65 div: DIVCL .
+   66    | DIVCL . flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -1154,19 +1165,19 @@ State 64
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
 
-    $default  reduce using rule 64 (div)
+    $default  reduce using rule 65 (div)
 
     text  go to state 31
-    flow  go to state 115
+    flow  go to state 117
     misc  go to state 33
 
 
 State 65
 
-   66 div: flow . DIVCL flow
-   67    | flow . DIVCL
+   67 div: flow . DIVCL flow
+   68    | flow . DIVCL
 
-    DIVCL  shift, and go to state 116
+    DIVCL  shift, and go to state 118
 
 
 State 66
@@ -1178,16 +1189,16 @@ State 66
 
 State 67
 
-  114 img: ATTRIBUTE . ATTRIBUTEVAL img
+  115 img: ATTRIBUTE . ATTRIBUTEVAL img
 
-    ATTRIBUTEVAL  shift, and go to state 117
+    ATTRIBUTEVAL  shift, and go to state 119
 
 
 State 68
 
-  115 img: IMGCL .
+  116 img: IMGCL .
 
-    $default  reduce using rule 115 (img)
+    $default  reduce using rule 116 (img)
 
 
 State 69
@@ -1212,7 +1223,7 @@ State 69
     $default  reduce using rule 22 (flow)
 
     text  go to state 31
-    flow  go to state 118
+    flow  go to state 120
     misc  go to state 33
 
 
@@ -1225,8 +1236,8 @@ State 70
 
 State 71
 
-  116 fontsub: font .
-  117        | font . flow
+  117 fontsub: font .
+  118        | font . flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -1242,23 +1253,23 @@ State 71
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
 
-    $default  reduce using rule 116 (fontsub)
+    $default  reduce using rule 117 (fontsub)
 
     text  go to state 31
-    flow  go to state 119
+    flow  go to state 121
     misc  go to state 33
 
 
 State 72
 
-  122 list: LCL .
+  123 list: LCL .
 
-    $default  reduce using rule 122 (list)
+    $default  reduce using rule 123 (list)
 
 
 State 73
 
-  121 list: LIOP . listitem list
+  122 list: LIOP . listitem list
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -1268,7 +1279,7 @@ State 73
     IMGOP      shift, and go to state 23
     FONTOP     shift, and go to state 24
     LOP        shift, and go to state 25
-    LICL       shift, and go to state 120
+    LICL       shift, and go to state 122
     FIGOP      shift, and go to state 26
     DLOP       shift, and go to state 27
     TABOP      shift, and go to state 28
@@ -1276,9 +1287,9 @@ State 73
     COMMENT    shift, and go to state 30
 
     text      go to state 31
-    flow      go to state 121
+    flow      go to state 123
     misc      go to state 33
-    listitem  go to state 122
+    listitem  go to state 124
 
 
 State 74
@@ -1290,8 +1301,8 @@ State 74
 
 State 75
 
-  129 figure: FIGCL .
-  134       | FIGCL . flow
+  130 figure: FIGCL .
+  135       | FIGCL . flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -1307,19 +1318,19 @@ State 75
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
 
-    $default  reduce using rule 129 (figure)
+    $default  reduce using rule 130 (figure)
 
     text  go to state 31
-    flow  go to state 123
+    flow  go to state 125
     misc  go to state 33
 
 
 State 76
 
-  126 figure: FIGCAPOP . figcap FIGCL
-  127       | FIGCAPOP . figcap flow FIGCL
-  131       | FIGCAPOP . figcap FIGCL flow
-  132       | FIGCAPOP . figcap flow FIGCL flow
+  127 figure: FIGCAPOP . figcap FIGCL
+  128       | FIGCAPOP . figcap flow FIGCL
+  132       | FIGCAPOP . figcap FIGCL flow
+  133       | FIGCAPOP . figcap flow FIGCL flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -1330,27 +1341,27 @@ State 76
     FONTOP     shift, and go to state 24
     LOP        shift, and go to state 25
     FIGOP      shift, and go to state 26
-    FIGCAPCL   shift, and go to state 124
+    FIGCAPCL   shift, and go to state 126
     DLOP       shift, and go to state 27
     TABOP      shift, and go to state 28
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
 
     text    go to state 31
-    flow    go to state 125
+    flow    go to state 127
     misc    go to state 33
-    figcap  go to state 126
+    figcap  go to state 128
 
 
 State 77
 
-  125 figure: flow . FIGCAPOP figcap FIGCL
-  128       | flow . FIGCL
-  130       | flow . FIGCAPOP figcap FIGCL flow
-  133       | flow . FIGCL flow
+  126 figure: flow . FIGCAPOP figcap FIGCL
+  129       | flow . FIGCL
+  131       | flow . FIGCAPOP figcap FIGCL flow
+  134       | flow . FIGCL flow
 
-    FIGCL     shift, and go to state 127
-    FIGCAPOP  shift, and go to state 128
+    FIGCL     shift, and go to state 129
+    FIGCAPOP  shift, and go to state 130
 
 
 State 78
@@ -1362,8 +1373,8 @@ State 78
 
 State 79
 
-  138 dl: DIVOP . div DLCL
-  141   | DIVOP . div DLCL flow
+  139 dl: DIVOP . div DLCL
+  142   | DIVOP . div DLCL flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -1383,13 +1394,13 @@ State 79
     text  go to state 31
     flow  go to state 65
     misc  go to state 33
-    div   go to state 129
+    div   go to state 131
 
 
 State 80
 
-  137 dl: DLCL .
-  140   | DLCL . flow
+  138 dl: DLCL .
+  141   | DLCL . flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -1405,17 +1416,17 @@ State 80
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
 
-    $default  reduce using rule 137 (dl)
+    $default  reduce using rule 138 (dl)
 
     text  go to state 31
-    flow  go to state 130
+    flow  go to state 132
     misc  go to state 33
 
 
 State 81
 
-  139 dl: DTOP . dt DLCL
-  142   | DTOP . dt DLCL flow
+  140 dl: DTOP . dt DLCL
+  143   | DTOP . dt DLCL flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -1427,15 +1438,15 @@ State 81
     LOP        shift, and go to state 25
     FIGOP      shift, and go to state 26
     DLOP       shift, and go to state 27
-    DTCL       shift, and go to state 131
+    DTCL       shift, and go to state 133
     TABOP      shift, and go to state 28
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
 
     text  go to state 31
-    flow  go to state 132
+    flow  go to state 134
     misc  go to state 33
-    dt    go to state 133
+    dt    go to state 135
 
 
 State 82
@@ -1447,8 +1458,8 @@ State 82
 
 State 83
 
-   40 table: TABCL .
-   41      | TABCL . flow
+   41 table: TABCL .
+   42      | TABCL . flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -1464,19 +1475,19 @@ State 83
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
 
-    $default  reduce using rule 40 (table)
+    $default  reduce using rule 41 (table)
 
     text  go to state 31
-    flow  go to state 134
+    flow  go to state 136
     misc  go to state 33
 
 
 State 84
 
-   34 table: CAPOP . caption TABCL
-   35      | CAPOP . caption TROP tr TABCL
-   37      | CAPOP . caption TABCL flow
-   38      | CAPOP . caption TROP tr TABCL flow
+   35 table: CAPOP . caption TABCL
+   36      | CAPOP . caption TROP tr TABCL
+   38      | CAPOP . caption TABCL flow
+   39      | CAPOP . caption TROP tr TABCL flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -1489,29 +1500,29 @@ State 84
     FIGOP      shift, and go to state 26
     DLOP       shift, and go to state 27
     TABOP      shift, and go to state 28
-    CAPCL      shift, and go to state 135
+    CAPCL      shift, and go to state 137
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
 
     text     go to state 31
-    flow     go to state 136
+    flow     go to state 138
     misc     go to state 33
-    caption  go to state 137
+    caption  go to state 139
 
 
 State 85
 
-   36 table: TROP . tr TABCL
-   39      | TROP . tr TABCL flow
+   37 table: TROP . tr TABCL
+   40      | TROP . tr TABCL flow
 
-    TRCL     shift, and go to state 138
-    THOP     shift, and go to state 139
-    TDOP     shift, and go to state 140
+    TRCL     shift, and go to state 140
+    THOP     shift, and go to state 141
+    TDOP     shift, and go to state 142
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
 
-    misc  go to state 141
-    tr    go to state 142
+    misc  go to state 143
+    tr    go to state 144
 
 
 State 86
@@ -1537,155 +1548,224 @@ State 88
 
 State 89
 
+   33 misc: misc BR .
+   34     | BR .
+
+    BODYCL     reduce using rule 33 (misc)
+    BODYCL     [reduce using rule 34 (misc)]
+    BPHRASEOP  reduce using rule 33 (misc)
+    BPHRASEOP  [reduce using rule 34 (misc)]
+    GTPHOP     reduce using rule 33 (misc)
+    GTPHOP     [reduce using rule 34 (misc)]
+    GTPHCL     reduce using rule 33 (misc)
+    GTPHCL     [reduce using rule 34 (misc)]
+    TEXT       reduce using rule 33 (misc)
+    TEXT       [reduce using rule 34 (misc)]
+    AOP        reduce using rule 33 (misc)
+    AOP        [reduce using rule 34 (misc)]
+    ACL        reduce using rule 33 (misc)
+    ACL        [reduce using rule 34 (misc)]
+    DIVOP      reduce using rule 33 (misc)
+    DIVOP      [reduce using rule 34 (misc)]
+    DIVCL      reduce using rule 33 (misc)
+    DIVCL      [reduce using rule 34 (misc)]
+    IMGOP      reduce using rule 33 (misc)
+    IMGOP      [reduce using rule 34 (misc)]
+    FONTOP     reduce using rule 33 (misc)
+    FONTOP     [reduce using rule 34 (misc)]
+    LOP        reduce using rule 33 (misc)
+    LOP        [reduce using rule 34 (misc)]
+    LICL       reduce using rule 33 (misc)
+    LICL       [reduce using rule 34 (misc)]
+    FIGOP      reduce using rule 33 (misc)
+    FIGOP      [reduce using rule 34 (misc)]
+    FIGCL      reduce using rule 33 (misc)
+    FIGCL      [reduce using rule 34 (misc)]
+    FIGCAPOP   reduce using rule 33 (misc)
+    FIGCAPOP   [reduce using rule 34 (misc)]
+    FIGCAPCL   reduce using rule 33 (misc)
+    FIGCAPCL   [reduce using rule 34 (misc)]
+    DLOP       reduce using rule 33 (misc)
+    DLOP       [reduce using rule 34 (misc)]
+    DLCL       reduce using rule 33 (misc)
+    DLCL       [reduce using rule 34 (misc)]
+    DTCL       reduce using rule 33 (misc)
+    DTCL       [reduce using rule 34 (misc)]
+    DDCL       reduce using rule 33 (misc)
+    DDCL       [reduce using rule 34 (misc)]
+    TABOP      reduce using rule 33 (misc)
+    TABOP      [reduce using rule 34 (misc)]
+    CAPCL      reduce using rule 33 (misc)
+    CAPCL      [reduce using rule 34 (misc)]
+    THCL       reduce using rule 33 (misc)
+    THCL       [reduce using rule 34 (misc)]
+    TDCL       reduce using rule 33 (misc)
+    TDCL       [reduce using rule 34 (misc)]
+    BR         reduce using rule 33 (misc)
+    BR         [reduce using rule 34 (misc)]
+    COMMENT    reduce using rule 33 (misc)
+    COMMENT    [reduce using rule 34 (misc)]
+    $default   reduce using rule 33 (misc)
+
+
+State 90
+
    29 flow: misc flow .
 
     $default  reduce using rule 29 (flow)
 
 
-State 90
+State 91
 
     7 st: HTMLOP head body HTMLCL .
 
     $default  reduce using rule 7 (st)
 
 
-State 91
+State 92
 
     6 st: DOCTYPE HTMLOP head body HTMLCL .
 
     $default  reduce using rule 6 (st)
 
 
-State 92
+State 93
 
    13 title: TITLEOP text TITLECL .
 
     $default  reduce using rule 13 (title)
 
 
-State 93
-
-   85 phraseopen: BPHRASECL flow .
-
-    $default  reduce using rule 85 (phraseopen)
-
-
 State 94
 
-   92 phrases: PHRASEOP PHRASECL .
-  104        | PHRASEOP PHRASECL . phrasecom
+   86 phraseopen: BPHRASECL flow .
 
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    $default  reduce using rule 92 (phrases)
-
-    misc       go to state 50
-    phrasecom  go to state 143
+    $default  reduce using rule 86 (phraseopen)
 
 
 State 95
 
-   89 phrases: phrases . PHRASEOP phrases PHRASECL
-   90        | phrases . PHRASEOP PHRASECL
-   91        | PHRASEOP phrases . PHRASECL
-   93        | phrases . IMGOP img
-   94        | phrases . font
-   95        | phrases . FONTOP font
-  101        | phrases . PHRASEOP phrases PHRASECL phrasecom
-  102        | phrases . PHRASEOP PHRASECL phrasecom
-  103        | PHRASEOP phrases . PHRASECL phrasecom
-  105        | phrases . IMGOP img phrasecom
-  106        | phrases . font phrasecom
-  107        | phrases . FONTOP font phrasecom
+   93 phrases: PHRASEOP PHRASECL .
+  105        | PHRASEOP PHRASECL . phrasecom
 
-    PHRASEOP   shift, and go to state 102
-    PHRASECL   shift, and go to state 144
-    ATTRIBUTE  shift, and go to state 45
-    IMGOP      shift, and go to state 103
-    FONTOP     shift, and go to state 104
-    FONTOOP    shift, and go to state 48
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
 
-    font  go to state 105
+    $default  reduce using rule 93 (phrases)
+
+    misc       go to state 50
+    phrasecom  go to state 145
 
 
 State 96
 
-  118 font: ATTRIBUTE ATTRIBUTEVAL . FONTOOP FONTCL
-  119     | ATTRIBUTE ATTRIBUTEVAL . FONTOOP phrases FONTCL
+   90 phrases: phrases . PHRASEOP phrases PHRASECL
+   91        | phrases . PHRASEOP PHRASECL
+   92        | PHRASEOP phrases . PHRASECL
+   94        | phrases . IMGOP img
+   95        | phrases . font
+   96        | phrases . FONTOP font
+  102        | phrases . PHRASEOP phrases PHRASECL phrasecom
+  103        | phrases . PHRASEOP PHRASECL phrasecom
+  104        | PHRASEOP phrases . PHRASECL phrasecom
+  106        | phrases . IMGOP img phrasecom
+  107        | phrases . font phrasecom
+  108        | phrases . FONTOP font phrasecom
 
-    FONTOOP  shift, and go to state 145
+    PHRASEOP   shift, and go to state 104
+    PHRASECL   shift, and go to state 146
+    ATTRIBUTE  shift, and go to state 45
+    IMGOP      shift, and go to state 105
+    FONTOP     shift, and go to state 106
+    FONTOOP    shift, and go to state 48
+
+    font  go to state 107
 
 
 State 97
 
-   98 phrases: IMGOP img .
-  110        | IMGOP img . phrasecom
+  119 font: ATTRIBUTE ATTRIBUTEVAL . FONTOOP FONTCL
+  120     | ATTRIBUTE ATTRIBUTEVAL . FONTOOP phrases FONTCL
 
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    $default  reduce using rule 98 (phrases)
-
-    misc       go to state 50
-    phrasecom  go to state 146
+    FONTOOP  shift, and go to state 147
 
 
 State 98
 
-   96 phrases: FONTOP font .
-  108        | FONTOP font . phrasecom
+   99 phrases: IMGOP img .
+  111        | IMGOP img . phrasecom
 
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
 
-    $default  reduce using rule 96 (phrases)
+    $default  reduce using rule 99 (phrases)
 
     misc       go to state 50
-    phrasecom  go to state 147
+    phrasecom  go to state 148
 
 
 State 99
 
-   89 phrases: phrases . PHRASEOP phrases PHRASECL
-   90        | phrases . PHRASEOP PHRASECL
-   93        | phrases . IMGOP img
-   94        | phrases . font
-   95        | phrases . FONTOP font
-  101        | phrases . PHRASEOP phrases PHRASECL phrasecom
-  102        | phrases . PHRASEOP PHRASECL phrasecom
-  105        | phrases . IMGOP img phrasecom
-  106        | phrases . font phrasecom
-  107        | phrases . FONTOP font phrasecom
-  120 font: FONTOOP phrases . FONTCL
-
-    PHRASEOP   shift, and go to state 102
-    ATTRIBUTE  shift, and go to state 45
-    IMGOP      shift, and go to state 103
-    FONTOP     shift, and go to state 104
-    FONTOOP    shift, and go to state 48
-    FONTCL     shift, and go to state 148
-
-    font  go to state 105
-
-
-State 100
-
-  111 phrases: text phrasecom .
-  113 phrasecom: phrasecom . misc
+   97 phrases: FONTOP font .
+  109        | FONTOP font . phrasecom
 
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
 
-    $default  reduce using rule 111 (phrases)
+    $default  reduce using rule 97 (phrases)
 
-    misc  go to state 106
+    misc       go to state 50
+    phrasecom  go to state 149
+
+
+State 100
+
+   90 phrases: phrases . PHRASEOP phrases PHRASECL
+   91        | phrases . PHRASEOP PHRASECL
+   94        | phrases . IMGOP img
+   95        | phrases . font
+   96        | phrases . FONTOP font
+  102        | phrases . PHRASEOP phrases PHRASECL phrasecom
+  103        | phrases . PHRASEOP PHRASECL phrasecom
+  106        | phrases . IMGOP img phrasecom
+  107        | phrases . font phrasecom
+  108        | phrases . FONTOP font phrasecom
+  121 font: FONTOOP phrases . FONTCL
+
+    PHRASEOP   shift, and go to state 104
+    ATTRIBUTE  shift, and go to state 45
+    IMGOP      shift, and go to state 105
+    FONTOP     shift, and go to state 106
+    FONTOOP    shift, and go to state 48
+    FONTCL     shift, and go to state 150
+
+    font  go to state 107
 
 
 State 101
 
-   84 phraseopen: phrases BPHRASECL . flow
-   88           | phrases BPHRASECL .
+  112 phrases: text phrasecom .
+  114 phrasecom: phrasecom . misc
+
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    $default  reduce using rule 112 (phrases)
+
+    misc  go to state 108
+
+
+State 102
+
+   33 misc: misc BR .
+
+    $default  reduce using rule 33 (misc)
+
+
+State 103
+
+   85 phraseopen: phrases BPHRASECL . flow
+   89           | phrases BPHRASECL .
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -1701,22 +1781,22 @@ State 101
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
 
-    $default  reduce using rule 88 (phraseopen)
+    $default  reduce using rule 89 (phraseopen)
 
     text  go to state 31
-    flow  go to state 149
+    flow  go to state 151
     misc  go to state 33
 
 
-State 102
+State 104
 
-   89 phrases: phrases PHRASEOP . phrases PHRASECL
-   90        | phrases PHRASEOP . PHRASECL
-  101        | phrases PHRASEOP . phrases PHRASECL phrasecom
-  102        | phrases PHRASEOP . PHRASECL phrasecom
+   90 phrases: phrases PHRASEOP . phrases PHRASECL
+   91        | phrases PHRASEOP . PHRASECL
+  102        | phrases PHRASEOP . phrases PHRASECL phrasecom
+  103        | phrases PHRASEOP . PHRASECL phrasecom
 
     PHRASEOP   shift, and go to state 44
-    PHRASECL   shift, and go to state 150
+    PHRASECL   shift, and go to state 152
     TEXT       shift, and go to state 20
     ATTRIBUTE  shift, and go to state 45
     IMGOP      shift, and go to state 46
@@ -1727,86 +1807,90 @@ State 102
 
     text       go to state 49
     misc       go to state 50
-    phrases    go to state 151
+    phrases    go to state 153
     phrasecom  go to state 53
     font       go to state 60
 
 
-State 103
+State 105
 
-   93 phrases: phrases IMGOP . img
-  105        | phrases IMGOP . img phrasecom
+   94 phrases: phrases IMGOP . img
+  106        | phrases IMGOP . img phrasecom
 
     ATTRIBUTE  shift, and go to state 67
     IMGCL      shift, and go to state 68
 
-    img  go to state 152
-
-
-State 104
-
-   95 phrases: phrases FONTOP . font
-  107        | phrases FONTOP . font phrasecom
-
-    ATTRIBUTE  shift, and go to state 45
-    FONTOOP    shift, and go to state 48
-
-    font  go to state 153
-
-
-State 105
-
-   94 phrases: phrases font .
-  106        | phrases font . phrasecom
-
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    $default  reduce using rule 94 (phrases)
-
-    misc       go to state 50
-    phrasecom  go to state 154
+    img  go to state 154
 
 
 State 106
 
-  113 phrasecom: phrasecom misc .
+   96 phrases: phrases FONTOP . font
+  108        | phrases FONTOP . font phrasecom
 
-    $default  reduce using rule 113 (phrasecom)
+    ATTRIBUTE  shift, and go to state 45
+    FONTOOP    shift, and go to state 48
+
+    font  go to state 155
 
 
 State 107
 
-  109 phrases: font phrasecom .
-  113 phrasecom: phrasecom . misc
+   95 phrases: phrases font .
+  107        | phrases font . phrasecom
 
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
 
-    $default  reduce using rule 109 (phrases)
+    $default  reduce using rule 95 (phrases)
 
-    misc  go to state 106
+    misc       go to state 50
+    phrasecom  go to state 156
 
 
 State 108
 
-   80 gtph: BPHRASEOP phraseopen . GTPHCL flow
-   81     | BPHRASEOP phraseopen . GTPHCL
+   33 misc: misc . BR
+  114 phrasecom: phrasecom misc .
 
-    GTPHCL  shift, and go to state 155
+    BR  shift, and go to state 102
+
+    BR        [reduce using rule 114 (phrasecom)]
+    $default  reduce using rule 114 (phrasecom)
 
 
 State 109
 
-   77 gtph: GTPHCL flow .
+  110 phrases: font phrasecom .
+  114 phrasecom: phrasecom . misc
 
-    $default  reduce using rule 77 (gtph)
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    $default  reduce using rule 110 (phrases)
+
+    misc  go to state 108
 
 
 State 110
 
-   76 gtph: phrases GTPHCL . flow
-   78     | phrases GTPHCL .
+   81 gtph: BPHRASEOP phraseopen . GTPHCL flow
+   82     | BPHRASEOP phraseopen . GTPHCL
+
+    GTPHCL  shift, and go to state 157
+
+
+State 111
+
+   78 gtph: GTPHCL flow .
+
+    $default  reduce using rule 78 (gtph)
+
+
+State 112
+
+   77 gtph: phrases GTPHCL . flow
+   79     | phrases GTPHCL .
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -1822,17 +1906,17 @@ State 110
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
 
-    $default  reduce using rule 78 (gtph)
+    $default  reduce using rule 79 (gtph)
 
     text  go to state 31
-    flow  go to state 156
+    flow  go to state 158
     misc  go to state 33
 
 
-State 111
+State 113
 
-   82 gtph: phrasecom BPHRASEOP . phraseopen GTPHCL flow
-   83     | phrasecom BPHRASEOP . phraseopen GTPHCL
+   83 gtph: phrasecom BPHRASEOP . phraseopen GTPHCL flow
+   84     | phrasecom BPHRASEOP . phraseopen GTPHCL
 
     BPHRASECL  shift, and go to state 43
     PHRASEOP   shift, and go to state 44
@@ -1846,16 +1930,615 @@ State 111
 
     text        go to state 49
     misc        go to state 50
-    phraseopen  go to state 157
+    phraseopen  go to state 159
     phrases     go to state 52
     phrasecom   go to state 53
     font        go to state 54
 
 
-State 112
+State 114
 
-   70 atag: AOPOP ACL . flow
-   73     | AOPOP ACL .
+   71 atag: AOPOP ACL . flow
+   74     | AOPOP ACL .
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    $default  reduce using rule 74 (atag)
+
+    text  go to state 31
+    flow  go to state 160
+    misc  go to state 33
+
+
+State 115
+
+   70 atag: AOPOP flow . ACL flow
+   73     | AOPOP flow . ACL
+
+    ACL  shift, and go to state 161
+
+
+State 116
+
+   69 atag: ATTRIBUTE ATTRIBUTEVAL . AOPOP flow ACL flow
+   72     | ATTRIBUTE ATTRIBUTEVAL . AOPOP flow ACL
+   75     | ATTRIBUTE ATTRIBUTEVAL . AOPOP ACL flow
+   76     | ATTRIBUTE ATTRIBUTEVAL . AOPOP ACL
+
+    AOPOP  shift, and go to state 162
+
+
+State 117
+
+   66 div: DIVCL flow .
+
+    $default  reduce using rule 66 (div)
+
+
+State 118
+
+   67 div: flow DIVCL . flow
+   68    | flow DIVCL .
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    $default  reduce using rule 68 (div)
+
+    text  go to state 31
+    flow  go to state 163
+    misc  go to state 33
+
+
+State 119
+
+  115 img: ATTRIBUTE ATTRIBUTEVAL . img
+
+    ATTRIBUTE  shift, and go to state 67
+    IMGCL      shift, and go to state 68
+
+    img  go to state 164
+
+
+State 120
+
+   23 flow: IMGOP img flow .
+
+    $default  reduce using rule 23 (flow)
+
+
+State 121
+
+  118 fontsub: font flow .
+
+    $default  reduce using rule 118 (fontsub)
+
+
+State 122
+
+  125 listitem: LICL .
+
+    $default  reduce using rule 125 (listitem)
+
+
+State 123
+
+  124 listitem: flow . LICL
+
+    LICL  shift, and go to state 165
+
+
+State 124
+
+  122 list: LIOP listitem . list
+
+    LCL   shift, and go to state 72
+    LIOP  shift, and go to state 73
+
+    list  go to state 166
+
+
+State 125
+
+  135 figure: FIGCL flow .
+
+    $default  reduce using rule 135 (figure)
+
+
+State 126
+
+  137 figcap: FIGCAPCL .
+
+    $default  reduce using rule 137 (figcap)
+
+
+State 127
+
+  136 figcap: flow . FIGCAPCL
+
+    FIGCAPCL  shift, and go to state 167
+
+
+State 128
+
+  127 figure: FIGCAPOP figcap . FIGCL
+  128       | FIGCAPOP figcap . flow FIGCL
+  132       | FIGCAPOP figcap . FIGCL flow
+  133       | FIGCAPOP figcap . flow FIGCL flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    FIGCL      shift, and go to state 168
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    text  go to state 31
+    flow  go to state 169
+    misc  go to state 33
+
+
+State 129
+
+  129 figure: flow FIGCL .
+  134       | flow FIGCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    $default  reduce using rule 129 (figure)
+
+    text  go to state 31
+    flow  go to state 170
+    misc  go to state 33
+
+
+State 130
+
+  126 figure: flow FIGCAPOP . figcap FIGCL
+  131       | flow FIGCAPOP . figcap FIGCL flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    FIGCAPCL   shift, and go to state 126
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    text    go to state 31
+    flow    go to state 127
+    misc    go to state 33
+    figcap  go to state 171
+
+
+State 131
+
+  139 dl: DIVOP div . DLCL
+  142   | DIVOP div . DLCL flow
+
+    DLCL  shift, and go to state 172
+
+
+State 132
+
+  141 dl: DLCL flow .
+
+    $default  reduce using rule 141 (dl)
+
+
+State 133
+
+  146 dt: DTCL . DDOP dd
+  147   | DTCL . DDOP dd DTOP dt
+
+    DDOP  shift, and go to state 173
+
+
+State 134
+
+  144 dt: flow . DTCL DDOP dd
+  145   | flow . DTCL DDOP dd DTOP dt
+
+    DTCL  shift, and go to state 174
+
+
+State 135
+
+  140 dl: DTOP dt . DLCL
+  143   | DTOP dt . DLCL flow
+
+    DLCL  shift, and go to state 175
+
+
+State 136
+
+   42 table: TABCL flow .
+
+    $default  reduce using rule 42 (table)
+
+
+State 137
+
+   44 caption: CAPCL .
+
+    $default  reduce using rule 44 (caption)
+
+
+State 138
+
+   43 caption: flow . CAPCL
+
+    CAPCL  shift, and go to state 176
+
+
+State 139
+
+   35 table: CAPOP caption . TABCL
+   36      | CAPOP caption . TROP tr TABCL
+   38      | CAPOP caption . TABCL flow
+   39      | CAPOP caption . TROP tr TABCL flow
+
+    TABCL  shift, and go to state 177
+    TROP   shift, and go to state 178
+
+
+State 140
+
+   45 tr: TRCL .
+   48   | TRCL . TROP tr
+
+    TROP  shift, and go to state 179
+
+    $default  reduce using rule 45 (tr)
+
+
+State 141
+
+   46 tr: THOP . th TRCL
+   49   | THOP . th TRCL TROP tr
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    THCL       shift, and go to state 180
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    text  go to state 31
+    flow  go to state 181
+    misc  go to state 33
+    th    go to state 182
+
+
+State 142
+
+   47 tr: TDOP . td TRCL
+   50   | TDOP . td TRCL TROP tr
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    TDCL       shift, and go to state 183
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    text  go to state 31
+    flow  go to state 184
+    misc  go to state 33
+    td    go to state 185
+
+
+State 143
+
+   33 misc: misc . BR
+   51 tr: misc . TRCL
+   52   | misc . THOP th TRCL
+   53   | misc . TDOP td TRCL
+   54   | misc . TRCL TROP tr
+   55   | misc . THOP th TRCL TROP tr
+   56   | misc . TDOP td TRCL TROP tr
+
+    TRCL  shift, and go to state 186
+    THOP  shift, and go to state 187
+    TDOP  shift, and go to state 188
+    BR    shift, and go to state 102
+
+
+State 144
+
+   37 table: TROP tr . TABCL
+   40      | TROP tr . TABCL flow
+
+    TABCL  shift, and go to state 189
+
+
+State 145
+
+  105 phrases: PHRASEOP PHRASECL phrasecom .
+  114 phrasecom: phrasecom . misc
+
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    $default  reduce using rule 105 (phrases)
+
+    misc  go to state 108
+
+
+State 146
+
+   92 phrases: PHRASEOP phrases PHRASECL .
+  104        | PHRASEOP phrases PHRASECL . phrasecom
+
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    $default  reduce using rule 92 (phrases)
+
+    misc       go to state 50
+    phrasecom  go to state 190
+
+
+State 147
+
+  119 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP . FONTCL
+  120     | ATTRIBUTE ATTRIBUTEVAL FONTOOP . phrases FONTCL
+
+    PHRASEOP   shift, and go to state 44
+    TEXT       shift, and go to state 20
+    ATTRIBUTE  shift, and go to state 45
+    IMGOP      shift, and go to state 46
+    FONTOP     shift, and go to state 47
+    FONTOOP    shift, and go to state 48
+    FONTCL     shift, and go to state 191
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    text       go to state 49
+    misc       go to state 50
+    phrases    go to state 192
+    phrasecom  go to state 53
+    font       go to state 60
+
+
+State 148
+
+  111 phrases: IMGOP img phrasecom .
+  114 phrasecom: phrasecom . misc
+
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    $default  reduce using rule 111 (phrases)
+
+    misc  go to state 108
+
+
+State 149
+
+  109 phrases: FONTOP font phrasecom .
+  114 phrasecom: phrasecom . misc
+
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    $default  reduce using rule 109 (phrases)
+
+    misc  go to state 108
+
+
+State 150
+
+  121 font: FONTOOP phrases FONTCL .
+
+    $default  reduce using rule 121 (font)
+
+
+State 151
+
+   85 phraseopen: phrases BPHRASECL flow .
+
+    $default  reduce using rule 85 (phraseopen)
+
+
+State 152
+
+   91 phrases: phrases PHRASEOP PHRASECL .
+  103        | phrases PHRASEOP PHRASECL . phrasecom
+
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    $default  reduce using rule 91 (phrases)
+
+    misc       go to state 50
+    phrasecom  go to state 193
+
+
+State 153
+
+   90 phrases: phrases . PHRASEOP phrases PHRASECL
+   90        | phrases PHRASEOP phrases . PHRASECL
+   91        | phrases . PHRASEOP PHRASECL
+   94        | phrases . IMGOP img
+   95        | phrases . font
+   96        | phrases . FONTOP font
+  102        | phrases . PHRASEOP phrases PHRASECL phrasecom
+  102        | phrases PHRASEOP phrases . PHRASECL phrasecom
+  103        | phrases . PHRASEOP PHRASECL phrasecom
+  106        | phrases . IMGOP img phrasecom
+  107        | phrases . font phrasecom
+  108        | phrases . FONTOP font phrasecom
+
+    PHRASEOP   shift, and go to state 104
+    PHRASECL   shift, and go to state 194
+    ATTRIBUTE  shift, and go to state 45
+    IMGOP      shift, and go to state 105
+    FONTOP     shift, and go to state 106
+    FONTOOP    shift, and go to state 48
+
+    font  go to state 107
+
+
+State 154
+
+   94 phrases: phrases IMGOP img .
+  106        | phrases IMGOP img . phrasecom
+
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    $default  reduce using rule 94 (phrases)
+
+    misc       go to state 50
+    phrasecom  go to state 195
+
+
+State 155
+
+   96 phrases: phrases FONTOP font .
+  108        | phrases FONTOP font . phrasecom
+
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    $default  reduce using rule 96 (phrases)
+
+    misc       go to state 50
+    phrasecom  go to state 196
+
+
+State 156
+
+  107 phrases: phrases font phrasecom .
+  114 phrasecom: phrasecom . misc
+
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    $default  reduce using rule 107 (phrases)
+
+    misc  go to state 108
+
+
+State 157
+
+   81 gtph: BPHRASEOP phraseopen GTPHCL . flow
+   82     | BPHRASEOP phraseopen GTPHCL .
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    $default  reduce using rule 82 (gtph)
+
+    text  go to state 31
+    flow  go to state 197
+    misc  go to state 33
+
+
+State 158
+
+   77 gtph: phrases GTPHCL flow .
+
+    $default  reduce using rule 77 (gtph)
+
+
+State 159
+
+   83 gtph: phrasecom BPHRASEOP phraseopen . GTPHCL flow
+   84     | phrasecom BPHRASEOP phraseopen . GTPHCL
+
+    GTPHCL  shift, and go to state 198
+
+
+State 160
+
+   71 atag: AOPOP ACL flow .
+
+    $default  reduce using rule 71 (atag)
+
+
+State 161
+
+   70 atag: AOPOP flow ACL . flow
+   73     | AOPOP flow ACL .
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -1874,1188 +2557,76 @@ State 112
     $default  reduce using rule 73 (atag)
 
     text  go to state 31
-    flow  go to state 158
-    misc  go to state 33
-
-
-State 113
-
-   69 atag: AOPOP flow . ACL flow
-   72     | AOPOP flow . ACL
-
-    ACL  shift, and go to state 159
-
-
-State 114
-
-   68 atag: ATTRIBUTE ATTRIBUTEVAL . AOPOP flow ACL flow
-   71     | ATTRIBUTE ATTRIBUTEVAL . AOPOP flow ACL
-   74     | ATTRIBUTE ATTRIBUTEVAL . AOPOP ACL flow
-   75     | ATTRIBUTE ATTRIBUTEVAL . AOPOP ACL
-
-    AOPOP  shift, and go to state 160
-
-
-State 115
-
-   65 div: DIVCL flow .
-
-    $default  reduce using rule 65 (div)
-
-
-State 116
-
-   66 div: flow DIVCL . flow
-   67    | flow DIVCL .
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    $default  reduce using rule 67 (div)
-
-    text  go to state 31
-    flow  go to state 161
-    misc  go to state 33
-
-
-State 117
-
-  114 img: ATTRIBUTE ATTRIBUTEVAL . img
-
-    ATTRIBUTE  shift, and go to state 67
-    IMGCL      shift, and go to state 68
-
-    img  go to state 162
-
-
-State 118
-
-   23 flow: IMGOP img flow .
-
-    $default  reduce using rule 23 (flow)
-
-
-State 119
-
-  117 fontsub: font flow .
-
-    $default  reduce using rule 117 (fontsub)
-
-
-State 120
-
-  124 listitem: LICL .
-
-    $default  reduce using rule 124 (listitem)
-
-
-State 121
-
-  123 listitem: flow . LICL
-
-    LICL  shift, and go to state 163
-
-
-State 122
-
-  121 list: LIOP listitem . list
-
-    LCL   shift, and go to state 72
-    LIOP  shift, and go to state 73
-
-    list  go to state 164
-
-
-State 123
-
-  134 figure: FIGCL flow .
-
-    $default  reduce using rule 134 (figure)
-
-
-State 124
-
-  136 figcap: FIGCAPCL .
-
-    $default  reduce using rule 136 (figcap)
-
-
-State 125
-
-  135 figcap: flow . FIGCAPCL
-
-    FIGCAPCL  shift, and go to state 165
-
-
-State 126
-
-  126 figure: FIGCAPOP figcap . FIGCL
-  127       | FIGCAPOP figcap . flow FIGCL
-  131       | FIGCAPOP figcap . FIGCL flow
-  132       | FIGCAPOP figcap . flow FIGCL flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    FIGCL      shift, and go to state 166
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    text  go to state 31
-    flow  go to state 167
-    misc  go to state 33
-
-
-State 127
-
-  128 figure: flow FIGCL .
-  133       | flow FIGCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    $default  reduce using rule 128 (figure)
-
-    text  go to state 31
-    flow  go to state 168
-    misc  go to state 33
-
-
-State 128
-
-  125 figure: flow FIGCAPOP . figcap FIGCL
-  130       | flow FIGCAPOP . figcap FIGCL flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    FIGCAPCL   shift, and go to state 124
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    text    go to state 31
-    flow    go to state 125
-    misc    go to state 33
-    figcap  go to state 169
-
-
-State 129
-
-  138 dl: DIVOP div . DLCL
-  141   | DIVOP div . DLCL flow
-
-    DLCL  shift, and go to state 170
-
-
-State 130
-
-  140 dl: DLCL flow .
-
-    $default  reduce using rule 140 (dl)
-
-
-State 131
-
-  145 dt: DTCL . DDOP dd
-  146   | DTCL . DDOP dd DTOP dt
-
-    DDOP  shift, and go to state 171
-
-
-State 132
-
-  143 dt: flow . DTCL DDOP dd
-  144   | flow . DTCL DDOP dd DTOP dt
-
-    DTCL  shift, and go to state 172
-
-
-State 133
-
-  139 dl: DTOP dt . DLCL
-  142   | DTOP dt . DLCL flow
-
-    DLCL  shift, and go to state 173
-
-
-State 134
-
-   41 table: TABCL flow .
-
-    $default  reduce using rule 41 (table)
-
-
-State 135
-
-   43 caption: CAPCL .
-
-    $default  reduce using rule 43 (caption)
-
-
-State 136
-
-   42 caption: flow . CAPCL
-
-    CAPCL  shift, and go to state 174
-
-
-State 137
-
-   34 table: CAPOP caption . TABCL
-   35      | CAPOP caption . TROP tr TABCL
-   37      | CAPOP caption . TABCL flow
-   38      | CAPOP caption . TROP tr TABCL flow
-
-    TABCL  shift, and go to state 175
-    TROP   shift, and go to state 176
-
-
-State 138
-
-   44 tr: TRCL .
-   47   | TRCL . TROP tr
-
-    TROP  shift, and go to state 177
-
-    $default  reduce using rule 44 (tr)
-
-
-State 139
-
-   45 tr: THOP . th TRCL
-   48   | THOP . th TRCL TROP tr
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    THCL       shift, and go to state 178
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    text  go to state 31
-    flow  go to state 179
-    misc  go to state 33
-    th    go to state 180
-
-
-State 140
-
-   46 tr: TDOP . td TRCL
-   49   | TDOP . td TRCL TROP tr
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    TDCL       shift, and go to state 181
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    text  go to state 31
-    flow  go to state 182
-    misc  go to state 33
-    td    go to state 183
-
-
-State 141
-
-   50 tr: misc . TRCL
-   51   | misc . THOP th TRCL
-   52   | misc . TDOP td TRCL
-   53   | misc . TRCL TROP tr
-   54   | misc . THOP th TRCL TROP tr
-   55   | misc . TDOP td TRCL TROP tr
-
-    TRCL  shift, and go to state 184
-    THOP  shift, and go to state 185
-    TDOP  shift, and go to state 186
-
-
-State 142
-
-   36 table: TROP tr . TABCL
-   39      | TROP tr . TABCL flow
-
-    TABCL  shift, and go to state 187
-
-
-State 143
-
-  104 phrases: PHRASEOP PHRASECL phrasecom .
-  113 phrasecom: phrasecom . misc
-
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    $default  reduce using rule 104 (phrases)
-
-    misc  go to state 106
-
-
-State 144
-
-   91 phrases: PHRASEOP phrases PHRASECL .
-  103        | PHRASEOP phrases PHRASECL . phrasecom
-
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    $default  reduce using rule 91 (phrases)
-
-    misc       go to state 50
-    phrasecom  go to state 188
-
-
-State 145
-
-  118 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP . FONTCL
-  119     | ATTRIBUTE ATTRIBUTEVAL FONTOOP . phrases FONTCL
-
-    PHRASEOP   shift, and go to state 44
-    TEXT       shift, and go to state 20
-    ATTRIBUTE  shift, and go to state 45
-    IMGOP      shift, and go to state 46
-    FONTOP     shift, and go to state 47
-    FONTOOP    shift, and go to state 48
-    FONTCL     shift, and go to state 189
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    text       go to state 49
-    misc       go to state 50
-    phrases    go to state 190
-    phrasecom  go to state 53
-    font       go to state 60
-
-
-State 146
-
-  110 phrases: IMGOP img phrasecom .
-  113 phrasecom: phrasecom . misc
-
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    $default  reduce using rule 110 (phrases)
-
-    misc  go to state 106
-
-
-State 147
-
-  108 phrases: FONTOP font phrasecom .
-  113 phrasecom: phrasecom . misc
-
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    $default  reduce using rule 108 (phrases)
-
-    misc  go to state 106
-
-
-State 148
-
-  120 font: FONTOOP phrases FONTCL .
-
-    $default  reduce using rule 120 (font)
-
-
-State 149
-
-   84 phraseopen: phrases BPHRASECL flow .
-
-    $default  reduce using rule 84 (phraseopen)
-
-
-State 150
-
-   90 phrases: phrases PHRASEOP PHRASECL .
-  102        | phrases PHRASEOP PHRASECL . phrasecom
-
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    $default  reduce using rule 90 (phrases)
-
-    misc       go to state 50
-    phrasecom  go to state 191
-
-
-State 151
-
-   89 phrases: phrases . PHRASEOP phrases PHRASECL
-   89        | phrases PHRASEOP phrases . PHRASECL
-   90        | phrases . PHRASEOP PHRASECL
-   93        | phrases . IMGOP img
-   94        | phrases . font
-   95        | phrases . FONTOP font
-  101        | phrases . PHRASEOP phrases PHRASECL phrasecom
-  101        | phrases PHRASEOP phrases . PHRASECL phrasecom
-  102        | phrases . PHRASEOP PHRASECL phrasecom
-  105        | phrases . IMGOP img phrasecom
-  106        | phrases . font phrasecom
-  107        | phrases . FONTOP font phrasecom
-
-    PHRASEOP   shift, and go to state 102
-    PHRASECL   shift, and go to state 192
-    ATTRIBUTE  shift, and go to state 45
-    IMGOP      shift, and go to state 103
-    FONTOP     shift, and go to state 104
-    FONTOOP    shift, and go to state 48
-
-    font  go to state 105
-
-
-State 152
-
-   93 phrases: phrases IMGOP img .
-  105        | phrases IMGOP img . phrasecom
-
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    $default  reduce using rule 93 (phrases)
-
-    misc       go to state 50
-    phrasecom  go to state 193
-
-
-State 153
-
-   95 phrases: phrases FONTOP font .
-  107        | phrases FONTOP font . phrasecom
-
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    $default  reduce using rule 95 (phrases)
-
-    misc       go to state 50
-    phrasecom  go to state 194
-
-
-State 154
-
-  106 phrases: phrases font phrasecom .
-  113 phrasecom: phrasecom . misc
-
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    $default  reduce using rule 106 (phrases)
-
-    misc  go to state 106
-
-
-State 155
-
-   80 gtph: BPHRASEOP phraseopen GTPHCL . flow
-   81     | BPHRASEOP phraseopen GTPHCL .
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    $default  reduce using rule 81 (gtph)
-
-    text  go to state 31
-    flow  go to state 195
-    misc  go to state 33
-
-
-State 156
-
-   76 gtph: phrases GTPHCL flow .
-
-    $default  reduce using rule 76 (gtph)
-
-
-State 157
-
-   82 gtph: phrasecom BPHRASEOP phraseopen . GTPHCL flow
-   83     | phrasecom BPHRASEOP phraseopen . GTPHCL
-
-    GTPHCL  shift, and go to state 196
-
-
-State 158
-
-   70 atag: AOPOP ACL flow .
-
-    $default  reduce using rule 70 (atag)
-
-
-State 159
-
-   69 atag: AOPOP flow ACL . flow
-   72     | AOPOP flow ACL .
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    $default  reduce using rule 72 (atag)
-
-    text  go to state 31
-    flow  go to state 197
-    misc  go to state 33
-
-
-State 160
-
-   68 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP . flow ACL flow
-   71     | ATTRIBUTE ATTRIBUTEVAL AOPOP . flow ACL
-   74     | ATTRIBUTE ATTRIBUTEVAL AOPOP . ACL flow
-   75     | ATTRIBUTE ATTRIBUTEVAL AOPOP . ACL
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    ACL        shift, and go to state 198
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    text  go to state 31
     flow  go to state 199
     misc  go to state 33
 
 
-State 161
-
-   66 div: flow DIVCL flow .
-
-    $default  reduce using rule 66 (div)
-
-
 State 162
 
-  114 img: ATTRIBUTE ATTRIBUTEVAL img .
+   69 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP . flow ACL flow
+   72     | ATTRIBUTE ATTRIBUTEVAL AOPOP . flow ACL
+   75     | ATTRIBUTE ATTRIBUTEVAL AOPOP . ACL flow
+   76     | ATTRIBUTE ATTRIBUTEVAL AOPOP . ACL
 
-    $default  reduce using rule 114 (img)
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    ACL        shift, and go to state 200
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    text  go to state 31
+    flow  go to state 201
+    misc  go to state 33
 
 
 State 163
 
-  123 listitem: flow LICL .
+   67 div: flow DIVCL flow .
 
-    $default  reduce using rule 123 (listitem)
+    $default  reduce using rule 67 (div)
 
 
 State 164
 
-  121 list: LIOP listitem list .
+  115 img: ATTRIBUTE ATTRIBUTEVAL img .
 
-    $default  reduce using rule 121 (list)
+    $default  reduce using rule 115 (img)
 
 
 State 165
 
-  135 figcap: flow FIGCAPCL .
+  124 listitem: flow LICL .
 
-    $default  reduce using rule 135 (figcap)
+    $default  reduce using rule 124 (listitem)
 
 
 State 166
 
-  126 figure: FIGCAPOP figcap FIGCL .
-  131       | FIGCAPOP figcap FIGCL . flow
+  122 list: LIOP listitem list .
 
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    $default  reduce using rule 126 (figure)
-
-    text  go to state 31
-    flow  go to state 200
-    misc  go to state 33
+    $default  reduce using rule 122 (list)
 
 
 State 167
 
-  127 figure: FIGCAPOP figcap flow . FIGCL
-  132       | FIGCAPOP figcap flow . FIGCL flow
+  136 figcap: flow FIGCAPCL .
 
-    FIGCL  shift, and go to state 201
+    $default  reduce using rule 136 (figcap)
 
 
 State 168
 
-  133 figure: flow FIGCL flow .
-
-    $default  reduce using rule 133 (figure)
-
-
-State 169
-
-  125 figure: flow FIGCAPOP figcap . FIGCL
-  130       | flow FIGCAPOP figcap . FIGCL flow
-
-    FIGCL  shift, and go to state 202
-
-
-State 170
-
-  138 dl: DIVOP div DLCL .
-  141   | DIVOP div DLCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    $default  reduce using rule 138 (dl)
-
-    text  go to state 31
-    flow  go to state 203
-    misc  go to state 33
-
-
-State 171
-
-  145 dt: DTCL DDOP . dd
-  146   | DTCL DDOP . dd DTOP dt
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    DDCL       shift, and go to state 204
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    text  go to state 31
-    flow  go to state 205
-    misc  go to state 33
-    dd    go to state 206
-
-
-State 172
-
-  143 dt: flow DTCL . DDOP dd
-  144   | flow DTCL . DDOP dd DTOP dt
-
-    DDOP  shift, and go to state 207
-
-
-State 173
-
-  139 dl: DTOP dt DLCL .
-  142   | DTOP dt DLCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    $default  reduce using rule 139 (dl)
-
-    text  go to state 31
-    flow  go to state 208
-    misc  go to state 33
-
-
-State 174
-
-   42 caption: flow CAPCL .
-
-    $default  reduce using rule 42 (caption)
-
-
-State 175
-
-   34 table: CAPOP caption TABCL .
-   37      | CAPOP caption TABCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    $default  reduce using rule 34 (table)
-
-    text  go to state 31
-    flow  go to state 209
-    misc  go to state 33
-
-
-State 176
-
-   35 table: CAPOP caption TROP . tr TABCL
-   38      | CAPOP caption TROP . tr TABCL flow
-
-    TRCL     shift, and go to state 138
-    THOP     shift, and go to state 139
-    TDOP     shift, and go to state 140
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    misc  go to state 141
-    tr    go to state 210
-
-
-State 177
-
-   47 tr: TRCL TROP . tr
-
-    TRCL     shift, and go to state 138
-    THOP     shift, and go to state 139
-    TDOP     shift, and go to state 140
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    misc  go to state 141
-    tr    go to state 211
-
-
-State 178
-
-   56 th: THCL .
-   58   | THCL . THOP th
-
-    THOP  shift, and go to state 212
-
-    $default  reduce using rule 56 (th)
-
-
-State 179
-
-   57 th: flow . THCL
-   59   | flow . THCL THOP th
-
-    THCL  shift, and go to state 213
-
-
-State 180
-
-   45 tr: THOP th . TRCL
-   48   | THOP th . TRCL TROP tr
-
-    TRCL  shift, and go to state 214
-
-
-State 181
-
-   60 td: TDCL .
-   62   | TDCL . TDOP td
-
-    TDOP  shift, and go to state 215
-
-    $default  reduce using rule 60 (td)
-
-
-State 182
-
-   61 td: flow . TDCL
-   63   | flow . TDCL TDOP td
-
-    TDCL  shift, and go to state 216
-
-
-State 183
-
-   46 tr: TDOP td . TRCL
-   49   | TDOP td . TRCL TROP tr
-
-    TRCL  shift, and go to state 217
-
-
-State 184
-
-   50 tr: misc TRCL .
-   53   | misc TRCL . TROP tr
-
-    TROP  shift, and go to state 218
-
-    $default  reduce using rule 50 (tr)
-
-
-State 185
-
-   51 tr: misc THOP . th TRCL
-   54   | misc THOP . th TRCL TROP tr
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    THCL       shift, and go to state 178
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    text  go to state 31
-    flow  go to state 179
-    misc  go to state 33
-    th    go to state 219
-
-
-State 186
-
-   52 tr: misc TDOP . td TRCL
-   55   | misc TDOP . td TRCL TROP tr
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    TDCL       shift, and go to state 181
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    text  go to state 31
-    flow  go to state 182
-    misc  go to state 33
-    td    go to state 220
-
-
-State 187
-
-   36 table: TROP tr TABCL .
-   39      | TROP tr TABCL . flow
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    $default  reduce using rule 36 (table)
-
-    text  go to state 31
-    flow  go to state 221
-    misc  go to state 33
-
-
-State 188
-
-  103 phrases: PHRASEOP phrases PHRASECL phrasecom .
-  113 phrasecom: phrasecom . misc
-
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    $default  reduce using rule 103 (phrases)
-
-    misc  go to state 106
-
-
-State 189
-
-  118 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL .
-
-    $default  reduce using rule 118 (font)
-
-
-State 190
-
-   89 phrases: phrases . PHRASEOP phrases PHRASECL
-   90        | phrases . PHRASEOP PHRASECL
-   93        | phrases . IMGOP img
-   94        | phrases . font
-   95        | phrases . FONTOP font
-  101        | phrases . PHRASEOP phrases PHRASECL phrasecom
-  102        | phrases . PHRASEOP PHRASECL phrasecom
-  105        | phrases . IMGOP img phrasecom
-  106        | phrases . font phrasecom
-  107        | phrases . FONTOP font phrasecom
-  119 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP phrases . FONTCL
-
-    PHRASEOP   shift, and go to state 102
-    ATTRIBUTE  shift, and go to state 45
-    IMGOP      shift, and go to state 103
-    FONTOP     shift, and go to state 104
-    FONTOOP    shift, and go to state 48
-    FONTCL     shift, and go to state 222
-
-    font  go to state 105
-
-
-State 191
-
-  102 phrases: phrases PHRASEOP PHRASECL phrasecom .
-  113 phrasecom: phrasecom . misc
-
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    $default  reduce using rule 102 (phrases)
-
-    misc  go to state 106
-
-
-State 192
-
-   89 phrases: phrases PHRASEOP phrases PHRASECL .
-  101        | phrases PHRASEOP phrases PHRASECL . phrasecom
-
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    $default  reduce using rule 89 (phrases)
-
-    misc       go to state 50
-    phrasecom  go to state 223
-
-
-State 193
-
-  105 phrases: phrases IMGOP img phrasecom .
-  113 phrasecom: phrasecom . misc
-
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    $default  reduce using rule 105 (phrases)
-
-    misc  go to state 106
-
-
-State 194
-
-  107 phrases: phrases FONTOP font phrasecom .
-  113 phrasecom: phrasecom . misc
-
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    $default  reduce using rule 107 (phrases)
-
-    misc  go to state 106
-
-
-State 195
-
-   80 gtph: BPHRASEOP phraseopen GTPHCL flow .
-
-    $default  reduce using rule 80 (gtph)
-
-
-State 196
-
-   82 gtph: phrasecom BPHRASEOP phraseopen GTPHCL . flow
-   83     | phrasecom BPHRASEOP phraseopen GTPHCL .
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    $default  reduce using rule 83 (gtph)
-
-    text  go to state 31
-    flow  go to state 224
-    misc  go to state 33
-
-
-State 197
-
-   69 atag: AOPOP flow ACL flow .
-
-    $default  reduce using rule 69 (atag)
-
-
-State 198
-
-   74 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP ACL . flow
-   75     | ATTRIBUTE ATTRIBUTEVAL AOPOP ACL .
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    $default  reduce using rule 75 (atag)
-
-    text  go to state 31
-    flow  go to state 225
-    misc  go to state 33
-
-
-State 199
-
-   68 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP flow . ACL flow
-   71     | ATTRIBUTE ATTRIBUTEVAL AOPOP flow . ACL
-
-    ACL  shift, and go to state 226
-
-
-State 200
-
-  131 figure: FIGCAPOP figcap FIGCL flow .
-
-    $default  reduce using rule 131 (figure)
-
-
-State 201
-
-  127 figure: FIGCAPOP figcap flow FIGCL .
-  132       | FIGCAPOP figcap flow FIGCL . flow
+  127 figure: FIGCAPOP figcap FIGCL .
+  132       | FIGCAPOP figcap FIGCL . flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -3074,14 +2645,37 @@ State 201
     $default  reduce using rule 127 (figure)
 
     text  go to state 31
-    flow  go to state 227
+    flow  go to state 202
     misc  go to state 33
 
 
-State 202
+State 169
 
-  125 figure: flow FIGCAPOP figcap FIGCL .
-  130       | flow FIGCAPOP figcap FIGCL . flow
+  128 figure: FIGCAPOP figcap flow . FIGCL
+  133       | FIGCAPOP figcap flow . FIGCL flow
+
+    FIGCL  shift, and go to state 203
+
+
+State 170
+
+  134 figure: flow FIGCL flow .
+
+    $default  reduce using rule 134 (figure)
+
+
+State 171
+
+  126 figure: flow FIGCAPOP figcap . FIGCL
+  131       | flow FIGCAPOP figcap . FIGCL flow
+
+    FIGCL  shift, and go to state 204
+
+
+State 172
+
+  139 dl: DIVOP div DLCL .
+  142   | DIVOP div DLCL . flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -3097,106 +2691,17 @@ State 202
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
 
-    $default  reduce using rule 125 (figure)
-
-    text  go to state 31
-    flow  go to state 228
-    misc  go to state 33
-
-
-State 203
-
-  141 dl: DIVOP div DLCL flow .
-
-    $default  reduce using rule 141 (dl)
-
-
-State 204
-
-  149 dd: DDCL .
-  150   | DDCL . DDOP dd
-
-    DDOP  shift, and go to state 229
-
-    $default  reduce using rule 149 (dd)
-
-
-State 205
-
-  147 dd: flow . DDCL
-  148   | flow . DDCL DDOP dd
-
-    DDCL  shift, and go to state 230
-
-
-State 206
-
-  145 dt: DTCL DDOP dd .
-  146   | DTCL DDOP dd . DTOP dt
-
-    DTOP  shift, and go to state 231
-
-    $default  reduce using rule 145 (dt)
-
-
-State 207
-
-  143 dt: flow DTCL DDOP . dd
-  144   | flow DTCL DDOP . dd DTOP dt
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    DDCL       shift, and go to state 204
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
+    $default  reduce using rule 139 (dl)
 
     text  go to state 31
     flow  go to state 205
     misc  go to state 33
-    dd    go to state 232
 
 
-State 208
+State 173
 
-  142 dl: DTOP dt DLCL flow .
-
-    $default  reduce using rule 142 (dl)
-
-
-State 209
-
-   37 table: CAPOP caption TABCL flow .
-
-    $default  reduce using rule 37 (table)
-
-
-State 210
-
-   35 table: CAPOP caption TROP tr . TABCL
-   38      | CAPOP caption TROP tr . TABCL flow
-
-    TABCL  shift, and go to state 233
-
-
-State 211
-
-   47 tr: TRCL TROP tr .
-
-    $default  reduce using rule 47 (tr)
-
-
-State 212
-
-   58 th: THCL THOP . th
+  146 dt: DTCL DDOP . dd
+  147   | DTCL DDOP . dd DTOP dt
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -3208,157 +2713,29 @@ State 212
     LOP        shift, and go to state 25
     FIGOP      shift, and go to state 26
     DLOP       shift, and go to state 27
+    DDCL       shift, and go to state 206
     TABOP      shift, and go to state 28
-    THCL       shift, and go to state 178
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
 
     text  go to state 31
-    flow  go to state 179
+    flow  go to state 207
     misc  go to state 33
-    th    go to state 234
+    dd    go to state 208
 
 
-State 213
+State 174
 
-   57 th: flow THCL .
-   59   | flow THCL . THOP th
+  144 dt: flow DTCL . DDOP dd
+  145   | flow DTCL . DDOP dd DTOP dt
 
-    THOP  shift, and go to state 235
-
-    $default  reduce using rule 57 (th)
+    DDOP  shift, and go to state 209
 
 
-State 214
+State 175
 
-   45 tr: THOP th TRCL .
-   48   | THOP th TRCL . TROP tr
-
-    TROP  shift, and go to state 236
-
-    $default  reduce using rule 45 (tr)
-
-
-State 215
-
-   62 td: TDCL TDOP . td
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    TDCL       shift, and go to state 181
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    text  go to state 31
-    flow  go to state 182
-    misc  go to state 33
-    td    go to state 237
-
-
-State 216
-
-   61 td: flow TDCL .
-   63   | flow TDCL . TDOP td
-
-    TDOP  shift, and go to state 238
-
-    $default  reduce using rule 61 (td)
-
-
-State 217
-
-   46 tr: TDOP td TRCL .
-   49   | TDOP td TRCL . TROP tr
-
-    TROP  shift, and go to state 239
-
-    $default  reduce using rule 46 (tr)
-
-
-State 218
-
-   53 tr: misc TRCL TROP . tr
-
-    TRCL     shift, and go to state 138
-    THOP     shift, and go to state 139
-    TDOP     shift, and go to state 140
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    misc  go to state 141
-    tr    go to state 240
-
-
-State 219
-
-   51 tr: misc THOP th . TRCL
-   54   | misc THOP th . TRCL TROP tr
-
-    TRCL  shift, and go to state 241
-
-
-State 220
-
-   52 tr: misc TDOP td . TRCL
-   55   | misc TDOP td . TRCL TROP tr
-
-    TRCL  shift, and go to state 242
-
-
-State 221
-
-   39 table: TROP tr TABCL flow .
-
-    $default  reduce using rule 39 (table)
-
-
-State 222
-
-  119 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP phrases FONTCL .
-
-    $default  reduce using rule 119 (font)
-
-
-State 223
-
-  101 phrases: phrases PHRASEOP phrases PHRASECL phrasecom .
-  113 phrasecom: phrasecom . misc
-
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    $default  reduce using rule 101 (phrases)
-
-    misc  go to state 106
-
-
-State 224
-
-   82 gtph: phrasecom BPHRASEOP phraseopen GTPHCL flow .
-
-    $default  reduce using rule 82 (gtph)
-
-
-State 225
-
-   74 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP ACL flow .
-
-    $default  reduce using rule 74 (atag)
-
-
-State 226
-
-   68 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL . flow
-   71     | ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL .
+  140 dl: DTOP dt DLCL .
+  143   | DTOP dt DLCL . flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -3374,101 +2751,24 @@ State 226
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
 
-    $default  reduce using rule 71 (atag)
+    $default  reduce using rule 140 (dl)
 
     text  go to state 31
-    flow  go to state 243
+    flow  go to state 210
     misc  go to state 33
 
 
-State 227
+State 176
 
-  132 figure: FIGCAPOP figcap flow FIGCL flow .
+   43 caption: flow CAPCL .
 
-    $default  reduce using rule 132 (figure)
-
-
-State 228
-
-  130 figure: flow FIGCAPOP figcap FIGCL flow .
-
-    $default  reduce using rule 130 (figure)
+    $default  reduce using rule 43 (caption)
 
 
-State 229
+State 177
 
-  150 dd: DDCL DDOP . dd
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    DDCL       shift, and go to state 204
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    text  go to state 31
-    flow  go to state 205
-    misc  go to state 33
-    dd    go to state 244
-
-
-State 230
-
-  147 dd: flow DDCL .
-  148   | flow DDCL . DDOP dd
-
-    DDOP  shift, and go to state 245
-
-    $default  reduce using rule 147 (dd)
-
-
-State 231
-
-  146 dt: DTCL DDOP dd DTOP . dt
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    DTCL       shift, and go to state 131
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    text  go to state 31
-    flow  go to state 132
-    misc  go to state 33
-    dt    go to state 246
-
-
-State 232
-
-  143 dt: flow DTCL DDOP dd .
-  144   | flow DTCL DDOP dd . DTOP dt
-
-    DTOP  shift, and go to state 247
-
-    $default  reduce using rule 143 (dt)
-
-
-State 233
-
-   35 table: CAPOP caption TROP tr TABCL .
-   38      | CAPOP caption TROP tr TABCL . flow
+   35 table: CAPOP caption TABCL .
+   38      | CAPOP caption TABCL . flow
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -3487,178 +2787,448 @@ State 233
     $default  reduce using rule 35 (table)
 
     text  go to state 31
-    flow  go to state 248
+    flow  go to state 211
     misc  go to state 33
 
 
-State 234
+State 178
 
-   58 th: THCL THOP th .
+   36 table: CAPOP caption TROP . tr TABCL
+   39      | CAPOP caption TROP . tr TABCL flow
 
-    $default  reduce using rule 58 (th)
-
-
-State 235
-
-   59 th: flow THCL THOP . th
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    THCL       shift, and go to state 178
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    text  go to state 31
-    flow  go to state 179
-    misc  go to state 33
-    th    go to state 249
-
-
-State 236
-
-   48 tr: THOP th TRCL TROP . tr
-
-    TRCL     shift, and go to state 138
-    THOP     shift, and go to state 139
-    TDOP     shift, and go to state 140
+    TRCL     shift, and go to state 140
+    THOP     shift, and go to state 141
+    TDOP     shift, and go to state 142
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
 
-    misc  go to state 141
-    tr    go to state 250
+    misc  go to state 143
+    tr    go to state 212
 
 
-State 237
+State 179
 
-   62 td: TDCL TDOP td .
+   48 tr: TRCL TROP . tr
 
-    $default  reduce using rule 62 (td)
-
-
-State 238
-
-   63 td: flow TDCL TDOP . td
-
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    TABOP      shift, and go to state 28
-    TDCL       shift, and go to state 181
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    text  go to state 31
-    flow  go to state 182
-    misc  go to state 33
-    td    go to state 251
-
-
-State 239
-
-   49 tr: TDOP td TRCL TROP . tr
-
-    TRCL     shift, and go to state 138
-    THOP     shift, and go to state 139
-    TDOP     shift, and go to state 140
+    TRCL     shift, and go to state 140
+    THOP     shift, and go to state 141
+    TDOP     shift, and go to state 142
     BR       shift, and go to state 29
     COMMENT  shift, and go to state 30
 
-    misc  go to state 141
-    tr    go to state 252
+    misc  go to state 143
+    tr    go to state 213
 
 
-State 240
+State 180
 
-   53 tr: misc TRCL TROP tr .
+   57 th: THCL .
+   59   | THCL . THOP th
 
-    $default  reduce using rule 53 (tr)
+    THOP  shift, and go to state 214
+
+    $default  reduce using rule 57 (th)
 
 
-State 241
+State 181
 
-   51 tr: misc THOP th TRCL .
-   54   | misc THOP th TRCL . TROP tr
+   58 th: flow . THCL
+   60   | flow . THCL THOP th
 
-    TROP  shift, and go to state 253
+    THCL  shift, and go to state 215
+
+
+State 182
+
+   46 tr: THOP th . TRCL
+   49   | THOP th . TRCL TROP tr
+
+    TRCL  shift, and go to state 216
+
+
+State 183
+
+   61 td: TDCL .
+   63   | TDCL . TDOP td
+
+    TDOP  shift, and go to state 217
+
+    $default  reduce using rule 61 (td)
+
+
+State 184
+
+   62 td: flow . TDCL
+   64   | flow . TDCL TDOP td
+
+    TDCL  shift, and go to state 218
+
+
+State 185
+
+   47 tr: TDOP td . TRCL
+   50   | TDOP td . TRCL TROP tr
+
+    TRCL  shift, and go to state 219
+
+
+State 186
+
+   51 tr: misc TRCL .
+   54   | misc TRCL . TROP tr
+
+    TROP  shift, and go to state 220
 
     $default  reduce using rule 51 (tr)
 
 
-State 242
+State 187
 
-   52 tr: misc TDOP td TRCL .
-   55   | misc TDOP td TRCL . TROP tr
+   52 tr: misc THOP . th TRCL
+   55   | misc THOP . th TRCL TROP tr
 
-    TROP  shift, and go to state 254
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    THCL       shift, and go to state 180
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
 
-    $default  reduce using rule 52 (tr)
+    text  go to state 31
+    flow  go to state 181
+    misc  go to state 33
+    th    go to state 221
 
 
-State 243
+State 188
 
-   68 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL flow .
+   53 tr: misc TDOP . td TRCL
+   56   | misc TDOP . td TRCL TROP tr
 
-    $default  reduce using rule 68 (atag)
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    TDCL       shift, and go to state 183
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    text  go to state 31
+    flow  go to state 184
+    misc  go to state 33
+    td    go to state 222
 
 
-State 244
+State 189
 
-  150 dd: DDCL DDOP dd .
+   37 table: TROP tr TABCL .
+   40      | TROP tr TABCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    $default  reduce using rule 37 (table)
+
+    text  go to state 31
+    flow  go to state 223
+    misc  go to state 33
+
+
+State 190
+
+  104 phrases: PHRASEOP phrases PHRASECL phrasecom .
+  114 phrasecom: phrasecom . misc
+
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    $default  reduce using rule 104 (phrases)
+
+    misc  go to state 108
+
+
+State 191
+
+  119 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL .
+
+    $default  reduce using rule 119 (font)
+
+
+State 192
+
+   90 phrases: phrases . PHRASEOP phrases PHRASECL
+   91        | phrases . PHRASEOP PHRASECL
+   94        | phrases . IMGOP img
+   95        | phrases . font
+   96        | phrases . FONTOP font
+  102        | phrases . PHRASEOP phrases PHRASECL phrasecom
+  103        | phrases . PHRASEOP PHRASECL phrasecom
+  106        | phrases . IMGOP img phrasecom
+  107        | phrases . font phrasecom
+  108        | phrases . FONTOP font phrasecom
+  120 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP phrases . FONTCL
+
+    PHRASEOP   shift, and go to state 104
+    ATTRIBUTE  shift, and go to state 45
+    IMGOP      shift, and go to state 105
+    FONTOP     shift, and go to state 106
+    FONTOOP    shift, and go to state 48
+    FONTCL     shift, and go to state 224
+
+    font  go to state 107
+
+
+State 193
+
+  103 phrases: phrases PHRASEOP PHRASECL phrasecom .
+  114 phrasecom: phrasecom . misc
+
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    $default  reduce using rule 103 (phrases)
+
+    misc  go to state 108
+
+
+State 194
+
+   90 phrases: phrases PHRASEOP phrases PHRASECL .
+  102        | phrases PHRASEOP phrases PHRASECL . phrasecom
+
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    $default  reduce using rule 90 (phrases)
+
+    misc       go to state 50
+    phrasecom  go to state 225
+
+
+State 195
+
+  106 phrases: phrases IMGOP img phrasecom .
+  114 phrasecom: phrasecom . misc
+
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    $default  reduce using rule 106 (phrases)
+
+    misc  go to state 108
+
+
+State 196
+
+  108 phrases: phrases FONTOP font phrasecom .
+  114 phrasecom: phrasecom . misc
+
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    $default  reduce using rule 108 (phrases)
+
+    misc  go to state 108
+
+
+State 197
+
+   81 gtph: BPHRASEOP phraseopen GTPHCL flow .
+
+    $default  reduce using rule 81 (gtph)
+
+
+State 198
+
+   83 gtph: phrasecom BPHRASEOP phraseopen GTPHCL . flow
+   84     | phrasecom BPHRASEOP phraseopen GTPHCL .
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    $default  reduce using rule 84 (gtph)
+
+    text  go to state 31
+    flow  go to state 226
+    misc  go to state 33
+
+
+State 199
+
+   70 atag: AOPOP flow ACL flow .
+
+    $default  reduce using rule 70 (atag)
+
+
+State 200
+
+   75 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP ACL . flow
+   76     | ATTRIBUTE ATTRIBUTEVAL AOPOP ACL .
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    $default  reduce using rule 76 (atag)
+
+    text  go to state 31
+    flow  go to state 227
+    misc  go to state 33
+
+
+State 201
+
+   69 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP flow . ACL flow
+   72     | ATTRIBUTE ATTRIBUTEVAL AOPOP flow . ACL
+
+    ACL  shift, and go to state 228
+
+
+State 202
+
+  132 figure: FIGCAPOP figcap FIGCL flow .
+
+    $default  reduce using rule 132 (figure)
+
+
+State 203
+
+  128 figure: FIGCAPOP figcap flow FIGCL .
+  133       | FIGCAPOP figcap flow FIGCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    $default  reduce using rule 128 (figure)
+
+    text  go to state 31
+    flow  go to state 229
+    misc  go to state 33
+
+
+State 204
+
+  126 figure: flow FIGCAPOP figcap FIGCL .
+  131       | flow FIGCAPOP figcap FIGCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    $default  reduce using rule 126 (figure)
+
+    text  go to state 31
+    flow  go to state 230
+    misc  go to state 33
+
+
+State 205
+
+  142 dl: DIVOP div DLCL flow .
+
+    $default  reduce using rule 142 (dl)
+
+
+State 206
+
+  150 dd: DDCL .
+  151   | DDCL . DDOP dd
+
+    DDOP  shift, and go to state 231
 
     $default  reduce using rule 150 (dd)
 
 
-State 245
+State 207
 
-  148 dd: flow DDCL DDOP . dd
+  148 dd: flow . DDCL
+  149   | flow . DDCL DDOP dd
 
-    BPHRASEOP  shift, and go to state 18
-    GTPHOP     shift, and go to state 19
-    TEXT       shift, and go to state 20
-    AOP        shift, and go to state 21
-    DIVOP      shift, and go to state 22
-    IMGOP      shift, and go to state 23
-    FONTOP     shift, and go to state 24
-    LOP        shift, and go to state 25
-    FIGOP      shift, and go to state 26
-    DLOP       shift, and go to state 27
-    DDCL       shift, and go to state 204
-    TABOP      shift, and go to state 28
-    BR         shift, and go to state 29
-    COMMENT    shift, and go to state 30
-
-    text  go to state 31
-    flow  go to state 205
-    misc  go to state 33
-    dd    go to state 255
+    DDCL  shift, and go to state 232
 
 
-State 246
+State 208
 
-  146 dt: DTCL DDOP dd DTOP dt .
+  146 dt: DTCL DDOP dd .
+  147   | DTCL DDOP dd . DTOP dt
+
+    DTOP  shift, and go to state 233
 
     $default  reduce using rule 146 (dt)
 
 
-State 247
+State 209
 
-  144 dt: flow DTCL DDOP dd DTOP . dt
+  144 dt: flow DTCL DDOP . dd
+  145   | flow DTCL DDOP . dd DTOP dt
 
     BPHRASEOP  shift, and go to state 18
     GTPHOP     shift, and go to state 19
@@ -3670,103 +3240,619 @@ State 247
     LOP        shift, and go to state 25
     FIGOP      shift, and go to state 26
     DLOP       shift, and go to state 27
-    DTCL       shift, and go to state 131
+    DDCL       shift, and go to state 206
     TABOP      shift, and go to state 28
     BR         shift, and go to state 29
     COMMENT    shift, and go to state 30
 
     text  go to state 31
-    flow  go to state 132
+    flow  go to state 207
     misc  go to state 33
-    dt    go to state 256
+    dd    go to state 234
 
 
-State 248
+State 210
 
-   38 table: CAPOP caption TROP tr TABCL flow .
+  143 dl: DTOP dt DLCL flow .
+
+    $default  reduce using rule 143 (dl)
+
+
+State 211
+
+   38 table: CAPOP caption TABCL flow .
 
     $default  reduce using rule 38 (table)
 
 
-State 249
+State 212
 
-   59 th: flow THCL THOP th .
+   36 table: CAPOP caption TROP tr . TABCL
+   39      | CAPOP caption TROP tr . TABCL flow
 
-    $default  reduce using rule 59 (th)
+    TABCL  shift, and go to state 235
 
 
-State 250
+State 213
 
-   48 tr: THOP th TRCL TROP tr .
+   48 tr: TRCL TROP tr .
 
     $default  reduce using rule 48 (tr)
 
 
-State 251
+State 214
 
-   63 td: flow TDCL TDOP td .
+   59 th: THCL THOP . th
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    THCL       shift, and go to state 180
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    text  go to state 31
+    flow  go to state 181
+    misc  go to state 33
+    th    go to state 236
+
+
+State 215
+
+   58 th: flow THCL .
+   60   | flow THCL . THOP th
+
+    THOP  shift, and go to state 237
+
+    $default  reduce using rule 58 (th)
+
+
+State 216
+
+   46 tr: THOP th TRCL .
+   49   | THOP th TRCL . TROP tr
+
+    TROP  shift, and go to state 238
+
+    $default  reduce using rule 46 (tr)
+
+
+State 217
+
+   63 td: TDCL TDOP . td
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    TDCL       shift, and go to state 183
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    text  go to state 31
+    flow  go to state 184
+    misc  go to state 33
+    td    go to state 239
+
+
+State 218
+
+   62 td: flow TDCL .
+   64   | flow TDCL . TDOP td
+
+    TDOP  shift, and go to state 240
+
+    $default  reduce using rule 62 (td)
+
+
+State 219
+
+   47 tr: TDOP td TRCL .
+   50   | TDOP td TRCL . TROP tr
+
+    TROP  shift, and go to state 241
+
+    $default  reduce using rule 47 (tr)
+
+
+State 220
+
+   54 tr: misc TRCL TROP . tr
+
+    TRCL     shift, and go to state 140
+    THOP     shift, and go to state 141
+    TDOP     shift, and go to state 142
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    misc  go to state 143
+    tr    go to state 242
+
+
+State 221
+
+   52 tr: misc THOP th . TRCL
+   55   | misc THOP th . TRCL TROP tr
+
+    TRCL  shift, and go to state 243
+
+
+State 222
+
+   53 tr: misc TDOP td . TRCL
+   56   | misc TDOP td . TRCL TROP tr
+
+    TRCL  shift, and go to state 244
+
+
+State 223
+
+   40 table: TROP tr TABCL flow .
+
+    $default  reduce using rule 40 (table)
+
+
+State 224
+
+  120 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP phrases FONTCL .
+
+    $default  reduce using rule 120 (font)
+
+
+State 225
+
+  102 phrases: phrases PHRASEOP phrases PHRASECL phrasecom .
+  114 phrasecom: phrasecom . misc
+
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    $default  reduce using rule 102 (phrases)
+
+    misc  go to state 108
+
+
+State 226
+
+   83 gtph: phrasecom BPHRASEOP phraseopen GTPHCL flow .
+
+    $default  reduce using rule 83 (gtph)
+
+
+State 227
+
+   75 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP ACL flow .
+
+    $default  reduce using rule 75 (atag)
+
+
+State 228
+
+   69 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL . flow
+   72     | ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL .
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    $default  reduce using rule 72 (atag)
+
+    text  go to state 31
+    flow  go to state 245
+    misc  go to state 33
+
+
+State 229
+
+  133 figure: FIGCAPOP figcap flow FIGCL flow .
+
+    $default  reduce using rule 133 (figure)
+
+
+State 230
+
+  131 figure: flow FIGCAPOP figcap FIGCL flow .
+
+    $default  reduce using rule 131 (figure)
+
+
+State 231
+
+  151 dd: DDCL DDOP . dd
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    DDCL       shift, and go to state 206
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    text  go to state 31
+    flow  go to state 207
+    misc  go to state 33
+    dd    go to state 246
+
+
+State 232
+
+  148 dd: flow DDCL .
+  149   | flow DDCL . DDOP dd
+
+    DDOP  shift, and go to state 247
+
+    $default  reduce using rule 148 (dd)
+
+
+State 233
+
+  147 dt: DTCL DDOP dd DTOP . dt
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    DTCL       shift, and go to state 133
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    text  go to state 31
+    flow  go to state 134
+    misc  go to state 33
+    dt    go to state 248
+
+
+State 234
+
+  144 dt: flow DTCL DDOP dd .
+  145   | flow DTCL DDOP dd . DTOP dt
+
+    DTOP  shift, and go to state 249
+
+    $default  reduce using rule 144 (dt)
+
+
+State 235
+
+   36 table: CAPOP caption TROP tr TABCL .
+   39      | CAPOP caption TROP tr TABCL . flow
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    $default  reduce using rule 36 (table)
+
+    text  go to state 31
+    flow  go to state 250
+    misc  go to state 33
+
+
+State 236
+
+   59 th: THCL THOP th .
+
+    $default  reduce using rule 59 (th)
+
+
+State 237
+
+   60 th: flow THCL THOP . th
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    THCL       shift, and go to state 180
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    text  go to state 31
+    flow  go to state 181
+    misc  go to state 33
+    th    go to state 251
+
+
+State 238
+
+   49 tr: THOP th TRCL TROP . tr
+
+    TRCL     shift, and go to state 140
+    THOP     shift, and go to state 141
+    TDOP     shift, and go to state 142
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    misc  go to state 143
+    tr    go to state 252
+
+
+State 239
+
+   63 td: TDCL TDOP td .
 
     $default  reduce using rule 63 (td)
 
 
+State 240
+
+   64 td: flow TDCL TDOP . td
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    TABOP      shift, and go to state 28
+    TDCL       shift, and go to state 183
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    text  go to state 31
+    flow  go to state 184
+    misc  go to state 33
+    td    go to state 253
+
+
+State 241
+
+   50 tr: TDOP td TRCL TROP . tr
+
+    TRCL     shift, and go to state 140
+    THOP     shift, and go to state 141
+    TDOP     shift, and go to state 142
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    misc  go to state 143
+    tr    go to state 254
+
+
+State 242
+
+   54 tr: misc TRCL TROP tr .
+
+    $default  reduce using rule 54 (tr)
+
+
+State 243
+
+   52 tr: misc THOP th TRCL .
+   55   | misc THOP th TRCL . TROP tr
+
+    TROP  shift, and go to state 255
+
+    $default  reduce using rule 52 (tr)
+
+
+State 244
+
+   53 tr: misc TDOP td TRCL .
+   56   | misc TDOP td TRCL . TROP tr
+
+    TROP  shift, and go to state 256
+
+    $default  reduce using rule 53 (tr)
+
+
+State 245
+
+   69 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL flow .
+
+    $default  reduce using rule 69 (atag)
+
+
+State 246
+
+  151 dd: DDCL DDOP dd .
+
+    $default  reduce using rule 151 (dd)
+
+
+State 247
+
+  149 dd: flow DDCL DDOP . dd
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    DDCL       shift, and go to state 206
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    text  go to state 31
+    flow  go to state 207
+    misc  go to state 33
+    dd    go to state 257
+
+
+State 248
+
+  147 dt: DTCL DDOP dd DTOP dt .
+
+    $default  reduce using rule 147 (dt)
+
+
+State 249
+
+  145 dt: flow DTCL DDOP dd DTOP . dt
+
+    BPHRASEOP  shift, and go to state 18
+    GTPHOP     shift, and go to state 19
+    TEXT       shift, and go to state 20
+    AOP        shift, and go to state 21
+    DIVOP      shift, and go to state 22
+    IMGOP      shift, and go to state 23
+    FONTOP     shift, and go to state 24
+    LOP        shift, and go to state 25
+    FIGOP      shift, and go to state 26
+    DLOP       shift, and go to state 27
+    DTCL       shift, and go to state 133
+    TABOP      shift, and go to state 28
+    BR         shift, and go to state 29
+    COMMENT    shift, and go to state 30
+
+    text  go to state 31
+    flow  go to state 134
+    misc  go to state 33
+    dt    go to state 258
+
+
+State 250
+
+   39 table: CAPOP caption TROP tr TABCL flow .
+
+    $default  reduce using rule 39 (table)
+
+
+State 251
+
+   60 th: flow THCL THOP th .
+
+    $default  reduce using rule 60 (th)
+
+
 State 252
 
-   49 tr: TDOP td TRCL TROP tr .
+   49 tr: THOP th TRCL TROP tr .
 
     $default  reduce using rule 49 (tr)
 
 
 State 253
 
-   54 tr: misc THOP th TRCL TROP . tr
+   64 td: flow TDCL TDOP td .
 
-    TRCL     shift, and go to state 138
-    THOP     shift, and go to state 139
-    TDOP     shift, and go to state 140
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    misc  go to state 141
-    tr    go to state 257
+    $default  reduce using rule 64 (td)
 
 
 State 254
 
-   55 tr: misc TDOP td TRCL TROP . tr
+   50 tr: TDOP td TRCL TROP tr .
 
-    TRCL     shift, and go to state 138
-    THOP     shift, and go to state 139
-    TDOP     shift, and go to state 140
-    BR       shift, and go to state 29
-    COMMENT  shift, and go to state 30
-
-    misc  go to state 141
-    tr    go to state 258
+    $default  reduce using rule 50 (tr)
 
 
 State 255
 
-  148 dd: flow DDCL DDOP dd .
+   55 tr: misc THOP th TRCL TROP . tr
 
-    $default  reduce using rule 148 (dd)
+    TRCL     shift, and go to state 140
+    THOP     shift, and go to state 141
+    TDOP     shift, and go to state 142
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    misc  go to state 143
+    tr    go to state 259
 
 
 State 256
 
-  144 dt: flow DTCL DDOP dd DTOP dt .
+   56 tr: misc TDOP td TRCL TROP . tr
 
-    $default  reduce using rule 144 (dt)
+    TRCL     shift, and go to state 140
+    THOP     shift, and go to state 141
+    TDOP     shift, and go to state 142
+    BR       shift, and go to state 29
+    COMMENT  shift, and go to state 30
+
+    misc  go to state 143
+    tr    go to state 260
 
 
 State 257
 
-   54 tr: misc THOP th TRCL TROP tr .
+  149 dd: flow DDCL DDOP dd .
 
-    $default  reduce using rule 54 (tr)
+    $default  reduce using rule 149 (dd)
 
 
 State 258
 
-   55 tr: misc TDOP td TRCL TROP tr .
+  145 dt: flow DTCL DDOP dd DTOP dt .
+
+    $default  reduce using rule 145 (dt)
+
+
+State 259
+
+   55 tr: misc THOP th TRCL TROP tr .
 
     $default  reduce using rule 55 (tr)
+
+
+State 260
+
+   56 tr: misc TDOP td TRCL TROP tr .
+
+    $default  reduce using rule 56 (tr)
