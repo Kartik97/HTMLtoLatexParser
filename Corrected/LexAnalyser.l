@@ -49,7 +49,7 @@ br "br"|"BR"
 comm "-->"
 word \b[^{space}<]+\b
 symbol1 "alpha"|"beta"|"chi"|"delta"|"epsilon"|"eta"|"gamma"|"iota"|"kappa"|"lambda"|"mu"|"nu"|"omega"|"phi"|"pi"|"psi"|"rho"|"sigma"|"tau"
-symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"Sigma"|"Theta"
+symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"Sigma"|"Theta"|"lt"|"gt"|"nbsp"|"quot"|"apos"|"cent"|"pound"|"yen"|"euro"|"copy"|"reg"
 
 %%
 {space}+ {}
