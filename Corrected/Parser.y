@@ -44,14 +44,14 @@ char* concat(char *s1,char *s2);
 %token FIGOP FIGCL FIGCAPOP FIGCAPCL
 %token DLOP DLCL DTOP DTCL DDOP DDCL
 %token <value> TABOP TABCL CAPOP CAPCL TROP TRCL THOP THCL TDOP TDCL BR
-%token <value> COMMENT SPCHAR SYMBOL
+%token <value> COMMENT SPCHAR SYMBOL CENTEROP CENTERCL
 
 %type <value> ATTRIBUTE DOCTYPE HTMLOP HTMLCL HEADOP HEADCL TITLEOP TITLECL TEXT BODYOP BODYCL PHRASEOP PHRASECL BPHRASEOP BPHRASECL
 %type <value> ATTRIBUTEVAL AOP AOPOP ACL IMGOP IMGCL LOP LCL LIOP LICL FIGCAPOP FIGCAPCL
 %type <value> GTPHOP GTPHCL DIVOP DIVCL FONTOP FONTOOP FONTCL FIGOP FIGCL
 %type <value> DLOP DLCL DTOP DTCL DDOP DDCL 
 %type <value> head title body flow phraseopen phrases listitem list misc consume gtph phr div dl dt dd table caption tr th td figure
-%type <value> figcap img atag miscph consumeph atagph font fontph
+%type <value> figcap img atag miscph consumeph atagph font fontph center centerph
 
 %%
 
@@ -92,6 +92,7 @@ consume: consume misc { $$=concat($1,$2); }
 miscph: misc {$$=$1; } 
 	| AOP atagph {$$=concat($1,$2); }
 	| FONTOP fontph {$$=concat($1,$2); }
+	| CENTEROP centerph {}
 	;
 	
 consumeph: consumeph miscph {$$=concat($1,$2); }
@@ -109,6 +110,13 @@ flow: BPHRASEOP phraseopen { $$=concat($1,$2); }
 	| FIGOP figure {$$=concat($1,$2); }
 	| AOP atag { $$=concat($1,$2); }
 	| FONTOP font { $$=concat($1,$2); }
+	| CENTEROP center { $$=concat($1,$2); }
+	;
+
+center: flow CENTERCL { $$=concat($1,$2); }
+	| flow CENTERCL flow { char *p=concat($1,$2); $$=concat(p,$3); }
+	| CENTERCL {$$=$1; }
+	| CENTERCL flow { $$=concat($1,$2); }
 	;
 
 phraseopen: phrases BPHRASECL flow { char *p=concat($1,$2); $$=concat(p,$3); }
@@ -155,6 +163,13 @@ gtph: phrases GTPHCL flow { char *p=concat($1,$2); $$=concat(p,$3); }
 	| BPHRASEOP phraseopen GTPHCL { char *p=concat($1,$2); $$=concat(p,$3); }
 	| consumeph BPHRASEOP phraseopen GTPHCL flow { char *p=concat($1,$2),*x=concat(p,$3),*y=concat(x,$4); $$=concat(y,$5);}
 	| consumeph BPHRASEOP phraseopen GTPHCL { char *p=concat($1,$2),*x=concat(p,$3); $$=concat(x,$4); }
+	;
+
+centerph: phrases CENTERCL { $$=concat($1,$2); }
+	| consumeph CENTERCL { $$=concat($1,$2); }
+	| CENTERCL {$$=$1; }
+	| BPHRASEOP phraseopen CENTERCL { char *p=concat($1,$2); $$=concat(p,$3); }
+	| consumeph BPHRASEOP phraseopen CENTERCL { char *p=concat($1,$2),*x=concat(p,$3); $$=concat(x,$4); }
 	;
 
 list: LIOP listitem list { char *p=concat($1,$2); $$=concat(p,$3); }

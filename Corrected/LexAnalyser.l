@@ -29,7 +29,8 @@ special "&"[a-zA-Z]+";"
 phrasingtags "b"|"B"|"em"|"EM"|"i"|"I"|"small"|"SMALL"|"strong"|"STRONG"|"sub"|"SUB"|"sup"|"SUP"|"u"|"U"|"tt"|"TT"
 gtph "p"|"P"|"h1"|"H1"|"h2"|"H2"|"h3"|"H4"|"h5"|"H5"
 a "a"|"A"
-div "div"|"DIV"|"center"|"CENTER"
+div "div"|"DIV"
+center "center"|"CENTER"
 img "img"|"IMG"
 font "font"|"FONT"
 li "li"|"LI"
@@ -342,6 +343,14 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
 "</"{td}{space}+[^>]*">"|"</"{td}">"  {
         yylval.value=strdup("TDCL ");
         return TDCL;
+}
+"<"{center}{space}+[^>]*">"|"<"{center}">"  {
+        yylval.value=strdup("CENTEROP ");
+        return CENTEROP;
+}
+"</"{center}{space}+[^>]*">"|"</"{center}">"  {
+        yylval.value=strdup("CENTERCL ");
+        return CENTERCL;
 }
 "<"{br}{space}+[^>]*">"|"<"{br}">"|"<"{br}{space}+[^>]*"/>"|"<"{br}"/>"  {
         yylval.value=strdup("BR ");
