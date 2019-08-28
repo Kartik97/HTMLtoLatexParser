@@ -359,6 +359,8 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         yylval.value=strdup("BR ");
         return BR;
 }
+. {}
+
 %%
 
 int yywrap(){
