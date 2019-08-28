@@ -1,40 +1,19 @@
 %{ 
 int count = 0; 
+int cut(char *s,int len);
 %} 
 space [ \n\t\r]
 word [a-zA-Z\`\~\!\@\#\$\%\^\&\*\(\)\-\_\+\=\{\}\[\]\|\\\:\;\"\'\,\.\/\?]*[^<]
-close "-->"
-phrasingtags "p"
-html "html"|"HTML"
-doctype "!doctype"|"!DOCTYPE"
-body "body"|"BODY"
-commclose "-->"
-
+close (\-\-\>)
 %% 
-"<!--"[^(\-\-\>)]*"-->"  {
-	printf("%d%s\n",count++, yytext); 
+"<!--"((.|\n)*?)?"-->"  {
+	if(cut(yytext,yyleng)+1==yyleng){
 	}
-"<"{doctype}{space}+[^{html}]*{html}">"|"<"{doctype}{space}+[^{html}]*{html}{space}+[^>]*">" {
-	printf("%d%s\n",count++, yytext); 
+	else
+		yyless(cut(yytext,yyleng)+1);
+	printf("%d %d %d\n",count++,cut(yytext,yyleng),yyleng);
 }
-"<"{html}{space}+[^>]*">"|"<"{html}">"  {
-	printf("%d%s\n",count++, yytext); 
-}
-"</"{html}{space}+[^>]*">"|"</"{html}">"  {
-	printf("%d%s\n",count++, yytext); 
-}
-"<"{body}{space}+[^>]*">"|"<"{body}">"  {
-        printf("%d%s\n",count++, yytext); 
-}
-"</"{body}{space}+[^>]*">"|"</"{body}">"  {
-        printf("%d%s\n",count++, yytext); 
-}
-"<"{phrasingtags}{space}+[^>]*">"|"<"{phrasingtags}">"  {
-        printf("%d%s\n",count++, yytext); 
-}
-"</"{phrasingtags}{space}+[^>]*">"|"</"{phrasingtags}">"  {
-	printf("%d%s\n",count++, yytext); 
-}
+
 %% 
 
 int yywrap(){} 
@@ -44,3 +23,10 @@ yylex();
 return 0; 
 } 
 
+int cut(char *s,int len){
+	int i=0;
+	for(;i<len-2;i++){
+		if(s[i]==45 && s[i+1]==45 && s[i+2]==62)
+			return i+2;
+	}
+}

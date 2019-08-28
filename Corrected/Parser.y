@@ -149,6 +149,8 @@ fontph: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL { char *p=concat($1,$2),*x=concat(
 
 atagph: ATTRIBUTE ATTRIBUTEVAL AOPOP phrases ACL { char *p=concat($1,$2),*x=concat(p,$3),*y=concat(x,$4); $$=concat(y,$5); }
     | AOPOP phrases ACL { char *p=concat($1,$2); $$=concat(p,$3); }
+    | ATTRIBUTE ATTRIBUTEVAL AOPOP consumeph ACL { char *p=concat($1,$2),*x=concat(p,$3),*y=concat(x,$4); $$=concat(y,$5); }
+    | AOPOP consumeph ACL { char *p=concat($1,$2); $$=concat(p,$3); }
     | AOPOP ACL {$$=concat($1,$2); }
 	| ATTRIBUTE ATTRIBUTEVAL AOPOP ACL { char *p=concat($1,$2),*x=concat(p,$3);$$=concat(x,$4); }
 	;

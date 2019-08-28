@@ -8,6 +8,7 @@ using namespace std;
 int phcount=0,temp=0;
 char *findpos(const char* s,int len,int start);
 char *findval(const char* s,int len,int start);
+int cut(char *s,int len);
 %}
 
 %option stack
@@ -27,7 +28,7 @@ body "body"|"BODY"
 doctype "!doctype"|"!DOCTYPE"
 special "&"[a-zA-Z]+";"
 phrasingtags "b"|"B"|"em"|"EM"|"i"|"I"|"small"|"SMALL"|"strong"|"STRONG"|"sub"|"SUB"|"sup"|"SUP"|"u"|"U"|"tt"|"TT"
-gtph "p"|"P"|"h1"|"H1"|"h2"|"H2"|"h3"|"H4"|"h5"|"H5"
+gtph "p"|"P"|"h1"|"H1"|"h2"|"H2"|"h3"|"H3"|"h4"|"H4"|"h5"|"H5"
 a "a"|"A"
 div "div"|"DIV"
 center "center"|"CENTER"
@@ -54,7 +55,9 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
 
 %%
 {space}+ {}
-"<!--"[^(\-\-\>)]*"-->"  {
+"<!--"((.|\n)*?)?"-->"  {
+        if(cut(yytext,yyleng)+1!=yyleng)
+                yyless(cut(yytext,yyleng)+1);
         yylval.value=strdup(yytext);
         return COMMENT;
 }
@@ -166,7 +169,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
 	. {}
 }
 <aAtt>{
-	[=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()]*[\"\'] {
+	[=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()#\+\=\[\]\{\}]*[\"\'] {
 		yy_pop_state();
 		yylval.value=strdup(findval(yytext,yyleng,1));
 		return ATTRIBUTEVAL;
@@ -388,4 +391,11 @@ char *findval(const char *s,int len,int start){
         }
         p[k-1]=0;
         return p;
+}
+int cut(char *s,int len){
+        int i=0;
+        for(;i<len-2;i++){
+                if(s[i]==45 && s[i+1]==45 && s[i+2]==62)
+                        return i+2;
+        }
 }
