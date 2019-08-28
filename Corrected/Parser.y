@@ -92,7 +92,7 @@ consume: consume misc { $$=concat($1,$2); }
 miscph: misc {$$=$1; } 
 	| AOP atagph {$$=concat($1,$2); }
 	| FONTOP fontph {$$=concat($1,$2); }
-	| CENTEROP centerph {}
+	| CENTEROP centerph {$$=concat($1,$2); }
 	;
 	
 consumeph: consumeph miscph {$$=concat($1,$2); }

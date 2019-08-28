@@ -1880,7 +1880,7 @@ yyreduce:
 
   case 27:
 #line 95 "Parser.y" /* yacc.c:1646  */
-    {}
+    {(yyval.value)=concat((yyvsp[-1].value),(yyvsp[0].value)); }
 #line 1885 "Parser.tab.c" /* yacc.c:1646  */
     break;
 
