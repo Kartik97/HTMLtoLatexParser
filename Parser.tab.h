@@ -99,7 +99,10 @@ extern int yydebug;
     TDCL = 309,
     BR = 310,
     COMMENT = 311,
-    SPCHAR = 312
+    SPCHAR = 312,
+    SYMBOL = 313,
+    CENTEROP = 314,
+    CENTERCL = 315
   };
 #endif
 
@@ -113,7 +116,7 @@ union YYSTYPE
 	char* object;
 	char* value;
 
-#line 117 "Parser.tab.h" /* yacc.c:1909  */
+#line 120 "Parser.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
