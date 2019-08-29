@@ -687,34 +687,52 @@ td: TDCL {
     ;
 
 figure: flow FIGCAPOP figcap FIGCL {
+			$$=add_startChild($1,$3,$4);
 		}
 	| FIGCAPOP figcap FIGCL {
+			$$=add_startChild($2,$3);
 		}
 	| FIGCAPOP figcap flow FIGCL { 
+			$$=add_startChild($2,$3,$4);
 		}
 	| flow FIGCL {
+			$$=add_startChild($1,$2);
 		}
 	| FIGCL {
+			$$=add_start($1);
 		}
 	| flow FIGCAPOP figcap FIGCL flow {
+			$$=add_child_neighbour($1,$3,$4,$5);
 		}
     | FIGCAPOP figcap FIGCL flow {
+    		$$=add_child_neighbour($2,$3,$4);
     	}
 	| FIGCAPOP figcap flow FIGCL flow {
+			$$=add_child_neighbour($2,$3,$4,$5);
 		}
     | flow FIGCL flow {
+    		$$=add_child_neighbour($1,$2,$3);
     	}
 	| FIGCL flow {
+			$$=add_neighbour($1,$2);
 		}
 	| flow FIGCAPOP figcap flow FIGCL flow {
+			node* n=add_child_neighbour($1,$3,$5,$6);
+    		add_children(n->v[0],$4->v);
+    		$$=n;
 		}
 	| flow FIGCAPOP figcap flow FIGCL {
+			node* n=add_startChild($1,$3,$5);
+    		add_children(n->v[0],$4->v);
+    		$$=n;	
 		}
 	;
 
 figcap: flow FIGCAPCL {
+			$$=add_startChild($1,$2);
 		}
 	| FIGCAPCL {
+			$$=add_start($1);
 		}
 	;
 
