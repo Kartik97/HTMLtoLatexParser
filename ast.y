@@ -175,6 +175,7 @@ flow: BPHRASEOP phraseopen {
 			$$=$2;
 		}
 	| LOP list { 
+			$$=$2;
 		}
 	| misc flow {
 			vn v1,v2;
@@ -344,22 +345,33 @@ centerph: phrases CENTERCL {
 	;
 
 list: LIOP listitem list {
+			$3->v[0]->children.insert($3->v[0]->children.begin(),$2->v.begin(),$2->v.end());
+			$$=$3;
 		}
 	| LCL {
+			$$=add_start($1);
 		}
 	| consume LIOP listitem list {
+			$4->v[0]->children.insert($4->v[0]->children.begin(),$3->v.begin(),$3->v.end());
+			$4->v[0]->children.insert($4->v[0]->children.begin(),$1->v.begin(),$1->v.end());
+			$$=$4;
 		}
 	| consume LCL {
+			$$=add_startChild($1,$2);
 		}
 	| LCL flow {
+			$$=add_neighbour($1,$2);
 		}
 	| consume LCL flow {
+			$$=add_child_neighbour($1,$2,$3);
 		}
 	;
 
 listitem: flow LICL {
+			$$=add_startChild($1,$2);
 		}
 	| LICL {
+			$$=add_start($1);
 		}
 	;
 

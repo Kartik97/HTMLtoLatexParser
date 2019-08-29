@@ -35,31 +35,6 @@ treeNode* add_attributes(treeNode* node,string att,string attVal){
 	return node;
 }
 
-void print(treeNode* node){
-	cout<<"["<<node->tagVal;
-	if(!node->content.empty()){
-		cout<<": ";
-		for(int i=0;i<node->content.size();i++){
-			cout<<node->content[i];
-		}
-	}
-	cout<<"]";
-	if(!node->att.empty()){
-		cout<<" (";
-		for(int i=0;i<node->att.size();i++){
-			cout<<" ("<<node->att[i]<<": "<<node->attVal[i]<<") ";
-		}
-		cout<<")";
-	}
-	cout<<"{ ";
-	if(!node->children.empty()){
-		for(int i=0;i<node->children.size();i++){
-			print(node->children[i]);
-		}
-	}
-	cout<<" }";
-}
-
 node* add_child_neighbour(node* c,string name,node *n){
 	vector<treeNode*> v;
 	node* temp = new node;
@@ -121,4 +96,38 @@ node* add_startChild(node *c1,node* c2,string name){
 	v.pb(ptr);
 	copy(temp->v,v);
 	return temp;
+}
+
+int find_parent(node* n){
+	string s1("ULCL");
+	string s2("OLCL");
+	for(int i=0;i<n->v.size();i++){
+		if((n->v[i]->tagVal==s1) || (n->v[i]->tagVal==s2))
+			return i;
+	}
+}
+
+void print(treeNode* node){
+	cout<<"["<<node->tagVal;
+	if(!node->content.empty()){
+		cout<<": ";
+		for(int i=0;i<node->content.size();i++){
+			cout<<node->content[i];
+		}
+	}
+	cout<<"]"<<endl;
+	if(!node->att.empty()){
+		cout<<" (";
+		for(int i=0;i<node->att.size();i++){
+			cout<<" ("<<node->att[i]<<": "<<node->attVal[i]<<") ";
+		}
+		cout<<")"<<endl;
+	}
+	cout<<"{ ";
+	if(!node->children.empty()){
+		for(int i=0;i<node->children.size();i++){
+			print(node->children[i]);
+		}
+	}
+	cout<<" }"<<endl;
 }

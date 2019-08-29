@@ -1837,7 +1837,7 @@ case 5:
 YY_RULE_SETUP
 #line 79 "ast.l"
 {
-	yylval.value = strdup("DOCTYPE ");
+	yylval.value = strdup("DOCTYPE");
 	return DOCTYPE;
 }
 	YY_BREAK
@@ -1846,7 +1846,7 @@ case 6:
 YY_RULE_SETUP
 #line 83 "ast.l"
 {
-	yylval.value=strdup("HTMLOP ");
+	yylval.value=strdup("HTMLOP");
 	return HTMLOP;
 }
 	YY_BREAK
@@ -1855,7 +1855,7 @@ case 7:
 YY_RULE_SETUP
 #line 87 "ast.l"
 {
-	yylval.value=strdup("HTMLCL ");
+	yylval.value=strdup("HTMLCL");
 	return HTMLCL;
 }
 	YY_BREAK
@@ -1864,7 +1864,7 @@ case 8:
 YY_RULE_SETUP
 #line 91 "ast.l"
 {
-        yylval.value=strdup("HEADOP ");
+        yylval.value=strdup("HEADOP");
         return HEADOP;
 }
 	YY_BREAK
@@ -1873,7 +1873,7 @@ case 9:
 YY_RULE_SETUP
 #line 95 "ast.l"
 {
-        yylval.value=strdup("HEADCL ");
+        yylval.value=strdup("HEADCL");
         return HEADCL;
 }
 	YY_BREAK
@@ -1882,7 +1882,7 @@ case 10:
 YY_RULE_SETUP
 #line 99 "ast.l"
 {
-        yylval.value=strdup("TITLEOP ");
+        yylval.value=strdup("TITLEOP");
         return TITLEOP;
 }
 	YY_BREAK
@@ -1891,7 +1891,7 @@ case 11:
 YY_RULE_SETUP
 #line 103 "ast.l"
 {
-        yylval.value=strdup("TITLECL ");
+        yylval.value=strdup("TITLECL");
         return TITLECL;
 }
 	YY_BREAK
@@ -1900,7 +1900,7 @@ case 12:
 YY_RULE_SETUP
 #line 107 "ast.l"
 {
-        yylval.value=strdup("BODYOP ");
+        yylval.value=strdup("BODYOP");
         return BODYOP;
 }
 	YY_BREAK
@@ -1909,7 +1909,7 @@ case 13:
 YY_RULE_SETUP
 #line 111 "ast.l"
 {
-        yylval.value=strdup("BODYCL ");
+        yylval.value=strdup("BODYCL");
         return BODYCL;
 }
 	YY_BREAK
@@ -1983,7 +1983,7 @@ YY_RULE_SETUP
 #line 149 "ast.l"
 {
 	yy_push_state(aInside);
-	yylval.value=strdup("AOP ");
+	yylval.value=strdup("AOP");
 	return AOP;
 }
 	YY_BREAK
@@ -1992,7 +1992,7 @@ case 21:
 YY_RULE_SETUP
 #line 154 "ast.l"
 {
-	yylval.value=strdup("ACL ");
+	yylval.value=strdup("ACL");
 	return ACL;
 }
 	YY_BREAK
@@ -2003,7 +2003,7 @@ YY_RULE_SETUP
 #line 159 "ast.l"
 {
 		yy_push_state(aAtt);
-		yylval.value=strdup("HREF ");
+		yylval.value=strdup("HREF");
 		yyless(yyleng-1);
 		return ATTRIBUTE;
 	}
@@ -2014,7 +2014,7 @@ YY_RULE_SETUP
 #line 165 "ast.l"
 {
 		yy_pop_state();
-		yylval.value=strdup("AOPOP ");
+		yylval.value=strdup("AOPOP");
 		return AOPOP;
 	}
 	YY_BREAK
@@ -2042,7 +2042,7 @@ YY_RULE_SETUP
 #line 179 "ast.l"
 {
 	yy_push_state(imgInside);
-	yylval.value=strdup("IMGOP ");
+	yylval.value=strdup("IMGOP");
 	return IMGOP;
 }
 	YY_BREAK
@@ -2053,7 +2053,7 @@ YY_RULE_SETUP
 #line 185 "ast.l"
 {
                 yy_push_state(imgAtt);
-                yylval.value=strdup("SRC ");
+                yylval.value=strdup("SRC");
                 yyless(yyleng-1);
                 return ATTRIBUTE;
         }
@@ -2064,7 +2064,7 @@ YY_RULE_SETUP
 #line 191 "ast.l"
 {
                 yy_push_state(imgAtt);
-                yylval.value=strdup("WIDTH ");
+                yylval.value=strdup("WIDTH");
                 yyless(yyleng-1);
                 return ATTRIBUTE;
         }
@@ -2075,7 +2075,7 @@ YY_RULE_SETUP
 #line 197 "ast.l"
 {
                 yy_push_state(imgAtt);
-                yylval.value=strdup("HEIGHT ");
+                yylval.value=strdup("HEIGHT");
                 yyless(yyleng-1);
                 return ATTRIBUTE;
         }
@@ -2086,7 +2086,7 @@ YY_RULE_SETUP
 #line 203 "ast.l"
 {
                 yy_pop_state();
-                yylval.value=strdup("IMGCL ");
+                yylval.value=strdup("IMGCL");
                 return IMGCL;
         }
 	YY_BREAK
@@ -2114,7 +2114,7 @@ YY_RULE_SETUP
 #line 217 "ast.l"
 {
         yy_push_state(fontInside);
-	yylval.value=strdup("FONTOP ");	
+	yylval.value=strdup("FONTOP");	
 	return FONTOP;
 }
 	YY_BREAK
@@ -2123,7 +2123,7 @@ case 34:
 YY_RULE_SETUP
 #line 222 "ast.l"
 {
-	yylval.value=strdup("FONTCL ");	
+	yylval.value=strdup("FONTCL");	
 	return FONTCL;
 }
 	YY_BREAK
@@ -2134,7 +2134,7 @@ YY_RULE_SETUP
 #line 227 "ast.l"
 {
                 yy_push_state(fontAtt);
-                yylval.value=strdup("SIZE ");
+                yylval.value=strdup("SIZE");
                 yyless(yyleng-1);
                 return ATTRIBUTE;
         }
@@ -2145,7 +2145,7 @@ YY_RULE_SETUP
 #line 233 "ast.l"
 {
                 yy_pop_state();
-                yylval.value=strdup("FONTOOP ");
+                yylval.value=strdup("FONTOOP");
                 return FONTOOP;
         }
 	YY_BREAK
@@ -2172,7 +2172,7 @@ case 39:
 YY_RULE_SETUP
 #line 247 "ast.l"
 {
-        yylval.value=strdup("ULOP ");
+        yylval.value=strdup("ULOP");
         return LOP;
 }
 	YY_BREAK
@@ -2181,7 +2181,7 @@ case 40:
 YY_RULE_SETUP
 #line 251 "ast.l"
 {
-        yylval.value=strdup("ULCL ");
+        yylval.value=strdup("ULCL");
         return LCL;
 }
 	YY_BREAK
@@ -2190,7 +2190,7 @@ case 41:
 YY_RULE_SETUP
 #line 255 "ast.l"
 {
-        yylval.value=strdup("OLOP ");
+        yylval.value=strdup("OLOP");
         return LOP;
 }
 	YY_BREAK
@@ -2199,7 +2199,7 @@ case 42:
 YY_RULE_SETUP
 #line 259 "ast.l"
 {
-        yylval.value=strdup("OLCL ");
+        yylval.value=strdup("OLCL");
         return LCL;
 }
 	YY_BREAK
@@ -2208,7 +2208,7 @@ case 43:
 YY_RULE_SETUP
 #line 263 "ast.l"
 {
-        yylval.value=strdup("LIOP ");
+        yylval.value=strdup("LIOP");
         return LIOP;
 }
 	YY_BREAK
@@ -2217,7 +2217,7 @@ case 44:
 YY_RULE_SETUP
 #line 267 "ast.l"
 {
-        yylval.value=strdup("LICL ");
+        yylval.value=strdup("LICL");
         return LICL;
 }
 	YY_BREAK
@@ -2226,7 +2226,7 @@ case 45:
 YY_RULE_SETUP
 #line 271 "ast.l"
 {
-        yylval.value=strdup("FIGUREOP ");
+        yylval.value=strdup("FIGUREOP");
         return FIGOP;
 }
 	YY_BREAK
@@ -2235,7 +2235,7 @@ case 46:
 YY_RULE_SETUP
 #line 275 "ast.l"
 {
-        yylval.value=strdup("FIGURECL ");
+        yylval.value=strdup("FIGURECL");
         return FIGCL;
 }
 	YY_BREAK
@@ -2244,7 +2244,7 @@ case 47:
 YY_RULE_SETUP
 #line 279 "ast.l"
 {
-        yylval.value=strdup("FIGCAPTIONOP ");
+        yylval.value=strdup("FIGCAPTIONOP");
         return FIGCAPOP;
 }
 	YY_BREAK
@@ -2253,7 +2253,7 @@ case 48:
 YY_RULE_SETUP
 #line 283 "ast.l"
 {
-	yylval.value=strdup("FIGCAPTIONCL ");
+	yylval.value=strdup("FIGCAPTIONCL");
         return FIGCAPCL;
 }
 	YY_BREAK
@@ -2262,7 +2262,7 @@ case 49:
 YY_RULE_SETUP
 #line 287 "ast.l"
 {
-        yylval.value=strdup("DLOP ");
+        yylval.value=strdup("DLOP");
         return DLOP;
 }
 	YY_BREAK
@@ -2271,7 +2271,7 @@ case 50:
 YY_RULE_SETUP
 #line 291 "ast.l"
 {
-        yylval.value=strdup("DLCL ");
+        yylval.value=strdup("DLCL");
         return DLCL;
 }
 	YY_BREAK
@@ -2280,7 +2280,7 @@ case 51:
 YY_RULE_SETUP
 #line 295 "ast.l"
 {
-        yylval.value=strdup("DTOP ");
+        yylval.value=strdup("DTOP");
         return DTOP;
 }
 	YY_BREAK
@@ -2289,7 +2289,7 @@ case 52:
 YY_RULE_SETUP
 #line 299 "ast.l"
 {
-        yylval.value=strdup("DTCL ");
+        yylval.value=strdup("DTCL");
         return DTCL;
 }
 	YY_BREAK
@@ -2298,7 +2298,7 @@ case 53:
 YY_RULE_SETUP
 #line 303 "ast.l"
 {
-        yylval.value=strdup("DDOP ");
+        yylval.value=strdup("DDOP");
         return DDOP;
 }
 	YY_BREAK
@@ -2307,7 +2307,7 @@ case 54:
 YY_RULE_SETUP
 #line 307 "ast.l"
 {
-        yylval.value=strdup("DDCL ");
+        yylval.value=strdup("DDCL");
         return DDCL;
 }
 	YY_BREAK
@@ -2316,7 +2316,7 @@ case 55:
 YY_RULE_SETUP
 #line 311 "ast.l"
 {
-        yylval.value=strdup("TABLEOP ");
+        yylval.value=strdup("TABLEOP");
         return TABOP;
 }
 	YY_BREAK
@@ -2325,7 +2325,7 @@ case 56:
 YY_RULE_SETUP
 #line 315 "ast.l"
 {
-        yylval.value=strdup("TABLECL ");
+        yylval.value=strdup("TABLECL");
         return TABCL;
 }
 	YY_BREAK
@@ -2334,7 +2334,7 @@ case 57:
 YY_RULE_SETUP
 #line 319 "ast.l"
 {
-        yylval.value=strdup("CAPOP ");
+        yylval.value=strdup("CAPOP");
         return CAPOP;
 }
 	YY_BREAK
@@ -2343,7 +2343,7 @@ case 58:
 YY_RULE_SETUP
 #line 323 "ast.l"
 {
-        yylval.value=strdup("CAPCL ");
+        yylval.value=strdup("CAPCL");
         return CAPCL;
 }
 	YY_BREAK
@@ -2352,7 +2352,7 @@ case 59:
 YY_RULE_SETUP
 #line 327 "ast.l"
 {
-        yylval.value=strdup("TROP ");
+        yylval.value=strdup("TROP");
         return TROP;
 }
 	YY_BREAK
@@ -2361,7 +2361,7 @@ case 60:
 YY_RULE_SETUP
 #line 331 "ast.l"
 {
-        yylval.value=strdup("TRCL ");
+        yylval.value=strdup("TRCL");
         return TRCL;
 }
 	YY_BREAK
@@ -2370,7 +2370,7 @@ case 61:
 YY_RULE_SETUP
 #line 335 "ast.l"
 {
-        yylval.value=strdup("THOP ");
+        yylval.value=strdup("THOP");
         return THOP;
 }
 	YY_BREAK
@@ -2379,7 +2379,7 @@ case 62:
 YY_RULE_SETUP
 #line 339 "ast.l"
 {
-        yylval.value=strdup("THCL ");
+        yylval.value=strdup("THCL");
         return THCL;
 }
 	YY_BREAK
@@ -2388,7 +2388,7 @@ case 63:
 YY_RULE_SETUP
 #line 343 "ast.l"
 {
-        yylval.value=strdup("TDOP ");
+        yylval.value=strdup("TDOP");
         return TDOP;
 }
 	YY_BREAK
@@ -2397,7 +2397,7 @@ case 64:
 YY_RULE_SETUP
 #line 347 "ast.l"
 {
-        yylval.value=strdup("TDCL ");
+        yylval.value=strdup("TDCL");
         return TDCL;
 }
 	YY_BREAK
@@ -2406,7 +2406,7 @@ case 65:
 YY_RULE_SETUP
 #line 351 "ast.l"
 {
-        yylval.value=strdup("CENTEROP ");
+        yylval.value=strdup("CENTEROP");
         return CENTEROP;
 }
 	YY_BREAK
@@ -2415,7 +2415,7 @@ case 66:
 YY_RULE_SETUP
 #line 355 "ast.l"
 {
-        yylval.value=strdup("CENTERCL ");
+        yylval.value=strdup("CENTERCL");
         return CENTERCL;
 }
 	YY_BREAK
@@ -2424,7 +2424,7 @@ case 67:
 YY_RULE_SETUP
 #line 359 "ast.l"
 {
-        yylval.value=strdup("BR ");
+        yylval.value=strdup("BR");
         return BR;
 }
 	YY_BREAK

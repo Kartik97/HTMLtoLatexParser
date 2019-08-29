@@ -26,5 +26,6 @@ node* add_neighbour(string name,node *n);
 node* add_start(string name);
 node* add_startChild(node* n,string name);
 node* add_startChild(node *c1,node* c2,string name);
-void update_children(treeNode* node,vector<treeNode*> child);
+int find_parent(node* n);
+//void update_children(treeNode* node,vector<treeNode*> child);
 void print(treeNode* node);
