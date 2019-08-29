@@ -30,8 +30,8 @@ treeNode* add_children(treeNode* node,vector<treeNode*> c1){
 }
 
 treeNode* add_attributes(treeNode* node,string att,string attVal){
-	node->att.push_back(att);
-	node->attVal.push_back(attVal);
+	node->att.insert(node->att.begin(),att);
+	node->attVal.insert(node->attVal.begin(),attVal);
 	return node;
 }
 

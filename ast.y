@@ -191,8 +191,10 @@ flow: BPHRASEOP phraseopen { $$=$2; }
 			$$=$2;
 		}
 	| TABOP table {
+			$$=$2;
 		}
 	| FIGOP figure {
+			$$=$2;
 		}
 	| AOP atag { 
 		}
@@ -476,100 +478,211 @@ dd: flow DDCL {
 	;
 
 caption: flow CAPCL {
+			$$=add_startChild($1,$2);
 		}
 	| CAPCL {
+			$$=add_start($1);
 		}
 	| flow CAPCL consume {
+			$$=add_child_neighbour($1,$2,$3);
 		}
 	| CAPCL consume {
+			$$=add_neighbour($1,$2);
 		}
 	;
 
 table: CAPOP caption TABCL {
+			$$=add_startChild($2,$3);
 		}
 	| CAPOP caption TABCL flow {
+			$$=add_child_neighbour($2,$3,$4);
 		}
 	| consume CAPOP caption TABCL {
+			$$=add_startChild($1,$3,$4);
 		}
 	| consume CAPOP caption TABCL flow {
+			$$=add_child_neighbour($1,$3,$4,$5);
 		}
 	| CAPOP caption TROP tr TABCL {
+			$$=add_startChild($2,$4,$5);
 		}
 	| TROP tr TABCL {
+			$$=add_startChild($2,$3);
 		}
     | CAPOP caption TROP tr TABCL flow {
+    		$$=add_child_neighbour($2,$4,$5,$6);
     	}
     | TROP tr TABCL flow {
+    		$$=add_child_neighbour($2,$3,$4);
     	}
 	| TABCL {
+			$$=add_start($1);
 		}
 	| TABCL flow {
+			$$=add_neighbour($1,$2);
+		}
+	| consume TROP tr TABCL {
+			$$=add_startChild($1,$3,$4);
+		}
+    | consume CAPOP caption TROP tr TABCL flow {
+    		node* n=add_child_neighbour($1,$3,$6,$7);
+    		add_children(n->v[0],$5->v);
+    		$$=n;
+    	}
+    | consume TROP tr TABCL flow {
+    		$$=add_child_neighbour($1,$3,$4,$5);
+    	}
+	| consume TABCL {
+			$$=add_startChild($1,$2);
+		}
+	| consume TABCL flow {
+			$$=add_child_neighbour($1,$2,$3);
 		}
 	;
 
 tr: TRCL {
+			$$=add_start($1);
 		}
 	| consume TRCL {
+			$$=add_startChild($1,$2);
 		}
 	| THOP th TRCL {
+			$$=add_startChild($2,$3);
 		}
 	| TDOP td TRCL {
+			$$=add_startChild($2,$3);
 		}
 	| TRCL consume {
+			$$=add_neighbour($1,$2);
 		}
 	| consume TRCL consume {
+			$$=add_child_neighbour($1,$2,$3);
 		}
 	| THOP th TRCL consume {
+			$$=add_child_neighbour($2,$3,$4);
 		}
 	| TDOP td TRCL consume {
+			$$=add_child_neighbour($2,$3,$4);
 		}
 	| TRCL TROP tr  { 
+			$$=add_neighbour($1,$3);
 		}
 	| TRCL consume TROP tr {
+			node* n=add_neighbour($1,$2);
+			copy(n->v,$4->v);
+			$$=n;
 		}
     | THOP th TRCL TROP tr {
+    		$$=add_child_neighbour($2,$3,$5);
     	}
     | TDOP td TRCL TROP tr {
+    		$$=add_child_neighbour($2,$3,$5);
     	}
     | THOP th TRCL consume TROP tr {
+    		node* n=add_child_neighbour($2,$3,$4);
+			copy(n->v,$6->v);
+			$$=n;	
     	}
     | TDOP td TRCL consume TROP tr {
+    		node* n=add_child_neighbour($2,$3,$4);
+			copy(n->v,$6->v);
+			$$=n;	
     	}
+	| consume THOP th TRCL {
+			$$=add_startChild($1,$3,$4);
+		}
+	| consume TDOP td TRCL {
+			$$=add_startChild($1,$3,$4);
+		}
+	| consume THOP th TRCL consume {
+			$$=add_child_neighbour($1,$3,$4,$5);
+		}
+	| consume TDOP td TRCL consume {
+			$$=add_child_neighbour($1,$3,$4,$5);
+		}
+	| consume TRCL TROP tr  { 
+			$$=add_child_neighbour($1,$2,$4);
+		}
+	| consume TRCL consume TROP tr {
+			node* n=add_child_neighbour($1,$2,$3);
+			copy(n->v,$5->v);
+			$$=n;
+		}
+    | consume THOP th TRCL TROP tr {
+    		$$=add_child_neighbour($1,$3,$4,$6);
+    	}
+    | consume TDOP td TRCL TROP tr {
+    		$$=add_child_neighbour($1,$3,$4,$6);
+    	}
+    | consume THOP th TRCL consume TROP tr {
+    		node* n=add_child_neighbour($1,$3,$4,$5);
+			copy(n->v,$7->v);
+			$$=n;	
+    	}
+    | consume TDOP td TRCL consume TROP tr {
+    		node* n=add_child_neighbour($1,$3,$4,$5);
+			copy(n->v,$7->v);
+			$$=n;	
+    	}
+
 	;
 
-th: THCL {
+th: THCL {	$$=add_start($1);
 		}
 	| flow THCL {
+			$$=add_startChild($1,$2);
 		}
 	| THCL consume {
+			$$=add_neighbour($1,$2);
 		}
 	| flow THCL consume  {
+			$$=add_child_neighbour($1,$2,$3);
 		}
 	| THCL THOP th  {
+			$$=add_neighbour($1,$3);
 		}
 	| flow THCL THOP th {
+			$$=add_child_neighbour($1,$2,$4);
 		}
 	| THCL consume THOP th {
+			node* n=add_neighbour($1,$2);
+		  	copy(n->v,$4->v);
+    		$$=n;			
 		}
 	| flow THCL consume THOP th { 
+			node* n=add_child_neighbour($1,$2,$3);
+		  	copy(n->v,$5->v);
+    		$$=n;
 		}
 	;
 
 td: TDCL {	
+			$$=add_start($1);
 		}
     | flow TDCL {
+	    	$$=add_startChild($1,$2);
     	}
     | TDCL consume {
+    		$$=add_neighbour($1,$2);
     	}
     | flow TDCL consume {
+	 	   	$$=add_child_neighbour($1,$2,$3);
     	}
     | TDCL TDOP td {
+	    	$$=add_neighbour($1,$3);
     	}
     | flow TDCL TDOP td {
+    		$$=add_child_neighbour($1,$2,$4);
     	}
     | TDCL consume TDOP td {
+	    	node *n=add_neighbour($1,$2);
+  		  	copy(n->v,$4->v);
+    		$$=n;
     	}
     | flow TDCL consume TDOP td {
+ 	 	  	node* n=add_child_neighbour($1,$2,$3);
+    		copy(n->v,$5->v);
+    		$$=n;
     	}
     ;
 
