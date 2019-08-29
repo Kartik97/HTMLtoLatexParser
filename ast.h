@@ -18,7 +18,13 @@ typedef struct node{
 treeNode* add_node();
 treeNode* add_node(string s);
 treeNode* add_node(string s,string content);
-void add_children(treeNode* node,vector<treeNode*> c1);
-void add_attributes(treeNode* node,string att,string attVal);
+treeNode* add_children(treeNode* node,vector<treeNode*> c1);
+treeNode* add_attributes(treeNode* node,string att,string attVal);
+node* add_child_neighbour(node* c,string name,node *n);
+node* add_child_neighbour(node* c1,node* c2,string name,node *n);
+node* add_neighbour(string name,node *n);
+node* add_start(string name);
+node* add_startChild(node* n,string name);
+node* add_startChild(node *c1,node* c2,string name);
 void update_children(treeNode* node,vector<treeNode*> child);
 void print(treeNode* node);

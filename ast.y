@@ -91,9 +91,9 @@ title:	TITLEOP TITLECL {
 	;
 
 body: BODYOP flow BODYCL  {
-				treeNode* node = add_node("BODY");
-				add_children(node,$2->v);
-				print(node);
+				treeNode* ptr = add_node("BODY");
+				add_children(ptr,$2->v);
+				print(ptr);
 			}
 	| BODYOP BODYCL {
 			}
@@ -129,7 +129,7 @@ misc: COMMENT { vn v;
 			}
 	;
 
-consume: consume misc { vn v1,v2;
+consume: consume misc {  vn v1,v2;
 			v1 = $1->v;
 			v2 = $2->v;
 			copy(v1,v2);
@@ -154,7 +154,14 @@ miscph: misc {
 		}
 	;
 	
-consumeph: consumeph miscph {
+consumeph: consumeph miscph { vn v1,v2;
+			v1 = $1->v;
+			v2 = $2->v;
+			copy(v1,v2);
+		//	update(&v1);
+			node* n = new node;
+			copy(n->v,v1);
+			$$=n;
 		}
 	| miscph {
 			$$=$1;
@@ -162,11 +169,10 @@ consumeph: consumeph miscph {
 	;
 
 flow: BPHRASEOP phraseopen { 
-	//		treeNode* node=add_node($1);
-	//		add_children(node,$2);
-	//		print($1);
+			$$=$2;
 		}
 	| GTPHOP gtph { 
+			$$=$2;
 		}
 	| LOP list { 
 		}
@@ -210,38 +216,56 @@ center: flow CENTERCL {
 	;
 
 phraseopen: phrases BPHRASECL flow { 
+			$$=add_child_neighbour($1,$2,$3);
 		}
 	| BPHRASECL flow {
+			$$=add_neighbour($1,$2);
 		}
 	| BPHRASECL { 
+			$$=add_start($1);	
 		}
 	| phrases BPHRASECL {
+			$$=add_startChild($1,$2);
 		}
 	| consumeph BPHRASECL flow {
+			$$=add_child_neighbour($1,$2,$3);
 		}
 	| consumeph BPHRASECL { 
+			$$=add_startChild($1,$2);
 		}
 	;
 
 phrases: PHRASEOP phr { 
+			$$=$2;
 		}
 	| consumeph PHRASEOP phr {
+			node* n=new node;
+			copy(n->v,$1->v);
+			copy(n->v,$3->v);
+			$$=n;
 		}
 	;
 
 phr: PHRASECL {
+			$$=add_start($1);
 		}
 	| phrases PHRASECL {
+			$$=add_startChild($1,$2);
 		}
 	| PHRASECL phrases {
+			$$=add_neighbour($1,$2);
 		}
 	| PHRASECL consumeph {
+			$$=add_neighbour($1,$2);
 		}
 	| consumeph PHRASECL {
+			$$=add_startChild($1,$2);
 		}
 	| consumeph PHRASECL phrases {
+			$$=add_child_neighbour($1,$2,$3);
 		}
 	| consumeph PHRASECL consumeph {
+			$$=add_child_neighbour($1,$2,$3);
 		}
 	;
 
@@ -276,24 +300,34 @@ atagph: ATTRIBUTE ATTRIBUTEVAL AOPOP phrases ACL {
 	;
 
 gtph: phrases GTPHCL flow { 
+			$$=add_child_neighbour($1,$2,$3);
 		}
 	| phrases GTPHCL { 
+			$$=add_startChild($1,$2);
 		}
 	| GTPHCL flow { 
+			$$=add_neighbour($1,$2);
 		}
 	| GTPHCL {
+			$$=add_start($1);
 		}
 	| consumeph GTPHCL { 
+			$$=add_startChild($1,$2);
 		}
 	| consumeph GTPHCL flow { 
+			$$=add_child_neighbour($1,$2,$3);
 		}
 	| BPHRASEOP phraseopen GTPHCL flow { 
+			$$=add_child_neighbour($2,$3,$4);
 		}
 	| BPHRASEOP phraseopen GTPHCL { 
+			$$=add_startChild($2,$3);
 		}
 	| consumeph BPHRASEOP phraseopen GTPHCL flow { 
-		}
+			$$=add_child_neighbour($1,$3,$4,$5);
+		}	
 	| consumeph BPHRASEOP phraseopen GTPHCL { 
+			$$=add_startChild($1,$3,$4);
 		}
 	;
 
@@ -526,14 +560,14 @@ figcap: flow FIGCAPCL {
 	;
 
 img:  ATTRIBUTE ATTRIBUTEVAL img { 
-			treeNode* node=$3->v[0];
-			add_attributes(node,$1,$2);
+			treeNode* ptr=$3->v[0];
+			add_attributes(ptr,$1,$2);
 			$$=$3;
 		}
 	| IMGCL { 	node* n = new node;
 				vn v;
-				treeNode* node=add_node("IMG");
-				v.pb(node);
+				treeNode* ptr=add_node("IMG");
+				v.pb(ptr);
 				copy(n->v,v);
 				$$=n;
 		} 
