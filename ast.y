@@ -132,8 +132,13 @@ misc: COMMENT { vn v;
 consume: consume misc {  vn v1,v2;
 			v1 = $1->v;
 			v2 = $2->v;
-			copy(v1,v2);
-		//	update(&v1);
+			int s=v1.size();
+			if(v1[s-1]->tagVal=="TEXT" && v2[0]->tagVal=="TEXT" ){
+				v1[s-1]->content=v1[s-1]->content+v2[0]->content;
+			}
+			else{
+				copy(v1,v2);
+			}
 			node* n = new node;
 			copy(n->v,v1);
 			$$=n;
@@ -157,8 +162,13 @@ miscph: misc {
 consumeph: consumeph miscph { vn v1,v2;
 			v1 = $1->v;
 			v2 = $2->v;
-			copy(v1,v2);
-		//	update(&v1);
+			int s=v1.size();
+			if(v1[s-1]->tagVal=="TEXT" && v2[0]->tagVal=="TEXT" ){
+				v1[s-1]->content=v1[s-1]->content+v2[0]->content;
+			}
+			else{
+				copy(v1,v2);
+			}
 			node* n = new node;
 			copy(n->v,v1);
 			$$=n;
@@ -175,8 +185,13 @@ flow: BPHRASEOP phraseopen { $$=$2; }
 			vn v1,v2;
 			v1 = $1->v;
 			v2 = $2->v;
-			copy(v1,v2);
-		//	update(&v1);
+			int s=v1.size();
+			if(v1[s-1]->tagVal=="TEXT" && v2[0]->tagVal=="TEXT" ){
+				v1[s-1]->content=v1[s-1]->content+v2[0]->content;
+			}
+			else{
+				copy(v1,v2);
+			}
 			node* n = new node;
 			copy(n->v,v1);
 			$$=n;
