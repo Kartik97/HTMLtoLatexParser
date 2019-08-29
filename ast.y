@@ -168,15 +168,9 @@ consumeph: consumeph miscph { vn v1,v2;
 		}
 	;
 
-flow: BPHRASEOP phraseopen { 
-			$$=$2;
-		}
-	| GTPHOP gtph { 
-			$$=$2;
-		}
-	| LOP list { 
-			$$=$2;
-		}
+flow: BPHRASEOP phraseopen { $$=$2; }
+	| GTPHOP gtph {  $$=$2; }
+	| LOP list {  $$=$2; }
 	| misc flow {
 			vn v1,v2;
 			v1 = $1->v;
@@ -191,8 +185,10 @@ flow: BPHRASEOP phraseopen {
 			$$=$1;
 		}
 	| DIVOP div { 
+			$$=$2;
 		}
 	| DLOP dl {
+			$$=$2;
 		}
 	| TABOP table {
 		}
@@ -376,68 +372,106 @@ listitem: flow LICL {
 	;
 
 div: DIVCL {
+		$$=add_start($1);
 		}
 	| DIVCL flow {
+		$$=add_neighbour($1,$2);
 		}
 	| flow DIVCL flow {
+		$$=add_child_neighbour($1,$2,$3);
 		}
 	| flow DIVCL {
+		$$=add_startChild($1,$2);
 		}
 	;
 
 dl: DLCL {
+			$$=add_start($1);
 		}
 	| consume DLCL {
+			$$=add_startChild($1,$2);
 		}
 	| DIVOP div DLCL {
+			$$=add_startChild($2,$3);
 		}
 	| consume DIVOP div DLCL {
+			$$=add_startChild($1,$3,$4);
 		}
 	| DLCL flow {
+			$$=add_neighbour($1,$2);
 		}
 	| consume DLCL flow {
+			$$=add_child_neighbour($1,$2,$3);
 		}
     | DIVOP div DLCL flow {
+    		$$=add_child_neighbour($2,$3,$4);
     	}
     | consume DIVOP div DLCL flow {
+    		$$=add_child_neighbour($1,$3,$4,$5);
     	}
     | DTOP dt DLCL { 
+    		$$=add_startChild($2,$3);
     	}
     | DTOP dt DLCL flow {
+    		$$=add_child_neighbour($2,$3,$4);
     	}
     | consume DTOP dt DLCL {
+    		$$=add_startChild($1,$3,$4);
     	}
     | consume DTOP dt DLCL flow {
+    		$$=add_child_neighbour($1,$3,$4,$5);
     	}
 	;
 
 dt: flow DTCL DDOP dd {
+			$$=add_child_neighbour($1,$2,$4);
 		}
 	| flow DTCL consume DDOP dd {
+			node *n=add_child_neighbour($1,$2,$3);
+			copy(n->v,$5->v);
+			$$=n;
 		}
 	| flow DTCL DDOP dd DTOP dt {
+			node *n=add_child_neighbour($1,$2,$4);
+			copy(n->v,$6->v);
+			$$=n;
 		}
 	| DTCL DDOP dd {
+			$$=add_neighbour($1,$3);
 		}
     | DTCL DDOP dd DTOP dt {
+    		node *n=add_neighbour($1,$3);
+    		copy(n->v,$5->v);
+			$$=n;	
     	}
 	;
 
 dd: flow DDCL {
+			$$=add_startChild($1,$2);
 		}
 	| flow DDCL DDOP dd {
+			$$=add_child_neighbour($1,$2,$4);	
 		}
 	| DDCL {
+			$$=add_start($1);
 		}
 	| DDCL DDOP dd {
+			$$=add_neighbour($1,$3);
 		}
 	| flow DDCL consume {
+			$$=add_child_neighbour($1,$2,$3);
 		}
 	| flow DDCL consume DDOP dd {
+			node* n=add_child_neighbour($1,$2,$3);
+			copy(n->v,$5->v);
+			$$=n;
 		}
 	| DDCL consume {
+			$$=add_neighbour($1,$2);
 		}
 	| DDCL consume DDOP dd {
+			node *n=add_neighbour($1,$2);
+			copy(n->v,$4->v);
 		}
 	;
 
