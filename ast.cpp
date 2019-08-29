@@ -19,35 +19,31 @@ treeNode* add_node(string s,string content){
 	return node;
 }
 
-treeNode* add_children(treeNode* node,treeNode* c1){
-	node->children.push_back(c1);
-	return node;
+void add_children(treeNode* node,vector<treeNode*> c1){
+	for(int i=0;i<c1.size();i++){
+		if(c1[i])
+			node->children.push_back(c1[i]);
+	}
 }
 
-treeNode* add_attributes(treeNode* node,string att,string attVal){
+void add_attributes(treeNode* node,string att,string attVal){
 	node->att.push_back(att);
 	node->attVal.push_back(attVal);
-	return node;
 }
 
-treeNode* update_children(treeNode* node,treeNode* child){
-	treeNode* first = new treeNode;
-	first->tagVal = child->tagVal;
-	first->content = child->content;
-	for(int i=0;i<child->children.size();i++){
-		if(first->tagVal == child->children[i]->tagVal){
-			first->content=first->content+child->children[i]->content;
-		}
-		else{
-			node->children.push_back(first);
-			first = new treeNode;
-			first->tagVal=child->children[i]->tagVal;
-			first->content=child->children[i]->content;
-		}
-	}
-	node->children.push_back(first);
-	return node;
-}
+// void update(vector<treeNode*> v){
+// 	treeNode* first = (*v)[0];
+// 	for(int i=1;i<(*v).size();i++){
+// 		if(first->tagVal == (*v)[i]->tagVal){
+// 			first->content=first->content+(*v)[i]->content;
+// 		}
+// 		else{
+// 			node->children.push_back(first);
+// 			first = (*v)[i];
+// 		}
+// 	}
+// 	node->children.push_back(first);
+// }
 
 void print(treeNode* node){
 	cout<<"["<<node->tagVal;

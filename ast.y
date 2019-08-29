@@ -5,16 +5,23 @@
 #include "ast.h"
 
 using namespace std;
+
+#define copy(v1,v2) copy(v2.begin(),v2.end(),back_inserter(v1))
+#define pb(x) push_back(x)
+
 int i=0;
 extern int yylex();
 extern void yyerror(const char*);
 char* concat(char *s1,char *s2);
+typedef vector<treeNode*> vn;
+
+void update(vn* v);
 
 %}
 
 // %name parse
 %union{
-	treeNode* object;
+	node* object;
 	char* value;
 }
 
@@ -59,7 +66,7 @@ st:	DOCTYPE {
 			}
 	| DOCTYPE HTMLOP head HTMLCL {
 			}
-	| HTMLOP head HTMLCL { print($2);
+	| HTMLOP head HTMLCL {
 			}
 	| DOCTYPE HTMLOP head body HTMLCL {
 			}
@@ -72,48 +79,64 @@ st:	DOCTYPE {
 	;
 
 head: HEADOP title HEADCL { 
-				treeNode* node = add_node("HEAD");
-				add_children(node,$2);
-				$$=node;
 			} 
 	| HEADOP HEADCL { 
-				$$=add_node("HEAD");
 			}
 	;
 
 title:	TITLEOP TITLECL {
-				$$=add_node("TITLE"); 	
 			}
 	| TITLEOP consume TITLECL  {
-				treeNode* title=add_node("TITLE");
-				$$=update_children(title,$2);
 			}
 	;
 
 body: BODYOP flow BODYCL  {
+				treeNode* node = add_node("BODY");
+				add_children(node,$2->v);
+				print(node);
 			}
 	| BODYOP BODYCL {
-			$$=add_node("BODY");
 			}
 	;
 
-misc: COMMENT { $$=add_node("COMMENT",$1);
+misc: COMMENT { vn v;
+				v.push_back(add_node("COMMENT",$1));
+				node* n = new node;
+				copy(n->v,v);
+				$$=n;
 			}
-	| BR 	{ $$=add_node("BR");
+	| BR 	{  	vn v;
+				v.push_back(add_node("BR"));
+				node* n = new node;
+				copy(n->v,v);
+				$$=n;
 			}
-	| TEXT  { $$=add_node("TEXT",$1);
+	| TEXT  { 	vn v;
+				v.push_back(add_node("TEXT",$1));
+				node* n = new node;
+				copy(n->v,v);
+				$$=n;
 			}
 	| IMGOP img {
 			$$=$2;
 		}
-	| SYMBOL {
-			$$=add_node("SYMBOL",$1);
-		}
+	| SYMBOL { 
+				vn v;
+				v.push_back(add_node("SYMBOL",$1));
+				node* n = new node;
+				copy(n->v,v);
+				$$=n;
+			}
 	;
 
-consume: consume misc {
-			add_children($1,$2);
-			$$=$1;
+consume: consume misc { vn v1,v2;
+			v1 = $1->v;
+			v2 = $2->v;
+			copy(v1,v2);
+		//	update(&v1);
+			node* n = new node;
+			copy(n->v,v1);
+			$$=n;
 		}
 	| misc {
 			$$=$1;
@@ -121,7 +144,7 @@ consume: consume misc {
 	;
 
 miscph: misc {
-		$$=$1;
+			$$=$1;
 		}
 	| AOP atagph {
 		}
@@ -134,18 +157,31 @@ miscph: misc {
 consumeph: consumeph miscph {
 		}
 	| miscph {
+			$$=$1;
 		}
 	;
 
 flow: BPHRASEOP phraseopen { 
+	//		treeNode* node=add_node($1);
+	//		add_children(node,$2);
+	//		print($1);
 		}
 	| GTPHOP gtph { 
 		}
 	| LOP list { 
 		}
 	| misc flow {
+			vn v1,v2;
+			v1 = $1->v;
+			v2 = $2->v;
+			copy(v1,v2);
+		//	update(&v1);
+			node* n = new node;
+			copy(n->v,v1);
+			$$=n;
 		}
 	| misc {
+			$$=$1;
 		}
 	| DIVOP div { 
 		}
@@ -174,15 +210,14 @@ center: flow CENTERCL {
 	;
 
 phraseopen: phrases BPHRASECL flow { 
-		
 		}
-	| BPHRASECL flow { 
+	| BPHRASECL flow {
 		}
 	| BPHRASECL { 
 		}
-	| phrases BPHRASECL { 
+	| phrases BPHRASECL {
 		}
-	| consumeph BPHRASECL flow { 
+	| consumeph BPHRASECL flow {
 		}
 	| consumeph BPHRASECL { 
 		}
@@ -190,23 +225,23 @@ phraseopen: phrases BPHRASECL flow {
 
 phrases: PHRASEOP phr { 
 		}
-	| consumeph PHRASEOP phr { 
+	| consumeph PHRASEOP phr {
 		}
 	;
 
 phr: PHRASECL {
 		}
-	| phrases PHRASECL { 
+	| phrases PHRASECL {
 		}
-	| PHRASECL phrases { 
+	| PHRASECL phrases {
 		}
-	| PHRASECL consumeph { 
+	| PHRASECL consumeph {
 		}
-	| consumeph PHRASECL { 
+	| consumeph PHRASECL {
 		}
-	| consumeph PHRASECL phrases { 
+	| consumeph PHRASECL phrases {
 		}
-	| consumeph PHRASECL consumeph { 
+	| consumeph PHRASECL consumeph {
 		}
 	;
 
@@ -226,13 +261,17 @@ atagph: ATTRIBUTE ATTRIBUTEVAL AOPOP phrases ACL {
 		}
     | AOPOP phrases ACL { 
     	}
+    | ATTRIBUTE ATTRIBUTEVAL AOPOP BPHRASEOP phraseopen ACL { 
+		}
+    | AOPOP BPHRASEOP phraseopen ACL { 
+    	}
     | ATTRIBUTE ATTRIBUTEVAL AOPOP consumeph ACL { 
     	}
     | AOPOP consumeph ACL { 
     	}
     | AOPOP ACL {
     	}
-	| ATTRIBUTE ATTRIBUTEVAL AOPOP ACL { 
+	| ATTRIBUTE ATTRIBUTEVAL AOPOP ACL { 	
 		}
 	;
 
@@ -486,12 +525,17 @@ figcap: flow FIGCAPCL {
 		}
 	;
 
-img:  ATTRIBUTE ATTRIBUTEVAL img {
-				add_attributes($3,$1,$2);
-				$$=$3;
+img:  ATTRIBUTE ATTRIBUTEVAL img { 
+			treeNode* node=$3->v[0];
+			add_attributes(node,$1,$2);
+			$$=$3;
 		}
-	| IMGCL { 	treeNode* node=add_node("IMG");
-				$$=node;
+	| IMGCL { 	node* n = new node;
+				vn v;
+				treeNode* node=add_node("IMG");
+				v.pb(node);
+				copy(n->v,v);
+				$$=n;
 		} 
 	; 
 
@@ -548,4 +592,19 @@ char* concat(char *s1,char *s2){
 	strcat(p,s1);
 	strcat(p,s2);
 	return p;	
+}
+void update(vn* v){
+	vn* temp;
+	treeNode* first = (*v)[0];
+	for(int i=1;i<(*v).size();i++){
+		if(first->tagVal == (*v)[i]->tagVal){
+			first->content=first->content+(*v)[i]->content;
+		}
+		else{
+			(*temp).pb(first);
+			first = (*v)[i];
+		}
+	}
+	(*temp).pb(first);
+	v=temp;
 }

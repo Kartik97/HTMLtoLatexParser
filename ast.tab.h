@@ -111,9 +111,9 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 16 "ast.y" /* yacc.c:1909  */
+#line 23 "ast.y" /* yacc.c:1909  */
 
-	treeNode* object;
+	node* object;
 	char* value;
 
 #line 120 "ast.tab.h" /* yacc.c:1909  */
