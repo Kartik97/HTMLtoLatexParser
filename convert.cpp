@@ -4,8 +4,9 @@ using namespace std;
 
 map<string,pair<string,string>> convertTag;
 void define_mapping(){
-	convertTag["DOCTYPE HTML"]=make_pair("\\documentclass{article}\n\\usepackage{hyperref}\n\\usepackage{graphicx}\n\\usepackage{verbatim}\n\\hypersetup{colorlinks=true}","");
-//	convertTag["HTML"]=make_pair("\\documentclass{article}\n \\usepackage{hyperref}\n  \\usepackage{graphicx}\n usepackage{verbatim} \n \\hypersetup{colorlinks=true}","");
+	convertTag["DOCTYPE HTML"]=make_pair("","");
+	convertTag["HTML"]=make_pair("","");
+	convertTag["HEAD"]=make_pair("","");
 	convertTag["TITLE"]=make_pair("\\title{","}");
 	convertTag["BODY"]=make_pair("\\begin{document}","\\end{document}");
 	convertTag["DIV"]=make_pair("\\\\","\\\\");
@@ -28,10 +29,10 @@ void define_mapping(){
 	convertTag["HREF"]=make_pair("\\href{","}");
 	convertTag["IMG"]=make_pair("\\includegraphics[","]");
 	convertTag["SRC"]=make_pair("{","}");
-	convertTag["HEIGHT"]=make_pair("height=","cm");
-	convertTag["WIDTH"]=make_pair("width=","cm");
-	convertTag["FONT"]=make_pair("\\fontsize{","");                           //10 pt normal
-	convertTag["SIZE"]=make_pair("pt}{12pt}\\selectfont","\\normalsize");
+	convertTag["HEIGHT"]=make_pair("height=","pt");
+	convertTag["WIDTH"]=make_pair("width=","pt");
+	convertTag["FONT"]=make_pair("\\fontsize{","\\normalsize");                           //10 pt normal
+	convertTag["SIZE"]=make_pair("pt}{12pt}\\selectfont","");
 	convertTag["CENTER"]=make_pair("\\begin{center}","\\end{center}");
 	convertTag["BR"]=make_pair("\n","");
 	convertTag["OL"]=make_pair("\\begin{enumerate}","\\end{enumerate}");
@@ -90,14 +91,14 @@ lexNode* add_lexNode(string val){
 	return node;
 }
 
-lexNode* add_lexChild(lexNode *root,lexNode *n){
-	root->children.push_back(n);
+lexNode* add_lexChild(lexNode *root,string s){
+	root->children.push_back(add_lexNode(s));
 	return root;
 }
 
 lexNode* root_init(){
 	lexNode *root=add_lexNode("ROOT");
-	add_lexChild(root,add_lexNode(convertTag["DOCTYPE HTML"].first));
+	add_lexChild(root,add_lexNode("\\documentclass{article}\n\\usepackage{hyperref}\n\\usepackage{graphicx}\n\\usepackage{verbatim}\n\\hypersetup{colorlinks=true}"));
 	return root;
 }
 
@@ -114,4 +115,58 @@ void printLex(lexNode *root){
 		}
 	}
 	cout<<" }"<<endl;
+}
+
+lexNode* convert(lexNode *root,treeNode *node){
+	if(node->tagVal=="A" && node->att.size()>0){
+		if(node->att[0]=="HREF")
+			add_lexChild(root,convertTag["HREF"].first+node->attVal[0]+convertTag["HREF"].second+convertTag["A"].first);	
+	}
+	else if(node->tagVal=="IMG" && node->att.size()>0){
+		string child=convertTag["IMG"].first;
+		int pos=find(node->att.begin(),node->att.end(),"HEIGHT")-node->att.begin(),flag=0;
+		if(pos<node->att.size()){
+			child=child+"="+node->attVal[pos]+"pt";
+			flag=1;
+		}
+		pos=find(node->att.begin(),node->att.end(),"WIDTH")-node->att.begin();
+		if(pos<node->att.size()){
+			if(flag==1)
+				child+=",";
+			child=child+"="+node->attVal[pos]+"pt";
+			flag=1;
+		}
+		child+="]{";
+		pos=pos=find(node->att.begin(),node->att.end(),"SRC")-node->att.begin();
+		if(pos<node->att.size()){
+			child=child+node->attVal[pos];
+		}
+		child+="}";
+		add_lexChild(root,child);
+	}
+	else if(node->tagVal=="FONT" && node->att.size()>0){
+		if(node->att[0]=="SIZE")
+			add_lexChild(root,convertTag["FONT"].first+node->attVal[0]+convertTag["SIZE"].first);	
+		else 
+			add_lexChild(root,convertTag["FONT"].first+"10"+convertTag["SIZE"].first);	
+	}
+	else if(node->tagVal=="TEXT"){
+		add_lexChild(root,node->content);
+	}
+	else if(node->tagVal=="SYMBOL"){
+		add_lexChild(root,convertTag[node->content].first);
+	}
+	else if(node->tagVal=="COMMENT"){
+		add_lexChild(root,convertTag["COMMENT"].first+"\n"+node->content.substr(4,node->content.length()-7)+"\n"+convertTag["COMMENT"].second);	
+	}
+	else{
+		add_lexChild(root,convertTag(node->tagVal).first);
+	}
+
+
+
+	if(!node->content.empty())
+		add_lexChild(root,node->content);
+
+	return root;
 }
