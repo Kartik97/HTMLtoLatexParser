@@ -110,10 +110,7 @@ int find_parent(node* n){
 void print(treeNode* node){
 	cout<<"["<<node->tagVal;
 	if(!node->content.empty()){
-		cout<<": ";
-		for(int i=0;i<node->content.size();i++){
-			cout<<node->content[i];
-		}
+		cout<<": "<<node->content;
 	}
 	cout<<"]"<<endl;
 	if(!node->att.empty()){
@@ -130,4 +127,34 @@ void print(treeNode* node){
 		}
 	}
 	cout<<" }"<<endl;
+}
+
+void write(treeNode *node){
+	ofstream file;
+	file.open("ast.txt",ios::app);
+	if(!file){
+		cout<<"file error";
+		print(node);
+	}
+	else{
+		file<<"["<<node->tagVal;
+		if(!node->content.empty()){
+			file<<": "<<node->content;
+		}
+		file<<"] ";
+		if(!node->att.empty()){
+			file<<" (";
+			for(int i=0;i<node->att.size();i++){
+				file<<" ("<<node->att[i]<<": "<<node->attVal[i]<<") ";
+			}
+			file<<")"<<endl;
+		}
+		file<<"{ "<<endl;
+		if(!node->children.empty()){
+			for(int i=0;i<node->children.size();i++){
+				write(node->children[i]);
+			}
+		}
+		file<<" }"<<endl;
+	}
 }

@@ -85,7 +85,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
 	return HTMLOP;
 }
 "</"{html}{space}+[^>]*">"|"</"{html}">"  {
-	yylval.value=strdup("HTMLCL");
+	yylval.value=strdup("HTML");
 	return HTMLCL;
 }
 "<"{head}{space}+[^>]*">"|"<"{head}">"  {
@@ -93,7 +93,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return HEADOP;
 }
 "</"{head}{space}+[^>]*">"|"</"{head}">"  {
-        yylval.value=strdup("HEADCL");
+        yylval.value=strdup("HEAD");
         return HEADCL;
 }
 "<"{title}{space}+[^>]*">"|"<"{title}">"  {
@@ -101,7 +101,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return TITLEOP;
 }
 "</"{title}{space}+[^>]*">"|"</"{title}">"  {
-        yylval.value=strdup("TITLECL");
+        yylval.value=strdup("TITLE");
         return TITLECL;
 }
 "<"{body}{space}+[^>]*">"|"<"{body}">"  {
@@ -109,7 +109,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return BODYOP;
 }
 "</"{body}{space}+[^>]*">"|"</"{body}">"  {
-        yylval.value=strdup("BODYCL");
+        yylval.value=strdup("BODY");
         return BODYCL;
 }
 "<"{div}{space}+[^>]*">"|"<"{div}">"  {
@@ -152,7 +152,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
 	return AOP;
 }
 "</"{a}{space}+[^>]*">"|"</"{a}">" {
-	yylval.value=strdup("ACL");
+	yylval.value=strdup("A");
 	return ACL;
 }
 <aInside>{
@@ -202,7 +202,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         }
         [^"src""width""height">]*[">""/>"] {
                 yy_pop_state();
-                yylval.value=strdup("IMGCL");
+                yylval.value=strdup("IMG");
                 return IMGCL;
         }
         . {}
@@ -220,7 +220,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
 	return FONTOP;
 }
 "</"{font}{space}+[^>]*">"|"</"{font}">" {
-	yylval.value=strdup("FONTCL");	
+	yylval.value=strdup("FONT");	
 	return FONTCL;
 }
 <fontInside>{
@@ -249,7 +249,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return LOP;
 }
 "</"{ul}{space}+[^>]*">"|"</"{ul}">"  {
-        yylval.value=strdup("ULCL");
+        yylval.value=strdup("UL");
         return LCL;
 }
 "<"{ol}{space}+[^>]*">"|"<"{ol}">"  {
@@ -257,7 +257,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return LOP;
 }
 "</"{ol}{space}+[^>]*">"|"</"{ol}">"  {
-        yylval.value=strdup("OLCL");
+        yylval.value=strdup("OL");
         return LCL;
 }
 "<"{li}{space}+[^>]*">"|"<"{li}">"  {
@@ -265,7 +265,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return LIOP;
 }
 "</"{li}{space}+[^>]*">"|"</"{li}">"  {
-        yylval.value=strdup("LICL");
+        yylval.value=strdup("LI");
         return LICL;
 }
 "<"{figure}{space}+[^>]*">"|"<"{figure}">"  {
@@ -273,7 +273,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return FIGOP;
 }
 "</"{figure}{space}+[^>]*">"|"</"{figure}">"  {
-        yylval.value=strdup("FIGURECL");
+        yylval.value=strdup("FIGURE");
         return FIGCL;
 }
 "<"{figcaption}{space}+[^>]*">"|"<"{figcaption}">"  {
@@ -281,7 +281,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return FIGCAPOP;
 }
 "</"{figcaption}{space}+[^>]*">"|"</"{figcaption}">"  {
-	yylval.value=strdup("FIGCAPTIONCL");
+	yylval.value=strdup("FIGCAPTION");
         return FIGCAPCL;
 }
 "<"{dl}{space}+[^>]*">"|"<"{dl}">"  {
@@ -289,7 +289,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return DLOP;
 }
 "</"{dl}{space}+[^>]*">"|"</"{dl}">"  {
-        yylval.value=strdup("DLCL");
+        yylval.value=strdup("DL");
         return DLCL;
 }
 "<"{dt}{space}+[^>]*">"|"<"{dt}">"  {
@@ -297,7 +297,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return DTOP;
 }
 "</"{dt}{space}+[^>]*">"|"</"{dt}">"  {
-        yylval.value=strdup("DTCL");
+        yylval.value=strdup("DT");
         return DTCL;
 }
 "<"{dd}{space}+[^>]*">"|"<"{dd}">"  {
@@ -305,7 +305,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return DDOP;
 }
 "</"{dd}{space}+[^>]*">"|"</"{dd}">"  {
-        yylval.value=strdup("DDCL");
+        yylval.value=strdup("DD");
         return DDCL;
 }
 "<"{table}{space}+[^>]*">"|"<"{table}">"  {
@@ -313,7 +313,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return TABOP;
 }
 "</"{table}{space}+[^>]*">"|"</"{table}">"  {
-        yylval.value=strdup("TABLECL");
+        yylval.value=strdup("TABLE");
         return TABCL;
 }
 "<"{caption}{space}+[^>]*">"|"<"{caption}">"  {
@@ -321,7 +321,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return CAPOP;
 }
 "</"{caption}{space}+[^>]*">"|"</"{caption}">"  {
-        yylval.value=strdup("CAPCL");
+        yylval.value=strdup("CAP");
         return CAPCL;
 }
 "<"{tr}{space}+[^>]*">"|"<"{tr}">"  {
@@ -329,7 +329,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return TROP;
 }
 "</"{tr}{space}+[^>]*">"|"</"{tr}">"  {
-        yylval.value=strdup("TRCL");
+        yylval.value=strdup("TR");
         return TRCL;
 }
 "<"{th}{space}+[^>]*">"|"<"{th}">"  {
@@ -337,7 +337,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return THOP;
 }
 "</"{th}{space}+[^>]*">"|"</"{th}">"  {
-        yylval.value=strdup("THCL");
+        yylval.value=strdup("TH");
         return THCL;
 }
 "<"{td}{space}+[^>]*">"|"<"{td}">"  {
@@ -345,7 +345,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return TDOP;
 }
 "</"{td}{space}+[^>]*">"|"</"{td}">"  {
-        yylval.value=strdup("TDCL");
+        yylval.value=strdup("TD");
         return TDCL;
 }
 "<"{center}{space}+[^>]*">"|"<"{center}">"  {
@@ -353,7 +353,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return CENTEROP;
 }
 "</"{center}{space}+[^>]*">"|"</"{center}">"  {
-        yylval.value=strdup("CENTERCL");
+        yylval.value=strdup("CENTER");
         return CENTERCL;
 }
 "<"{br}{space}+[^>]*">"|"<"{br}">"|"<"{br}{space}+[^>]*"/>"|"<"{br}"/>"  {
@@ -375,9 +375,6 @@ char *findpos(const char *s,int len,int start){
 			p[k++]=(s[i]);
 		else break;
 	}
-        if(start==2){
-                p[k++]='C';
-        }
 	p[k]=0;
 	return p;
 }

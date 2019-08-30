@@ -1651,7 +1651,7 @@ case 7:
 YY_RULE_SETUP
 #line 87 "ast.l"
 {
-	yylval.value=strdup("HTMLCL");
+	yylval.value=strdup("HTML");
 	return HTMLCL;
 }
 	YY_BREAK
@@ -1669,7 +1669,7 @@ case 9:
 YY_RULE_SETUP
 #line 95 "ast.l"
 {
-        yylval.value=strdup("HEADCL");
+        yylval.value=strdup("HEAD");
         return HEADCL;
 }
 	YY_BREAK
@@ -1687,7 +1687,7 @@ case 11:
 YY_RULE_SETUP
 #line 103 "ast.l"
 {
-        yylval.value=strdup("TITLECL");
+        yylval.value=strdup("TITLE");
         return TITLECL;
 }
 	YY_BREAK
@@ -1705,7 +1705,7 @@ case 13:
 YY_RULE_SETUP
 #line 111 "ast.l"
 {
-        yylval.value=strdup("BODYCL");
+        yylval.value=strdup("BODY");
         return BODYCL;
 }
 	YY_BREAK
@@ -1788,7 +1788,7 @@ case 21:
 YY_RULE_SETUP
 #line 154 "ast.l"
 {
-	yylval.value=strdup("ACL");
+	yylval.value=strdup("A");
 	return ACL;
 }
 	YY_BREAK
@@ -1882,7 +1882,7 @@ YY_RULE_SETUP
 #line 203 "ast.l"
 {
                 yy_pop_state();
-                yylval.value=strdup("IMGCL");
+                yylval.value=strdup("IMG");
                 return IMGCL;
         }
 	YY_BREAK
@@ -1919,7 +1919,7 @@ case 34:
 YY_RULE_SETUP
 #line 222 "ast.l"
 {
-	yylval.value=strdup("FONTCL");	
+	yylval.value=strdup("FONT");	
 	return FONTCL;
 }
 	YY_BREAK
@@ -1977,7 +1977,7 @@ case 40:
 YY_RULE_SETUP
 #line 251 "ast.l"
 {
-        yylval.value=strdup("ULCL");
+        yylval.value=strdup("UL");
         return LCL;
 }
 	YY_BREAK
@@ -1995,7 +1995,7 @@ case 42:
 YY_RULE_SETUP
 #line 259 "ast.l"
 {
-        yylval.value=strdup("OLCL");
+        yylval.value=strdup("OL");
         return LCL;
 }
 	YY_BREAK
@@ -2013,7 +2013,7 @@ case 44:
 YY_RULE_SETUP
 #line 267 "ast.l"
 {
-        yylval.value=strdup("LICL");
+        yylval.value=strdup("LI");
         return LICL;
 }
 	YY_BREAK
@@ -2031,7 +2031,7 @@ case 46:
 YY_RULE_SETUP
 #line 275 "ast.l"
 {
-        yylval.value=strdup("FIGURECL");
+        yylval.value=strdup("FIGURE");
         return FIGCL;
 }
 	YY_BREAK
@@ -2049,7 +2049,7 @@ case 48:
 YY_RULE_SETUP
 #line 283 "ast.l"
 {
-	yylval.value=strdup("FIGCAPTIONCL");
+	yylval.value=strdup("FIGCAPTION");
         return FIGCAPCL;
 }
 	YY_BREAK
@@ -2067,7 +2067,7 @@ case 50:
 YY_RULE_SETUP
 #line 291 "ast.l"
 {
-        yylval.value=strdup("DLCL");
+        yylval.value=strdup("DL");
         return DLCL;
 }
 	YY_BREAK
@@ -2085,7 +2085,7 @@ case 52:
 YY_RULE_SETUP
 #line 299 "ast.l"
 {
-        yylval.value=strdup("DTCL");
+        yylval.value=strdup("DT");
         return DTCL;
 }
 	YY_BREAK
@@ -2103,7 +2103,7 @@ case 54:
 YY_RULE_SETUP
 #line 307 "ast.l"
 {
-        yylval.value=strdup("DDCL");
+        yylval.value=strdup("DD");
         return DDCL;
 }
 	YY_BREAK
@@ -2121,7 +2121,7 @@ case 56:
 YY_RULE_SETUP
 #line 315 "ast.l"
 {
-        yylval.value=strdup("TABLECL");
+        yylval.value=strdup("TABLE");
         return TABCL;
 }
 	YY_BREAK
@@ -2139,7 +2139,7 @@ case 58:
 YY_RULE_SETUP
 #line 323 "ast.l"
 {
-        yylval.value=strdup("CAPCL");
+        yylval.value=strdup("CAP");
         return CAPCL;
 }
 	YY_BREAK
@@ -2157,7 +2157,7 @@ case 60:
 YY_RULE_SETUP
 #line 331 "ast.l"
 {
-        yylval.value=strdup("TRCL");
+        yylval.value=strdup("TR");
         return TRCL;
 }
 	YY_BREAK
@@ -2175,7 +2175,7 @@ case 62:
 YY_RULE_SETUP
 #line 339 "ast.l"
 {
-        yylval.value=strdup("THCL");
+        yylval.value=strdup("TH");
         return THCL;
 }
 	YY_BREAK
@@ -2193,7 +2193,7 @@ case 64:
 YY_RULE_SETUP
 #line 347 "ast.l"
 {
-        yylval.value=strdup("TDCL");
+        yylval.value=strdup("TD");
         return TDCL;
 }
 	YY_BREAK
@@ -2211,7 +2211,7 @@ case 66:
 YY_RULE_SETUP
 #line 355 "ast.l"
 {
-        yylval.value=strdup("CENTERCL");
+        yylval.value=strdup("CENTER");
         return CENTERCL;
 }
 	YY_BREAK
@@ -3301,9 +3301,6 @@ char *findpos(const char *s,int len,int start){
 			p[k++]=(s[i]);
 		else break;
 	}
-        if(start==2){
-                p[k++]='C';
-        }
 	p[k]=0;
 	return p;
 }

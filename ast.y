@@ -15,8 +15,6 @@ extern void yyerror(const char*);
 char* concat(char *s1,char *s2);
 typedef vector<treeNode*> vn;
 
-void update(vn* v);
-
 %}
 
 // %name parse
@@ -63,12 +61,13 @@ st:	DOCTYPE HTMLOP html {
 				treeNode *doc = add_node("DOCTYPE HTML");
 				root->children.pb(doc);
 				add_children(root,$3->v);
-				print(root);
+				write(root);
 			}
 	| HTMLOP html {
 				treeNode *root = add_node("ROOT");
 				add_children(root,$2->v);
-				print(root);	
+				//print(root);	
+				write(root);
 			}
 	| consumetop DOCTYPE HTMLOP html {
 				treeNode *root = add_node("ROOT");
@@ -76,13 +75,15 @@ st:	DOCTYPE HTMLOP html {
 				add_children(root,$1->v);
 				root->children.pb(doc);
 				add_children(root,$4->v);
-				print(root);
+				//print(root);
+				write(root);
 			}
 	| consumetop HTMLOP html {
 				treeNode *root = add_node("ROOT");
 				add_children(root,$1->v);
 				add_children(root,$3->v);
-				print(root);	
+				//print(root);	
+				write(root);
 			}
 	| consumetop DOCTYPE consumetop HTMLOP html {
 				treeNode *root = add_node("ROOT");
@@ -91,7 +92,8 @@ st:	DOCTYPE HTMLOP html {
 				root->children.pb(doc);
 				add_children(root,$3->v);
 				add_children(root,$5->v);
-				print(root);
+				//print(root);
+				write(root);
 			}
 	;
 
@@ -1076,19 +1078,4 @@ char* concat(char *s1,char *s2){
 	strcat(p,s1);
 	strcat(p,s2);
 	return p;	
-}
-void update(vn* v){
-	vn* temp;
-	treeNode* first = (*v)[0];
-	for(int i=1;i<(*v).size();i++){
-		if(first->tagVal == (*v)[i]->tagVal){
-			first->content=first->content+(*v)[i]->content;
-		}
-		else{
-			(*temp).pb(first);
-			first = (*v)[i];
-		}
-	}
-	(*temp).pb(first);
-	v=temp;
 }
