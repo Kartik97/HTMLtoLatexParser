@@ -156,8 +156,10 @@ miscph: misc {
 			$$=$1;
 		}
 	| AOP atagph {
+			$$=$2;
 		}
 	| FONTOP fontph {
+			$$=$2;
 		}
 	| CENTEROP centerph {
 		}
@@ -302,33 +304,68 @@ phr: PHRASECL {
 	;
 
 fontph: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL { 
+			node *n=add_start($4);
+			add_attributes(n->v[0],$1,$2);
+			$$=n;
 		}
 	| ATTRIBUTE ATTRIBUTEVAL FONTOOP phrases FONTCL { 
+			node *n=add_startChild($4,$5);
+			add_attributes(n->v[0],$1,$2);
+			$$=n;
 		}
 	| FONTOOP phrases FONTCL { 
+			$$=add_startChild($2,$3);
 		}
 	| ATTRIBUTE ATTRIBUTEVAL FONTOOP consumeph FONTCL { 
+			node *n=add_startChild($4,$5);
+			add_attributes(n->v[0],$1,$2);
+			$$=n;
 		}
 	| FONTOOP consumeph FONTCL { 
+			$$=add_startChild($2,$3);
 		}
 	;
 
 atagph: ATTRIBUTE ATTRIBUTEVAL AOPOP phrases ACL { 
+			node  *n=add_startChild($4,$5);
+			add_attributes(n->v[0],$1,$2);
+			$$=n;
 		}
     | AOPOP phrases ACL { 
+    		$$=add_startChild($2,$3);
     	}
     | ATTRIBUTE ATTRIBUTEVAL AOPOP BPHRASEOP phraseopen ACL { 
+    		node *n=add_startChild($5,$6);
+    		add_attributes(n->v[0],$1,$2);
+    		$$=n;
 		}
     | AOPOP BPHRASEOP phraseopen ACL { 
+    		$$=add_startChild($3,$4);
     	}
     | ATTRIBUTE ATTRIBUTEVAL AOPOP consumeph ACL { 
+    		node *n=add_startChild($4,$5);
+    		add_attributes(n->v[0],$1,$2);
+    		$$=n;
     	}
     | AOPOP consumeph ACL { 
+    		$$=add_startChild($2,$3);
     	}
     | AOPOP ACL {
+    		$$=add_start($2);
     	}
 	| ATTRIBUTE ATTRIBUTEVAL AOPOP ACL { 	
+			node *n=add_start($4);
+			add_attributes(n->v[0],$1,$2);
+			$$=n;
 		}
+	| ATTRIBUTE ATTRIBUTEVAL AOPOP consumeph BPHRASEOP phraseopen ACL { 
+    		node *n=add_startChild($4,$6,$7);
+    		add_attributes(n->v[0],$1,$2);
+    		$$=n;
+		}
+    | AOPOP consumeph BPHRASEOP phraseopen ACL { 
+    		$$=add_startChild($2,$4,$5);
+    	}
 	;
 
 gtph: phrases GTPHCL flow { 
@@ -784,14 +821,8 @@ img:  ATTRIBUTE ATTRIBUTEVAL img {
 	; 
 
 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL flow {
-			vn v;
-			treeNode *ptr=add_node($5);
-			add_attributes(ptr,$1,$2);
-			add_children(ptr,$4->v);
-			v.pb(ptr);
-			node* n=new node;
-			copy_list(n->v,v);
-			copy_list(n->v,$6->v);
+			node  *n=add_child_neighbour($4,$5,$6);
+			add_attributes(n->v[0],$1,$2);
 			$$=n;
 		}
 	| AOPOP flow ACL flow {
