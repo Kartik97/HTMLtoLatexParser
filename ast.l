@@ -71,6 +71,10 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
                 yylval.value=strdup(yytext);
                 return TEXT;
         }
+        else if(yytext[0]==32){
+                yylval.value=strdup(" ");
+                return TEXT;
+        }
         else{
                 yylval.value = strdup(findpos(yytext,yyleng,1));
                 return SYMBOL;

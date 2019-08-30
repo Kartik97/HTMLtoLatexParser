@@ -2242,7 +2242,7 @@ yyreduce:
 			}
 			node* n = new node;
 			copy_list(n->v,v1);	
-			if(v2[0]->tagVal!="TEXT") {
+			if(v2[0]->tagVal!=v1[s-1]->tagVal && (v1[s-1]->tagVal!="TEXT" || v2[0]->tagVal!="TEXT" )) {
 				copy_list(n->v,v2);
 			}
 			else if(v2.size()>1 && v2[1]->tagVal!="TEXT"){
@@ -2305,7 +2305,7 @@ yyreduce:
 			}
 			node* n = new node;
 			copy_list(n->v,v1);	
-			if(v2[0]->tagVal!="TEXT") {
+			if(v2[0]->tagVal!=v1[s-1]->tagVal && (v1[s-1]->tagVal!="TEXT" || v2[0]->tagVal!="TEXT" )) {
 				copy_list(n->v,v2);
 			}
 			else if(v2.size()>1 && v2[1]->tagVal!="TEXT"){
