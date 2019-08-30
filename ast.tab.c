@@ -513,24 +513,24 @@ static const yytype_uint16 yyrline[] =
       77,    81,    83,    87,    89,    93,    98,   102,   108,   114,
      120,   123,   132,   150,   155,   158,   160,   162,   166,   184,
      189,   190,   191,   192,   210,   213,   216,   219,   222,   225,
-     228,   230,   234,   236,   238,   240,   244,   247,   250,   253,
-     256,   259,   264,   267,   275,   278,   281,   284,   287,   290,
-     293,   298,   300,   302,   304,   306,   310,   312,   314,   316,
-     318,   320,   322,   324,   328,   331,   334,   337,   340,   343,
-     346,   349,   352,   355,   360,   362,   364,   366,   368,   372,
-     376,   379,   384,   387,   390,   395,   398,   403,   406,   409,
-     412,   417,   420,   423,   426,   429,   432,   435,   438,   441,
-     444,   447,   450,   455,   458,   463,   468,   471,   478,   481,
-     484,   487,   490,   493,   498,   501,   507,   510,   513,   516,
-     521,   524,   527,   530,   533,   536,   539,   542,   545,   548,
-     551,   554,   559,   562,   565,   570,   573,   576,   579,   582,
-     585,   588,   591,   594,   597,   602,   605,   608,   613,   618,
-     621,   624,   627,   630,   633,   638,   641,   644,   649,   657,
-     659,   662,   665,   668,   671,   674,   679,   686,   689,   692,
-     695,   698,   701,   704,   709,   716,   719,   722,   725,   728,
-     731,   734,   737,   740,   743,   746,   751,   758,   761,   766,
-     771,   780,   791,   794,   797,   802,   805,   808,   813,   819,
-     821,   823,   825,   827,   829
+     228,   231,   236,   239,   242,   245,   250,   253,   256,   259,
+     262,   265,   270,   273,   281,   284,   287,   290,   293,   296,
+     299,   304,   306,   308,   310,   312,   316,   318,   320,   322,
+     324,   326,   328,   330,   334,   337,   340,   343,   346,   349,
+     352,   355,   358,   361,   366,   368,   370,   372,   374,   378,
+     382,   385,   390,   393,   396,   401,   404,   409,   412,   415,
+     418,   423,   426,   429,   432,   435,   438,   441,   444,   447,
+     450,   453,   456,   461,   464,   469,   474,   477,   484,   487,
+     490,   493,   496,   499,   504,   507,   513,   516,   519,   522,
+     527,   530,   533,   536,   539,   542,   545,   548,   551,   554,
+     557,   560,   565,   568,   571,   576,   579,   582,   585,   588,
+     591,   594,   597,   600,   603,   608,   611,   614,   619,   624,
+     627,   630,   633,   636,   639,   644,   647,   650,   655,   663,
+     665,   668,   671,   674,   677,   680,   685,   692,   695,   698,
+     701,   704,   707,   710,   715,   722,   725,   728,   731,   734,
+     737,   740,   743,   746,   749,   752,   757,   764,   767,   772,
+     777,   786,   797,   800,   803,   808,   811,   814,   819,   826,
+     831,   836,   839,   844,   849
 };
 #endif
 
@@ -2124,1303 +2124,1309 @@ yyreduce:
   case 40:
 #line 228 "ast.y" /* yacc.c:1646  */
     { 
+			(yyval.object)=(yyvsp[0].object);
 		}
-#line 2129 "ast.tab.c" /* yacc.c:1646  */
+#line 2130 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 230 "ast.y" /* yacc.c:1646  */
-    { 
-		}
-#line 2136 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 42:
-#line 234 "ast.y" /* yacc.c:1646  */
-    { 
-		}
-#line 2143 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 43:
-#line 236 "ast.y" /* yacc.c:1646  */
-    { 
-		}
-#line 2150 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 44:
-#line 238 "ast.y" /* yacc.c:1646  */
-    {
-		}
-#line 2157 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 45:
-#line 240 "ast.y" /* yacc.c:1646  */
-    { 
-		}
-#line 2164 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 46:
-#line 244 "ast.y" /* yacc.c:1646  */
-    { 
-			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
-		}
-#line 2172 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 47:
-#line 247 "ast.y" /* yacc.c:1646  */
-    {
-			(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
-		}
-#line 2180 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 48:
-#line 250 "ast.y" /* yacc.c:1646  */
-    { 
-			(yyval.object)=add_start((yyvsp[0].value));	
-		}
-#line 2188 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 49:
-#line 253 "ast.y" /* yacc.c:1646  */
-    {
-			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
-		}
-#line 2196 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 50:
-#line 256 "ast.y" /* yacc.c:1646  */
-    {
-			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
-		}
-#line 2204 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 51:
-#line 259 "ast.y" /* yacc.c:1646  */
-    { 
-			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
-		}
-#line 2212 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 52:
-#line 264 "ast.y" /* yacc.c:1646  */
+#line 231 "ast.y" /* yacc.c:1646  */
     { 
 			(yyval.object)=(yyvsp[0].object);
 		}
-#line 2220 "ast.tab.c" /* yacc.c:1646  */
+#line 2138 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 42:
+#line 236 "ast.y" /* yacc.c:1646  */
+    { 
+			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
+		}
+#line 2146 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 43:
+#line 239 "ast.y" /* yacc.c:1646  */
+    { 
+			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
+		}
+#line 2154 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 44:
+#line 242 "ast.y" /* yacc.c:1646  */
+    {
+			(yyval.object)=add_start((yyvsp[0].value));
+		}
+#line 2162 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 45:
+#line 245 "ast.y" /* yacc.c:1646  */
+    { 
+			(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
+		}
+#line 2170 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 46:
+#line 250 "ast.y" /* yacc.c:1646  */
+    { 
+			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
+		}
+#line 2178 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 47:
+#line 253 "ast.y" /* yacc.c:1646  */
+    {
+			(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
+		}
+#line 2186 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 48:
+#line 256 "ast.y" /* yacc.c:1646  */
+    { 
+			(yyval.object)=add_start((yyvsp[0].value));	
+		}
+#line 2194 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 49:
+#line 259 "ast.y" /* yacc.c:1646  */
+    {
+			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
+		}
+#line 2202 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 50:
+#line 262 "ast.y" /* yacc.c:1646  */
+    {
+			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
+		}
+#line 2210 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 51:
+#line 265 "ast.y" /* yacc.c:1646  */
+    { 
+			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
+		}
+#line 2218 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 52:
+#line 270 "ast.y" /* yacc.c:1646  */
+    { 
+			(yyval.object)=(yyvsp[0].object);
+		}
+#line 2226 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 267 "ast.y" /* yacc.c:1646  */
+#line 273 "ast.y" /* yacc.c:1646  */
     {
 			node* n=new node;
 			copy_list(n->v,(yyvsp[-2].object)->v);
 			copy_list(n->v,(yyvsp[0].object)->v);
 			(yyval.object)=n;
 		}
-#line 2231 "ast.tab.c" /* yacc.c:1646  */
+#line 2237 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 275 "ast.y" /* yacc.c:1646  */
+#line 281 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_start((yyvsp[0].value));
 		}
-#line 2239 "ast.tab.c" /* yacc.c:1646  */
+#line 2245 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 278 "ast.y" /* yacc.c:1646  */
+#line 284 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2247 "ast.tab.c" /* yacc.c:1646  */
+#line 2253 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 281 "ast.y" /* yacc.c:1646  */
+#line 287 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2255 "ast.tab.c" /* yacc.c:1646  */
+#line 2261 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 284 "ast.y" /* yacc.c:1646  */
+#line 290 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2263 "ast.tab.c" /* yacc.c:1646  */
+#line 2269 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 287 "ast.y" /* yacc.c:1646  */
+#line 293 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2271 "ast.tab.c" /* yacc.c:1646  */
+#line 2277 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 290 "ast.y" /* yacc.c:1646  */
+#line 296 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2279 "ast.tab.c" /* yacc.c:1646  */
+#line 2285 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 293 "ast.y" /* yacc.c:1646  */
+#line 299 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2287 "ast.tab.c" /* yacc.c:1646  */
+#line 2293 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 298 "ast.y" /* yacc.c:1646  */
-    { 
-		}
-#line 2294 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 62:
-#line 300 "ast.y" /* yacc.c:1646  */
-    { 
-		}
-#line 2301 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 63:
-#line 302 "ast.y" /* yacc.c:1646  */
-    { 
-		}
-#line 2308 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 64:
 #line 304 "ast.y" /* yacc.c:1646  */
     { 
 		}
-#line 2315 "ast.tab.c" /* yacc.c:1646  */
+#line 2300 "ast.tab.c" /* yacc.c:1646  */
     break;
 
-  case 65:
+  case 62:
 #line 306 "ast.y" /* yacc.c:1646  */
     { 
 		}
-#line 2322 "ast.tab.c" /* yacc.c:1646  */
+#line 2307 "ast.tab.c" /* yacc.c:1646  */
     break;
 
-  case 66:
+  case 63:
+#line 308 "ast.y" /* yacc.c:1646  */
+    { 
+		}
+#line 2314 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 64:
 #line 310 "ast.y" /* yacc.c:1646  */
     { 
 		}
-#line 2329 "ast.tab.c" /* yacc.c:1646  */
+#line 2321 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 65:
+#line 312 "ast.y" /* yacc.c:1646  */
+    { 
+		}
+#line 2328 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 66:
+#line 316 "ast.y" /* yacc.c:1646  */
+    { 
+		}
+#line 2335 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 312 "ast.y" /* yacc.c:1646  */
-    { 
-    	}
-#line 2336 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 68:
-#line 314 "ast.y" /* yacc.c:1646  */
-    { 
-		}
-#line 2343 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 69:
-#line 316 "ast.y" /* yacc.c:1646  */
-    { 
-    	}
-#line 2350 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 70:
 #line 318 "ast.y" /* yacc.c:1646  */
     { 
     	}
-#line 2357 "ast.tab.c" /* yacc.c:1646  */
+#line 2342 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 68:
+#line 320 "ast.y" /* yacc.c:1646  */
+    { 
+		}
+#line 2349 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 69:
+#line 322 "ast.y" /* yacc.c:1646  */
+    { 
+    	}
+#line 2356 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 70:
+#line 324 "ast.y" /* yacc.c:1646  */
+    { 
+    	}
+#line 2363 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 320 "ast.y" /* yacc.c:1646  */
+#line 326 "ast.y" /* yacc.c:1646  */
     { 
     	}
-#line 2364 "ast.tab.c" /* yacc.c:1646  */
+#line 2370 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 72:
-#line 322 "ast.y" /* yacc.c:1646  */
+#line 328 "ast.y" /* yacc.c:1646  */
     {
     	}
-#line 2371 "ast.tab.c" /* yacc.c:1646  */
+#line 2377 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 73:
-#line 324 "ast.y" /* yacc.c:1646  */
+#line 330 "ast.y" /* yacc.c:1646  */
     { 	
 		}
-#line 2378 "ast.tab.c" /* yacc.c:1646  */
+#line 2384 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 74:
-#line 328 "ast.y" /* yacc.c:1646  */
+#line 334 "ast.y" /* yacc.c:1646  */
     { 
 			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2386 "ast.tab.c" /* yacc.c:1646  */
+#line 2392 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 75:
-#line 331 "ast.y" /* yacc.c:1646  */
+#line 337 "ast.y" /* yacc.c:1646  */
     { 
 			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2394 "ast.tab.c" /* yacc.c:1646  */
+#line 2400 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 76:
-#line 334 "ast.y" /* yacc.c:1646  */
+#line 340 "ast.y" /* yacc.c:1646  */
     { 
 			(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2402 "ast.tab.c" /* yacc.c:1646  */
+#line 2408 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 77:
-#line 337 "ast.y" /* yacc.c:1646  */
+#line 343 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_start((yyvsp[0].value));
 		}
-#line 2410 "ast.tab.c" /* yacc.c:1646  */
+#line 2416 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 78:
-#line 340 "ast.y" /* yacc.c:1646  */
+#line 346 "ast.y" /* yacc.c:1646  */
     { 
 			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2418 "ast.tab.c" /* yacc.c:1646  */
+#line 2424 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 79:
-#line 343 "ast.y" /* yacc.c:1646  */
+#line 349 "ast.y" /* yacc.c:1646  */
     { 
 			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2426 "ast.tab.c" /* yacc.c:1646  */
+#line 2432 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 80:
-#line 346 "ast.y" /* yacc.c:1646  */
+#line 352 "ast.y" /* yacc.c:1646  */
     { 
 			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2434 "ast.tab.c" /* yacc.c:1646  */
+#line 2440 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 81:
-#line 349 "ast.y" /* yacc.c:1646  */
+#line 355 "ast.y" /* yacc.c:1646  */
     { 
 			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2442 "ast.tab.c" /* yacc.c:1646  */
+#line 2448 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 82:
-#line 352 "ast.y" /* yacc.c:1646  */
+#line 358 "ast.y" /* yacc.c:1646  */
     { 
 			(yyval.object)=add_child_neighbour((yyvsp[-4].object),(yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2450 "ast.tab.c" /* yacc.c:1646  */
+#line 2456 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 83:
-#line 355 "ast.y" /* yacc.c:1646  */
+#line 361 "ast.y" /* yacc.c:1646  */
     { 
 			(yyval.object)=add_startChild((yyvsp[-3].object),(yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2458 "ast.tab.c" /* yacc.c:1646  */
+#line 2464 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 84:
-#line 360 "ast.y" /* yacc.c:1646  */
+#line 366 "ast.y" /* yacc.c:1646  */
     { 
 		}
-#line 2465 "ast.tab.c" /* yacc.c:1646  */
+#line 2471 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 85:
-#line 362 "ast.y" /* yacc.c:1646  */
+#line 368 "ast.y" /* yacc.c:1646  */
     { 
 		}
-#line 2472 "ast.tab.c" /* yacc.c:1646  */
+#line 2478 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 86:
-#line 364 "ast.y" /* yacc.c:1646  */
+#line 370 "ast.y" /* yacc.c:1646  */
     {
 		}
-#line 2479 "ast.tab.c" /* yacc.c:1646  */
+#line 2485 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 87:
-#line 366 "ast.y" /* yacc.c:1646  */
+#line 372 "ast.y" /* yacc.c:1646  */
     {
 		}
-#line 2486 "ast.tab.c" /* yacc.c:1646  */
+#line 2492 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 88:
-#line 368 "ast.y" /* yacc.c:1646  */
+#line 374 "ast.y" /* yacc.c:1646  */
     {
 		}
-#line 2493 "ast.tab.c" /* yacc.c:1646  */
+#line 2499 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 89:
-#line 372 "ast.y" /* yacc.c:1646  */
+#line 378 "ast.y" /* yacc.c:1646  */
     {
 			(yyvsp[0].object)->v[0]->children.insert((yyvsp[0].object)->v[0]->children.begin(),(yyvsp[-1].object)->v.begin(),(yyvsp[-1].object)->v.end());
 			(yyval.object)=(yyvsp[0].object);
 		}
-#line 2502 "ast.tab.c" /* yacc.c:1646  */
+#line 2508 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 90:
-#line 376 "ast.y" /* yacc.c:1646  */
+#line 382 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_start((yyvsp[0].value));
 		}
-#line 2510 "ast.tab.c" /* yacc.c:1646  */
+#line 2516 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 91:
-#line 379 "ast.y" /* yacc.c:1646  */
+#line 385 "ast.y" /* yacc.c:1646  */
     {
 			(yyvsp[0].object)->v[0]->children.insert((yyvsp[0].object)->v[0]->children.begin(),(yyvsp[-1].object)->v.begin(),(yyvsp[-1].object)->v.end());
 			(yyvsp[0].object)->v[0]->children.insert((yyvsp[0].object)->v[0]->children.begin(),(yyvsp[-3].object)->v.begin(),(yyvsp[-3].object)->v.end());
 			(yyval.object)=(yyvsp[0].object);
 		}
-#line 2520 "ast.tab.c" /* yacc.c:1646  */
+#line 2526 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 92:
-#line 384 "ast.y" /* yacc.c:1646  */
+#line 390 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2528 "ast.tab.c" /* yacc.c:1646  */
+#line 2534 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 93:
-#line 387 "ast.y" /* yacc.c:1646  */
+#line 393 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2536 "ast.tab.c" /* yacc.c:1646  */
+#line 2542 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 94:
-#line 390 "ast.y" /* yacc.c:1646  */
+#line 396 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2544 "ast.tab.c" /* yacc.c:1646  */
+#line 2550 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 95:
-#line 395 "ast.y" /* yacc.c:1646  */
+#line 401 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2552 "ast.tab.c" /* yacc.c:1646  */
+#line 2558 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 96:
-#line 398 "ast.y" /* yacc.c:1646  */
+#line 404 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_start((yyvsp[0].value));
 		}
-#line 2560 "ast.tab.c" /* yacc.c:1646  */
+#line 2566 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 97:
-#line 403 "ast.y" /* yacc.c:1646  */
+#line 409 "ast.y" /* yacc.c:1646  */
     {
 		(yyval.object)=add_start((yyvsp[0].value));
 		}
-#line 2568 "ast.tab.c" /* yacc.c:1646  */
+#line 2574 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 98:
-#line 406 "ast.y" /* yacc.c:1646  */
+#line 412 "ast.y" /* yacc.c:1646  */
     {
 		(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2576 "ast.tab.c" /* yacc.c:1646  */
+#line 2582 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 99:
-#line 409 "ast.y" /* yacc.c:1646  */
+#line 415 "ast.y" /* yacc.c:1646  */
     {
 		(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2584 "ast.tab.c" /* yacc.c:1646  */
+#line 2590 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 100:
-#line 412 "ast.y" /* yacc.c:1646  */
+#line 418 "ast.y" /* yacc.c:1646  */
     {
 		(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2592 "ast.tab.c" /* yacc.c:1646  */
+#line 2598 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 101:
-#line 417 "ast.y" /* yacc.c:1646  */
+#line 423 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_start((yyvsp[0].value));
 		}
-#line 2600 "ast.tab.c" /* yacc.c:1646  */
+#line 2606 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 102:
-#line 420 "ast.y" /* yacc.c:1646  */
+#line 426 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2608 "ast.tab.c" /* yacc.c:1646  */
+#line 2614 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 103:
-#line 423 "ast.y" /* yacc.c:1646  */
+#line 429 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2616 "ast.tab.c" /* yacc.c:1646  */
+#line 2622 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 104:
-#line 426 "ast.y" /* yacc.c:1646  */
+#line 432 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-3].object),(yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2624 "ast.tab.c" /* yacc.c:1646  */
+#line 2630 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 105:
-#line 429 "ast.y" /* yacc.c:1646  */
+#line 435 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2632 "ast.tab.c" /* yacc.c:1646  */
+#line 2638 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 106:
-#line 432 "ast.y" /* yacc.c:1646  */
+#line 438 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2640 "ast.tab.c" /* yacc.c:1646  */
+#line 2646 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 107:
-#line 435 "ast.y" /* yacc.c:1646  */
+#line 441 "ast.y" /* yacc.c:1646  */
     {
     		(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
     	}
-#line 2648 "ast.tab.c" /* yacc.c:1646  */
+#line 2654 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 108:
-#line 438 "ast.y" /* yacc.c:1646  */
+#line 444 "ast.y" /* yacc.c:1646  */
     {
     		(yyval.object)=add_child_neighbour((yyvsp[-4].object),(yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
     	}
-#line 2656 "ast.tab.c" /* yacc.c:1646  */
+#line 2662 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 109:
-#line 441 "ast.y" /* yacc.c:1646  */
+#line 447 "ast.y" /* yacc.c:1646  */
     { 
     		(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
     	}
-#line 2664 "ast.tab.c" /* yacc.c:1646  */
+#line 2670 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 110:
-#line 444 "ast.y" /* yacc.c:1646  */
+#line 450 "ast.y" /* yacc.c:1646  */
     {
     		(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
     	}
-#line 2672 "ast.tab.c" /* yacc.c:1646  */
+#line 2678 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 111:
-#line 447 "ast.y" /* yacc.c:1646  */
+#line 453 "ast.y" /* yacc.c:1646  */
     {
     		(yyval.object)=add_startChild((yyvsp[-3].object),(yyvsp[-1].object),(yyvsp[0].value));
     	}
-#line 2680 "ast.tab.c" /* yacc.c:1646  */
+#line 2686 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 112:
-#line 450 "ast.y" /* yacc.c:1646  */
+#line 456 "ast.y" /* yacc.c:1646  */
     {
     		(yyval.object)=add_child_neighbour((yyvsp[-4].object),(yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
     	}
-#line 2688 "ast.tab.c" /* yacc.c:1646  */
+#line 2694 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 113:
-#line 455 "ast.y" /* yacc.c:1646  */
+#line 461 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_child_neighbour((yyvsp[-3].object),(yyvsp[-2].value),(yyvsp[0].object));
 		}
-#line 2696 "ast.tab.c" /* yacc.c:1646  */
+#line 2702 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 114:
-#line 458 "ast.y" /* yacc.c:1646  */
+#line 464 "ast.y" /* yacc.c:1646  */
     {
 			node *n=add_child_neighbour((yyvsp[-4].object),(yyvsp[-3].value),(yyvsp[-2].object));
 			copy_list(n->v,(yyvsp[0].object)->v);
 			(yyval.object)=n;
 		}
-#line 2706 "ast.tab.c" /* yacc.c:1646  */
+#line 2712 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 115:
-#line 463 "ast.y" /* yacc.c:1646  */
+#line 469 "ast.y" /* yacc.c:1646  */
     {
 			node *n=add_child_neighbour((yyvsp[-5].object),(yyvsp[-4].value),(yyvsp[-2].object));
 			copy_list(n->v,(yyvsp[0].object)->v);
 			(yyval.object)=n;
 		}
-#line 2716 "ast.tab.c" /* yacc.c:1646  */
+#line 2722 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 116:
-#line 468 "ast.y" /* yacc.c:1646  */
+#line 474 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_neighbour((yyvsp[-2].value),(yyvsp[0].object));
 		}
-#line 2724 "ast.tab.c" /* yacc.c:1646  */
+#line 2730 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 117:
-#line 471 "ast.y" /* yacc.c:1646  */
+#line 477 "ast.y" /* yacc.c:1646  */
     {
     		node *n=add_neighbour((yyvsp[-4].value),(yyvsp[-2].object));
     		copy_list(n->v,(yyvsp[0].object)->v);
 			(yyval.object)=n;	
     	}
-#line 2734 "ast.tab.c" /* yacc.c:1646  */
+#line 2740 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 118:
-#line 478 "ast.y" /* yacc.c:1646  */
+#line 484 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2742 "ast.tab.c" /* yacc.c:1646  */
+#line 2748 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 119:
-#line 481 "ast.y" /* yacc.c:1646  */
+#line 487 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_child_neighbour((yyvsp[-3].object),(yyvsp[-2].value),(yyvsp[0].object));	
 		}
-#line 2750 "ast.tab.c" /* yacc.c:1646  */
+#line 2756 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 120:
-#line 484 "ast.y" /* yacc.c:1646  */
+#line 490 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_start((yyvsp[0].value));
 		}
-#line 2758 "ast.tab.c" /* yacc.c:1646  */
+#line 2764 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 121:
-#line 487 "ast.y" /* yacc.c:1646  */
+#line 493 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_neighbour((yyvsp[-2].value),(yyvsp[0].object));
 		}
-#line 2766 "ast.tab.c" /* yacc.c:1646  */
+#line 2772 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 122:
-#line 490 "ast.y" /* yacc.c:1646  */
+#line 496 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2774 "ast.tab.c" /* yacc.c:1646  */
+#line 2780 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 123:
-#line 493 "ast.y" /* yacc.c:1646  */
+#line 499 "ast.y" /* yacc.c:1646  */
     {
 			node* n=add_child_neighbour((yyvsp[-4].object),(yyvsp[-3].value),(yyvsp[-2].object));
 			copy_list(n->v,(yyvsp[0].object)->v);
 			(yyval.object)=n;
 		}
-#line 2784 "ast.tab.c" /* yacc.c:1646  */
+#line 2790 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 124:
-#line 498 "ast.y" /* yacc.c:1646  */
+#line 504 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2792 "ast.tab.c" /* yacc.c:1646  */
+#line 2798 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 125:
-#line 501 "ast.y" /* yacc.c:1646  */
+#line 507 "ast.y" /* yacc.c:1646  */
     {
 			node *n=add_neighbour((yyvsp[-3].value),(yyvsp[-2].object));
 			copy_list(n->v,(yyvsp[0].object)->v);
 		}
-#line 2801 "ast.tab.c" /* yacc.c:1646  */
+#line 2807 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 126:
-#line 507 "ast.y" /* yacc.c:1646  */
+#line 513 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2809 "ast.tab.c" /* yacc.c:1646  */
+#line 2815 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 127:
-#line 510 "ast.y" /* yacc.c:1646  */
+#line 516 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_start((yyvsp[0].value));
 		}
-#line 2817 "ast.tab.c" /* yacc.c:1646  */
+#line 2823 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 128:
-#line 513 "ast.y" /* yacc.c:1646  */
+#line 519 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2825 "ast.tab.c" /* yacc.c:1646  */
+#line 2831 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 129:
-#line 516 "ast.y" /* yacc.c:1646  */
+#line 522 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2833 "ast.tab.c" /* yacc.c:1646  */
+#line 2839 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 130:
-#line 521 "ast.y" /* yacc.c:1646  */
+#line 527 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2841 "ast.tab.c" /* yacc.c:1646  */
+#line 2847 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 131:
-#line 524 "ast.y" /* yacc.c:1646  */
+#line 530 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2849 "ast.tab.c" /* yacc.c:1646  */
+#line 2855 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 132:
-#line 527 "ast.y" /* yacc.c:1646  */
-    {
-			(yyval.object)=add_startChild((yyvsp[-3].object),(yyvsp[-1].object),(yyvsp[0].value));
-		}
-#line 2857 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 133:
-#line 530 "ast.y" /* yacc.c:1646  */
-    {
-			(yyval.object)=add_child_neighbour((yyvsp[-4].object),(yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
-		}
-#line 2865 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 134:
 #line 533 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-3].object),(yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2873 "ast.tab.c" /* yacc.c:1646  */
+#line 2863 "ast.tab.c" /* yacc.c:1646  */
     break;
 
-  case 135:
+  case 133:
 #line 536 "ast.y" /* yacc.c:1646  */
     {
-			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
+			(yyval.object)=add_child_neighbour((yyvsp[-4].object),(yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2881 "ast.tab.c" /* yacc.c:1646  */
+#line 2871 "ast.tab.c" /* yacc.c:1646  */
     break;
 
-  case 136:
+  case 134:
 #line 539 "ast.y" /* yacc.c:1646  */
-    {
-    		(yyval.object)=add_child_neighbour((yyvsp[-4].object),(yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
-    	}
-#line 2889 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 137:
-#line 542 "ast.y" /* yacc.c:1646  */
-    {
-    		(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
-    	}
-#line 2897 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 138:
-#line 545 "ast.y" /* yacc.c:1646  */
-    {
-			(yyval.object)=add_start((yyvsp[0].value));
-		}
-#line 2905 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 139:
-#line 548 "ast.y" /* yacc.c:1646  */
-    {
-			(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
-		}
-#line 2913 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 140:
-#line 551 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-3].object),(yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2921 "ast.tab.c" /* yacc.c:1646  */
+#line 2879 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 135:
+#line 542 "ast.y" /* yacc.c:1646  */
+    {
+			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
+		}
+#line 2887 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 136:
+#line 545 "ast.y" /* yacc.c:1646  */
+    {
+    		(yyval.object)=add_child_neighbour((yyvsp[-4].object),(yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
+    	}
+#line 2895 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 137:
+#line 548 "ast.y" /* yacc.c:1646  */
+    {
+    		(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
+    	}
+#line 2903 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 138:
+#line 551 "ast.y" /* yacc.c:1646  */
+    {
+			(yyval.object)=add_start((yyvsp[0].value));
+		}
+#line 2911 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 139:
+#line 554 "ast.y" /* yacc.c:1646  */
+    {
+			(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
+		}
+#line 2919 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 140:
+#line 557 "ast.y" /* yacc.c:1646  */
+    {
+			(yyval.object)=add_startChild((yyvsp[-3].object),(yyvsp[-1].object),(yyvsp[0].value));
+		}
+#line 2927 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 141:
-#line 554 "ast.y" /* yacc.c:1646  */
+#line 560 "ast.y" /* yacc.c:1646  */
     {
     		node* n=add_child_neighbour((yyvsp[-6].object),(yyvsp[-4].object),(yyvsp[-1].value),(yyvsp[0].object));
     		add_children(n->v[0],(yyvsp[-2].object)->v);
     		(yyval.object)=n;
     	}
-#line 2931 "ast.tab.c" /* yacc.c:1646  */
+#line 2937 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 142:
-#line 559 "ast.y" /* yacc.c:1646  */
+#line 565 "ast.y" /* yacc.c:1646  */
     {
     		(yyval.object)=add_child_neighbour((yyvsp[-4].object),(yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
     	}
-#line 2939 "ast.tab.c" /* yacc.c:1646  */
+#line 2945 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 143:
-#line 562 "ast.y" /* yacc.c:1646  */
+#line 568 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2947 "ast.tab.c" /* yacc.c:1646  */
+#line 2953 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 144:
-#line 565 "ast.y" /* yacc.c:1646  */
+#line 571 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2955 "ast.tab.c" /* yacc.c:1646  */
+#line 2961 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 145:
-#line 570 "ast.y" /* yacc.c:1646  */
+#line 576 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_start((yyvsp[0].value));
 		}
-#line 2963 "ast.tab.c" /* yacc.c:1646  */
+#line 2969 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 146:
-#line 573 "ast.y" /* yacc.c:1646  */
-    {
-			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
-		}
-#line 2971 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 147:
-#line 576 "ast.y" /* yacc.c:1646  */
-    {
-			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
-		}
-#line 2979 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 148:
 #line 579 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 2987 "ast.tab.c" /* yacc.c:1646  */
+#line 2977 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 147:
+#line 582 "ast.y" /* yacc.c:1646  */
+    {
+			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
+		}
+#line 2985 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 148:
+#line 585 "ast.y" /* yacc.c:1646  */
+    {
+			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
+		}
+#line 2993 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 149:
-#line 582 "ast.y" /* yacc.c:1646  */
+#line 588 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 2995 "ast.tab.c" /* yacc.c:1646  */
+#line 3001 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 150:
-#line 585 "ast.y" /* yacc.c:1646  */
-    {
-			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
-		}
-#line 3003 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 151:
-#line 588 "ast.y" /* yacc.c:1646  */
-    {
-			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
-		}
-#line 3011 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 152:
 #line 591 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 3019 "ast.tab.c" /* yacc.c:1646  */
+#line 3009 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 151:
+#line 594 "ast.y" /* yacc.c:1646  */
+    {
+			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
+		}
+#line 3017 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 152:
+#line 597 "ast.y" /* yacc.c:1646  */
+    {
+			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
+		}
+#line 3025 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 153:
-#line 594 "ast.y" /* yacc.c:1646  */
+#line 600 "ast.y" /* yacc.c:1646  */
     { 
 			(yyval.object)=add_neighbour((yyvsp[-2].value),(yyvsp[0].object));
 		}
-#line 3027 "ast.tab.c" /* yacc.c:1646  */
+#line 3033 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 154:
-#line 597 "ast.y" /* yacc.c:1646  */
+#line 603 "ast.y" /* yacc.c:1646  */
     {
 			node* n=add_neighbour((yyvsp[-3].value),(yyvsp[-2].object));
 			copy_list(n->v,(yyvsp[0].object)->v);
 			(yyval.object)=n;
 		}
-#line 3037 "ast.tab.c" /* yacc.c:1646  */
+#line 3043 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 155:
-#line 602 "ast.y" /* yacc.c:1646  */
+#line 608 "ast.y" /* yacc.c:1646  */
     {
     		(yyval.object)=add_child_neighbour((yyvsp[-3].object),(yyvsp[-2].value),(yyvsp[0].object));
     	}
-#line 3045 "ast.tab.c" /* yacc.c:1646  */
+#line 3051 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 156:
-#line 605 "ast.y" /* yacc.c:1646  */
+#line 611 "ast.y" /* yacc.c:1646  */
     {
     		(yyval.object)=add_child_neighbour((yyvsp[-3].object),(yyvsp[-2].value),(yyvsp[0].object));
     	}
-#line 3053 "ast.tab.c" /* yacc.c:1646  */
+#line 3059 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 157:
-#line 608 "ast.y" /* yacc.c:1646  */
+#line 614 "ast.y" /* yacc.c:1646  */
     {
     		node* n=add_child_neighbour((yyvsp[-4].object),(yyvsp[-3].value),(yyvsp[-2].object));
 			copy_list(n->v,(yyvsp[0].object)->v);
 			(yyval.object)=n;	
     	}
-#line 3063 "ast.tab.c" /* yacc.c:1646  */
+#line 3069 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 158:
-#line 613 "ast.y" /* yacc.c:1646  */
+#line 619 "ast.y" /* yacc.c:1646  */
     {
     		node* n=add_child_neighbour((yyvsp[-4].object),(yyvsp[-3].value),(yyvsp[-2].object));
 			copy_list(n->v,(yyvsp[0].object)->v);
 			(yyval.object)=n;	
     	}
-#line 3073 "ast.tab.c" /* yacc.c:1646  */
+#line 3079 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 159:
-#line 618 "ast.y" /* yacc.c:1646  */
+#line 624 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-3].object),(yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 3081 "ast.tab.c" /* yacc.c:1646  */
+#line 3087 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 160:
-#line 621 "ast.y" /* yacc.c:1646  */
+#line 627 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-3].object),(yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 3089 "ast.tab.c" /* yacc.c:1646  */
+#line 3095 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 161:
-#line 624 "ast.y" /* yacc.c:1646  */
+#line 630 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_child_neighbour((yyvsp[-4].object),(yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 3097 "ast.tab.c" /* yacc.c:1646  */
+#line 3103 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 162:
-#line 627 "ast.y" /* yacc.c:1646  */
+#line 633 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_child_neighbour((yyvsp[-4].object),(yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 3105 "ast.tab.c" /* yacc.c:1646  */
+#line 3111 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 163:
-#line 630 "ast.y" /* yacc.c:1646  */
+#line 636 "ast.y" /* yacc.c:1646  */
     { 
 			(yyval.object)=add_child_neighbour((yyvsp[-3].object),(yyvsp[-2].value),(yyvsp[0].object));
 		}
-#line 3113 "ast.tab.c" /* yacc.c:1646  */
+#line 3119 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 164:
-#line 633 "ast.y" /* yacc.c:1646  */
+#line 639 "ast.y" /* yacc.c:1646  */
     {
 			node* n=add_child_neighbour((yyvsp[-4].object),(yyvsp[-3].value),(yyvsp[-2].object));
 			copy_list(n->v,(yyvsp[0].object)->v);
 			(yyval.object)=n;
 		}
-#line 3123 "ast.tab.c" /* yacc.c:1646  */
+#line 3129 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 165:
-#line 638 "ast.y" /* yacc.c:1646  */
+#line 644 "ast.y" /* yacc.c:1646  */
     {
     		(yyval.object)=add_child_neighbour((yyvsp[-5].object),(yyvsp[-3].object),(yyvsp[-2].value),(yyvsp[0].object));
     	}
-#line 3131 "ast.tab.c" /* yacc.c:1646  */
+#line 3137 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 166:
-#line 641 "ast.y" /* yacc.c:1646  */
+#line 647 "ast.y" /* yacc.c:1646  */
     {
     		(yyval.object)=add_child_neighbour((yyvsp[-5].object),(yyvsp[-3].object),(yyvsp[-2].value),(yyvsp[0].object));
     	}
-#line 3139 "ast.tab.c" /* yacc.c:1646  */
+#line 3145 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 167:
-#line 644 "ast.y" /* yacc.c:1646  */
+#line 650 "ast.y" /* yacc.c:1646  */
     {
     		node* n=add_child_neighbour((yyvsp[-6].object),(yyvsp[-4].object),(yyvsp[-3].value),(yyvsp[-2].object));
 			copy_list(n->v,(yyvsp[0].object)->v);
 			(yyval.object)=n;	
     	}
-#line 3149 "ast.tab.c" /* yacc.c:1646  */
+#line 3155 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 168:
-#line 649 "ast.y" /* yacc.c:1646  */
+#line 655 "ast.y" /* yacc.c:1646  */
     {
     		node* n=add_child_neighbour((yyvsp[-6].object),(yyvsp[-4].object),(yyvsp[-3].value),(yyvsp[-2].object));
 			copy_list(n->v,(yyvsp[0].object)->v);
 			(yyval.object)=n;	
     	}
-#line 3159 "ast.tab.c" /* yacc.c:1646  */
+#line 3165 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 169:
-#line 657 "ast.y" /* yacc.c:1646  */
+#line 663 "ast.y" /* yacc.c:1646  */
     {	(yyval.object)=add_start((yyvsp[0].value));
 		}
-#line 3166 "ast.tab.c" /* yacc.c:1646  */
+#line 3172 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 170:
-#line 659 "ast.y" /* yacc.c:1646  */
+#line 665 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 3174 "ast.tab.c" /* yacc.c:1646  */
+#line 3180 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 171:
-#line 662 "ast.y" /* yacc.c:1646  */
+#line 668 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 3182 "ast.tab.c" /* yacc.c:1646  */
+#line 3188 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 172:
-#line 665 "ast.y" /* yacc.c:1646  */
+#line 671 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 3190 "ast.tab.c" /* yacc.c:1646  */
+#line 3196 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 173:
-#line 668 "ast.y" /* yacc.c:1646  */
+#line 674 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_neighbour((yyvsp[-2].value),(yyvsp[0].object));
 		}
-#line 3198 "ast.tab.c" /* yacc.c:1646  */
+#line 3204 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 174:
-#line 671 "ast.y" /* yacc.c:1646  */
+#line 677 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_child_neighbour((yyvsp[-3].object),(yyvsp[-2].value),(yyvsp[0].object));
 		}
-#line 3206 "ast.tab.c" /* yacc.c:1646  */
+#line 3212 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 175:
-#line 674 "ast.y" /* yacc.c:1646  */
+#line 680 "ast.y" /* yacc.c:1646  */
     {
 			node* n=add_neighbour((yyvsp[-3].value),(yyvsp[-2].object));
 		  	copy_list(n->v,(yyvsp[0].object)->v);
     		(yyval.object)=n;			
 		}
-#line 3216 "ast.tab.c" /* yacc.c:1646  */
+#line 3222 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 176:
-#line 679 "ast.y" /* yacc.c:1646  */
+#line 685 "ast.y" /* yacc.c:1646  */
     { 
 			node* n=add_child_neighbour((yyvsp[-4].object),(yyvsp[-3].value),(yyvsp[-2].object));
 		  	copy_list(n->v,(yyvsp[0].object)->v);
     		(yyval.object)=n;
 		}
-#line 3226 "ast.tab.c" /* yacc.c:1646  */
+#line 3232 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 177:
-#line 686 "ast.y" /* yacc.c:1646  */
+#line 692 "ast.y" /* yacc.c:1646  */
     {	
 			(yyval.object)=add_start((yyvsp[0].value));
 		}
-#line 3234 "ast.tab.c" /* yacc.c:1646  */
+#line 3240 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 178:
-#line 689 "ast.y" /* yacc.c:1646  */
+#line 695 "ast.y" /* yacc.c:1646  */
     {
 	    	(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
     	}
-#line 3242 "ast.tab.c" /* yacc.c:1646  */
+#line 3248 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 179:
-#line 692 "ast.y" /* yacc.c:1646  */
+#line 698 "ast.y" /* yacc.c:1646  */
     {
     		(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
     	}
-#line 3250 "ast.tab.c" /* yacc.c:1646  */
+#line 3256 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 180:
-#line 695 "ast.y" /* yacc.c:1646  */
+#line 701 "ast.y" /* yacc.c:1646  */
     {
 	 	   	(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
     	}
-#line 3258 "ast.tab.c" /* yacc.c:1646  */
+#line 3264 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 181:
-#line 698 "ast.y" /* yacc.c:1646  */
+#line 704 "ast.y" /* yacc.c:1646  */
     {
 	    	(yyval.object)=add_neighbour((yyvsp[-2].value),(yyvsp[0].object));
     	}
-#line 3266 "ast.tab.c" /* yacc.c:1646  */
+#line 3272 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 182:
-#line 701 "ast.y" /* yacc.c:1646  */
+#line 707 "ast.y" /* yacc.c:1646  */
     {
     		(yyval.object)=add_child_neighbour((yyvsp[-3].object),(yyvsp[-2].value),(yyvsp[0].object));
     	}
-#line 3274 "ast.tab.c" /* yacc.c:1646  */
+#line 3280 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 183:
-#line 704 "ast.y" /* yacc.c:1646  */
+#line 710 "ast.y" /* yacc.c:1646  */
     {
 	    	node *n=add_neighbour((yyvsp[-3].value),(yyvsp[-2].object));
   		  	copy_list(n->v,(yyvsp[0].object)->v);
     		(yyval.object)=n;
     	}
-#line 3284 "ast.tab.c" /* yacc.c:1646  */
+#line 3290 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 184:
-#line 709 "ast.y" /* yacc.c:1646  */
+#line 715 "ast.y" /* yacc.c:1646  */
     {
  	 	  	node* n=add_child_neighbour((yyvsp[-4].object),(yyvsp[-3].value),(yyvsp[-2].object));
     		copy_list(n->v,(yyvsp[0].object)->v);
     		(yyval.object)=n;
     	}
-#line 3294 "ast.tab.c" /* yacc.c:1646  */
+#line 3300 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 185:
-#line 716 "ast.y" /* yacc.c:1646  */
+#line 722 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-3].object),(yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 3302 "ast.tab.c" /* yacc.c:1646  */
+#line 3308 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 186:
-#line 719 "ast.y" /* yacc.c:1646  */
-    {
-			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
-		}
-#line 3310 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 187:
-#line 722 "ast.y" /* yacc.c:1646  */
-    { 
-			(yyval.object)=add_startChild((yyvsp[-2].object),(yyvsp[-1].object),(yyvsp[0].value));
-		}
-#line 3318 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 188:
 #line 725 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 3326 "ast.tab.c" /* yacc.c:1646  */
+#line 3316 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 187:
+#line 728 "ast.y" /* yacc.c:1646  */
+    { 
+			(yyval.object)=add_startChild((yyvsp[-2].object),(yyvsp[-1].object),(yyvsp[0].value));
+		}
+#line 3324 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 188:
+#line 731 "ast.y" /* yacc.c:1646  */
+    {
+			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
+		}
+#line 3332 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 189:
-#line 728 "ast.y" /* yacc.c:1646  */
+#line 734 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_start((yyvsp[0].value));
 		}
-#line 3334 "ast.tab.c" /* yacc.c:1646  */
+#line 3340 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 190:
-#line 731 "ast.y" /* yacc.c:1646  */
+#line 737 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_child_neighbour((yyvsp[-4].object),(yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 3342 "ast.tab.c" /* yacc.c:1646  */
+#line 3348 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 191:
-#line 734 "ast.y" /* yacc.c:1646  */
-    {
-    		(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
-    	}
-#line 3350 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 192:
-#line 737 "ast.y" /* yacc.c:1646  */
-    {
-			(yyval.object)=add_child_neighbour((yyvsp[-3].object),(yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
-		}
-#line 3358 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 193:
 #line 740 "ast.y" /* yacc.c:1646  */
     {
     		(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
     	}
-#line 3366 "ast.tab.c" /* yacc.c:1646  */
+#line 3356 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 192:
+#line 743 "ast.y" /* yacc.c:1646  */
+    {
+			(yyval.object)=add_child_neighbour((yyvsp[-3].object),(yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
+		}
+#line 3364 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 193:
+#line 746 "ast.y" /* yacc.c:1646  */
+    {
+    		(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
+    	}
+#line 3372 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 194:
-#line 743 "ast.y" /* yacc.c:1646  */
+#line 749 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 3374 "ast.tab.c" /* yacc.c:1646  */
+#line 3380 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 195:
-#line 746 "ast.y" /* yacc.c:1646  */
+#line 752 "ast.y" /* yacc.c:1646  */
     {
 			node* n=add_child_neighbour((yyvsp[-5].object),(yyvsp[-3].object),(yyvsp[-1].value),(yyvsp[0].object));
     		add_children(n->v[0],(yyvsp[-2].object)->v);
     		(yyval.object)=n;
 		}
-#line 3384 "ast.tab.c" /* yacc.c:1646  */
+#line 3390 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 196:
-#line 751 "ast.y" /* yacc.c:1646  */
+#line 757 "ast.y" /* yacc.c:1646  */
     {
 			node* n=add_startChild((yyvsp[-4].object),(yyvsp[-2].object),(yyvsp[0].value));
     		add_children(n->v[0],(yyvsp[-1].object)->v);
     		(yyval.object)=n;	
 		}
-#line 3394 "ast.tab.c" /* yacc.c:1646  */
+#line 3400 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 197:
-#line 758 "ast.y" /* yacc.c:1646  */
+#line 764 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
-#line 3402 "ast.tab.c" /* yacc.c:1646  */
+#line 3408 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 198:
-#line 761 "ast.y" /* yacc.c:1646  */
+#line 767 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_start((yyvsp[0].value));
 		}
-#line 3410 "ast.tab.c" /* yacc.c:1646  */
+#line 3416 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 199:
-#line 766 "ast.y" /* yacc.c:1646  */
+#line 772 "ast.y" /* yacc.c:1646  */
     { 
 			treeNode *ptr=(yyvsp[0].object)->v[0];
 			add_attributes(ptr,(yyvsp[-2].value),(yyvsp[-1].value));
 			(yyval.object)=(yyvsp[0].object);
 		}
-#line 3420 "ast.tab.c" /* yacc.c:1646  */
+#line 3426 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 200:
-#line 771 "ast.y" /* yacc.c:1646  */
+#line 777 "ast.y" /* yacc.c:1646  */
     { 	node *n = new node;
 				vn v;
 				treeNode *ptr=add_node("IMG");
@@ -3428,11 +3434,11 @@ yyreduce:
 				copy_list(n->v,v);
 				(yyval.object)=n;
 		}
-#line 3432 "ast.tab.c" /* yacc.c:1646  */
+#line 3438 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 201:
-#line 780 "ast.y" /* yacc.c:1646  */
+#line 786 "ast.y" /* yacc.c:1646  */
     {
 			vn v;
 			treeNode *ptr=add_node((yyvsp[-1].value));
@@ -3444,114 +3450,129 @@ yyreduce:
 			copy_list(n->v,(yyvsp[0].object)->v);
 			(yyval.object)=n;
 		}
-#line 3448 "ast.tab.c" /* yacc.c:1646  */
+#line 3454 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 202:
-#line 791 "ast.y" /* yacc.c:1646  */
+#line 797 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 3456 "ast.tab.c" /* yacc.c:1646  */
+#line 3462 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 203:
-#line 794 "ast.y" /* yacc.c:1646  */
+#line 800 "ast.y" /* yacc.c:1646  */
     {
 			(yyval.object)=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
 		}
-#line 3464 "ast.tab.c" /* yacc.c:1646  */
+#line 3470 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 204:
-#line 797 "ast.y" /* yacc.c:1646  */
+#line 803 "ast.y" /* yacc.c:1646  */
     {
 			node *n=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 			add_attributes(n->v[0],(yyvsp[-4].value),(yyvsp[-3].value));
 			(yyval.object)=n;
 		}
-#line 3474 "ast.tab.c" /* yacc.c:1646  */
+#line 3480 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 205:
-#line 802 "ast.y" /* yacc.c:1646  */
+#line 808 "ast.y" /* yacc.c:1646  */
     {
     		(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value)); 
    		}
-#line 3482 "ast.tab.c" /* yacc.c:1646  */
+#line 3488 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 206:
-#line 805 "ast.y" /* yacc.c:1646  */
+#line 811 "ast.y" /* yacc.c:1646  */
     {
     		(yyval.object)=add_start((yyvsp[0].value));
    		}
-#line 3490 "ast.tab.c" /* yacc.c:1646  */
+#line 3496 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 207:
-#line 808 "ast.y" /* yacc.c:1646  */
+#line 814 "ast.y" /* yacc.c:1646  */
     {
 			node *n=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
 			add_attributes(n->v[0],(yyvsp[-4].value),(yyvsp[-3].value));
 			(yyval.object)=n;
 		}
-#line 3500 "ast.tab.c" /* yacc.c:1646  */
+#line 3506 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 208:
-#line 813 "ast.y" /* yacc.c:1646  */
+#line 819 "ast.y" /* yacc.c:1646  */
     {
 			node *n=add_start((yyvsp[0].value));
 			add_attributes(n->v[0],(yyvsp[-3].value),(yyvsp[-2].value));
-		}
-#line 3509 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 209:
-#line 819 "ast.y" /* yacc.c:1646  */
-    {
+			(yyval.object)=n;
 		}
 #line 3516 "ast.tab.c" /* yacc.c:1646  */
     break;
 
-  case 210:
-#line 821 "ast.y" /* yacc.c:1646  */
+  case 209:
+#line 826 "ast.y" /* yacc.c:1646  */
     {
+			node *n=add_start((yyvsp[0].value));
+			add_attributes(n->v[0],(yyvsp[-3].value),(yyvsp[-2].value));
+			(yyval.object)=n;
 		}
-#line 3523 "ast.tab.c" /* yacc.c:1646  */
+#line 3526 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 210:
+#line 831 "ast.y" /* yacc.c:1646  */
+    {
+			node *n=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
+			add_attributes(n->v[0],(yyvsp[-4].value),(yyvsp[-3].value));
+			(yyval.object)=n;
+		}
+#line 3536 "ast.tab.c" /* yacc.c:1646  */
     break;
 
   case 211:
-#line 823 "ast.y" /* yacc.c:1646  */
+#line 836 "ast.y" /* yacc.c:1646  */
     {
-		}
-#line 3530 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 212:
-#line 825 "ast.y" /* yacc.c:1646  */
-    {
-		}
-#line 3537 "ast.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 213:
-#line 827 "ast.y" /* yacc.c:1646  */
-    {
+			(yyval.object)=add_startChild((yyvsp[-1].object),(yyvsp[0].value));
 		}
 #line 3544 "ast.tab.c" /* yacc.c:1646  */
     break;
 
-  case 214:
-#line 829 "ast.y" /* yacc.c:1646  */
+  case 212:
+#line 839 "ast.y" /* yacc.c:1646  */
     {
+			node *n=add_neighbour((yyvsp[-1].value),(yyvsp[0].object));
+			add_attributes(n->v[0],(yyvsp[-4].value),(yyvsp[-3].value));
+			(yyval.object)=n;
 		}
-#line 3551 "ast.tab.c" /* yacc.c:1646  */
+#line 3554 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 213:
+#line 844 "ast.y" /* yacc.c:1646  */
+    {
+			node *n=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
+			add_attributes(n->v[0],(yyvsp[-5].value),(yyvsp[-4].value));
+			(yyval.object)=n;
+		}
+#line 3564 "ast.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 214:
+#line 849 "ast.y" /* yacc.c:1646  */
+    {
+			(yyval.object)=add_child_neighbour((yyvsp[-2].object),(yyvsp[-1].value),(yyvsp[0].object));
+		}
+#line 3572 "ast.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 3555 "ast.tab.c" /* yacc.c:1646  */
+#line 3576 "ast.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -3779,7 +3800,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 833 "ast.y" /* yacc.c:1906  */
+#line 854 "ast.y" /* yacc.c:1906  */
 
 void yyerror(const char *msg){
 	printf("%s\n",msg);

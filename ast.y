@@ -54,7 +54,7 @@ void update(vn* v);
 %token <value> TABOP TABCL CAPOP CAPCL TROP TRCL THOP THCL TDOP TDCL BR
 %token <value> COMMENT SPCHAR SYMBOL CENTEROP CENTERCL
 %type <object> head title body flow phraseopen phrases listitem list misc consume gtph phr div dl dt dd table caption tr th td
-%type <object> figcap atag miscph consumeph atagph font fontph img figure
+%type <object> figcap atag miscph consumeph atagph font fontph img figure center
 
 %%
 
@@ -226,18 +226,24 @@ flow: BPHRASEOP phraseopen { $$=$2; }
 			$$=$2;
 		}
 	| FONTOP font { 
+			$$=$2;
 		}
 	| CENTEROP center { 
+			$$=$2;
 		}
 	;
 
 center: flow CENTERCL { 
+			$$=add_startChild($1,$2);
 		}
 	| flow CENTERCL flow { 
+			$$=add_child_neighbour($1,$2,$3);
 		}
 	| CENTERCL {
+			$$=add_start($1);
 		}
 	| CENTERCL flow { 
+			$$=add_neighbour($1,$2);
 		}
 	;
 
@@ -813,20 +819,35 @@ atag: ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL flow {
 	| ATTRIBUTE ATTRIBUTEVAL AOPOP ACL {
 			node *n=add_start($4);
 			add_attributes(n->v[0],$1,$2);
+			$$=n;
 		}
 	;
 
 font: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL {
+			node *n=add_start($4);
+			add_attributes(n->v[0],$1,$2);
+			$$=n;
 		}
 	| ATTRIBUTE ATTRIBUTEVAL FONTOOP flow FONTCL {
+			node *n=add_startChild($4,$5);
+			add_attributes(n->v[0],$1,$2);
+			$$=n;
 		}
 	| FONTOOP flow FONTCL {
+			$$=add_startChild($2,$3);
 		}
 	| ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL flow {
+			node *n=add_neighbour($4,$5);
+			add_attributes(n->v[0],$1,$2);
+			$$=n;
 		}
 	| ATTRIBUTE ATTRIBUTEVAL FONTOOP flow FONTCL flow {
+			node *n=add_child_neighbour($4,$5,$6);
+			add_attributes(n->v[0],$1,$2);
+			$$=n;
 		}
 	| FONTOOP flow FONTCL flow {
+			$$=add_child_neighbour($2,$3,$4);
 		}
 	;
 
