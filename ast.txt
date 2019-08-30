@@ -9,377 +9,59 @@
  }
  }
 [BODY] { 
-[H1] { 
-[TEXT: CSS] { 
- }
- }
-[P] { 
-[TEXT: Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Nulla ut lectus id velit aliquet semper. Proin vitae erat. Duis metus. Namvel nisl.Duis lobortis mi at lorem. Etiam ornare nibh quis eros. Nam magna sem, adipiscing at,porttitor vitae, interdum vitae, elit. Sed turpis mi,tincidunt eget , euismod ac, molestie quis, wisi.] { 
- }
- }
-[P] { 
-[TEXT: Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Nulla ut lectus id velit aliquet semper. Proin vitae erat. Duis metus. Namvel nisl. Duis lobortis mi at lorem. Etiam ornare nibh quis eros. Nam magna sem, adipiscing at, porttitor vitae, interdum vitae, elit. Sed turpis mi,tincidunt eget, euismod ac, molestie quis, wisi.] { 
- }
- }
-[P] { 
-[TEXT: Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Nulla ut lectus id velit aliquet semper. Proin vitae erat. Duis metus. Namvel nisl. Duis lobortis mi at lorem. Etiam ornare nibh quis eros. Nam magna sem, adipiscing at, porttitor vitae, interdum vitae, elit. Sed turpis mi,tincidunt eget, euismod ac, molestie quis, wisi. Praesent nisl pede,hendrerit semper, accumsan ac, consequat id, nibh.] { 
- }
- }
-[P] { 
-[TEXT: Lorem ipsum dolor sit amet, consectetuer adipiscing.Nulla ut lectus id velit aliquet semper. Proin vitae erat. Duisvel nisl. Duis lobortis mi at lorem. Etiam ornare nibh quis eros. sem, adipiscing at, porttitor vitae, interdum vitae, elit.] { 
- }
- }
-[DIV] { 
-[P] { 
-[TEXT: Div line 1. ] { 
- }
- }
- }
-[DIV] { 
-[P] { 
-[TEXT: Div line 2. ] { 
- }
- }
- }
-[DIV] { 
-[P] { 
-[TEXT: Div line 3.] { 
- }
- }
- }
-[COMMENT: <!-- little comment: <p>&#x03C0; &#960;</p> -->] { 
- }
-[H1] { 
-[TEXT: Special symbols] { 
- }
- }
-[H2] { 
-[TEXT: Greek symbols] { 
- }
- }
-[P] { 
-[TT] { 
-[TEXT: Alpha] { 
- }
- }
-[TEXT: : ] { 
- }
-[SYMBOL: Alpha] { 
- }
-[SYMBOL: Gamma] { 
- }
-[SYMBOL: Theta] { 
- }
-[SYMBOL: Xi] { 
- }
-[SYMBOL: Pi] { 
- }
- }
-[H2] { 
-[TEXT: LaTeX chars] { 
- }
- }
-[P] { 
-[TEXT: { } _ ^ @ $ \ % ~ #] { 
- }
- }
-[H1] { 
-[TEXT: LaTeX commands in HTML] { 
- }
- }
-[P] { 
-[TEXT: It's easy to include LaTeX commands in HTML comments.] { 
- }
-[COMMENT: <!-- latex:  
-\LaTeX{} greets you.
--->] { 
- }
- }
-[H1] { 
-[TEXT: Different font styles and sizes.] { 
- }
- }
-[P] { 
-[TEXT: Lorem ipsum ] { 
- }
-[FONT]  ( (SIZE: 7) )
+[A]  ( (HREF: google.com) )
 { 
-[TEXT: dolor] { 
+[EM] { 
+[TEXT: hi ] { 
  }
  }
-[TEXT: sit amet, ] { 
+ }
+[EM] { 
+[TEXT: the quick brown fox ] { 
  }
 [I] { 
-[TEXT: consectetuer] { 
+[TEXT: jumoed ] { 
  }
  }
-[TEXT: adipiscing elit.Nulla ut ] { 
- }
-[STRONG] { 
-[TEXT: lectus] { 
- }
- }
-[TEXT: id velit aliquet semper. ] { 
- }
-[TT] { 
-[TEXT: Proin vitae] { 
- }
- }
-[TEXT: erat. Duis metus. Namvel nisl. Duis ] { 
- }
-[SMALL] { 
-[TEXT: lobortis] { 
- }
- }
-[TEXT: mi at ] { 
- }
-[FONT]  ( (SIZE: 1) )
-{ 
-[TEXT: lorem] { 
- }
- }
-[TEXT: .] { 
- }
- }
-[A] { 
- }
-[H1] { 
-[TEXT: Images] { 
- }
- }
-[P] { 
-[COMMENT: <!--latex: \LaTeX -->] { 
- }
-[TEXT: supports only JPG and PNG images.] { 
- }
- }
-[P] { 
-[CENTER] { 
-[IMG]  ( (SRC: marley.jpg) )
-{ 
- }
- }
- }
-[P] { 
-[IMG]  ( (SRC: logo.png) )
-{ 
- }
- }
-[H1] { 
-[TEXT: Tables] { 
- }
- }
-[TABLE] { 
-[TR] { 
-[TD] { 
-[TEXT: 1 1] { 
- }
- }
-[TD] { 
-[TEXT: 1 hgf2] { 
- }
- }
-[TD] { 
-[TEXT: hgfhf1 3] { 
- }
- }
- }
-[TR] { 
-[TD] { 
-[TEXT: 2 1] { 
- }
- }
-[TD] { 
-[TEXT: 2 2] { 
- }
- }
-[TD] { 
-[TEXT: 2 3] { 
- }
- }
- }
-[TR] { 
-[TD] { 
-[TEXT: 3 1] { 
- }
- }
-[TD] { 
-[TEXT: 3 2] { 
- }
- }
-[TD] { 
-[TEXT: 3 3] { 
- }
- }
- }
- }
-[BR] { 
- }
-[TABLE] { 
-[TR] { 
-[TD] { 
-[TEXT: Sparta Praha] { 
- }
- }
-[TD] { 
-[TEXT: 28] { 
- }
- }
- }
-[TR] { 
-[TD] { 
-[TEXT: Slovan Liberec] { 
- }
- }
-[TD] { 
-[TEXT: 25] { 
- }
- }
- }
-[TR] { 
-[TD] { 
-[TEXT: Dukla Praha] { 
- }
- }
-[TD] { 
-[TEXT: 24] { 
- }
- }
- }
-[TR] { 
-[TD] { 
-[TEXT: Slavia Praha] { 
- }
- }
-[TD] { 
-[TEXT: 20] { 
- }
- }
- }
- }
-[H1] { 
-[TEXT: Subscript, superscript] { 
- }
- }
-[P] { 
-[TEXT: H] { 
- }
-[SUB] { 
-[TEXT: 2] { 
- }
- }
-[TEXT: O, E = mc] { 
- }
-[SUP] { 
-[TEXT: 2] { 
- }
- }
- }
-[H1] { 
-[TEXT: Hyperlinks] { 
- }
- }
-[P] { 
-[TEXT: I study at ] { 
- }
-[A]  ( (HREF: http://www.mff.cuni.cz) )
-{ 
-[TEXT: UK MFF] { 
- }
- }
-[TEXT: . Andwhat about ] { 
- }
-[A]  ( (HREF: #img) )
-{ 
-[TEXT: images] { 
- }
- }
-[TEXT: ?] { 
- }
- }
-[H1] { 
-[TEXT: Some texts] { 
- }
- }
-[P] { 
-[CENTER] { 
-[TEXT: They went in single file, running like hounds on a strong scent,and an eager light was in their eyes. Nearly due west the broadswath of the marching ] { 
- }
-[SMALL] { 
-[TEXT: Orcs tramped] { 
- }
- }
-[TEXT: its ugly ] { 
- }
-[SYMBOL: lot] { 
- }
- }
- }
-[P] { 
-[TEXT: John said, I saw Lucy at lunch, she told] { 
- }
- }
-[H1] { 
-[TEXT: Lists and definitions] { 
- }
- }
-[DL] { 
-[DT] { 
-[TEXT: Dweeb] { 
- }
- }
-[DD] { 
-[TEXT: young excitable person who may matureinto a ] { 
+[TEXT: over the ] { 
  }
 [EM] { 
-[TEXT: Nerd] { 
+[TEXT: fence ] { 
  }
  }
-[TEXT: or ] { 
+ }
+ }
+ }
+ }
+[ROOT] { 
+[DOCTYPE HTML] { 
+ }
+[HTML] { 
+[HEAD] { 
+[TITLE] { 
+[TEXT: Sample document] { 
+ }
+ }
+ }
+[BODY] { 
+[A]  ( (HREF: google.com) )
+{ 
+[EM] { 
+[TEXT: hi ] { 
+ }
+ }
  }
 [EM] { 
-[TEXT: Geek] { 
+[TEXT: the quick brown fox ] { 
+ }
+[I] { 
+[TEXT: jumoed ] { 
  }
  }
+[TEXT: over the ] { 
  }
-[DT] { 
-[TEXT: Hacker] { 
- }
- }
-[DD] { 
-[TEXT: a clever programmer] { 
- }
- }
-[DT] { 
-[TEXT: Nerd] { 
- }
- }
-[DD] { 
-[TEXT: technically bright but socially inept person] { 
- }
- }
- }
-[P] { 
-[TEXT: In this section, we discuss the lesser known forest elephants....this section continues...] { 
- }
- }
-[H2] { 
-[TEXT: Habitat] { 
- }
- }
-[P] { 
-[TEXT: Forest elephants do not live in trees but among them....this subsection continues... ] { 
- }
- }
-[H3] { 
-[TEXT: Habitat] { 
- }
- }
-[P] { 
-[TEXT: Forest elephants do not live in trees but among them....this subsection continues... ] { 
- }
-[STRONG] { 
-[TEXT: AND A LINE FOLLOWS] { 
+[EM] { 
+[TEXT: fence ] { 
  }
  }
  }
