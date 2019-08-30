@@ -8,6 +8,7 @@
 using namespace std;
 int phcount=0,temp=0;
 char *findpos(const char* s,int len,int start);
+char *findsymbol(const char* s,int len,int start);
 char *findval(const char* s,int len,int start);
 int cut(char *s,int len);
 %}
@@ -63,7 +64,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return COMMENT;
 }
 "&"{symbol1}";"|"&"{symbol2}";" {
-        yylval.value = strdup(findpos(yytext,yyleng,1));
+        yylval.value = strdup(findsymbol(yytext,yyleng,1));
         return SYMBOL;
 }
 [a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\+\=\{\}\[\]\|\\\:\;\"\'\,\.\/\?]*[^<\n]  {
@@ -72,7 +73,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
                 return TEXT;
         }
         else{
-                yylval.value = strdup(findpos(yytext,yyleng,1));
+                yylval.value = strdup(findsymbol(yytext,yyleng,1));
                 return SYMBOL;
         }
 }
@@ -372,11 +373,22 @@ char *findpos(const char *s,int len,int start){
 	char *p=(char *)malloc(sizeof(char)*100);
 	for(;i<len;i++){
 		if((s[i]>=65 && s[i]<=90) || (s[i]>=97 && s[i]<=122) || (s[i]>=48 && s[i]<=57))
-			p[k++]=(s[i]);
+			p[k++]=toupper(s[i]);
 		else break;
 	}
 	p[k]=0;
 	return p;
+}
+char *findsymbol(const char *s,int len,int start){
+        int i=start,k=0;
+        char *p=(char *)malloc(sizeof(char)*100);
+        for(;i<len;i++){
+                if((s[i]>=65 && s[i]<=90) || (s[i]>=97 && s[i]<=122) || (s[i]>=48 && s[i]<=57))
+                        p[k++]=(s[i]);
+                else break;
+        }
+        p[k]=0;
+        return p;
 }
 char *findval(const char *s,int len,int start){
         int i=start,k=0,flag=0;

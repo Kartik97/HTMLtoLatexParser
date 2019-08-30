@@ -9,56 +9,56 @@
  }
  }
 [BODY] { 
-[h1] { 
+[H1] { 
 [TEXT: CSS] { 
  }
  }
-[p] { 
+[P] { 
 [TEXT: Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Nulla ut lectus id velit aliquet semper. Proin vitae erat. Duis metus. Namvel nisl.Duis lobortis mi at lorem. Etiam ornare nibh quis eros. Nam magna sem, adipiscing at,porttitor vitae, interdum vitae, elit. Sed turpis mi,tincidunt eget , euismod ac, molestie quis, wisi.] { 
  }
  }
-[p] { 
+[P] { 
 [TEXT: Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Nulla ut lectus id velit aliquet semper. Proin vitae erat. Duis metus. Namvel nisl. Duis lobortis mi at lorem. Etiam ornare nibh quis eros. Nam magna sem, adipiscing at, porttitor vitae, interdum vitae, elit. Sed turpis mi,tincidunt eget, euismod ac, molestie quis, wisi.] { 
  }
  }
-[p] { 
+[P] { 
 [TEXT: Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Nulla ut lectus id velit aliquet semper. Proin vitae erat. Duis metus. Namvel nisl. Duis lobortis mi at lorem. Etiam ornare nibh quis eros. Nam magna sem, adipiscing at, porttitor vitae, interdum vitae, elit. Sed turpis mi,tincidunt eget, euismod ac, molestie quis, wisi. Praesent nisl pede,hendrerit semper, accumsan ac, consequat id, nibh.] { 
  }
  }
-[p] { 
+[P] { 
 [TEXT: Lorem ipsum dolor sit amet, consectetuer adipiscing.Nulla ut lectus id velit aliquet semper. Proin vitae erat. Duisvel nisl. Duis lobortis mi at lorem. Etiam ornare nibh quis eros. sem, adipiscing at, porttitor vitae, interdum vitae, elit.] { 
  }
  }
-[div] { 
-[p] { 
+[DIV] { 
+[P] { 
 [TEXT: Div line 1. ] { 
  }
  }
  }
-[div] { 
-[p] { 
+[DIV] { 
+[P] { 
 [TEXT: Div line 2. ] { 
  }
  }
  }
-[div] { 
-[p] { 
+[DIV] { 
+[P] { 
 [TEXT: Div line 3.] { 
  }
  }
  }
 [COMMENT: <!-- little comment: <p>&#x03C0; &#960;</p> -->] { 
  }
-[h1] { 
+[H1] { 
 [TEXT: Special symbols] { 
  }
  }
-[h2] { 
+[H2] { 
 [TEXT: Greek symbols] { 
  }
  }
-[p] { 
-[tt] { 
+[P] { 
+[TT] { 
 [TEXT: Alpha] { 
  }
  }
@@ -75,19 +75,19 @@
 [SYMBOL: Pi] { 
  }
  }
-[h2] { 
+[H2] { 
 [TEXT: LaTeX chars] { 
  }
  }
-[p] { 
+[P] { 
 [TEXT: { } _ ^ @ $ \ % ~ #] { 
  }
  }
-[h1] { 
+[H1] { 
 [TEXT: LaTeX commands in HTML] { 
  }
  }
-[p] { 
+[P] { 
 [TEXT: It's easy to include LaTeX commands in HTML comments.] { 
  }
 [COMMENT: <!-- latex:  
@@ -95,11 +95,11 @@
 -->] { 
  }
  }
-[h1] { 
+[H1] { 
 [TEXT: Different font styles and sizes.] { 
  }
  }
-[p] { 
+[P] { 
 [TEXT: Lorem ipsum ] { 
  }
 [FONT]  ( (SIZE: 7) )
@@ -109,25 +109,25 @@
  }
 [TEXT: sit amet, ] { 
  }
-[i] { 
+[I] { 
 [TEXT: consectetuer] { 
  }
  }
 [TEXT: adipiscing elit.Nulla ut ] { 
  }
-[strong] { 
+[STRONG] { 
 [TEXT: lectus] { 
  }
  }
 [TEXT: id velit aliquet semper. ] { 
  }
-[tt] { 
+[TT] { 
 [TEXT: Proin vitae] { 
  }
  }
 [TEXT: erat. Duis metus. Namvel nisl. Duis ] { 
  }
-[small] { 
+[SMALL] { 
 [TEXT: lobortis] { 
  }
  }
@@ -143,29 +143,29 @@
  }
 [A] { 
  }
-[h1] { 
+[H1] { 
 [TEXT: Images] { 
  }
  }
-[p] { 
+[P] { 
 [COMMENT: <!--latex: \LaTeX -->] { 
  }
 [TEXT: supports only JPG and PNG images.] { 
  }
  }
-[p] { 
+[P] { 
 [CENTER] { 
 [IMG]  ( (SRC: marley.jpg) )
 { 
  }
  }
  }
-[p] { 
+[P] { 
 [IMG]  ( (SRC: logo.png) )
 { 
  }
  }
-[h1] { 
+[H1] { 
 [TEXT: Tables] { 
  }
  }
@@ -257,29 +257,29 @@
  }
  }
  }
-[h1] { 
+[H1] { 
 [TEXT: Subscript, superscript] { 
  }
  }
-[p] { 
+[P] { 
 [TEXT: H] { 
  }
-[sub] { 
+[SUB] { 
 [TEXT: 2] { 
  }
  }
 [TEXT: O, E = mc] { 
  }
-[sup] { 
+[SUP] { 
 [TEXT: 2] { 
  }
  }
  }
-[h1] { 
+[H1] { 
 [TEXT: Hyperlinks] { 
  }
  }
-[p] { 
+[P] { 
 [TEXT: I study at ] { 
  }
 [A]  ( (HREF: http://www.mff.cuni.cz) )
@@ -297,15 +297,15 @@
 [TEXT: ?] { 
  }
  }
-[h1] { 
+[H1] { 
 [TEXT: Some texts] { 
  }
  }
-[p] { 
+[P] { 
 [CENTER] { 
 [TEXT: They went in single file, running like hounds on a strong scent,and an eager light was in their eyes. Nearly due west the broadswath of the marching ] { 
  }
-[small] { 
+[SMALL] { 
 [TEXT: Orcs tramped] { 
  }
  }
@@ -315,11 +315,11 @@
  }
  }
  }
-[p] { 
+[P] { 
 [TEXT: John said, I saw Lucy at lunch, she told] { 
  }
  }
-[h1] { 
+[H1] { 
 [TEXT: Lists and definitions] { 
  }
  }
@@ -359,7 +359,7 @@
  }
  }
  }
-[p] { 
+[P] { 
 [TEXT: In this section, we discuss the lesser known forest elephants....this section continues...] { 
  }
  }
@@ -367,7 +367,7 @@
 [TEXT: Habitat] { 
  }
  }
-[p] { 
+[P] { 
 [TEXT: Forest elephants do not live in trees but among them....this subsection continues... ] { 
  }
  }
@@ -375,49 +375,11 @@
 [TEXT: Habitat] { 
  }
  }
-[p] { 
+[P] { 
 [TEXT: Forest elephants do not live in trees but among them....this subsection continues... ] { 
  }
-[strong] { 
+[STRONG] { 
 [TEXT: AND A LINE FOLLOWS] { 
- }
- }
- }
-[h2] { 
-[TEXT: List] { 
- }
- }
-[UL] { 
-[LI] { 
-[TEXT: ... Level one, number one...] { 
- }
- }
-[LI] { 
-[OL] { 
-[LI] { 
-[TEXT: ... Level two, number one...] { 
- }
- }
-[LI] { 
-[TEXT: ... Level two, number two...] { 
- }
- }
-[LI] { 
-[OL] { 
-[LI] { 
-[TEXT: ... Level three, number one...] { 
- }
- }
- }
- }
-[LI] { 
-[TEXT: ... Level two, number three...] { 
- }
- }
- }
- }
-[LI] { 
-[TEXT: ... Level one, number two...] { 
  }
  }
  }
