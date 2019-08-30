@@ -170,7 +170,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
 	. {}
 }
 <aAtt>{
-	[=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()#\+\=\[\]\{\}]*[\"\'] {
+	[=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()#\+\=\[\]\{\}\_\-]*[\"\'] {
 		yy_pop_state();
 		yylval.value=strdup(findval(yytext,yyleng,1));
 		return ATTRIBUTEVAL;
@@ -208,7 +208,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         . {}
 }
 <imgAtt>{
-	 [=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()_]*[\"\'] {
+	 [=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()\_\-]*[\"\'] {
                 yy_pop_state();
                 yylval.value=strdup(findval(yytext,yyleng,1));
                 return ATTRIBUTEVAL;
@@ -238,7 +238,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         . {}
 }
 <fontAtt>{
-        [=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()]*[\"\'] {
+        [=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()\_\-]*[\"\'] {
                 yy_pop_state();
                 yylval.value=strdup(findval(yytext,yyleng,1));
                 return ATTRIBUTEVAL;

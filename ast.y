@@ -6,7 +6,7 @@
 
 using namespace std;
 
-#define copy(v1,v2) copy(v2.begin(),v2.end(),back_inserter(v1))
+#define copy_list(v1,v2) copy(v2.begin(),v2.end(),back_inserter(v1))
 #define pb(x) push_back(x)
 
 int i=0;
@@ -102,19 +102,19 @@ body: BODYOP flow BODYCL  {
 misc: COMMENT { vn v;
 				v.push_back(add_node("COMMENT",$1));
 				node* n = new node;
-				copy(n->v,v);
+				copy_list(n->v,v);
 				$$=n;
 			}
 	| BR 	{  	vn v;
 				v.push_back(add_node("BR"));
 				node* n = new node;
-				copy(n->v,v);
+				copy_list(n->v,v);
 				$$=n;
 			}
 	| TEXT  { 	vn v;
 				v.push_back(add_node("TEXT",$1));
 				node* n = new node;
-				copy(n->v,v);
+				copy_list(n->v,v);
 				$$=n;
 			}
 	| IMGOP img {
@@ -124,23 +124,27 @@ misc: COMMENT { vn v;
 				vn v;
 				v.push_back(add_node("SYMBOL",$1));
 				node* n = new node;
-				copy(n->v,v);
+				copy_list(n->v,v);
 				$$=n;
 			}
 	;
 
-consume: consume misc {  vn v1,v2;
+consume: consume misc {
+			vn v1,v2;
 			v1 = $1->v;
 			v2 = $2->v;
 			int s=v1.size();
 			if(v1[s-1]->tagVal=="TEXT" && v2[0]->tagVal=="TEXT" ){
 				v1[s-1]->content=v1[s-1]->content+v2[0]->content;
 			}
-			else{
-				copy(v1,v2);
-			}
 			node* n = new node;
-			copy(n->v,v1);
+			copy_list(n->v,v1);	
+			if(v2[0]->tagVal!="TEXT") {
+				copy_list(n->v,v2);
+			}
+			else if(v2.size()>1 && v2[1]->tagVal!="TEXT"){
+				copy(v2.begin()+1,v2.end(),back_inserter(n->v));
+			}
 			$$=n;
 		}
 	| misc {
@@ -159,18 +163,22 @@ miscph: misc {
 		}
 	;
 	
-consumeph: consumeph miscph { vn v1,v2;
+consumeph: consumeph miscph {
+			vn v1,v2;
 			v1 = $1->v;
 			v2 = $2->v;
 			int s=v1.size();
 			if(v1[s-1]->tagVal=="TEXT" && v2[0]->tagVal=="TEXT" ){
 				v1[s-1]->content=v1[s-1]->content+v2[0]->content;
 			}
-			else{
-				copy(v1,v2);
-			}
 			node* n = new node;
-			copy(n->v,v1);
+			copy_list(n->v,v1);	
+			if(v2[0]->tagVal!="TEXT") {
+				copy_list(n->v,v2);
+			}
+			else if(v2.size()>1 && v2[1]->tagVal!="TEXT"){
+				copy(v2.begin()+1,v2.end(),back_inserter(n->v));
+			}
 			$$=n;
 		}
 	| miscph {
@@ -189,11 +197,14 @@ flow: BPHRASEOP phraseopen { $$=$2; }
 			if(v1[s-1]->tagVal=="TEXT" && v2[0]->tagVal=="TEXT" ){
 				v1[s-1]->content=v1[s-1]->content+v2[0]->content;
 			}
-			else{
-				copy(v1,v2);
-			}
 			node* n = new node;
-			copy(n->v,v1);
+			copy_list(n->v,v1);	
+			if(v2[0]->tagVal!="TEXT") {
+				copy_list(n->v,v2);
+			}
+			else if(v2.size()>1 && v2[1]->tagVal!="TEXT"){
+				copy(v2.begin()+1,v2.end(),back_inserter(n->v));
+			}
 			$$=n;
 		}
 	| misc {
@@ -212,6 +223,7 @@ flow: BPHRASEOP phraseopen { $$=$2; }
 			$$=$2;
 		}
 	| AOP atag { 
+			$$=$2;
 		}
 	| FONTOP font { 
 		}
@@ -254,8 +266,8 @@ phrases: PHRASEOP phr {
 		}
 	| consumeph PHRASEOP phr {
 			node* n=new node;
-			copy(n->v,$1->v);
-			copy(n->v,$3->v);
+			copy_list(n->v,$1->v);
+			copy_list(n->v,$3->v);
 			$$=n;
 		}
 	;
@@ -445,12 +457,12 @@ dt: flow DTCL DDOP dd {
 		}
 	| flow DTCL consume DDOP dd {
 			node *n=add_child_neighbour($1,$2,$3);
-			copy(n->v,$5->v);
+			copy_list(n->v,$5->v);
 			$$=n;
 		}
 	| flow DTCL DDOP dd DTOP dt {
 			node *n=add_child_neighbour($1,$2,$4);
-			copy(n->v,$6->v);
+			copy_list(n->v,$6->v);
 			$$=n;
 		}
 	| DTCL DDOP dd {
@@ -458,7 +470,7 @@ dt: flow DTCL DDOP dd {
 		}
     | DTCL DDOP dd DTOP dt {
     		node *n=add_neighbour($1,$3);
-    		copy(n->v,$5->v);
+    		copy_list(n->v,$5->v);
 			$$=n;	
     	}
 	;
@@ -480,7 +492,7 @@ dd: flow DDCL {
 		}
 	| flow DDCL consume DDOP dd {
 			node* n=add_child_neighbour($1,$2,$3);
-			copy(n->v,$5->v);
+			copy_list(n->v,$5->v);
 			$$=n;
 		}
 	| DDCL consume {
@@ -488,7 +500,7 @@ dd: flow DDCL {
 		}
 	| DDCL consume DDOP dd {
 			node *n=add_neighbour($1,$2);
-			copy(n->v,$4->v);
+			copy_list(n->v,$4->v);
 		}
 	;
 
@@ -584,7 +596,7 @@ tr: TRCL {
 		}
 	| TRCL consume TROP tr {
 			node* n=add_neighbour($1,$2);
-			copy(n->v,$4->v);
+			copy_list(n->v,$4->v);
 			$$=n;
 		}
     | THOP th TRCL TROP tr {
@@ -595,12 +607,12 @@ tr: TRCL {
     	}
     | THOP th TRCL consume TROP tr {
     		node* n=add_child_neighbour($2,$3,$4);
-			copy(n->v,$6->v);
+			copy_list(n->v,$6->v);
 			$$=n;	
     	}
     | TDOP td TRCL consume TROP tr {
     		node* n=add_child_neighbour($2,$3,$4);
-			copy(n->v,$6->v);
+			copy_list(n->v,$6->v);
 			$$=n;	
     	}
 	| consume THOP th TRCL {
@@ -620,7 +632,7 @@ tr: TRCL {
 		}
 	| consume TRCL consume TROP tr {
 			node* n=add_child_neighbour($1,$2,$3);
-			copy(n->v,$5->v);
+			copy_list(n->v,$5->v);
 			$$=n;
 		}
     | consume THOP th TRCL TROP tr {
@@ -631,12 +643,12 @@ tr: TRCL {
     	}
     | consume THOP th TRCL consume TROP tr {
     		node* n=add_child_neighbour($1,$3,$4,$5);
-			copy(n->v,$7->v);
+			copy_list(n->v,$7->v);
 			$$=n;	
     	}
     | consume TDOP td TRCL consume TROP tr {
     		node* n=add_child_neighbour($1,$3,$4,$5);
-			copy(n->v,$7->v);
+			copy_list(n->v,$7->v);
 			$$=n;	
     	}
 
@@ -661,12 +673,12 @@ th: THCL {	$$=add_start($1);
 		}
 	| THCL consume THOP th {
 			node* n=add_neighbour($1,$2);
-		  	copy(n->v,$4->v);
+		  	copy_list(n->v,$4->v);
     		$$=n;			
 		}
 	| flow THCL consume THOP th { 
 			node* n=add_child_neighbour($1,$2,$3);
-		  	copy(n->v,$5->v);
+		  	copy_list(n->v,$5->v);
     		$$=n;
 		}
 	;
@@ -691,12 +703,12 @@ td: TDCL {
     	}
     | TDCL consume TDOP td {
 	    	node *n=add_neighbour($1,$2);
-  		  	copy(n->v,$4->v);
+  		  	copy_list(n->v,$4->v);
     		$$=n;
     	}
     | flow TDCL consume TDOP td {
  	 	  	node* n=add_child_neighbour($1,$2,$3);
-    		copy(n->v,$5->v);
+    		copy_list(n->v,$5->v);
     		$$=n;
     	}
     ;
@@ -752,34 +764,55 @@ figcap: flow FIGCAPCL {
 	;
 
 img:  ATTRIBUTE ATTRIBUTEVAL img { 
-			treeNode* ptr=$3->v[0];
+			treeNode *ptr=$3->v[0];
 			add_attributes(ptr,$1,$2);
 			$$=$3;
 		}
-	| IMGCL { 	node* n = new node;
+	| IMGCL { 	node *n = new node;
 				vn v;
-				treeNode* ptr=add_node("IMG");
+				treeNode *ptr=add_node("IMG");
 				v.pb(ptr);
-				copy(n->v,v);
+				copy_list(n->v,v);
 				$$=n;
 		} 
 	; 
 
 atag: ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL flow {
+			vn v;
+			treeNode *ptr=add_node($5);
+			add_attributes(ptr,$1,$2);
+			add_children(ptr,$4->v);
+			v.pb(ptr);
+			node* n=new node;
+			copy_list(n->v,v);
+			copy_list(n->v,$6->v);
+			$$=n;
 		}
 	| AOPOP flow ACL flow {
+			$$=add_child_neighbour($2,$3,$4);
 		}
 	| AOPOP ACL flow {
+			$$=add_neighbour($2,$3);
 		}
 	| ATTRIBUTE ATTRIBUTEVAL AOPOP flow ACL {
+			node *n=add_startChild($4,$5);
+			add_attributes(n->v[0],$1,$2);
+			$$=n;
 		}
-    | AOPOP flow ACL { 
+    | AOPOP flow ACL {
+    		$$=add_startChild($2,$3); 
    		}
     | AOPOP ACL {
+    		$$=add_start($2);
    		}
 	| ATTRIBUTE ATTRIBUTEVAL AOPOP ACL flow {
+			node *n=add_neighbour($4,$5);
+			add_attributes(n->v[0],$1,$2);
+			$$=n;
 		}
 	| ATTRIBUTE ATTRIBUTEVAL AOPOP ACL {
+			node *n=add_start($4);
+			add_attributes(n->v[0],$1,$2);
 		}
 	;
 
