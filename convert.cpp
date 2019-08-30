@@ -43,9 +43,14 @@ void define_mapping(){
 	convertTag["DD"]=make_pair("","");
 	convertTag["FIGURE"]=make_pair("\\begin{figure}","\\end{figure}");
 	convertTag["FIGURECAPTION"]=make_pair("\\caption{","}");
+
 	convertTag["TABLE"]=make_pair("\\begin{table}[!ht]","\\end{end}");
 	convertTag["CAP"]=make_pair("\\caption{","}");
 	convertTag["_TABLE"]=make_pair("\\begin{tabular}","\\end{tabular}");
+	convertTag["TR"]=make_pair("","\\\\");
+	convertTag["TD"]=make_pair("","");
+	convertTag["TH"]=make_pair("","");
+
 	convertTag["alpha"]=make_pair("\\alpha","");
 	convertTag["beta"]=make_pair("\\beta","");
 	convertTag["chi"]=make_pair("\\chi","");
@@ -85,20 +90,37 @@ void define_mapping(){
 	convertTag["COMMENT"]=make_pair("\\begin{comment}","\\end{comment}");
 }
 
-lexNode* add_lexNode(string val){
+lexNode* add_lexNode(string type,string value){
 	lexNode* node=new lexNode;
-	node->value=val;
+	node->type=type;
+	node->value=value;
 	return node;
 }
 
-lexNode* add_lexChild(lexNode *root,string s){
-	root->children.push_back(add_lexNode(s));
+lexNode* add_lexNode(string type){
+	lexNode* node=new lexNode;
+	node->type=type;
+	return node;
+}
+
+lexNode* add_lexChild(lexNode *root,string t,string v){
+	root->children.push_back(add_lexNode(t,v));
+	return root;
+}
+
+lexNode* add_lexChild(lexNode *root,string t){
+	root->children.push_back(add_lexNode(t));
+	return root;
+}
+
+lexNode* add_lexChild(lexNode *root,lexNode *node){
+	root->children.push_back(node);
 	return root;
 }
 
 lexNode* root_init(){
 	lexNode *root=add_lexNode("ROOT");
-	add_lexChild(root,add_lexNode("\\documentclass{article}\n\\usepackage{hyperref}\n\\usepackage{graphicx}\n\\usepackage{verbatim}\n\\hypersetup{colorlinks=true}"));
+	add_lexChild(root,"PREAMBLE","\\documentclass{article}\n\\usepackage{hyperref}\n\\usepackage{graphicx}\n\\usepackage{verbatim}\n\\hypersetup{colorlinks=true}");
 	return root;
 }
 
@@ -107,7 +129,10 @@ void printLex(lexNode *root){
 		cout<<"LEX ROOT ERROR";
 		exit(0);
 	}
-	cout<<"["<<root->value<<"]"<<endl;
+	cout<<"["<<root->type<<"] :"<<endl;
+	if(!root->value.empty()){
+		cout<<root->value;
+	}
 	cout<<"{ ";
 	if(!root->children.empty()){
 		for(int i=0;i<root->children.size();i++){
@@ -120,7 +145,7 @@ void printLex(lexNode *root){
 lexNode* convert(lexNode *root,treeNode *node){
 	if(node->tagVal=="A" && node->att.size()>0){
 		if(node->att[0]=="HREF")
-			add_lexChild(root,convertTag["HREF"].first+node->attVal[0]+convertTag["HREF"].second+convertTag["A"].first);	
+			add_lexChild(root,"A",convertTag["HREF"].first+node->attVal[0]+convertTag["HREF"].second+convertTag["A"].first);	
 	}
 	else if(node->tagVal=="IMG" && node->att.size()>0){
 		string child=convertTag["IMG"].first;
@@ -142,31 +167,31 @@ lexNode* convert(lexNode *root,treeNode *node){
 			child=child+node->attVal[pos];
 		}
 		child+="}";
-		add_lexChild(root,child);
+		add_lexChild(root,"IMG",child);
 	}
 	else if(node->tagVal=="FONT" && node->att.size()>0){
 		if(node->att[0]=="SIZE")
-			add_lexChild(root,convertTag["FONT"].first+node->attVal[0]+convertTag["SIZE"].first);	
+			add_lexChild(root,"FONT",convertTag["FONT"].first+node->attVal[0]+convertTag["SIZE"].first);	
 		else 
-			add_lexChild(root,convertTag["FONT"].first+"10"+convertTag["SIZE"].first);	
+			add_lexChild(root,"FONT",convertTag["FONT"].first+"10"+convertTag["SIZE"].first);	
 	}
 	else if(node->tagVal=="TEXT"){
-		add_lexChild(root,node->content);
+		add_lexChild(root,"TEXT",node->content);
 	}
 	else if(node->tagVal=="SYMBOL"){
-		add_lexChild(root,convertTag[node->content].first);
+		add_lexChild(root,"SYMBOL",convertTag[node->content].first);
 	}
 	else if(node->tagVal=="COMMENT"){
-		add_lexChild(root,convertTag["COMMENT"].first+"\n"+node->content.substr(4,node->content.length()-7)+"\n"+convertTag["COMMENT"].second);	
+		add_lexChild(root,"COMMENT",convertTag["COMMENT"].first+"\n"+node->content.substr(4,node->content.length()-7)+"\n"+convertTag["COMMENT"].second);	
 	}
 	else{
-		add_lexChild(root,convertTag(node->tagVal).first);
+		add_lexChild(root,node->tagVal,convertTag[node->tagVal].first);
 	}
 
-
-
-	if(!node->content.empty())
-		add_lexChild(root,node->content);
-
+	if(!node->children.empty()){
+		for(int i=0;i<node->children.size();i++){
+			add_lexChild(root,convert(add_lexNode(node->children[i]->tagVal),node->children[i]));
+		}
+	}
 	return root;
 }

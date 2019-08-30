@@ -1,8 +1,8 @@
 %{
+#include "convert.h"
 #include<bits/stdc++.h>
 #include<stdio.h>
 #include<string.h>
-#include "ast.h"
 
 using namespace std;
 
@@ -62,6 +62,10 @@ st:	DOCTYPE HTMLOP html {
 				root->children.pb(doc);
 				add_children(root,$3->v);
 				write(root);
+
+				lexNode *rootLex=root_init();
+				convert(rootLex,root);
+				printLex(rootLex);
 			}
 	| HTMLOP html {
 				treeNode *root = add_node("ROOT");

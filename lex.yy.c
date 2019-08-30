@@ -1266,10 +1266,10 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "LexAnalyser.l"
 #line 2 "LexAnalyser.l"
+#include "convert.h"
 #include<bits/stdc++.h>
 #include<stdio.h>
 #include<string.h>
-#include "ast.h"
 #include "Parser.tab.h"
 
 using namespace std;

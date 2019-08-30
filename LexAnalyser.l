@@ -1,8 +1,8 @@
 %{
+#include "convert.h"
 #include<bits/stdc++.h>
 #include<stdio.h>
 #include<string.h>
-#include "ast.h"
 #include "Parser.tab.h"
 
 using namespace std;

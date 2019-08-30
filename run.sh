@@ -2,5 +2,5 @@
 
 flex LexAnalyser.l
 bison -d -v Parser.y
-g++ lex.yy.c Parser.tab.c ast.cpp
+g++ convert.cpp ast.cpp lex.yy.c Parser.tab.c
 ./a.out input.html

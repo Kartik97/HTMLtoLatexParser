@@ -6,6 +6,7 @@ extern map<string,pair<string,string>> convertTag;
 int main(){
 	define_mapping();
 	lexNode *root=root_init();
+	treeNode *ptr=new treeNode;
 	printLex(root);
 	return 1;
 }
