@@ -2,6 +2,7 @@
 #include<bits/stdc++.h>
 #include<stdio.h>
 #include<string.h>
+#include "ast.h"
 #include "Parser.tab.h"
 
 using namespace std;
@@ -65,7 +66,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         yylval.value = strdup(findpos(yytext,yyleng,1));
         return SYMBOL;
 }
-[a-zA-Z\`\~\!\@\#\$\%\^\&\*\(\)\-\_\+\=\{\}\[\]\|\\\:\;\"\'\,\.\/\?]*[^<]  {
+[a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\+\=\{\}\[\]\|\\\:\;\"\'\,\.\/\?]*[^<\n]  {
         if(yytext[0]!=32 && yytext[yyleng-2]!=59) {
                 yylval.value=strdup(yytext);
                 return TEXT;
@@ -76,39 +77,39 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         }
 }
 "<"{doctype}{space}+[^{html}]*{html}">"|"<"{doctype}{space}+[^{html}]*{html}{space}+[^>]*">" {
-	yylval.value = strdup("DOCTYPE ");
+	yylval.value = strdup("DOCTYPE");
 	return DOCTYPE;
 }
 "<"{html}{space}+[^>]*">"|"<"{html}">"  {
-	yylval.value=strdup("HTMLOP ");
+	yylval.value=strdup("HTMLOP");
 	return HTMLOP;
 }
 "</"{html}{space}+[^>]*">"|"</"{html}">"  {
-	yylval.value=strdup("HTMLCL ");
+	yylval.value=strdup("HTML");
 	return HTMLCL;
 }
 "<"{head}{space}+[^>]*">"|"<"{head}">"  {
-        yylval.value=strdup("HEADOP ");
+        yylval.value=strdup("HEADOP");
         return HEADOP;
 }
 "</"{head}{space}+[^>]*">"|"</"{head}">"  {
-        yylval.value=strdup("HEADCL ");
+        yylval.value=strdup("HEAD");
         return HEADCL;
 }
 "<"{title}{space}+[^>]*">"|"<"{title}">"  {
-        yylval.value=strdup("TITLEOP ");
+        yylval.value=strdup("TITLEOP");
         return TITLEOP;
 }
 "</"{title}{space}+[^>]*">"|"</"{title}">"  {
-        yylval.value=strdup("TITLECL ");
+        yylval.value=strdup("TITLE");
         return TITLECL;
 }
 "<"{body}{space}+[^>]*">"|"<"{body}">"  {
-        yylval.value=strdup("BODYOP ");
+        yylval.value=strdup("BODYOP");
         return BODYOP;
 }
 "</"{body}{space}+[^>]*">"|"</"{body}">"  {
-        yylval.value=strdup("BODYCL ");
+        yylval.value=strdup("BODY");
         return BODYCL;
 }
 "<"{div}{space}+[^>]*">"|"<"{div}">"  {
@@ -147,29 +148,29 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
 }
 "<"{a}{space}+|"<"{a} {
 	yy_push_state(aInside);
-	yylval.value=strdup("AOP ");
+	yylval.value=strdup("AOP");
 	return AOP;
 }
 "</"{a}{space}+[^>]*">"|"</"{a}">" {
-	yylval.value=strdup("ACL ");
+	yylval.value=strdup("A");
 	return ACL;
 }
 <aInside>{
 	"href"{space}+[^=]*"="|"href=" {
 		yy_push_state(aAtt);
-		yylval.value=strdup("HREF ");
+		yylval.value=strdup("HREF");
 		yyless(yyleng-1);
 		return ATTRIBUTE;
 	}
 	[^"href">]*">" {
 		yy_pop_state();
-		yylval.value=strdup("AOPOP ");
+		yylval.value=strdup("AOPOP");
 		return AOPOP;
 	}
 	. {}
 }
 <aAtt>{
-	[=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()#\+\=\[\]\{\}]*[\"\'] {
+	[=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()#\+\=\[\]\{\}\_\-]*[\"\'] {
 		yy_pop_state();
 		yylval.value=strdup(findval(yytext,yyleng,1));
 		return ATTRIBUTEVAL;
@@ -177,37 +178,37 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
 }
 "<"{img}{space}+|"<"{img} {
 	yy_push_state(imgInside);
-	yylval.value=strdup("IMGOP ");
+	yylval.value=strdup("IMGOP");
 	return IMGOP;
 }
 <imgInside>{
 	"src"{space}+[^=]*"="|"src=" {
                 yy_push_state(imgAtt);
-                yylval.value=strdup("SRC ");
+                yylval.value=strdup("SRC");
                 yyless(yyleng-1);
                 return ATTRIBUTE;
         }
 	"width"{space}+[^=]*"="|"width=" {
                 yy_push_state(imgAtt);
-                yylval.value=strdup("WIDTH ");
+                yylval.value=strdup("WIDTH");
                 yyless(yyleng-1);
                 return ATTRIBUTE;
         }
 	"height"{space}+[^=]*"="|"height=" {
                 yy_push_state(imgAtt);
-                yylval.value=strdup("HEIGHT ");
+                yylval.value=strdup("HEIGHT");
                 yyless(yyleng-1);
                 return ATTRIBUTE;
         }
         [^"src""width""height">]*[">""/>"] {
                 yy_pop_state();
-                yylval.value=strdup("IMGCL ");
+                yylval.value=strdup("IMG");
                 return IMGCL;
         }
         . {}
 }
 <imgAtt>{
-	 [=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()]*[\"\'] {
+	 [=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()\_\-]*[\"\'] {
                 yy_pop_state();
                 yylval.value=strdup(findval(yytext,yyleng,1));
                 return ATTRIBUTEVAL;
@@ -215,148 +216,148 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
 }
 "<"{font}{space}+|"<"{font} {
         yy_push_state(fontInside);
-	yylval.value=strdup("FONTOP ");	
+	yylval.value=strdup("FONTOP");	
 	return FONTOP;
 }
 "</"{font}{space}+[^>]*">"|"</"{font}">" {
-	yylval.value=strdup("FONTCL ");	
+	yylval.value=strdup("FONT");	
 	return FONTCL;
 }
 <fontInside>{
         "size"{space}+[^=]*"="|"size=" {
                 yy_push_state(fontAtt);
-                yylval.value=strdup("SIZE ");
+                yylval.value=strdup("SIZE");
                 yyless(yyleng-1);
                 return ATTRIBUTE;
         }
         [^"size">]*">" {
                 yy_pop_state();
-                yylval.value=strdup("FONTOOP ");
+                yylval.value=strdup("FONTOOP");
                 return FONTOOP;
         }
         . {}
 }
 <fontAtt>{
-        [=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()]*[\"\'] {
+        [=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()\_\-]*[\"\'] {
                 yy_pop_state();
                 yylval.value=strdup(findval(yytext,yyleng,1));
                 return ATTRIBUTEVAL;
         }
 }
 "<"{ul}{space}+[^>]*">"|"<"{ul}">"  {
-        yylval.value=strdup("ULOP ");
+        yylval.value=strdup("ULOP");
         return LOP;
 }
 "</"{ul}{space}+[^>]*">"|"</"{ul}">"  {
-        yylval.value=strdup("ULCL ");
+        yylval.value=strdup("UL");
         return LCL;
 }
 "<"{ol}{space}+[^>]*">"|"<"{ol}">"  {
-        yylval.value=strdup("OLOP ");
+        yylval.value=strdup("OLOP");
         return LOP;
 }
 "</"{ol}{space}+[^>]*">"|"</"{ol}">"  {
-        yylval.value=strdup("OLCL ");
+        yylval.value=strdup("OL");
         return LCL;
 }
 "<"{li}{space}+[^>]*">"|"<"{li}">"  {
-        yylval.value=strdup("LIOP ");
+        yylval.value=strdup("LIOP");
         return LIOP;
 }
 "</"{li}{space}+[^>]*">"|"</"{li}">"  {
-        yylval.value=strdup("LICL ");
+        yylval.value=strdup("LI");
         return LICL;
 }
 "<"{figure}{space}+[^>]*">"|"<"{figure}">"  {
-        yylval.value=strdup("FIGUREOP ");
+        yylval.value=strdup("FIGUREOP");
         return FIGOP;
 }
 "</"{figure}{space}+[^>]*">"|"</"{figure}">"  {
-        yylval.value=strdup("FIGURECL ");
+        yylval.value=strdup("FIGURE");
         return FIGCL;
 }
 "<"{figcaption}{space}+[^>]*">"|"<"{figcaption}">"  {
-        yylval.value=strdup("FIGCAPTIONOP ");
+        yylval.value=strdup("FIGCAPTIONOP");
         return FIGCAPOP;
 }
 "</"{figcaption}{space}+[^>]*">"|"</"{figcaption}">"  {
-	yylval.value=strdup("FIGCAPTIONCL ");
+	yylval.value=strdup("FIGCAPTION");
         return FIGCAPCL;
 }
 "<"{dl}{space}+[^>]*">"|"<"{dl}">"  {
-        yylval.value=strdup("DLOP ");
+        yylval.value=strdup("DLOP");
         return DLOP;
 }
 "</"{dl}{space}+[^>]*">"|"</"{dl}">"  {
-        yylval.value=strdup("DLCL ");
+        yylval.value=strdup("DL");
         return DLCL;
 }
 "<"{dt}{space}+[^>]*">"|"<"{dt}">"  {
-        yylval.value=strdup("DTOP ");
+        yylval.value=strdup("DTOP");
         return DTOP;
 }
 "</"{dt}{space}+[^>]*">"|"</"{dt}">"  {
-        yylval.value=strdup("DTCL ");
+        yylval.value=strdup("DT");
         return DTCL;
 }
 "<"{dd}{space}+[^>]*">"|"<"{dd}">"  {
-        yylval.value=strdup("DDOP ");
+        yylval.value=strdup("DDOP");
         return DDOP;
 }
 "</"{dd}{space}+[^>]*">"|"</"{dd}">"  {
-        yylval.value=strdup("DDCL ");
+        yylval.value=strdup("DD");
         return DDCL;
 }
 "<"{table}{space}+[^>]*">"|"<"{table}">"  {
-        yylval.value=strdup("TABLEOP ");
+        yylval.value=strdup("TABLEOP");
         return TABOP;
 }
 "</"{table}{space}+[^>]*">"|"</"{table}">"  {
-        yylval.value=strdup("TABLECL ");
+        yylval.value=strdup("TABLE");
         return TABCL;
 }
 "<"{caption}{space}+[^>]*">"|"<"{caption}">"  {
-        yylval.value=strdup("CAPOP ");
+        yylval.value=strdup("CAPOP");
         return CAPOP;
 }
 "</"{caption}{space}+[^>]*">"|"</"{caption}">"  {
-        yylval.value=strdup("CAPCL ");
+        yylval.value=strdup("CAP");
         return CAPCL;
 }
 "<"{tr}{space}+[^>]*">"|"<"{tr}">"  {
-        yylval.value=strdup("TROP ");
+        yylval.value=strdup("TROP");
         return TROP;
 }
 "</"{tr}{space}+[^>]*">"|"</"{tr}">"  {
-        yylval.value=strdup("TRCL ");
+        yylval.value=strdup("TR");
         return TRCL;
 }
 "<"{th}{space}+[^>]*">"|"<"{th}">"  {
-        yylval.value=strdup("THOP ");
+        yylval.value=strdup("THOP");
         return THOP;
 }
 "</"{th}{space}+[^>]*">"|"</"{th}">"  {
-        yylval.value=strdup("THCL ");
+        yylval.value=strdup("TH");
         return THCL;
 }
 "<"{td}{space}+[^>]*">"|"<"{td}">"  {
-        yylval.value=strdup("TDOP ");
+        yylval.value=strdup("TDOP");
         return TDOP;
 }
 "</"{td}{space}+[^>]*">"|"</"{td}">"  {
-        yylval.value=strdup("TDCL ");
+        yylval.value=strdup("TD");
         return TDCL;
 }
 "<"{center}{space}+[^>]*">"|"<"{center}">"  {
-        yylval.value=strdup("CENTEROP ");
+        yylval.value=strdup("CENTEROP");
         return CENTEROP;
 }
 "</"{center}{space}+[^>]*">"|"</"{center}">"  {
-        yylval.value=strdup("CENTERCL ");
+        yylval.value=strdup("CENTER");
         return CENTERCL;
 }
 "<"{br}{space}+[^>]*">"|"<"{br}">"|"<"{br}{space}+[^>]*"/>"|"<"{br}"/>"  {
-        yylval.value=strdup("BR ");
+        yylval.value=strdup("BR");
         return BR;
 }
 . {}
@@ -374,9 +375,6 @@ char *findpos(const char *s,int len,int start){
 			p[k++]=(s[i]);
 		else break;
 	}
-        if(start==2){
-                p[k++]='C';
-        }
 	p[k]=0;
 	return p;
 }

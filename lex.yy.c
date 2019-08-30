@@ -1277,13 +1277,13 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "ast.l"
-#line 2 "ast.l"
+#line 1 "LexAnalyser.l"
+#line 2 "LexAnalyser.l"
 #include<bits/stdc++.h>
 #include<stdio.h>
 #include<string.h>
 #include "ast.h"
-#include "ast.tab.h"
+#include "Parser.tab.h"
 
 using namespace std;
 int phcount=0,temp=0;
@@ -1530,7 +1530,7 @@ YY_DECL
 		}
 
 	{
-#line 57 "ast.l"
+#line 57 "LexAnalyser.l"
 
 #line 1536 "lex.yy.c"
 
@@ -1592,13 +1592,13 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 58 "ast.l"
+#line 58 "LexAnalyser.l"
 {}
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 59 "ast.l"
+#line 59 "LexAnalyser.l"
 {
         if(cut(yytext,yyleng)+1!=yyleng)
                 yyless(cut(yytext,yyleng)+1);
@@ -1608,7 +1608,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 65 "ast.l"
+#line 65 "LexAnalyser.l"
 {
         yylval.value = strdup(findpos(yytext,yyleng,1));
         return SYMBOL;
@@ -1616,7 +1616,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 69 "ast.l"
+#line 69 "LexAnalyser.l"
 {
         if(yytext[0]!=32 && yytext[yyleng-2]!=59) {
                 yylval.value=strdup(yytext);
@@ -1631,7 +1631,7 @@ YY_RULE_SETUP
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 79 "ast.l"
+#line 79 "LexAnalyser.l"
 {
 	yylval.value = strdup("DOCTYPE");
 	return DOCTYPE;
@@ -1640,7 +1640,7 @@ YY_RULE_SETUP
 case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
-#line 83 "ast.l"
+#line 83 "LexAnalyser.l"
 {
 	yylval.value=strdup("HTMLOP");
 	return HTMLOP;
@@ -1649,7 +1649,7 @@ YY_RULE_SETUP
 case 7:
 /* rule 7 can match eol */
 YY_RULE_SETUP
-#line 87 "ast.l"
+#line 87 "LexAnalyser.l"
 {
 	yylval.value=strdup("HTML");
 	return HTMLCL;
@@ -1658,7 +1658,7 @@ YY_RULE_SETUP
 case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
-#line 91 "ast.l"
+#line 91 "LexAnalyser.l"
 {
         yylval.value=strdup("HEADOP");
         return HEADOP;
@@ -1667,7 +1667,7 @@ YY_RULE_SETUP
 case 9:
 /* rule 9 can match eol */
 YY_RULE_SETUP
-#line 95 "ast.l"
+#line 95 "LexAnalyser.l"
 {
         yylval.value=strdup("HEAD");
         return HEADCL;
@@ -1676,7 +1676,7 @@ YY_RULE_SETUP
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 99 "ast.l"
+#line 99 "LexAnalyser.l"
 {
         yylval.value=strdup("TITLEOP");
         return TITLEOP;
@@ -1685,7 +1685,7 @@ YY_RULE_SETUP
 case 11:
 /* rule 11 can match eol */
 YY_RULE_SETUP
-#line 103 "ast.l"
+#line 103 "LexAnalyser.l"
 {
         yylval.value=strdup("TITLE");
         return TITLECL;
@@ -1694,7 +1694,7 @@ YY_RULE_SETUP
 case 12:
 /* rule 12 can match eol */
 YY_RULE_SETUP
-#line 107 "ast.l"
+#line 107 "LexAnalyser.l"
 {
         yylval.value=strdup("BODYOP");
         return BODYOP;
@@ -1703,7 +1703,7 @@ YY_RULE_SETUP
 case 13:
 /* rule 13 can match eol */
 YY_RULE_SETUP
-#line 111 "ast.l"
+#line 111 "LexAnalyser.l"
 {
         yylval.value=strdup("BODY");
         return BODYCL;
@@ -1712,7 +1712,7 @@ YY_RULE_SETUP
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 115 "ast.l"
+#line 115 "LexAnalyser.l"
 {
         yylval.value=strdup(findpos(yytext,yyleng,1));
         return DIVOP;
@@ -1721,7 +1721,7 @@ YY_RULE_SETUP
 case 15:
 /* rule 15 can match eol */
 YY_RULE_SETUP
-#line 119 "ast.l"
+#line 119 "LexAnalyser.l"
 {
         yylval.value=strdup(findpos(yytext,yyleng,2));
         return DIVCL;
@@ -1730,7 +1730,7 @@ YY_RULE_SETUP
 case 16:
 /* rule 16 can match eol */
 YY_RULE_SETUP
-#line 123 "ast.l"
+#line 123 "LexAnalyser.l"
 {
         yylval.value=strdup(findpos(yytext,yyleng,1));
 	phcount++;
@@ -1745,7 +1745,7 @@ YY_RULE_SETUP
 case 17:
 /* rule 17 can match eol */
 YY_RULE_SETUP
-#line 133 "ast.l"
+#line 133 "LexAnalyser.l"
 {
 	yylval.value=strdup(findpos(yytext,yyleng,2));
 	phcount--;
@@ -1758,7 +1758,7 @@ YY_RULE_SETUP
 case 18:
 /* rule 18 can match eol */
 YY_RULE_SETUP
-#line 141 "ast.l"
+#line 141 "LexAnalyser.l"
 {
         yylval.value=strdup(findpos(yytext,yyleng,1));
         return GTPHOP;
@@ -1767,7 +1767,7 @@ YY_RULE_SETUP
 case 19:
 /* rule 19 can match eol */
 YY_RULE_SETUP
-#line 145 "ast.l"
+#line 145 "LexAnalyser.l"
 {
         yylval.value=strdup(findpos(yytext,yyleng,2));
         return GTPHCL;
@@ -1776,7 +1776,7 @@ YY_RULE_SETUP
 case 20:
 /* rule 20 can match eol */
 YY_RULE_SETUP
-#line 149 "ast.l"
+#line 149 "LexAnalyser.l"
 {
 	yy_push_state(aInside);
 	yylval.value=strdup("AOP");
@@ -1786,7 +1786,7 @@ YY_RULE_SETUP
 case 21:
 /* rule 21 can match eol */
 YY_RULE_SETUP
-#line 154 "ast.l"
+#line 154 "LexAnalyser.l"
 {
 	yylval.value=strdup("A");
 	return ACL;
@@ -1796,7 +1796,7 @@ YY_RULE_SETUP
 case 22:
 /* rule 22 can match eol */
 YY_RULE_SETUP
-#line 159 "ast.l"
+#line 159 "LexAnalyser.l"
 {
 		yy_push_state(aAtt);
 		yylval.value=strdup("HREF");
@@ -1807,7 +1807,7 @@ YY_RULE_SETUP
 case 23:
 /* rule 23 can match eol */
 YY_RULE_SETUP
-#line 165 "ast.l"
+#line 165 "LexAnalyser.l"
 {
 		yy_pop_state();
 		yylval.value=strdup("AOPOP");
@@ -1816,7 +1816,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 170 "ast.l"
+#line 170 "LexAnalyser.l"
 {}
 	YY_BREAK
 
@@ -1824,7 +1824,7 @@ YY_RULE_SETUP
 case 25:
 /* rule 25 can match eol */
 YY_RULE_SETUP
-#line 173 "ast.l"
+#line 173 "LexAnalyser.l"
 {
 		yy_pop_state();
 		yylval.value=strdup(findval(yytext,yyleng,1));
@@ -1835,7 +1835,7 @@ YY_RULE_SETUP
 case 26:
 /* rule 26 can match eol */
 YY_RULE_SETUP
-#line 179 "ast.l"
+#line 179 "LexAnalyser.l"
 {
 	yy_push_state(imgInside);
 	yylval.value=strdup("IMGOP");
@@ -1846,7 +1846,7 @@ YY_RULE_SETUP
 case 27:
 /* rule 27 can match eol */
 YY_RULE_SETUP
-#line 185 "ast.l"
+#line 185 "LexAnalyser.l"
 {
                 yy_push_state(imgAtt);
                 yylval.value=strdup("SRC");
@@ -1857,7 +1857,7 @@ YY_RULE_SETUP
 case 28:
 /* rule 28 can match eol */
 YY_RULE_SETUP
-#line 191 "ast.l"
+#line 191 "LexAnalyser.l"
 {
                 yy_push_state(imgAtt);
                 yylval.value=strdup("WIDTH");
@@ -1868,7 +1868,7 @@ YY_RULE_SETUP
 case 29:
 /* rule 29 can match eol */
 YY_RULE_SETUP
-#line 197 "ast.l"
+#line 197 "LexAnalyser.l"
 {
                 yy_push_state(imgAtt);
                 yylval.value=strdup("HEIGHT");
@@ -1879,7 +1879,7 @@ YY_RULE_SETUP
 case 30:
 /* rule 30 can match eol */
 YY_RULE_SETUP
-#line 203 "ast.l"
+#line 203 "LexAnalyser.l"
 {
                 yy_pop_state();
                 yylval.value=strdup("IMG");
@@ -1888,7 +1888,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 208 "ast.l"
+#line 208 "LexAnalyser.l"
 {}
 	YY_BREAK
 
@@ -1896,7 +1896,7 @@ YY_RULE_SETUP
 case 32:
 /* rule 32 can match eol */
 YY_RULE_SETUP
-#line 211 "ast.l"
+#line 211 "LexAnalyser.l"
 {
                 yy_pop_state();
                 yylval.value=strdup(findval(yytext,yyleng,1));
@@ -1907,7 +1907,7 @@ YY_RULE_SETUP
 case 33:
 /* rule 33 can match eol */
 YY_RULE_SETUP
-#line 217 "ast.l"
+#line 217 "LexAnalyser.l"
 {
         yy_push_state(fontInside);
 	yylval.value=strdup("FONTOP");	
@@ -1917,7 +1917,7 @@ YY_RULE_SETUP
 case 34:
 /* rule 34 can match eol */
 YY_RULE_SETUP
-#line 222 "ast.l"
+#line 222 "LexAnalyser.l"
 {
 	yylval.value=strdup("FONT");	
 	return FONTCL;
@@ -1927,7 +1927,7 @@ YY_RULE_SETUP
 case 35:
 /* rule 35 can match eol */
 YY_RULE_SETUP
-#line 227 "ast.l"
+#line 227 "LexAnalyser.l"
 {
                 yy_push_state(fontAtt);
                 yylval.value=strdup("SIZE");
@@ -1938,7 +1938,7 @@ YY_RULE_SETUP
 case 36:
 /* rule 36 can match eol */
 YY_RULE_SETUP
-#line 233 "ast.l"
+#line 233 "LexAnalyser.l"
 {
                 yy_pop_state();
                 yylval.value=strdup("FONTOOP");
@@ -1947,7 +1947,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 238 "ast.l"
+#line 238 "LexAnalyser.l"
 {}
 	YY_BREAK
 
@@ -1955,7 +1955,7 @@ YY_RULE_SETUP
 case 38:
 /* rule 38 can match eol */
 YY_RULE_SETUP
-#line 241 "ast.l"
+#line 241 "LexAnalyser.l"
 {
                 yy_pop_state();
                 yylval.value=strdup(findval(yytext,yyleng,1));
@@ -1966,7 +1966,7 @@ YY_RULE_SETUP
 case 39:
 /* rule 39 can match eol */
 YY_RULE_SETUP
-#line 247 "ast.l"
+#line 247 "LexAnalyser.l"
 {
         yylval.value=strdup("ULOP");
         return LOP;
@@ -1975,7 +1975,7 @@ YY_RULE_SETUP
 case 40:
 /* rule 40 can match eol */
 YY_RULE_SETUP
-#line 251 "ast.l"
+#line 251 "LexAnalyser.l"
 {
         yylval.value=strdup("UL");
         return LCL;
@@ -1984,7 +1984,7 @@ YY_RULE_SETUP
 case 41:
 /* rule 41 can match eol */
 YY_RULE_SETUP
-#line 255 "ast.l"
+#line 255 "LexAnalyser.l"
 {
         yylval.value=strdup("OLOP");
         return LOP;
@@ -1993,7 +1993,7 @@ YY_RULE_SETUP
 case 42:
 /* rule 42 can match eol */
 YY_RULE_SETUP
-#line 259 "ast.l"
+#line 259 "LexAnalyser.l"
 {
         yylval.value=strdup("OL");
         return LCL;
@@ -2002,7 +2002,7 @@ YY_RULE_SETUP
 case 43:
 /* rule 43 can match eol */
 YY_RULE_SETUP
-#line 263 "ast.l"
+#line 263 "LexAnalyser.l"
 {
         yylval.value=strdup("LIOP");
         return LIOP;
@@ -2011,7 +2011,7 @@ YY_RULE_SETUP
 case 44:
 /* rule 44 can match eol */
 YY_RULE_SETUP
-#line 267 "ast.l"
+#line 267 "LexAnalyser.l"
 {
         yylval.value=strdup("LI");
         return LICL;
@@ -2020,7 +2020,7 @@ YY_RULE_SETUP
 case 45:
 /* rule 45 can match eol */
 YY_RULE_SETUP
-#line 271 "ast.l"
+#line 271 "LexAnalyser.l"
 {
         yylval.value=strdup("FIGUREOP");
         return FIGOP;
@@ -2029,7 +2029,7 @@ YY_RULE_SETUP
 case 46:
 /* rule 46 can match eol */
 YY_RULE_SETUP
-#line 275 "ast.l"
+#line 275 "LexAnalyser.l"
 {
         yylval.value=strdup("FIGURE");
         return FIGCL;
@@ -2038,7 +2038,7 @@ YY_RULE_SETUP
 case 47:
 /* rule 47 can match eol */
 YY_RULE_SETUP
-#line 279 "ast.l"
+#line 279 "LexAnalyser.l"
 {
         yylval.value=strdup("FIGCAPTIONOP");
         return FIGCAPOP;
@@ -2047,7 +2047,7 @@ YY_RULE_SETUP
 case 48:
 /* rule 48 can match eol */
 YY_RULE_SETUP
-#line 283 "ast.l"
+#line 283 "LexAnalyser.l"
 {
 	yylval.value=strdup("FIGCAPTION");
         return FIGCAPCL;
@@ -2056,7 +2056,7 @@ YY_RULE_SETUP
 case 49:
 /* rule 49 can match eol */
 YY_RULE_SETUP
-#line 287 "ast.l"
+#line 287 "LexAnalyser.l"
 {
         yylval.value=strdup("DLOP");
         return DLOP;
@@ -2065,7 +2065,7 @@ YY_RULE_SETUP
 case 50:
 /* rule 50 can match eol */
 YY_RULE_SETUP
-#line 291 "ast.l"
+#line 291 "LexAnalyser.l"
 {
         yylval.value=strdup("DL");
         return DLCL;
@@ -2074,7 +2074,7 @@ YY_RULE_SETUP
 case 51:
 /* rule 51 can match eol */
 YY_RULE_SETUP
-#line 295 "ast.l"
+#line 295 "LexAnalyser.l"
 {
         yylval.value=strdup("DTOP");
         return DTOP;
@@ -2083,7 +2083,7 @@ YY_RULE_SETUP
 case 52:
 /* rule 52 can match eol */
 YY_RULE_SETUP
-#line 299 "ast.l"
+#line 299 "LexAnalyser.l"
 {
         yylval.value=strdup("DT");
         return DTCL;
@@ -2092,7 +2092,7 @@ YY_RULE_SETUP
 case 53:
 /* rule 53 can match eol */
 YY_RULE_SETUP
-#line 303 "ast.l"
+#line 303 "LexAnalyser.l"
 {
         yylval.value=strdup("DDOP");
         return DDOP;
@@ -2101,7 +2101,7 @@ YY_RULE_SETUP
 case 54:
 /* rule 54 can match eol */
 YY_RULE_SETUP
-#line 307 "ast.l"
+#line 307 "LexAnalyser.l"
 {
         yylval.value=strdup("DD");
         return DDCL;
@@ -2110,7 +2110,7 @@ YY_RULE_SETUP
 case 55:
 /* rule 55 can match eol */
 YY_RULE_SETUP
-#line 311 "ast.l"
+#line 311 "LexAnalyser.l"
 {
         yylval.value=strdup("TABLEOP");
         return TABOP;
@@ -2119,7 +2119,7 @@ YY_RULE_SETUP
 case 56:
 /* rule 56 can match eol */
 YY_RULE_SETUP
-#line 315 "ast.l"
+#line 315 "LexAnalyser.l"
 {
         yylval.value=strdup("TABLE");
         return TABCL;
@@ -2128,7 +2128,7 @@ YY_RULE_SETUP
 case 57:
 /* rule 57 can match eol */
 YY_RULE_SETUP
-#line 319 "ast.l"
+#line 319 "LexAnalyser.l"
 {
         yylval.value=strdup("CAPOP");
         return CAPOP;
@@ -2137,7 +2137,7 @@ YY_RULE_SETUP
 case 58:
 /* rule 58 can match eol */
 YY_RULE_SETUP
-#line 323 "ast.l"
+#line 323 "LexAnalyser.l"
 {
         yylval.value=strdup("CAP");
         return CAPCL;
@@ -2146,7 +2146,7 @@ YY_RULE_SETUP
 case 59:
 /* rule 59 can match eol */
 YY_RULE_SETUP
-#line 327 "ast.l"
+#line 327 "LexAnalyser.l"
 {
         yylval.value=strdup("TROP");
         return TROP;
@@ -2155,7 +2155,7 @@ YY_RULE_SETUP
 case 60:
 /* rule 60 can match eol */
 YY_RULE_SETUP
-#line 331 "ast.l"
+#line 331 "LexAnalyser.l"
 {
         yylval.value=strdup("TR");
         return TRCL;
@@ -2164,7 +2164,7 @@ YY_RULE_SETUP
 case 61:
 /* rule 61 can match eol */
 YY_RULE_SETUP
-#line 335 "ast.l"
+#line 335 "LexAnalyser.l"
 {
         yylval.value=strdup("THOP");
         return THOP;
@@ -2173,7 +2173,7 @@ YY_RULE_SETUP
 case 62:
 /* rule 62 can match eol */
 YY_RULE_SETUP
-#line 339 "ast.l"
+#line 339 "LexAnalyser.l"
 {
         yylval.value=strdup("TH");
         return THCL;
@@ -2182,7 +2182,7 @@ YY_RULE_SETUP
 case 63:
 /* rule 63 can match eol */
 YY_RULE_SETUP
-#line 343 "ast.l"
+#line 343 "LexAnalyser.l"
 {
         yylval.value=strdup("TDOP");
         return TDOP;
@@ -2191,7 +2191,7 @@ YY_RULE_SETUP
 case 64:
 /* rule 64 can match eol */
 YY_RULE_SETUP
-#line 347 "ast.l"
+#line 347 "LexAnalyser.l"
 {
         yylval.value=strdup("TD");
         return TDCL;
@@ -2200,7 +2200,7 @@ YY_RULE_SETUP
 case 65:
 /* rule 65 can match eol */
 YY_RULE_SETUP
-#line 351 "ast.l"
+#line 351 "LexAnalyser.l"
 {
         yylval.value=strdup("CENTEROP");
         return CENTEROP;
@@ -2209,7 +2209,7 @@ YY_RULE_SETUP
 case 66:
 /* rule 66 can match eol */
 YY_RULE_SETUP
-#line 355 "ast.l"
+#line 355 "LexAnalyser.l"
 {
         yylval.value=strdup("CENTER");
         return CENTERCL;
@@ -2218,7 +2218,7 @@ YY_RULE_SETUP
 case 67:
 /* rule 67 can match eol */
 YY_RULE_SETUP
-#line 359 "ast.l"
+#line 359 "LexAnalyser.l"
 {
         yylval.value=strdup("BR");
         return BR;
@@ -2226,12 +2226,12 @@ YY_RULE_SETUP
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 363 "ast.l"
+#line 363 "LexAnalyser.l"
 {}
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 365 "ast.l"
+#line 365 "LexAnalyser.l"
 ECHO;
 	YY_BREAK
 #line 2238 "lex.yy.c"
@@ -3286,7 +3286,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 365 "ast.l"
+#line 365 "LexAnalyser.l"
 
 
 
