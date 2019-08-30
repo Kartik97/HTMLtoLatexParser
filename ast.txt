@@ -1,4 +1,6 @@
 [ROOT] { 
+[COMMENT: <!-- top comment -->] { 
+ }
 [DOCTYPE HTML] { 
  }
 [HTML] { 
@@ -23,45 +25,12 @@
 [TEXT: jumoed ] { 
  }
  }
-[TEXT: over the ] { 
- }
-[EM] { 
-[TEXT: fence ] { 
- }
- }
- }
- }
- }
- }
-[ROOT] { 
-[DOCTYPE HTML] { 
- }
-[HTML] { 
-[HEAD] { 
-[TITLE] { 
-[TEXT: Sample document] { 
- }
- }
- }
-[BODY] { 
-[A]  ( (HREF: google.com) )
-{ 
-[EM] { 
-[TEXT: hi ] { 
- }
- }
- }
-[EM] { 
-[TEXT: the quick brown fox ] { 
+[TEXT: over the] { 
  }
 [I] { 
-[TEXT: jumoed ] { 
- }
- }
-[TEXT: over the ] { 
- }
 [EM] { 
 [TEXT: fence ] { 
+ }
  }
  }
  }

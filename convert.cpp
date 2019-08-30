@@ -4,7 +4,8 @@ using namespace std;
 
 map<string,pair<string,string>> convertTag;
 void define_mapping(){
-	convertTag["HTML"]=make_pair("\\documentclass{article}\n \\usepackage{hyperref}\n  \\usepackage{graphicx} \n \\hypersetup{colorlinks=true}","");
+	convertTag["DOCTYPE HTML"]=make_pair("\\documentclass{article}\n\\usepackage{hyperref}\n\\usepackage{graphicx}\n\\usepackage{verbatim}\n\\hypersetup{colorlinks=true}","");
+//	convertTag["HTML"]=make_pair("\\documentclass{article}\n \\usepackage{hyperref}\n  \\usepackage{graphicx}\n usepackage{verbatim} \n \\hypersetup{colorlinks=true}","");
 	convertTag["TITLE"]=make_pair("\\title{","}");
 	convertTag["BODY"]=make_pair("\\begin{document}","\\end{document}");
 	convertTag["DIV"]=make_pair("\\\\","\\\\");
@@ -29,7 +30,7 @@ void define_mapping(){
 	convertTag["SRC"]=make_pair("{","}");
 	convertTag["HEIGHT"]=make_pair("height=","cm");
 	convertTag["WIDTH"]=make_pair("width=","cm");
-	convertTag["FONT"]=make_pair("\\fontsize{","");
+	convertTag["FONT"]=make_pair("\\fontsize{","");                           //10 pt normal
 	convertTag["SIZE"]=make_pair("pt}{12pt}\\selectfont","\\normalsize");
 	convertTag["CENTER"]=make_pair("\\begin{center}","\\end{center}");
 	convertTag["BR"]=make_pair("\n","");
@@ -80,4 +81,37 @@ void define_mapping(){
 	convertTag["nbsp"]=make_pair("    ","");
 	convertTag["quot"]=make_pair("\"","");
 	convertTag["apos"]=make_pair("\'","");
+	convertTag["COMMENT"]=make_pair("\\begin{comment}","\\end{comment}");
+}
+
+lexNode* add_lexNode(string val){
+	lexNode* node=new lexNode;
+	node->value=val;
+	return node;
+}
+
+lexNode* add_lexChild(lexNode *root,lexNode *n){
+	root->children.push_back(n);
+	return root;
+}
+
+lexNode* root_init(){
+	lexNode *root=add_lexNode("ROOT");
+	add_lexChild(root,add_lexNode(convertTag["DOCTYPE HTML"].first));
+	return root;
+}
+
+void printLex(lexNode *root){
+	if(!root){
+		cout<<"LEX ROOT ERROR";
+		exit(0);
+	}
+	cout<<"["<<root->value<<"]"<<endl;
+	cout<<"{ ";
+	if(!root->children.empty()){
+		for(int i=0;i<root->children.size();i++){
+			printLex(root->children[i]);
+		}
+	}
+	cout<<" }"<<endl;
 }
