@@ -219,8 +219,6 @@ lexNode* handleTR(lexNode *root,treeNode *node){
 	return root;
 }
 
-
-// ---------------------------------------------------------------------------------------CORRECTED TR
 lexNode* handleTable(treeNode *node){
 	lexNode *root;
 	int rowFlag=0;
@@ -230,36 +228,42 @@ lexNode* handleTable(treeNode *node){
 		for(int i=0;i<node->children.size();i++){
 			if(node->children[i]->tagVal=="CAP"){
 				add_lexChild(root,convert(node->children[i],1));
+				add_lexChild(root,node->children[i]->tagVal+" END",convertTag[node->children[i]->tagVal].second);
 			}
 			else if(node->children[i]->tagVal=="TR"){
 				if(rowFlag==0){
 					child=convertTag["TABLE"].first+"{ |";
 					int s=node->children[i]->children.size();
-					for(int i=0;i<node->children[i]->children.size();i++)
-						if(node->children[i]->children[i]->tagVal=="TD" || node->children[i]->children[i]->tagVal=="TH")
+					for(int j=0;j<node->children[i]->children.size();j++)
+						if(node->children[i]->children[j]->tagVal=="TD" || node->children[i]->children[j]->tagVal=="TH")
 							child=child+"c|";
 					child=child+" }\n\\hline";
+	//				cout<<node->children[i]->children[i]->tagVal<<endl<<endl;
 					lexNode *tr=add_lexNode("TR",child);
 					handleTR(tr,node->children[i]);
 				//	add_lexChild(tr,convert(node->children[i],1));           handle TR
 					add_lexChild(root,tr);
+					add_lexChild(root,"TR END","\\\\ \n\\hline");
 					rowFlag=1;
 				}
 				else{
-					child="\n\\hline";
 					lexNode *tr=add_lexNode("TR",child);
 					// handleTR
 					handleTR(tr,node->children[i]);
 					add_lexChild(root,convert(node->children[i],1));
+					add_lexChild(root,"TR END","\\\\ \n\\hline");
 				}
 			}
 			else{
 				add_lexChild(root,convert(node->children[i],1));
+				add_lexChild(root,node->children[i]->tagVal+" END",convertTag[node->children[i]->tagVal].second);
 			}
 		}
 	}
 	return root;
 }
+
+// ---------------------------------------------------------------------------------------CORRECTED TABLE
 
 lexNode* convert(treeNode *node,int flag){
 	lexNode *root;
