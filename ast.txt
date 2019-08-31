@@ -4,24 +4,144 @@
 [HTML] { 
 [HEAD] { 
 [TITLE] { 
-[TEXT: Sample document] { 
+[TEXT: SAMPLE DOC] { 
  }
  }
  }
 [BODY] { 
-[U] { 
-[TEXT: heyy] { 
- }
-[COMMENT: <!-- this is a comment -->] { 
- }
-[EM] { 
-[TEXT: this is also test] { 
+[TABLE] { 
+[CAP] { 
+[TEXT: flow content] { 
  }
  }
-[BR] { 
+[TR] { 
+[TH] { 
+[TEXT: g1] { 
  }
-[U] { 
-[TEXT: worked or not...don't know about that yet] { 
+ }
+[TH] { 
+[TEXT: 1g] { 
+ }
+ }
+ }
+[TR] { 
+[TD] { 
+[TEXT: d1] { 
+ }
+ }
+[TD] { 
+[TEXT: d2] { 
+ }
+ }
+ }
+[TR] { 
+[TD] { 
+[TEXT: d3] { 
+ }
+ }
+[TD] { 
+[TEXT: d4] { 
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+[ROOT] { 
+[DOCTYPE HTML] { 
+ }
+[HTML] { 
+[HEAD] { 
+[TITLE] { 
+[TEXT: SAMPLE DOC] { 
+ }
+ }
+ }
+[BODY] { 
+[TABLE] { 
+[CAP] { 
+[TEXT: flow content] { 
+ }
+ }
+[TR] { 
+[TH] { 
+[TEXT: g1] { 
+ }
+ }
+[TH] { 
+[TEXT: 1g] { 
+ }
+ }
+ }
+[TR] { 
+[TD] { 
+[TEXT: d1] { 
+ }
+ }
+[TD] { 
+[TEXT: d2] { 
+ }
+ }
+ }
+[TR] { 
+[TD] { 
+[TEXT: d3] { 
+ }
+ }
+[TD] { 
+[TEXT: d4] { 
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+[ROOT] { 
+[DOCTYPE HTML] { 
+ }
+[HTML] { 
+[HEAD] { 
+[TITLE] { 
+[TEXT: SAMPLE DOC] { 
+ }
+ }
+ }
+[BODY] { 
+[TABLE] { 
+[CAP] { 
+[TEXT: flow content] { 
+ }
+ }
+[TR] { 
+[TH] { 
+[TEXT: g1] { 
+ }
+ }
+[TH] { 
+[TEXT: 1g] { 
+ }
+ }
+ }
+[TR] { 
+[TD] { 
+[TEXT: d1] { 
+ }
+ }
+[TD] { 
+[TEXT: d2] { 
+ }
+ }
+ }
+[TR] { 
+[TD] { 
+[TEXT: d3] { 
+ }
+ }
+[TD] { 
+[TEXT: d4] { 
+ }
  }
  }
  }

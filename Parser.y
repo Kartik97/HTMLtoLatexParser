@@ -14,7 +14,8 @@ extern int yylex();
 extern void yyerror(const char*);
 char* concat(char *s1,char *s2);
 typedef vector<treeNode*> vn;
-
+extern map<string,pair<string,string>> convertTag;
+extern lexNode* convert(treeNode *node,int flag);
 %}
 
 // %name parse
@@ -63,8 +64,9 @@ st:	DOCTYPE HTMLOP html {
 				add_children(root,$3->v);
 				write(root);
 
-				lexNode *rootLex=root_init();
-				convert(rootLex,root);
+				define_mapping();
+				lexNode *rootLex;
+				rootLex=convert(root,0);
 				printLex(rootLex);
 			}
 	| HTMLOP html {

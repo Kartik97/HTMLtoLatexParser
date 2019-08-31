@@ -3,6 +3,7 @@
 using namespace std;
 
 map<string,pair<string,string>> convertTag;
+int title;
 void define_mapping(){
 	convertTag["DOCTYPE HTML"]=make_pair("","");
 	convertTag["HTML"]=make_pair("","");
@@ -27,7 +28,7 @@ void define_mapping(){
 	convertTag["H5"]=make_pair("\\large \\textbf{","} \\normalsize");
 	convertTag["A"]=make_pair("{","}");
 	convertTag["HREF"]=make_pair("\\href{","}");
-	convertTag["IMG"]=make_pair("\\includegraphics[","]");
+	convertTag["IMG"]=make_pair("\\includegraphics[","");
 	convertTag["SRC"]=make_pair("{","}");
 	convertTag["HEIGHT"]=make_pair("height=","pt");
 	convertTag["WIDTH"]=make_pair("width=","pt");
@@ -44,12 +45,12 @@ void define_mapping(){
 	convertTag["FIGURE"]=make_pair("\\begin{figure}","\\end{figure}");
 	convertTag["FIGURECAPTION"]=make_pair("\\caption{","}");
 
-	convertTag["TABLE"]=make_pair("\\begin{table}[!ht]","\\end{end}");
-	convertTag["CAP"]=make_pair("\\caption{","}");
-	convertTag["_TABLE"]=make_pair("\\begin{tabular}","\\end{tabular}");
-	convertTag["TR"]=make_pair("","\\\\");
+	convertTag["_TABLE"]=make_pair("\\begin{table}[!ht]\n","");
+	convertTag["CAP"]=make_pair("\\caption{\n","}\n\\centering");
+	convertTag["TABLE"]=make_pair("\\begin{tabular}","\\end{tabular}\n\\end{table}");
+	convertTag["TR"]=make_pair("","\\\\ \n\\hline");
 	convertTag["TD"]=make_pair("","");
-	convertTag["TH"]=make_pair("","");
+	convertTag["TH"]=make_pair("\\textbf{","}");
 
 	convertTag["alpha"]=make_pair("\\alpha","");
 	convertTag["beta"]=make_pair("\\beta","");
@@ -83,11 +84,11 @@ void define_mapping(){
 	convertTag["Sigma"]=make_pair("\\Sigma","");
 	convertTag["Theta"]=make_pair("\\Theta","");
 	convertTag["lt"]=make_pair("<","");
-	convertTag["gt"]=make_pair("gt","");
+	convertTag["gt"]=make_pair(">","");
 	convertTag["nbsp"]=make_pair("    ","");
 	convertTag["quot"]=make_pair("\"","");
 	convertTag["apos"]=make_pair("\'","");
-	convertTag["COMMENT"]=make_pair("\\begin{comment}","\\end{comment}");
+	convertTag["COMMENT"]=make_pair("\\begin{comment}","\\end{comment}\n");
 }
 
 lexNode* add_lexNode(string type,string value){
@@ -129,11 +130,11 @@ void printLex(lexNode *root){
 		cout<<"LEX ROOT ERROR";
 		exit(0);
 	}
-	cout<<"["<<root->type<<"] :"<<endl;
+	cout<<"["<<root->type<<"] :";
 	if(!root->value.empty()){
 		cout<<root->value;
 	}
-	cout<<"{ ";
+	cout<<endl<<"{ ";
 	if(!root->children.empty()){
 		for(int i=0;i<root->children.size();i++){
 			printLex(root->children[i]);
@@ -142,6 +143,7 @@ void printLex(lexNode *root){
 	cout<<" }"<<endl;
 }
 
+/*
 lexNode* convert(lexNode *root,treeNode *node){
 	if(node->tagVal=="A" && node->att.size()>0){
 		if(node->att[0]=="HREF")
@@ -184,7 +186,7 @@ lexNode* convert(lexNode *root,treeNode *node){
 	else if(node->tagVal=="COMMENT"){
 		add_lexChild(root,"COMMENT",convertTag["COMMENT"].first+"\n"+node->content.substr(4,node->content.length()-7)+"\n"+convertTag["COMMENT"].second);	
 	}
-	else{
+	else if(node->tagVal!="ROOT"){
 		add_lexChild(root,node->tagVal,convertTag[node->tagVal].first);
 	}
 
@@ -194,4 +196,154 @@ lexNode* convert(lexNode *root,treeNode *node){
 		}
 	}
 	return root;
+} */
+
+lexNode* handleTR(lexNode *root,treeNode *node){
+	int count=-1;
+	for(int i=0;i<node->children.size();i++)
+		if(node->children[i]->tagVal=="TD" || node->children[i]->tagVal=="TH")
+			count++;
+	for(int i=0;i<node->children.size();i++){
+		add_lexChild(root,convert(node->children[i],1));
+		if(convertTag.find(node->children[i]->tagVal)!=convertTag.end())
+		{
+			if((node->children[i]->tagVal=="TH" || node->children[i]->tagVal=="TD") && count>0){
+				add_lexChild(root,node->children[i]->tagVal+" END",convertTag[node->children[i]->tagVal].second+" &");
+				count--;
+			}
+			else	
+				add_lexChild(root,node->children[i]->tagVal+" END",convertTag[node->children[i]->tagVal].second);
+		}
+
+	}
+	return root;
 }
+
+
+// ---------------------------------------------------------------------------------------CORRECTED TR
+lexNode* handleTable(treeNode *node){
+	lexNode *root;
+	int rowFlag=0;
+	string child=convertTag["_TABLE"].first;
+	root=add_lexNode("TOP TABLE",child);
+	if(!node->children.empty()){
+		for(int i=0;i<node->children.size();i++){
+			if(node->children[i]->tagVal=="CAP"){
+				add_lexChild(root,convert(node->children[i],1));
+			}
+			else if(node->children[i]->tagVal=="TR"){
+				if(rowFlag==0){
+					child=convertTag["TABLE"].first+"{ |";
+					int s=node->children[i]->children.size();
+					for(int i=0;i<node->children[i]->children.size();i++)
+						if(node->children[i]->children[i]->tagVal=="TD" || node->children[i]->children[i]->tagVal=="TH")
+							child=child+"c|";
+					child=child+" }\n\\hline";
+					lexNode *tr=add_lexNode("TR",child);
+					handleTR(tr,node->children[i]);
+				//	add_lexChild(tr,convert(node->children[i],1));           handle TR
+					add_lexChild(root,tr);
+					rowFlag=1;
+				}
+				else{
+					child="\n\\hline";
+					lexNode *tr=add_lexNode("TR",child);
+					// handleTR
+					handleTR(tr,node->children[i]);
+					add_lexChild(root,convert(node->children[i],1));
+				}
+			}
+			else{
+				add_lexChild(root,convert(node->children[i],1));
+			}
+		}
+	}
+	return root;
+}
+
+lexNode* convert(treeNode *node,int flag){
+	lexNode *root;
+	if(flag==0){
+		root=root_init();
+	}
+	else{
+		if(node->tagVal=="A" && node->att.size()>0){
+			if(node->att[0]=="HREF")
+				root=add_lexNode("A",convertTag["HREF"].first+node->attVal[0]+convertTag["HREF"].second+convertTag["A"].first);	
+		}
+		else if(node->tagVal=="IMG" && node->att.size()>0){
+			string child=convertTag["IMG"].first;
+			int pos=find(node->att.begin(),node->att.end(),"HEIGHT")-node->att.begin(),flag=0;
+			if(pos<node->att.size()){
+				child=child+"height="+node->attVal[pos]+"pt";
+				flag=1;
+			}
+			pos=find(node->att.begin(),node->att.end(),"WIDTH")-node->att.begin();
+			if(pos<node->att.size()){
+				if(flag==1)
+					child+=",";
+				child=child+"width="+node->attVal[pos]+"pt";
+				flag=1;
+			}
+			child+="]{";
+			pos=pos=find(node->att.begin(),node->att.end(),"SRC")-node->att.begin();
+			if(pos<node->att.size()){
+				child=child+node->attVal[pos];
+			}
+			child+="}";
+			root=add_lexNode("IMG",child);
+		}
+		else if(node->tagVal=="FONT" && node->att.size()>0){
+			if(node->att[0]=="SIZE")
+				root=add_lexNode("FONT",convertTag["FONT"].first+node->attVal[0]+convertTag["SIZE"].first);	
+			else 
+				root=add_lexNode("FONT",convertTag["FONT"].first+"10"+convertTag["SIZE"].first);	
+		}
+		else if(node->tagVal=="TEXT"){
+			root=add_lexNode("TEXT",node->content);
+		}
+		else if(node->tagVal=="SYMBOL"){
+			root=add_lexNode("SYMBOL",convertTag[node->content].first);
+		}
+		else if(node->tagVal=="COMMENT"){
+			root=add_lexNode("COMMENT",convertTag["COMMENT"].first+"\n"+node->content.substr(4,node->content.length()-7));	
+		}
+		else if(node->tagVal=="TITLE"){
+			root=add_lexNode(node->tagVal+" START",convertTag[node->tagVal].first);
+			title=1;
+		}
+		else if(node->tagVal=="BODY"){
+			if(title)
+				root=add_lexNode(node->tagVal+" START",convertTag[node->tagVal].first+"\n"+"\\maketitle");
+			else root=add_lexNode(node->tagVal+" START",convertTag[node->tagVal].first);
+		}
+		else if(node->tagVal=="TABLE"){
+		/*	string child=convertTag["_TABLE"].first;
+			int pos=find(node->att.begin(),node->att.end(),"CAP")-node->att.begin();
+			if(pos<node->att.size()){
+				child+=convertTag["CAP"].first;
+
+			}
+			else{
+				root=add_lexNode(node->tagVal+" START",child+convertTag["TABLE"].first);	
+			} */
+			root=handleTable(node);
+		}
+		else{
+			root=add_lexNode(node->tagVal+" START",convertTag[node->tagVal].first);
+		}
+	}
+
+
+	if(!node->children.empty() && node->tagVal!="TABLE"){
+		for(int i=0;i<node->children.size();i++){
+			add_lexChild(root,convert(node->children[i],1));
+			if(convertTag.find(node->children[i]->tagVal)!=convertTag.end())
+				add_lexChild(root,node->children[i]->tagVal+" END",convertTag[node->children[i]->tagVal].second);
+		}
+	}
+/*	else if(node->tagVal!="TEXT" && node->tagVal!="SYMBOL" && node->tagVal!="IMG"){
+		add_lexChild(root,node->tagVal+" END",convertTag[node->tagVal].second);
+	} */
+	return root;
+} 
