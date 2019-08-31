@@ -1105,41 +1105,46 @@ char* concat(char *s1,char *s2){
 
 char *checkText(char *s){
 	string change(s);
+	if(change.find('\\')!=string::npos){
+		int pos=change.find('\\');
+		change.replace(pos,pos+1,"\\textbackslash");
+	}
+
 	if(change.find('{')!=string::npos){
 		int pos=change.find('{');
-		change.replace(pos,pos+1," \\{");
+		change.replace(pos,pos+1,"\\{");
 	}
 	if(change.find('}')!=string::npos){
 		int pos=change.find('}');
-		change.replace(pos,pos+1," \\}");
+		change.replace(pos,pos+1,"\\}");
 	}
 	if(change.find('#')!=string::npos){
 		int pos=change.find('#');
-		change.replace(pos,pos+1," \\#");
+		change.replace(pos,pos+1,"\\#");
 	}
 	if(change.find('$')!=string::npos){
 		int pos=change.find('$');
-		change.replace(pos,pos+1," \\$");
+		change.replace(pos,pos+1,"\\$");
 	}
 	if(change.find('%')!=string::npos){
 		int pos=change.find('%');
-		change.replace(pos,pos+1," \\%");
+		change.replace(pos,pos+1,"\\%");
 	}
 	if(change.find('&')!=string::npos){
 		int pos=change.find('&');
-		change.replace(pos,pos+1," \\&");
+		change.replace(pos,pos+1,"\\&");
 	}
 	if(change.find('~')!=string::npos){
 		int pos=change.find('~');
-		change.replace(pos,pos+1," \\~");
+		change.replace(pos,pos+1,"\\~{}");
 	}
 	if(change.find('_')!=string::npos){
 		int pos=change.find('_');
-		change.replace(pos,pos+1," \\_");
+		change.replace(pos,pos+1,"\\_");
 	}
 	if(change.find('^')!=string::npos){
 		int pos=change.find('^');
-		change.replace(pos,pos+1," \\^");
+		change.replace(pos,pos+1,"\\^{}");
 	}
 	char *str = new char[change.length() + 1];
 	strcpy(str, change.c_str());

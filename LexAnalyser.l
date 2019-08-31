@@ -68,7 +68,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         return SYMBOL;
 }
 [a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\+\=\{\}\[\]\|\\\:\;\"\'\,\.\/\?]*[^<\n]  {
-        if(yytext[0]!=32 && yytext[yyleng-2]!=59) {
+        if(yytext[0]!=38 || yytext[yyleng-2]!=59) {
                 yylval.value=strdup(yytext);
                 return TEXT;
         }

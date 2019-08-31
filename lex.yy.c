@@ -1612,7 +1612,7 @@ case 4:
 YY_RULE_SETUP
 #line 70 "LexAnalyser.l"
 {
-        if(yytext[0]!=32 && yytext[yyleng-2]!=59) {
+        if(yytext[0]!=38 || yytext[yyleng-2]!=59) {
                 yylval.value=strdup(yytext);
                 return TEXT;
         }
