@@ -184,6 +184,37 @@ void writeTex(lexNode *root,string s){
 	}
 }
 
+//  ==============================================================================
+
+
+string switchChar(string s,char x,string conv){
+	string str="";
+	for(int i=0;i<s.length();i++){
+		if(s[i]==x)
+			str+=conv;
+		else str+=s[i];
+	}
+	return str;
+}  
+
+string checkText(string s){
+	string res;
+	res=switchChar(s,'\\',"\\textbackslash ");
+	res=switchChar(res,'{',"\\{");
+	res=switchChar(res,'}',"\\}");
+	res=switchChar(res,'#',"\\#");
+	res=switchChar(res,'$',"\\$");
+	res=switchChar(res,'%',"\\%");
+	res=switchChar(res,'&',"\\&");
+	res=switchChar(res,'~',"\\~{}");
+	res=switchChar(res,'_',"\\_");
+	res=switchChar(res,'^',"\\^{}");
+	return res;
+}
+
+
+//  ==============================================================================
+
 lexNode* handleTR(lexNode *root,treeNode *node){
 	int count=-1;
 	for(int i=0;i<node->children.size();i++)
@@ -293,7 +324,8 @@ lexNode* convert(treeNode *node,int flag){
 				root=add_lexNode("FONT",convertTag["FONT"].first+"11"+convertTag["SIZE"].first);	
 		}
 		else if(node->tagVal=="TEXT"){
-			root=add_lexNode("TEXT",node->content);
+
+			root=add_lexNode("TEXT",checkText(node->content));
 		}
 		else if(node->tagVal=="SYMBOL"){
 			root=add_lexNode("SYMBOL",convertTag[node->content].first);

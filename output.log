@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.8.16)  31 AUG 2019 23:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.8.16)  1 SEP 2019 00:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -278,7 +278,7 @@ r/m/n/10 n &&&&&&&&&&&& $$$$$$$$$$$$$$ ###########
 
 Overfull \hbox (18.33438pt too wide) in paragraph at lines 17--17
 \OT1/cmr/m/n/10 ~~~~~~~~~~ \OMS/cmsy/m/n/10 ffffffffffff gggggggggggg \OT1/cmr/
-m/n/10 ^^^^^^^^^^^^ @@@@@@@@@@@@@@@@ 
+m/n/10 ^^^^^^^^^^^^ @@@@@@@@@@@@@@@@
  []
 
 [1
@@ -299,12 +299,12 @@ Here is how much of TeX's memory you used:
  8383 multiletter control sequences out of 15000+600000
  6675 words of font info for 24 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 28i,6n,25p,460b,318s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 28i,6n,25p,486b,318s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on output.pdf (1 page, 38105 bytes).
+Output written on output.pdf (1 page, 38516 bytes).
 PDF statistics:
  29 PDF objects out of 1000 (max. 8388607)
  21 compressed objects within 1 object stream

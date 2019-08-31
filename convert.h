@@ -24,3 +24,6 @@ lexNode* handleTable(treeNode *node);
 lexNode* handleTR(lexNode *root,treeNode *node);
 void writeTex(lexNode *root,string s);
 void writeLex(lexNode *root);
+
+string switchChar(string s,char x,string conv);
+string checkText(string s);

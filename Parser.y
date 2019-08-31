@@ -14,8 +14,6 @@ string outfile;
 extern int yylex();
 extern void yyerror(const char*);
 char* concat(char *s1,char *s2);
-char* checkText(char *s);
-char *switchChar(char *s,char x,string conv);
 typedef vector<treeNode*> vn;
 extern map<string,pair<string,string>> convertTag;
 extern lexNode* convert(treeNode *node,int flag);
@@ -289,8 +287,7 @@ consumetop: consumetop misctop {
 
 misctext: TEXT {
 		vn v;
-		v.push_back(add_node("TEXT",checkText($1)));
-	//	v.push_back(add_node("TEXT",$1));
+		v.push_back(add_node("TEXT",$1));
 		node* n = new node;
 		copy_list(n->v,v);
 		$$=n;
@@ -324,8 +321,7 @@ misc: COMMENT { vn v;
 				$$=n;
 			}
 	| TEXT  { 	vn v;
-				//v.push_back(add_node("TEXT",$1));
-				v.push_back(add_node("TEXT",checkText($1)));
+				v.push_back(add_node("TEXT",$1));
 				node* n = new node;
 				copy_list(n->v,v);
 				$$=n;
@@ -1125,32 +1121,4 @@ char* concat(char *s1,char *s2){
 	strcat(p,s1);
 	strcat(p,s2);
 	return p;	
-}
-
-
-char *switchChar(char *s,char x,string conv){
-	string str="";
-	for(int i=0;i<strlen(s);i++){
-		if(s[i]==x)
-			str+=conv;
-		else str+=s[i];
-	}
-	char *str_c = new char[str.length() + 1];
-	strcpy(str_c, str.c_str());
-	return str_c;
-}  
-
-char *checkText(char *s){
-	char *res;
-	res=switchChar(s,'\\',"\\textbackslash ");
-	res=switchChar(res,'{',"\\{");
-	res=switchChar(res,'}',"\\}");
-	res=switchChar(res,'#',"\\#");
-	res=switchChar(res,'$',"\\$");
-	res=switchChar(res,'%',"\\%");
-	res=switchChar(res,'&',"\\&");
-	res=switchChar(res,'~',"\\~{}");
-	res=switchChar(res,'_',"\\_");
-	res=switchChar(res,'^',"\\^{}");
-	return res;
 }
