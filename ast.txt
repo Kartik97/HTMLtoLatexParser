@@ -1,3 +1,4 @@
+
 [ROOT] { 
 [DOCTYPE HTML] { 
  }
@@ -161,7 +162,7 @@
  }
  }
 [P] { 
-[IMG]  ( (SRC: logo.png) )
+[IMG]  ( (SRC: logo.png)  (WIDTH: 36)  (HEIGHT: 36) )
 { 
  }
  }

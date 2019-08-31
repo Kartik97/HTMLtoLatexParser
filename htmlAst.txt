@@ -1,0 +1,20 @@
+[ROOT] { 
+[COMMENT: <!-- TOPEST COMMENT -->] { 
+ }
+[DOCTYPE HTML] { 
+ }
+[COMMENT: <!-- middle comment -->] { 
+ }
+[HTML] { 
+[HEAD] { 
+[TITLE] { 
+[TEXT: Sample document] { 
+ }
+ }
+ }
+[BODY] { 
+[TEXT: \textbackslash n\textbackslash n\textbackslash n\textbackslash n\textbackslash n\textbackslash n\textbackslash n \&\&\&\&\&\&\&\&\&\&\&\& \$\$\$\$\$\$\$\$\$\$\$\$\$\$ \#\#\#\#\#\#\#\#\#\#\# \~{}\~{}\~{}\~{}\~{}\~{}\~{}\~{}\~{}\~{} \{\{\{\{\{\{\{\{\{\{\{\{ \}\}\}\}\}\}\}\}\}\}\}\} \^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{} @@@@@@@@@@@@@@@@ ] { 
+ }
+ }
+ }
+ }

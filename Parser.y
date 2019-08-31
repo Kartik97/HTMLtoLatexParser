@@ -10,14 +10,18 @@ using namespace std;
 #define pb(x) push_back(x)
 
 int i=0;
+string outfile;
 extern int yylex();
 extern void yyerror(const char*);
 char* concat(char *s1,char *s2);
 char* checkText(char *s);
+char *switchChar(char *s,char x,string conv);
 typedef vector<treeNode*> vn;
 extern map<string,pair<string,string>> convertTag;
 extern lexNode* convert(treeNode *node,int flag);
-extern void writeTex(lexNode *root);
+extern void writeTex(lexNode *root,string s);
+extern void writeLex(lexNode *root);
+extern void clearFile(string s);
 %}
 
 // %name parse
@@ -64,21 +68,28 @@ st:	DOCTYPE HTMLOP html {
 				treeNode *doc = add_node("DOCTYPE HTML");
 				root->children.pb(doc);
 				add_children(root,$3->v);
-				write(root);
 
+				clearFile("htmlAst.txt");                        //   WRITING TO FILES
+				write(root);
 				lexNode *rootLex;
 				rootLex=convert(root,0);
-				printLex(rootLex);
-				writeTex(rootLex);	
+				clearFile("lexAst.txt");
+				writeLex(rootLex);
+				clearFile(outfile);
+				writeTex(rootLex,outfile);	
 			}
 	| HTMLOP html {
 				treeNode *root = add_node("ROOT");
 				add_children(root,$2->v);
-				write(root);
 
+				clearFile("htmlAst.txt");                        //   WRITING TO FILES
+				write(root);
 				lexNode *rootLex;
 				rootLex=convert(root,0);
-				printLex(rootLex);
+				clearFile("lexAst.txt");
+				writeLex(rootLex);
+				clearFile(outfile);
+				writeTex(rootLex,outfile);	
 			}
 	| consumetop DOCTYPE HTMLOP html {
 				treeNode *root = add_node("ROOT");
@@ -86,21 +97,29 @@ st:	DOCTYPE HTMLOP html {
 				add_children(root,$1->v);
 				root->children.pb(doc);
 				add_children(root,$4->v);
-				write(root);
 
+				clearFile("htmlAst.txt");                        //   WRITING TO FILES
+				write(root);
 				lexNode *rootLex;
 				rootLex=convert(root,0);
-				printLex(rootLex);
+				clearFile("lexAst.txt");
+				writeLex(rootLex);
+				clearFile(outfile);
+				writeTex(rootLex,outfile);	
 			}
 	| consumetop HTMLOP html {
 				treeNode *root = add_node("ROOT");
 				add_children(root,$1->v);
 				add_children(root,$3->v);
-				write(root);
 
+				clearFile("htmlAst.txt");                        //   WRITING TO FILES
+				write(root);
 				lexNode *rootLex;
 				rootLex=convert(root,0);
-				printLex(rootLex);
+				clearFile("lexAst.txt");
+				writeLex(rootLex);
+				clearFile(outfile);
+				writeTex(rootLex,outfile);	
 			}
 	| consumetop DOCTYPE consumetop HTMLOP html {
 				treeNode *root = add_node("ROOT");
@@ -109,11 +128,15 @@ st:	DOCTYPE HTMLOP html {
 				root->children.pb(doc);
 				add_children(root,$3->v);
 				add_children(root,$5->v);
-				write(root);
 
+				clearFile("htmlAst.txt");                        //   WRITING TO FILES
+				write(root);
 				lexNode *rootLex;
 				rootLex=convert(root,0);
-				printLex(rootLex);
+				clearFile("lexAst.txt");
+				writeLex(rootLex);
+				clearFile(outfile);
+				writeTex(rootLex,outfile);	
 			}
 	;
 
@@ -1093,6 +1116,7 @@ int main(int argc,char **argv){
 		}
 	}
 	define_mapping();
+	outfile="output.tex";
 	yyparse();
 	return 0;
 }  
@@ -1103,50 +1127,30 @@ char* concat(char *s1,char *s2){
 	return p;	
 }
 
-char *checkText(char *s){
-	string change(s);
-	if(change.find('\\')!=string::npos){
-		int pos=change.find('\\');
-		change.replace(pos,pos+1,"\\textbackslash");
-	}
 
-	if(change.find('{')!=string::npos){
-		int pos=change.find('{');
-		change.replace(pos,pos+1,"\\{");
+char *switchChar(char *s,char x,string conv){
+	string str="";
+	for(int i=0;i<strlen(s);i++){
+		if(s[i]==x)
+			str+=conv;
+		else str+=s[i];
 	}
-	if(change.find('}')!=string::npos){
-		int pos=change.find('}');
-		change.replace(pos,pos+1,"\\}");
-	}
-	if(change.find('#')!=string::npos){
-		int pos=change.find('#');
-		change.replace(pos,pos+1,"\\#");
-	}
-	if(change.find('$')!=string::npos){
-		int pos=change.find('$');
-		change.replace(pos,pos+1,"\\$");
-	}
-	if(change.find('%')!=string::npos){
-		int pos=change.find('%');
-		change.replace(pos,pos+1,"\\%");
-	}
-	if(change.find('&')!=string::npos){
-		int pos=change.find('&');
-		change.replace(pos,pos+1,"\\&");
-	}
-	if(change.find('~')!=string::npos){
-		int pos=change.find('~');
-		change.replace(pos,pos+1,"\\~{}");
-	}
-	if(change.find('_')!=string::npos){
-		int pos=change.find('_');
-		change.replace(pos,pos+1,"\\_");
-	}
-	if(change.find('^')!=string::npos){
-		int pos=change.find('^');
-		change.replace(pos,pos+1,"\\^{}");
-	}
-	char *str = new char[change.length() + 1];
-	strcpy(str, change.c_str());
-	return str;
+	char *str_c = new char[str.length() + 1];
+	strcpy(str_c, str.c_str());
+	return str_c;
+}  
+
+char *checkText(char *s){
+	char *res;
+	res=switchChar(s,'\\',"\\textbackslash ");
+	res=switchChar(res,'{',"\\{");
+	res=switchChar(res,'}',"\\}");
+	res=switchChar(res,'#',"\\#");
+	res=switchChar(res,'$',"\\$");
+	res=switchChar(res,'%',"\\%");
+	res=switchChar(res,'&',"\\&");
+	res=switchChar(res,'~',"\\~{}");
+	res=switchChar(res,'_',"\\_");
+	res=switchChar(res,'^',"\\^{}");
+	return res;
 }

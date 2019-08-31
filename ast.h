@@ -29,3 +29,4 @@ node* add_startChild(node *c1,node* c2,string name);
 int find_parent(node* n);
 void print(treeNode* node);
 void write(treeNode *node);
+void clearFile(string s);

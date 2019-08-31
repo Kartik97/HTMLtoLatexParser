@@ -121,7 +121,7 @@ lexNode* add_lexChild(lexNode *root,lexNode *node){
 
 lexNode* root_init(){
 	lexNode *root=add_lexNode("ROOT");
-	add_lexChild(root,"PREAMBLE","\\documentclass{report}\n\\usepackage{hyperref}\n\\usepackage{graphicx}\n\\usepackage{verbatim}\n\\hypersetup{colorlinks=true}\n \\newcommand{\\Alpha}{A} \n \\newcommand{\\Beta}{B}  \n\\newcommand{\\Epsilon}{E} \n ");
+	add_lexChild(root,"PREAMBLE","\\documentclass{article}\n\\usepackage{hyperref}\n\\usepackage{graphicx}\n\\usepackage{verbatim}\n\\hypersetup{colorlinks=true}\n \\newcommand{\\Alpha}{A} \n \\newcommand{\\Beta}{B}  \n\\newcommand{\\Epsilon}{E} \n ");
 	return root;
 }
 
@@ -134,6 +134,7 @@ void printLex(lexNode *root){
 	if(!root->value.empty()){
 		cout<<root->value;
 	}
+	cout<<endl;
 	if(!root->children.empty()){
 		for(int i=0;i<root->children.size();i++){
 			printLex(root->children[i]);
@@ -141,17 +142,33 @@ void printLex(lexNode *root){
 	}
 }
 
-/*
-string printSp(int n){
-	string s="";
-	for(int i=0;i<n;i++)
-		s+=" ";
-	return s;
-} */
-
-void writeTex(lexNode *root){
+void writeLex(lexNode *root){
 	ofstream file;
-	file.open("output.tex",ios::app);
+	file.open("lexAst.txt",ios::app);
+	if(!file){
+		cout<<"file error";
+		printLex(root);
+	}
+	if(!root){
+		cout<<"LEX ROOT ERROR";
+		exit(0);
+	}
+	file<<"["<<root->type<<"] :";
+	if(!root->value.empty()){
+		file<<root->value;
+	}
+	file<<endl;
+	file.close();
+	if(!root->children.empty()){
+		for(int i=0;i<root->children.size();i++){
+			writeLex(root->children[i]);
+		}
+	}
+}	
+
+void writeTex(lexNode *root,string s){
+	ofstream file;
+	file.open(s,ios::app);
 	if(!file){
 		cout<<"file error";
 		printLex(root);
@@ -162,7 +179,7 @@ void writeTex(lexNode *root){
 	file.close();
 	if(!root->children.empty()){
 		for(int i=0;i<root->children.size();i++){
-			writeTex(root->children[i]);
+			writeTex(root->children[i],s);
 		}
 	}
 }
@@ -269,7 +286,7 @@ lexNode* convert(treeNode *node,int flag){
 		}
 		else if(node->tagVal=="FONT" && node->att.size()>0){
 			if(node->att[0]=="SIZE"){
-				string s=to_string(8+4*(node->attVal[0][0]-48));
+				string s=to_string(4+4*(node->attVal[0][0]-48));
 				root=add_lexNode("FONT",convertTag["FONT"].first+s+convertTag["SIZE"].first);	
 			}
 			else 

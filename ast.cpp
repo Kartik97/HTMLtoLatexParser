@@ -129,9 +129,15 @@ void print(treeNode* node){
 	cout<<" }"<<endl;
 }
 
+void clearFile(string s){
+	ofstream file;
+	file.open(s,ofstream::out|ofstream::trunc);
+	file.close();
+}
+
 void write(treeNode *node){
 	ofstream file;
-	file.open("ast.txt",ios::app);
+	file.open("htmlAst.txt",ios::app);
 	if(!file){
 		cout<<"file error";
 		print(node);
