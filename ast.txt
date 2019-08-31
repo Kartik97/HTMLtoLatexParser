@@ -148,3 +148,187 @@
  }
  }
  }
+[ROOT] { 
+[DOCTYPE HTML] { 
+ }
+[HTML] { 
+[HEAD] { 
+[TITLE] { 
+[TEXT: SAMPLE DOC] { 
+ }
+ }
+ }
+[BODY] { 
+[TABLE] { 
+[CAP] { 
+[TEXT: flow content] { 
+ }
+ }
+[TR] { 
+[TH] { 
+[TEXT: g1] { 
+ }
+ }
+[TH] { 
+[TEXT: 1g] { 
+ }
+ }
+ }
+[TR] { 
+[TD] { 
+[TEXT: d1] { 
+ }
+ }
+[TD] { 
+[TEXT: d2] { 
+ }
+ }
+ }
+[TR] { 
+[TD] { 
+[TEXT: d3] { 
+ }
+ }
+[TD] { 
+[TEXT: d4] { 
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+[ROOT] { 
+[DOCTYPE HTML] { 
+ }
+[HTML] { 
+[HEAD] { 
+[TITLE] { 
+[TEXT: SAMPLE DOC] { 
+ }
+ }
+ }
+[BODY] { 
+[A]  ( (HREF: 1234) )
+{ 
+[TEXT: tmkb ] { 
+ }
+[U] { 
+[TEXT: tmkbc ] { 
+ }
+[COMMENT: <!-- amkb -->] { 
+ }
+ }
+ }
+[TABLE] { 
+[CAP] { 
+[TEXT: flow content] { 
+ }
+ }
+[TR] { 
+[TH] { 
+[TEXT: g1] { 
+ }
+ }
+[TH] { 
+[TEXT: 1g] { 
+ }
+ }
+ }
+[TR] { 
+[TD] { 
+[TEXT: d1] { 
+ }
+ }
+[TD] { 
+[TEXT: d2] { 
+ }
+ }
+ }
+[TR] { 
+[TD] { 
+[TEXT: d3] { 
+ }
+ }
+[TD] { 
+[TEXT: d4] { 
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+[ROOT] { 
+[DOCTYPE HTML] { 
+ }
+[HTML] { 
+[HEAD] { 
+[TITLE] { 
+[TEXT: SAMPLE DOC] { 
+ }
+ }
+ }
+[BODY] { 
+[A]  ( (HREF: 1234) )
+{ 
+[TEXT: tmkb ] { 
+ }
+[U] { 
+[TEXT: tmkbc ] { 
+ }
+[COMMENT: <!-- amkb -->] { 
+ }
+ }
+ }
+[DIV] { 
+[TEXT: this is a paragraph] { 
+ }
+[UL] { 
+[COMMENT: <!--this is a comment -->] { 
+ }
+[LI] { 
+[TEXT: test working or not check?] { 
+ }
+ }
+ }
+ }
+[TABLE] { 
+[CAP] { 
+[TEXT: flow content] { 
+ }
+ }
+[TR] { 
+[TH] { 
+[TEXT: g1] { 
+ }
+ }
+[TH] { 
+[TEXT: 1g] { 
+ }
+ }
+ }
+[TR] { 
+[TD] { 
+[TEXT: d1] { 
+ }
+ }
+[TD] { 
+[TEXT: d2] { 
+ }
+ }
+ }
+[TR] { 
+[TD] { 
+[TEXT: d3] { 
+ }
+ }
+[TD] { 
+[TEXT: d4] { 
+ }
+ }
+ }
+ }
+ }
+ }
+ }
