@@ -13,9 +13,11 @@ int i=0;
 extern int yylex();
 extern void yyerror(const char*);
 char* concat(char *s1,char *s2);
+char* checkText(char *s);
 typedef vector<treeNode*> vn;
 extern map<string,pair<string,string>> convertTag;
 extern lexNode* convert(treeNode *node,int flag);
+extern void writeTex(lexNode *root);
 %}
 
 // %name parse
@@ -64,16 +66,19 @@ st:	DOCTYPE HTMLOP html {
 				add_children(root,$3->v);
 				write(root);
 
-				define_mapping();
 				lexNode *rootLex;
 				rootLex=convert(root,0);
 				printLex(rootLex);
+				writeTex(rootLex);	
 			}
 	| HTMLOP html {
 				treeNode *root = add_node("ROOT");
 				add_children(root,$2->v);
-				//print(root);	
 				write(root);
+
+				lexNode *rootLex;
+				rootLex=convert(root,0);
+				printLex(rootLex);
 			}
 	| consumetop DOCTYPE HTMLOP html {
 				treeNode *root = add_node("ROOT");
@@ -81,15 +86,21 @@ st:	DOCTYPE HTMLOP html {
 				add_children(root,$1->v);
 				root->children.pb(doc);
 				add_children(root,$4->v);
-				//print(root);
 				write(root);
+
+				lexNode *rootLex;
+				rootLex=convert(root,0);
+				printLex(rootLex);
 			}
 	| consumetop HTMLOP html {
 				treeNode *root = add_node("ROOT");
 				add_children(root,$1->v);
 				add_children(root,$3->v);
-				//print(root);	
 				write(root);
+
+				lexNode *rootLex;
+				rootLex=convert(root,0);
+				printLex(rootLex);
 			}
 	| consumetop DOCTYPE consumetop HTMLOP html {
 				treeNode *root = add_node("ROOT");
@@ -98,8 +109,11 @@ st:	DOCTYPE HTMLOP html {
 				root->children.pb(doc);
 				add_children(root,$3->v);
 				add_children(root,$5->v);
-				//print(root);
 				write(root);
+
+				lexNode *rootLex;
+				rootLex=convert(root,0);
+				printLex(rootLex);
 			}
 	;
 
@@ -252,7 +266,8 @@ consumetop: consumetop misctop {
 
 misctext: TEXT {
 		vn v;
-		v.push_back(add_node("TEXT",$1));
+		v.push_back(add_node("TEXT",checkText($1)));
+	//	v.push_back(add_node("TEXT",$1));
 		node* n = new node;
 		copy_list(n->v,v);
 		$$=n;
@@ -286,7 +301,8 @@ misc: COMMENT { vn v;
 				$$=n;
 			}
 	| TEXT  { 	vn v;
-				v.push_back(add_node("TEXT",$1));
+				//v.push_back(add_node("TEXT",$1));
+				v.push_back(add_node("TEXT",checkText($1)));
 				node* n = new node;
 				copy_list(n->v,v);
 				$$=n;
@@ -1076,6 +1092,7 @@ int main(int argc,char **argv){
 			return 0;
 		}
 	}
+	define_mapping();
 	yyparse();
 	return 0;
 }  
@@ -1084,4 +1101,47 @@ char* concat(char *s1,char *s2){
 	strcat(p,s1);
 	strcat(p,s2);
 	return p;	
+}
+
+char *checkText(char *s){
+	string change(s);
+	if(change.find('{')!=string::npos){
+		int pos=change.find('{');
+		change.replace(pos,pos+1," \\{");
+	}
+	if(change.find('}')!=string::npos){
+		int pos=change.find('}');
+		change.replace(pos,pos+1," \\}");
+	}
+	if(change.find('#')!=string::npos){
+		int pos=change.find('#');
+		change.replace(pos,pos+1," \\#");
+	}
+	if(change.find('$')!=string::npos){
+		int pos=change.find('$');
+		change.replace(pos,pos+1," \\$");
+	}
+	if(change.find('%')!=string::npos){
+		int pos=change.find('%');
+		change.replace(pos,pos+1," \\%");
+	}
+	if(change.find('&')!=string::npos){
+		int pos=change.find('&');
+		change.replace(pos,pos+1," \\&");
+	}
+	if(change.find('~')!=string::npos){
+		int pos=change.find('~');
+		change.replace(pos,pos+1," \\~");
+	}
+	if(change.find('_')!=string::npos){
+		int pos=change.find('_');
+		change.replace(pos,pos+1," \\_");
+	}
+	if(change.find('^')!=string::npos){
+		int pos=change.find('^');
+		change.replace(pos,pos+1," \\^");
+	}
+	char *str = new char[change.length() + 1];
+	strcpy(str, change.c_str());
+	return str;
 }

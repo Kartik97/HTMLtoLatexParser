@@ -22,3 +22,4 @@ void printLex(lexNode *root);
 lexNode* convert(lexNode *root,treeNode *node);
 lexNode* handleTable(treeNode *node);
 lexNode* handleTR(lexNode *root,treeNode *node);
+void writeTex(lexNode *root);
