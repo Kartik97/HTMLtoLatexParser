@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.8.16)  31 AUG 2019 21:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.8.16)  31 AUG 2019 21:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -258,46 +258,119 @@ LaTeX Warning: No \author given.
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 13.
+Underfull \hbox (badness 10000) in paragraph at lines 16--17
 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 17--19
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 17--19
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--21
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--21
+
+ []
+
+
+LaTeX Warning: Characters dropped after `\end{comment}' on input line 24.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--25
+
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 26.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 26.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 27.
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 13.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 19.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 27.
+
+
+LaTeX Warning: Characters dropped after `\end{comment}' on input line 31.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <36> not available
+(Font)              size <24.88> substituted on input line 33.
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.19 \end{document}
-                    [1]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 19.
+l.41  \section
+              *{Images} \par \begin{comment} [1]
+
+LaTeX Warning: Characters dropped after `\end{comment}' on input line 42.
+
+<marley.jpg, id=24, 200.75pt x 171.64125pt>
+File: marley.jpg Graphic file (type jpg)
+<use marley.jpg>
+Package pdftex.def Info: marley.jpg  used on input line 45. on input line 45.
+Package pdftex.def Info: Requested size: 200.7495pt x 171.64081pt on input line
+ 45.
+<logo.png, id=25, 277.035pt x 110.4125pt>
+File: logo.png Graphic file (type png)
+<use logo.png>
+Package pdftex.def Info: logo.png  used on input line 48. on input line 48.
+Package pdftex.def Info: Requested size: 277.03432pt x 110.41222pt on input lin
+e 48.
+[2 <./marley.jpg> <./logo.png>] [3]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 104.
+ [4]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 104.
  (./output.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 19.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 19.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 104.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 104.
 Package rerunfilecheck Info: File `output.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 19.
+
+
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 11.12pt have occurred.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 104.
  ) 
 Here is how much of TeX's memory you used:
- 5112 strings out of 494931
- 76126 string characters out of 6180851
- 149590 words of memory out of 5000000
- 8400 multiletter control sequences out of 15000+600000
- 7281 words of font info for 26 fonts, out of 8000000 for 9000
+ 5160 strings out of 494931
+ 76628 string characters out of 6180851
+ 152590 words of memory out of 5000000
+ 8418 multiletter control sequences out of 15000+600000
+ 9007 words of font info for 32 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 28i,6n,25p,207b,338s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on output.pdf (2 pages, 63184 bytes).
+ 28i,8n,25p,416b,467s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{img} has been referenced but does not exist, repl
+aced by a fixed one
+
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt1
+0.pfb>
+Output written on output.pdf (5 pages, 148558 bytes).
 PDF statistics:
- 41 PDF objects out of 1000 (max. 8388607)
- 30 compressed objects within 1 object stream
- 3 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 103 PDF objects out of 1000 (max. 8388607)
+ 81 compressed objects within 1 object stream
+ 26 named destinations out of 1000 (max. 500000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

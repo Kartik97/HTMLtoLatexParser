@@ -10,10 +10,95 @@
 \begin{document}
 
 \maketitle
+ \section*{CSS} \par Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Nulla ut lectus id velit aliquet semper. Proin vitae erat. Duis metus. Namvel nisl.Duis lobortis mi at lorem. Etiam ornare nibh quis eros. Nam magna sem, adipiscing at,porttitor vitae, interdum vitae, elit. Sed turpis mi,tincidunt eget , euismod ac, molestie quis, wisi.
+\par Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Nulla ut lectus id velit aliquet semper. Proin vitae erat. Duis metus. Namvel nisl. Duis lobortis mi at lorem. Etiam ornare nibh quis eros. Nam magna sem, adipiscing at, porttitor vitae, interdum vitae, elit. Sed turpis mi,tincidunt eget, euismod ac, molestie quis, wisi.
+\par Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Nulla ut lectus id velit aliquet semper. Proin vitae erat. Duis metus. Namvel nisl. Duis lobortis mi at lorem. Etiam ornare nibh quis eros. Nam magna sem, adipiscing at, porttitor vitae, interdum vitae, elit. Sed turpis mi,tincidunt eget, euismod ac, molestie quis, wisi. Praesent nisl pede,hendrerit semper, accumsan ac, consequat id, nibh.
+\par Lorem ipsum dolor sit amet, consectetuer adipiscing.Nulla ut lectus id velit aliquet semper. Proin vitae erat. Duisvel nisl. Duis lobortis mi at lorem. Etiam ornare nibh quis eros. sem, adipiscing at, porttitor vitae, interdum vitae, elit.
+ \\ \par Div line 1. 
+ \\ 
+ \\ \par Div line 2. 
+ \\ 
+ \\ \par Div line 3.
+ \\ 
+\begin{comment}
+ little comment: <p>&#x03C0; &#960;</p> \end{comment} \\ 
+  \section*{Special symbols}  \subsection*{Greek symbols} \par  \texttt{Alpha}
+: $\Alpha$ $\Gamma$ $\Theta$ $\Xi$ $\Pi$ 
  \subsection*{LaTeX chars} \par \{ \} \_ \^{} @ \$ \textbackslash \% \~{} \#
+ \section*{LaTeX commands in HTML} \par It's easy to include LaTeX commands in HTML comments.\begin{comment}
+ latex:  
+\LaTeX{} greets you.
+\end{comment} \\ 
+ 
+ \section*{Different font styles and sizes.} \par Lorem ipsum \fontsize{ 36pt}{12pt}\selectfont dolor\normalsize
+sit amet, \textit{consectetuer}
+adipiscing elit.Nulla ut \textbf{lectus}
+id velit aliquet semper.  \texttt{Proin vitae}
+erat. Duis metus. Namvel nisl. Duis \small lobortis\normalsize 
+mi at \fontsize{ 12pt}{12pt}\selectfont lorem\normalsize
+.
+{}
+ \section*{Images} \par \begin{comment}
+latex: \LaTeX \end{comment} \\ 
+ supports only JPG and PNG images.
 \par \begin{center}
+\includegraphics[]{marley.jpg}
+\end{center}
+
+\par \includegraphics[]{logo.png}
+
+ \section*{Tables} \begin{table}[!ht]
+\begin{tabular}
+{ |c|c|c| }
+\hline   1 1 & 1 hgf2 & hgfhf1 3\\ 
+\hline 2 1 & 2 2 & 2 3\\ 
+\hline 3 1 & 3 2 & 3 3\\ 
+\hline 
+ \end{tabular}
+\end{table}
+
+\begin{table}[!ht]
+\begin{tabular}
+{ |c|c| }
+\hline   Sparta Praha & 28\\ 
+\hline Slovan Liberec & 25\\ 
+\hline Dukla Praha & 24\\ 
+\hline Slavia Praha & 20\\ 
+\hline 
+ \end{tabular}
+\end{table}
+ \section*{Subscript, superscript} \par H\(_{2}\)O, E = mc\(^{2}\)
+ \section*{Hyperlinks} \par I study at \href{http://www.mff.cuni.cz}{UK MFF}
+. Andwhat about \href{#img}{images}
+?
+ \section*{Some texts} \par \begin{center}
 They went in single file, running like hounds on a strong scent,and an eager light was in their eyes. Nearly due west the broadswath of the marching \small Orcs tramped\normalsize 
 its ugly slot; the sweet grassof Rohan had been bruised and blackened as they passed.\end{center}
 
 \par John said, I saw Lucy at lunch, she told
+ \section*{Lists and definitions} \begin{description}
+\item[Dweeb]
+young excitable person who may matureinto a \emph{Nerd}
+or \emph{Geek}
+\item[Hacker]
+a clever programmer\item[Nerd]
+technically bright but socially inept person\end{description}
+\par In this section, we discuss the lesser known forest elephants....this section continues...
+ \subsection*{Habitat} \par Forest elephants do not live in trees but among them....this subsection continues... 
+ \subsubsection*{Habitat} \par Forest elephants do not live in trees but among them....this subsection continues... \textbf{AND A LINE FOLLOWS}
+
+ \subsection*{List} \begin{itemize}
+\item ... Level one, number one...
+\item \begin{enumerate}
+\item ... Level two, number one...
+\item ... Level two, number two...
+\item \begin{enumerate}
+\item ... Level three, number one...
+\end{enumerate}
+
+\item ... Level two, number three...
+\end{enumerate}
+
+\item ... Level one, number two...
+\end{itemize}
 \end{document}

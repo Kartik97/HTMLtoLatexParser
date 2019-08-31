@@ -16,8 +16,8 @@ void define_mapping(){
 	convertTag["I"]=make_pair("\\textit{","}\n");
 	convertTag["SMALL"]=make_pair("\\small ","\\normalsize \n");
 	convertTag["STRONG"]=make_pair("\\textbf{","}\n");
-	convertTag["SUB"]=make_pair("\\(_{","}\\)\n");
-	convertTag["SUP"]=make_pair("\\(^{","}\\)\n");
+	convertTag["SUB"]=make_pair("\\(_{","}\\)");
+	convertTag["SUP"]=make_pair("\\(^{","}\\)");
 	convertTag["U"]=make_pair("\\underline{","}\n");
 	convertTag["TT"]=make_pair(" \\texttt{","}\n");
 	convertTag["P"]=make_pair("\\par ","\n");
@@ -268,10 +268,12 @@ lexNode* convert(treeNode *node,int flag){
 			root=add_lexNode("IMG",child);
 		}
 		else if(node->tagVal=="FONT" && node->att.size()>0){
-			if(node->att[0]=="SIZE")
-				root=add_lexNode("FONT",convertTag["FONT"].first+node->attVal[0]+convertTag["SIZE"].first);	
+			if(node->att[0]=="SIZE"){
+				string s=to_string(8+4*(node->attVal[0][0]-48));
+				root=add_lexNode("FONT",convertTag["FONT"].first+s+convertTag["SIZE"].first);	
+			}
 			else 
-				root=add_lexNode("FONT",convertTag["FONT"].first+"10"+convertTag["SIZE"].first);	
+				root=add_lexNode("FONT",convertTag["FONT"].first+"11"+convertTag["SIZE"].first);	
 		}
 		else if(node->tagVal=="TEXT"){
 			root=add_lexNode("TEXT",node->content);
