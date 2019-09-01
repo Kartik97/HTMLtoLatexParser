@@ -29,52 +29,31 @@ extern void clearFile(string s);
 }
 
 %start st
-%token <value> DOCTYPE
-%token <value> HTMLOP
-%token <value> HTMLCL
-%token <value>  HEADOP
-%token <value> HEADCL
-%token <value> TITLEOP
-%token <value> TITLECL
-%token <value> BODYOP
-%token <value> BODYCL
-%token <value> BPHRASEOP
-%token <value> BPHRASECL
-%token <value> PHRASEOP
-%token <value> PHRASECL
-%token <value> GTPHOP
-%token <value> GTPHCL
-%token <value> TEXT
-%token <value> AOPOP AOP ACL
-%token <value> ATTRIBUTE
-%token <value> ATTRIBUTEVAL
-%token <value> DIVOP DIVCL
-%token <value> IMGOP IMGCL
-%token <value> FONTOP FONTOOP FONTCL
-%token <value> LOP LCL LIOP LICL
-%token <value> FIGOP FIGCL FIGCAPOP FIGCAPCL
-%token <value> DLOP DLCL DTOP DTCL DDOP DDCL
-%token <value> TABOP TABCL CAPOP CAPCL TROP TRCL THOP THCL TDOP TDCL BR TABOPOP
-%token <value> COMMENT SPCHAR SYMBOL CENTEROP CENTERCL
-%type <object> head title body flow phraseopen phrases listitem list misc consume gtph phr div dl dt dd table caption tr th td
-%type <object> figcap atag miscph consumeph atagph font fontph img figure center centerph misctext consumetext misctop consumetop html st
+%token <value> DOCTYPE HTMLOP HTMLCL HEADOP HEADCL TITLEOP TITLECL BODYOP BODYCL BPHRASEOP BPHRASECL
+%token <value> PHRASEOP PHRASECL GTPHOP GTPHCL TEXT AOPOP AOP ACL ATTRIBUTE ATTRIBUTEVAL DIVOP DIVCL
+%token <value> IMGOP IMGCL FONTOP FONTOOP FONTCL LOP LCL LIOP LICL FIGOP FIGCL FIGCAPOP FIGCAPCL
+%token <value> DLOP DLCL DTOP DTCL DDOP DDCL TABOP TABCL CAPOP CAPCL TROP TRCL THOP THCL TDOP TDCL BR 
+%token <value> COMMENT SPCHAR SYMBOL CENTEROP CENTERCL TABOPOP
+%type <object> head title body flow phraseopen phrases listitem list misc consume gtph phr div dl dt dd
+%type <object> figcap atag miscph consumeph atagph font fontph img figure center centerph misctext misctop 
+%type <object> table caption tr th td consumetext consumetop html st
 
 %%
 
 st:	DOCTYPE HTMLOP html {
-				treeNode *root = add_node("ROOT");
-				treeNode *doc = add_node("DOCTYPE HTML");
-				root->children.pb(doc);
-				add_children(root,$3->v);
+													treeNode *root = add_node("ROOT");
+													treeNode *doc = add_node("DOCTYPE HTML");
+													root->children.pb(doc);
+													add_children(root,$3->v);
 
-				clearFile("htmlAst.txt");                        //   WRITING TO FILES
-				write(root);
-				lexNode *rootLex;
-				rootLex=convert(root,0);
-				clearFile("lexAst.txt");
-				writeLex(rootLex);
-				clearFile(outfile);
-				writeTex(rootLex,outfile);	
+													clearFile("htmlAst.txt");                        //   WRITING TO FILES
+													write(root);
+													lexNode *rootLex;
+													rootLex=convert(root,0);
+													clearFile("lexAst.txt");
+													writeLex(rootLex);
+													clearFile(outfile);
+													writeTex(rootLex,outfile);	
 			}
 	| HTMLOP html {
 				treeNode *root = add_node("ROOT");
@@ -127,215 +106,219 @@ st:	DOCTYPE HTMLOP html {
 				add_children(root,$3->v);
 				add_children(root,$5->v);
 
-				clearFile("htmlAst.txt");                        //   WRITING TO FILES
-				write(root);
-				lexNode *rootLex;
-				rootLex=convert(root,0);
-				clearFile("lexAst.txt");
-				writeLex(rootLex);
-				clearFile(outfile);
-				writeTex(rootLex,outfile);	
-			}
+			clearFile("htmlAst.txt");                        //   WRITING TO FILES
+			write(root);
+			lexNode *rootLex;
+			rootLex=convert(root,0);
+			clearFile("lexAst.txt");
+			writeLex(rootLex);
+			clearFile(outfile);
+			writeTex(rootLex,outfile);	
+	}
 	;
 
 html: head body HTMLCL {
-				$$=add_startChild($1,$2,$3);
+			$$=add_startChild($1,$2,$3);
 	}
 	| head body HTMLCL consumetop {
-				$$=add_child_neighbour($1,$2,$3,$4);
+			$$=add_child_neighbour($1,$2,$3,$4);
 	}
 	;
 
 head: HEADOP title HEADCL { 
-				$$=add_startChild($2,$3);
-			} 
+			$$=add_startChild($2,$3);
+		} 
 	| HEADOP HEADCL { 
-				$$=add_start($2);
-			}
+			$$=add_start($2);
+		}
 	| HEADOP consumetop HEADCL {
-				$$=add_startChild($2,$3);
-			}
-
+			$$=add_startChild($2,$3);
+		}
 	| consumetop HEADOP title HEADCL { 
-				node *ptr=add_startChild($3,$4);
-				node *n=new node;
-				copy_list(n->v,$1->v);
-				copy_list(n->v,ptr->v);
-				$$=n;
-			} 
+			node *ptr=add_startChild($3,$4);
+			node *n=new node;
+			copy_list(n->v,$1->v);
+			copy_list(n->v,ptr->v);
+			$$=n;
+		} 
 	| consumetop HEADOP HEADCL { 
-				node *ptr=add_start($3);
-				node *n=new node;
-				copy_list(n->v,$1->v);
-				copy_list(n->v,ptr->v);
-				$$=n;
-			}
+			node *ptr=add_start($3);
+			node *n=new node;
+			copy_list(n->v,$1->v);
+			copy_list(n->v,ptr->v);
+			$$=n;
+		}
 	| consumetop HEADOP consumetop HEADCL {
-				node *ptr=add_startChild($3,$4);
-				node *n=new node;
-				copy_list(n->v,$1->v);
-				copy_list(n->v,ptr->v);
-				$$=n;
-			}
+			node *ptr=add_startChild($3,$4);
+			node *n=new node;
+			copy_list(n->v,$1->v);
+			copy_list(n->v,ptr->v);
+			$$=n;
+		}
 	;
 
 title:	TITLEOP TITLECL {
-				$$=add_start($2);
-			}
+			$$=add_start($2);
+		}
 	| TITLEOP consumetext TITLECL  {
-				$$=add_startChild($2,$3);
-			}
-
+			$$=add_startChild($2,$3);
+		}
 	| consumetop TITLEOP TITLECL {
-				node *ptr=add_start($3);
-				node *n=new node;
-				copy_list(n->v,$1->v);
-				copy_list(n->v,ptr->v);
-				$$=n;
-			}
+			node *ptr=add_start($3);
+			node *n=new node;
+			copy_list(n->v,$1->v);
+			copy_list(n->v,ptr->v);
+			$$=n;
+		}
 	| consumetop TITLEOP consumetext TITLECL  {
-				node *ptr=add_startChild($3,$4);
-				node *n=new node;
-				copy_list(n->v,$1->v);
-				copy_list(n->v,ptr->v);
-				$$=n;
-			}
+			node *ptr=add_startChild($3,$4);
+			node *n=new node;
+			copy_list(n->v,$1->v);
+			copy_list(n->v,ptr->v);
+			$$=n;
+		}
 	| TITLEOP TITLECL consumetop {
-				$$=add_neighbour($2,$3);
-			}
+			$$=add_neighbour($2,$3);
+		}
 	| TITLEOP consumetext TITLECL consumetop  {
-				$$=add_child_neighbour($2,$3,$4);
-			}
+			$$=add_child_neighbour($2,$3,$4);
+		}
 	| consumetop TITLEOP TITLECL consumetop {
-				node *ptr=add_neighbour($3,$4);
-				node *n=new node;
-				copy_list(n->v,$1->v);
-				copy_list(n->v,ptr->v);
-				$$=n;
-			}
+			node *ptr=add_neighbour($3,$4);
+			node *n=new node;
+			copy_list(n->v,$1->v);
+			copy_list(n->v,ptr->v);
+			$$=n;
+		}
 	| consumetop TITLEOP consumetext TITLECL  consumetop {
-				node *ptr=add_child_neighbour($3,$4,$5);
-				node *n=new node;
-				copy_list(n->v,$1->v);
-				copy_list(n->v,ptr->v);
-				$$=n;
-			}
+			node *ptr=add_child_neighbour($3,$4,$5);
+			node *n=new node;
+			copy_list(n->v,$1->v);
+			copy_list(n->v,ptr->v);
+			$$=n;
+		}
 	;
 
 body: BODYOP flow BODYCL  {
-				$$=add_startChild($2,$3);
-			}
+			$$=add_startChild($2,$3);
+		}
 	| BODYOP BODYCL {
-				$$=add_start($2);
-			}
-			
+			$$=add_start($2);
+		}		
 	| consumetop BODYOP flow BODYCL  { 
-				node *n=new node;
-				copy_list(n->v,$1->v);
-				node *ptr=add_startChild($3,$4);
-				copy_list(n->v,ptr->v);
-				$$=n;
-			}
+			node *n=new node;
+			copy_list(n->v,$1->v);
+			node *ptr=add_startChild($3,$4);
+			copy_list(n->v,ptr->v);
+			$$=n;
+		}
 	| consumetop BODYOP BODYCL {
-				node *n=new node;
-				copy_list(n->v,$1->v);
-				copy_list(n->v,add_start($3)->v);
-				$$=n;
-			}
+			node *n=new node;
+			copy_list(n->v,$1->v);
+			copy_list(n->v,add_start($3)->v);
+			$$=n;
+		}
 	| BODYOP flow BODYCL consumetop {
-				$$=add_child_neighbour($2,$3,$4);
-			}
+			$$=add_child_neighbour($2,$3,$4);
+		}
 	| BODYOP BODYCL consumetop {
-				$$=add_neighbour($2,$3);
-			}
+			$$=add_neighbour($2,$3);
+		}
 	| consumetop BODYOP flow BODYCL consumetop {
-				node *ptr=add_child_neighbour($3,$4,$5);
-				node *n=new node;
-				copy_list(n->v,$1->v);
-				copy_list(n->v,ptr->v);
-				$$=n;
-			}
+			node *ptr=add_child_neighbour($3,$4,$5);
+			node *n=new node;
+			copy_list(n->v,$1->v);
+			copy_list(n->v,ptr->v);
+			$$=n;
+		}
 	| consumetop BODYOP BODYCL consumetop {
-				node *ptr=add_neighbour($3,$4);
-				node *n=new node;
-				copy_list(n->v,$1->v);
-				copy_list(n->v,ptr->v);
-				$$=n;	
-			}
+			node *ptr=add_neighbour($3,$4);
+			node *n=new node;
+			copy_list(n->v,$1->v);
+			copy_list(n->v,ptr->v);
+			$$=n;	
+		}
 	;
 
 misctop: COMMENT {
-		vn v;
-		v.push_back(add_node("COMMENT",$1));
-		node* n = new node;
-		copy_list(n->v,v);
-		$$=n;
-	}
+			vn v;
+			v.push_back(add_node("COMMENT",$1));
+			node* n = new node;
+			copy_list(n->v,v);
+			$$=n;
+		}
 	;
 
 consumetop: consumetop misctop {
-		vn v1,v2;
-		v1 = $1->v;
-		v2 = $2->v;
-		node* n = new node;
-		copy_list(n->v,v1);	
-		copy_list(n->v,v2);
-		$$=n;
-	}
-	| misctop { $$=$1; }
+			vn v1,v2;
+			v1 = $1->v;
+			v2 = $2->v;
+			node* n = new node;
+			copy_list(n->v,v1);	
+			copy_list(n->v,v2);
+			$$=n;
+		}
+	| misctop {
+			$$=$1;
+		}
 	;
 
 misctext: TEXT {
-		vn v;
-		v.push_back(add_node("TEXT",$1));
-		node* n = new node;
-		copy_list(n->v,v);
-		$$=n;
-	}
+			vn v;
+			v.push_back(add_node("TEXT",$1));
+			node* n = new node;
+			copy_list(n->v,v);
+			$$=n;
+		}
 	;
 
 consumetext: consumetext misctext {
-		vn v1,v2;
-		v1 = $1->v;
-		v2 = $2->v;
-		if(v1[0]->tagVal=="TEXT" && v2[0]->tagVal=="TEXT" ){
-			v1[0]->content=v1[0]->content+v2[0]->content;
+			vn v1,v2;
+			v1 = $1->v;
+			v2 = $2->v;
+			if(v1[0]->tagVal=="TEXT" && v2[0]->tagVal=="TEXT" ){
+				v1[0]->content=v1[0]->content+v2[0]->content;
+			}
+			node* n = new node;
+			copy_list(n->v,v1);
+			$$=n;
 		}
-		node* n = new node;
-		copy_list(n->v,v1);
-		$$=n;
-	}
-	| misctext { $$=$1; }
+	| misctext {
+			 $$=$1;
+		}
 	;
 
-misc: COMMENT { vn v;
-				v.push_back(add_node("COMMENT",$1));
-				node* n = new node;
-				copy_list(n->v,v);
-				$$=n;
-			}
-	| BR 	{  	vn v;
-				v.push_back(add_node("BR"));
-				node* n = new node;
-				copy_list(n->v,v);
-				$$=n;
-			}
-	| TEXT  { 	vn v;
-				v.push_back(add_node("TEXT",$1));
-				node* n = new node;
-				copy_list(n->v,v);
-				$$=n;
-			}
+misc: COMMENT {
+			vn v;
+			v.push_back(add_node("COMMENT",$1));
+			node* n = new node;
+			copy_list(n->v,v);
+			$$=n;
+		}
+	| BR 	{
+		  	vn v;
+			v.push_back(add_node("BR"));
+			node* n = new node;
+			copy_list(n->v,v);
+			$$=n;
+		}
+	| TEXT  { 	
+			vn v;
+			v.push_back(add_node("TEXT",$1));
+			node* n = new node;
+			copy_list(n->v,v);
+			$$=n;
+		}
 	| IMGOP img {
 			$$=$2;
 		}
 	| SYMBOL { 
-				vn v;
-				v.push_back(add_node("SYMBOL",$1));
-				node* n = new node;
-				copy_list(n->v,v);
-				$$=n;
-			}
+			vn v;
+			v.push_back(add_node("SYMBOL",$1));
+			node* n = new node;
+			copy_list(n->v,v);
+			$$=n;
+		}
 	;
 
 consume: consume misc {
@@ -398,9 +381,15 @@ consumeph: consumeph miscph {
 		}
 	;
 
-flow: BPHRASEOP phraseopen { $$=$2; }
-	| GTPHOP gtph {  $$=$2; }
-	| LOP list {  $$=$2; }
+flow: BPHRASEOP phraseopen { 
+			$$=$2; 
+		}
+	| GTPHOP gtph {  
+			$$=$2; 
+		}
+	| LOP list {  
+			$$=$2; 
+		}
 	| misc flow {
 			vn v1,v2;
 			v1 = $1->v;
@@ -664,16 +653,16 @@ listitem: flow LICL {
 	;
 
 div: DIVCL {
-		$$=add_start($1);
+			$$=add_start($1);
 		}
 	| DIVCL flow {
-		$$=add_neighbour($1,$2);
+			$$=add_neighbour($1,$2);
 		}
 	| flow DIVCL flow {
-		$$=add_child_neighbour($1,$2,$3);
+			$$=add_child_neighbour($1,$2,$3);
 		}
 	| flow DIVCL {
-		$$=add_startChild($1,$2);
+			$$=add_startChild($1,$2);
 		}
 	;
 
@@ -918,7 +907,8 @@ tr: TRCL {
 
 	;
 
-th: THCL {	$$=add_start($1);
+th: THCL {	
+			$$=add_start($1);
 		}
 	| flow THCL {
 			$$=add_startChild($1,$2);
@@ -1032,7 +1022,8 @@ img:  ATTRIBUTE ATTRIBUTEVAL img {
 			add_attributes(ptr,$1,$2);
 			$$=$3;
 		}
-	| IMGCL { 	node *n = new node;
+	| IMGCL { 	
+				node *n = new node;
 				vn v;
 				treeNode *ptr=add_node("IMG");
 				v.pb(ptr);

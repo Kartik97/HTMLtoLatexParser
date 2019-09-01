@@ -98,12 +98,12 @@ extern int yydebug;
     TDOP = 308,
     TDCL = 309,
     BR = 310,
-    TABOPOP = 311,
-    COMMENT = 312,
-    SPCHAR = 313,
-    SYMBOL = 314,
-    CENTEROP = 315,
-    CENTERCL = 316
+    COMMENT = 311,
+    SPCHAR = 312,
+    SYMBOL = 313,
+    CENTEROP = 314,
+    CENTERCL = 315,
+    TABOPOP = 316
   };
 #endif
 
