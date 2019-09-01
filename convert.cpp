@@ -280,6 +280,61 @@ lexNode* handleTable(treeNode *node){
 			}
 		}
 	}
+	if(rowFlag!=1){
+		child=convertTag["TABLE"].first+"{c}\n  ";
+		lexNode *tr=add_lexNode("TR",child);
+		add_lexChild(root,tr);
+
+	}
+	return root;
+}
+
+lexNode* handleTableNoBorder(treeNode *node){
+	lexNode *root;
+	int rowFlag=0;
+	string child=convertTag["_TABLE"].first;
+	root=add_lexNode("TOP TABLE",child);
+	if(!node->children.empty()){
+		for(int i=0;i<node->children.size();i++){
+			if(node->children[i]->tagVal=="CAP"){
+				add_lexChild(root,convert(node->children[i],1));
+				add_lexChild(root,node->children[i]->tagVal+" END",convertTag[node->children[i]->tagVal].second);
+			}
+			else if(node->children[i]->tagVal=="TR"){
+				if(rowFlag==0){
+					child=convertTag["TABLE"].first+"{ ";
+					int s=node->children[i]->children.size();
+					for(int j=0;j<node->children[i]->children.size();j++)
+						if(node->children[i]->children[j]->tagVal=="TD" || node->children[i]->children[j]->tagVal=="TH")
+							child=child+"c ";
+					child=child+" }\n   ";
+					lexNode *tr=add_lexNode("TR",child);
+					handleTR(tr,node->children[i]);
+					add_lexChild(root,tr);
+					add_lexChild(root,"TR END","\\\\ \n ");
+					rowFlag=1;
+				}
+				else{
+					lexNode *tr=add_lexNode("TR",convertTag["TR"].first);
+					// handleTR
+					handleTR(tr,node->children[i]);
+					//add_lexChild(root,convert(node->children[i],1));
+					add_lexChild(root,tr);
+					add_lexChild(root,"TR END","\\\\ \n ");
+				}
+			}
+			else{
+				add_lexChild(root,convert(node->children[i],1));
+				add_lexChild(root,node->children[i]->tagVal+" END",convertTag[node->children[i]->tagVal].second);
+			}
+		}
+	}
+	if(rowFlag!=1){
+		child=convertTag["TABLE"].first+"{c}\n  ";
+		lexNode *tr=add_lexNode("TR",child);
+		add_lexChild(root,tr);
+
+	}
 	return root;
 }
 
@@ -333,7 +388,6 @@ lexNode* convert(treeNode *node,int flag){
 				root=add_lexNode("FONT",convertTag["FONT"].first+"11"+convertTag["SIZE"].first);	
 		}
 		else if(node->tagVal=="TEXT"){
-
 			root=add_lexNode("TEXT",checkText(node->content));
 		}
 		else if(node->tagVal=="SYMBOL"){
@@ -352,7 +406,10 @@ lexNode* convert(treeNode *node,int flag){
 			else root=add_lexNode(node->tagVal+" START",convertTag[node->tagVal].first);
 		}
 		else if(node->tagVal=="TABLE"){
-			root=handleTable(node);
+			if(!node->att.empty() && node->attVal[0]!="0")
+				root=handleTable(node);
+			else
+				root=handleTableNoBorder(node);
 		}
 		else{
 			root=add_lexNode(node->tagVal+" START",convertTag[node->tagVal].first);

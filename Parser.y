@@ -428,8 +428,13 @@ flow: BPHRASEOP phraseopen { $$=$2; }
 	| DLOP dl {
 			$$=$2;
 		}
-	| TABOP table {
-			$$=$2;
+	| TABOP TABOPOP table {
+			$$=$3;
+		}
+	| TABOP ATTRIBUTE ATTRIBUTEVAL TABOPOP table {
+			node *n=$5;
+			add_attributes(n->v[0],$2,$3);
+			$$=n;
 		}
 	| FIGOP figure {
 			$$=$2;

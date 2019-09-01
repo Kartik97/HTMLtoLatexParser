@@ -21,177 +21,408 @@
 
 \maketitle
 
+[H1 START] : \section*{
+[TEXT] :CSS
+[H1 END] :} 
+[P START] :\par 
+[TEXT] :Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Nulla ut lectus id velit aliquet semper. Proin vitae erat. Duis metus. Namvel nisl.Duis lobortis mi at lorem. Etiam ornare nibh quis eros. Nam magna sem, adipiscing at,porttitor vitae, interdum vitae, elit. Sed turpis mi,tincidunt eget , euismod ac, molestie quis, wisi.
+[P END] :
+
+[P START] :\par 
+[TEXT] :Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Nulla ut lectus id velit aliquet semper. Proin vitae erat. Duis metus. Namvel nisl. Duis lobortis mi at lorem. Etiam ornare nibh quis eros. Nam magna sem, adipiscing at, porttitor vitae, interdum vitae, elit. Sed turpis mi,tincidunt eget, euismod ac, molestie quis, wisi.
+[P END] :
+
+[P START] :\par 
+[TEXT] :Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Nulla ut lectus id velit aliquet semper. Proin vitae erat. Duis metus. Namvel nisl. Duis lobortis mi at lorem. Etiam ornare nibh quis eros. Nam magna sem, adipiscing at, porttitor vitae, interdum vitae, elit. Sed turpis mi,tincidunt eget, euismod ac, molestie quis, wisi. Praesent nisl pede,hendrerit semper, accumsan ac, consequat id, nibh.
+[P END] :
+
+[P START] :\par 
+[TEXT] :Lorem ipsum dolor sit amet, consectetuer adipiscing.Nulla ut lectus id velit aliquet semper. Proin vitae erat. Duisvel nisl. Duis lobortis mi at lorem. Etiam ornare nibh quis eros. sem, adipiscing at, porttitor vitae, interdum vitae, elit.
+[P END] :
+
+[DIV START] : \\ 
+[P START] :\par 
+[TEXT] :Div line 1. 
+[P END] :
+
+[DIV END] : \\ 
+
+[DIV START] : \\ 
+[P START] :\par 
+[TEXT] :Div line 2. 
+[P END] :
+
+[DIV END] : \\ 
+
+[DIV START] : \\ 
+[P START] :\par 
+[TEXT] :Div line 3.
+[P END] :
+
+[DIV END] : \\ 
+
+[COMMENT] :\begin{comment}
+ little comment: <p>&#x03C0; &#960;</p> 
+[COMMENT END] :\end{comment} \\ 
+ 
+[H1 START] : \section*{
+[TEXT] :Special symbols
+[H1 END] :} 
+[H2 START] : \subsection*{
+[TEXT] :Greek symbols
+[H2 END] :} 
+[P START] :\par 
+[TT START] : \texttt{
+[TEXT] :Alpha
+[TT END] :}
+
+[TEXT] :: 
+[SYMBOL] :$\Alpha$ 
+[SYMBOL] :$\Gamma$ 
+[SYMBOL] :$\Theta$ 
+[SYMBOL] :$\Xi$ 
+[SYMBOL] :$\Pi$ 
+[P END] :
+
+[H2 START] : \subsection*{
+[TEXT] :LaTeX chars
+[H2 END] :} 
+[P START] :\par 
+[TEXT] :\{ \} \_ \^{} @ \$ \textbackslash  \% \~{} \#
+[P END] :
+
+[H1 START] : \section*{
+[TEXT] :LaTeX commands in HTML
+[H1 END] :} 
+[P START] :\par 
+[TEXT] :It's easy to include LaTeX commands in HTML comments.
+[COMMENT] :\begin{comment}
+ latex:  
+\LaTeX{} greets you.
+
+[COMMENT END] :\end{comment} \\ 
+ 
+[P END] :
+
+[H1 START] : \section*{
+[TEXT] :Different font styles and sizes.
+[H1 END] :} 
+[P START] :\par 
+[TEXT] :Lorem ipsum 
+[FONT] :\fontsize{ 32pt}{12pt}\selectfont 
+[TEXT] :dolor
+[FONT END] :\normalsize
+
+[TEXT] :sit amet, 
+[I START] :\textit{
+[TEXT] :consectetuer
+[I END] :}
+
+[TEXT] :adipiscing elit.Nulla ut 
+[STRONG START] :\textbf{
+[TEXT] :lectus
+[STRONG END] :}
+
+[TEXT] :id velit aliquet semper. 
+[TT START] : \texttt{
+[TEXT] :Proin vitae
+[TT END] :}
+
+[TEXT] :erat. Duis metus. Namvel nisl. Duis 
+[SMALL START] :\small 
+[TEXT] :lobortis
+[SMALL END] :\normalsize 
+
+[TEXT] :mi at 
+[FONT] :\fontsize{ 8pt}{12pt}\selectfont 
+[TEXT] :lorem
+[FONT END] :\normalsize
+
+[TEXT] :.
+[P END] :
+
+[A START] :{
+[A END] :} \\ 
+
+[H1 START] : \section*{
+[TEXT] :Images
+[H1 END] :} 
+[P START] :\par 
+[COMMENT] :\begin{comment}
+latex: \LaTeX 
+[COMMENT END] :\end{comment} \\ 
+ 
+[TEXT] :supports only JPG and PNG images.
+[P END] :
+
+[P START] :\par 
 [CENTER START] :\begin{center}
 
-[TEXT] :tmkc
+[IMG] :\includegraphics[]{marley.jpg} \\
+[IMG END] :
+
+[CENTER END] :\end{center}
+
+[P END] :
+
+[P START] :\par 
+[IMG] :\includegraphics[]{logo.png} \\
+[IMG END] :
+
+[P END] :
+
+[H1 START] : \section*{
+[TEXT] :Tables
+[H1 END] :} 
+[TOP TABLE] :
+ \begin{table}[!ht]
+
+[TR] :
+ \begin{tabular}
+{ |c|c|c| }
+\hline   
+[TD START] :
+[TEXT] :1 1
+[TD END] : & 
+[TD START] :
+[TEXT] :1 hgf2
+[TD END] : & 
+[TD START] :
+[TEXT] :hgfhf1 3
+[TD END] :
+[TR END] :\\ 
+\hline 
+[TR] :
+[TD START] :
+[TEXT] :2 1
+[TD END] : & 
+[TD START] :
+[TEXT] :2 2
+[TD END] : & 
+[TD START] :
+[TEXT] :2 3
+[TD END] :
+[TR END] :\\ 
+\hline 
+[TR] :
+[TD START] :
+[TEXT] :3 1
+[TD END] : & 
+[TD START] :
+[TEXT] :3 2
+[TD END] : & 
+[TD START] :
+[TEXT] :3 3
+[TD END] :
+[TR END] :\\ 
+\hline 
+[TABLE END] :
+ \end{tabular}
+\end{table}
+
+[BR START] :
+
+[BR END] :
+[TOP TABLE] :
+ \begin{table}[!ht]
+
+[TR] :
+ \begin{tabular}
+{ c c  }
+   
+[TD START] :
+[TEXT] :Sparta Praha
+[TD END] : & 
+[TD START] :
+[TEXT] :28
+[TD END] :
+[TR END] :\\ 
+ 
+[TR] :
+[TD START] :
+[TEXT] :Slovan Liberec
+[TD END] : & 
+[TD START] :
+[TEXT] :25
+[TD END] :
+[TR END] :\\ 
+ 
+[TR] :
+[TD START] :
+[TEXT] :Dukla Praha
+[TD END] : & 
+[TD START] :
+[TEXT] :24
+[TD END] :
+[TR END] :\\ 
+ 
+[TR] :
+[TD START] :
+[TEXT] :Slavia Praha
+[TD END] : & 
+[TD START] :
+[TEXT] :20
+[TD END] :
+[TR END] :\\ 
+ 
+[TABLE END] :
+ \end{tabular}
+\end{table}
+
+[H1 START] : \section*{
+[TEXT] :Subscript, superscript
+[H1 END] :} 
+[P START] :\par 
+[TEXT] :H
+[SUB START] :\(_{
+[TEXT] :2
+[SUB END] :}\)
+[TEXT] :O, E = mc
+[SUP START] :\(^{
+[TEXT] :2
+[SUP END] :}\)
+[P END] :
+
+[H1 START] : \section*{
+[TEXT] :Hyperlinks
+[H1 END] :} 
+[P START] :\par 
+[TEXT] :I study at 
+[A] :\href{http://www.mff.cuni.cz}{
+[TEXT] :UK MFF
+[A END] :} \\ 
+
+[TEXT] :. Andwhat about 
+[A] :\href{#img}{
+[TEXT] :images
+[A END] :} \\ 
+
+[TEXT] :?
+[P END] :
+
+[H1 START] : \section*{
+[TEXT] :Some texts
+[H1 END] :} 
+[P START] :\par 
+[CENTER START] :\begin{center}
+
+[TEXT] :They went in single file, running like hounds on a strong scent,and an eager light was in their eyes. Nearly due west the broadswath of the marching 
+[SMALL START] :\small 
+[TEXT] :Orcs tramped
+[SMALL END] :\normalsize 
+
+[TEXT] :its ugly slot; the sweet grassof Rohan had been bruised and blackened as they passed.
+[CENTER END] :\end{center}
+
+[P END] :
+
+[P START] :\par 
+[TEXT] :John said, I saw Lucy at lunch, she told
+[P END] :
+
+[H1 START] : \section*{
+[TEXT] :Lists and definitions
+[H1 END] :} 
+[DL START] :\begin{description}
+
+[DT START] :\item[
+[TEXT] :Dweeb
+[DT END] :] \hspace{1pt} 
+
+[DD START] :
+[TEXT] :young excitable person who may matureinto a 
+[EM START] :\emph{
+[TEXT] :Nerd
+[EM END] :}
+
+[TEXT] :or 
+[EM START] :\emph{
+[TEXT] :Geek
+[EM END] :}
+
+[DD END] :
+[DT START] :\item[
+[TEXT] :Hacker
+[DT END] :] \hspace{1pt} 
+
+[DD START] :
+[TEXT] :a clever programmer
+[DD END] :
+[DT START] :\item[
+[TEXT] :Nerd
+[DT END] :] \hspace{1pt} 
+
+[DD START] :
+[TEXT] :technically bright but socially inept person
+[DD END] :
+[DL END] :\end{description}
+
+[P START] :\par 
+[TEXT] :In this section, we discuss the lesser known forest elephants....this section continues...
+[P END] :
+
+[H2 START] : \subsection*{
+[TEXT] :Habitat
+[H2 END] :} 
+[P START] :\par 
+[TEXT] :Forest elephants do not live in trees but among them....this subsection continues... 
+[P END] :
+
+[H3 START] : \subsubsection*{
+[TEXT] :Habitat
+[H3 END] :} 
+[P START] :\par 
+[TEXT] :Forest elephants do not live in trees but among them....this subsection continues... 
+[STRONG START] :\textbf{
+[TEXT] :AND A LINE FOLLOWS
+[STRONG END] :}
+
+[P END] :
+
+[H2 START] : \subsection*{
+[TEXT] :List
+[H2 END] :} 
 [UL START] :\begin{itemize}
 
 [LI START] :\item \hspace{1pt}
-[TEXT] :hey there 
+[TEXT] :... Level one, number one...
 [LI END] :
 
 [LI START] :\item \hspace{1pt}
 [OL START] :\begin{enumerate}
 
 [LI START] :\item \hspace{1pt}
-[COMMENT] :\begin{comment}
- this i s ac omment 
-[COMMENT END] :\end{comment} \\ 
- 
-[TOP TABLE] :
- \begin{table}[!ht]
+[TEXT] :... Level two, number one...
+[LI END] :
 
-[TR] :
- \begin{tabular}
-{ |c|c| }
-\hline   
-[TD START] :
-[TEXT] :Sparta Praha
-[TD END] : & 
-[TD START] :
-[TEXT] :28
-[TD END] :
-[TR END] :\\ 
-\hline 
-[TR] :
-[TD START] :
-[TEXT] :Slovan Liberec
-[TD END] : & 
-[TD START] :
-[TEXT] :25
-[TD END] :
-[TR END] :\\ 
-\hline 
-[TR] :
-[TD START] :
-[TEXT] :Dukla Praha
-[TD END] : & 
-[TD START] :
-[TEXT] :24
-[TD END] :
-[TR END] :\\ 
-\hline 
-[COMMENT] :\begin{comment}
- secind comment 
-[COMMENT END] :\end{comment} \\ 
- 
-[TR] :
-[TD START] :
-[TEXT] :Slavia Praha 
-[COMMENT] :\begin{comment}
-thirs comment 
-[COMMENT END] :\end{comment} \\ 
- 
-[TD END] : & 
-[COMMENT] :\begin{comment}
-fourth comment 
-[COMMENT END] :\end{comment} \\ 
- 
-[TD START] :
-[TEXT] :20
-[TD END] :
-[TR END] :\\ 
-\hline 
-[TABLE END] :
- \end{tabular}
-\end{table}
+[LI START] :\item \hspace{1pt}
+[TEXT] :... Level two, number two...
+[LI END] :
 
+[LI START] :\item \hspace{1pt}
+[OL START] :\begin{enumerate}
+
+[LI START] :\item \hspace{1pt}
+[TEXT] :... Level three, number one...
 [LI END] :
 
 [OL END] :\end{enumerate}
 
 [LI END] :
 
+[LI START] :\item \hspace{1pt}
+[TEXT] :... Level two, number three...
+[LI END] :
+
+[OL END] :\end{enumerate}
+
+[LI END] :
+
+[LI START] :\item \hspace{1pt}
+[TEXT] :... Level one, number two...
+[LI END] :
+
 [UL END] :\end{itemize}
-
-[CENTER END] :\end{center}
-
-[DL START] :\begin{description}
-
-[DT START] :\item[
-[TEXT] :Coffee
-[DT END] :] \hspace{1pt} 
-
-[DD START] :
-[TOP TABLE] :
- \begin{table}[!ht]
-
-[CAP START] :\caption{
-
-[TEXT] :table23
-[CAP END] :}
-\centering
-
-[TR] :
- \begin{tabular}
-{ |c|c| }
-\hline   
-[TD START] :
-[TEXT] :Sparta Praha
-[TD END] : & 
-[TD START] :
-[TEXT] :28
-[TD END] :
-[TR END] :\\ 
-\hline 
-[TR] :
-[TD START] :
-[TEXT] :Slovan Liberec
-[TD END] : & 
-[TD START] :
-[TEXT] :25
-[TD END] :
-[TR END] :\\ 
-\hline 
-[TR] :
-[TD START] :
-[TEXT] :Dukla Praha
-[TD END] : & 
-[TD START] :
-[TEXT] :24
-[TD END] :
-[TR END] :\\ 
-\hline 
-[COMMENT] :\begin{comment}
- secind comment 
-[COMMENT END] :\end{comment} \\ 
- 
-[TR] :
-[TD START] :
-[TEXT] :Slavia Praha 
-[COMMENT] :\begin{comment}
-thirs comment 
-[COMMENT END] :\end{comment} \\ 
- 
-[TD END] : & 
-[COMMENT] :\begin{comment}
-fourth comment 
-[COMMENT END] :\end{comment} \\ 
- 
-[TD START] :
-[TEXT] :20
-[TD END] :
-[TR END] :\\ 
-\hline 
-[TABLE END] :
- \end{tabular}
-\end{table}
-
-[DD END] :
-[DT START] :\item[
-[TEXT] :Milk
-[DT END] :] \hspace{1pt} 
-
-[DD START] :
-[A] :\href{google.com}{
-[TEXT] :White cold drink 
-[A END] :} \\ 
-
-[IMG] :\includegraphics[height=50pt,width=50pt]{logo.png} \\
-[IMG END] :
-
-[DD END] :
-[DL END] :\end{description}
 
 [BODY END] :\end{document}
 

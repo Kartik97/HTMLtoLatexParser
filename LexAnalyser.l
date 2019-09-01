@@ -218,6 +218,38 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
                 return ATTRIBUTEVAL;
         }
 }
+
+ "<"{table}{space}+|"<"{table}  {
+        yylval.value=strdup("TABLEOP");
+        yy_push_state(tableInside);
+        return TABOP;
+}
+"</"{table}{space}+[^>]*">"|"</"{table}">"  {
+        yylval.value=strdup("TABLE");
+        return TABCL;
+}  
+<tableInside>{
+        "border"{space}+"="|"border=" {
+                yy_push_state(fontAtt);
+                yylval.value=strdup("BORDER");
+                yyless(yyleng-1);
+                return ATTRIBUTE;
+        }
+        [^"size">]*">" {
+                yy_pop_state();
+                yylval.value=strdup("TABOPOP");
+                return TABOPOP;
+        }
+        . {}
+}
+<tableAtt>{
+        [=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()\_\-]*[\"\'] {
+                yy_pop_state();
+                yylval.value=strdup(findval(yytext,yyleng,1));
+                return ATTRIBUTEVAL;
+        }
+}
+
 "<"{font}{space}+|"<"{font} {
         yy_push_state(fontInside);
 	yylval.value=strdup("FONTOP");	
@@ -312,17 +344,6 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         yylval.value=strdup("DD");
         return DDCL;
 }
-
- "<"{table}{space}+[^>]*">"|"<"{table}">"  {
-        yylval.value=strdup("TABLEOP");
-        return TABOP;
-}
-"</"{table}{space}+[^>]*">"|"</"{table}">"  {
-        yylval.value=strdup("TABLE");
-        return TABCL;
-}  
-
-
 "<"{caption}{space}+[^>]*">"|"<"{caption}">"  {
         yylval.value=strdup("CAPOP");
         return CAPOP;

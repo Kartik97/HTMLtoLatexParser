@@ -21,6 +21,7 @@ lexNode* convert(treeNode *node,int flag);
 void printLex(lexNode *root);
 lexNode* convert(lexNode *root,treeNode *node);
 lexNode* handleTable(treeNode *node);
+lexNode* handleTableNoBorder(treeNode *node);
 lexNode* handleTR(lexNode *root,treeNode *node);
 void writeTex(lexNode *root,string s);
 void writeLex(lexNode *root);
