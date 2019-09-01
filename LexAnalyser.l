@@ -14,6 +14,7 @@ int cut(char *s,int len);
 %}
 
 %option stack
+%option caseless
 %x aInside
 %x aAtt
 %x imgInside
@@ -70,13 +71,14 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         yylval.value = strdup(findsymbol(yytext,yyleng,1));
         return SYMBOL;
 }
-[\"\'\,\.\/\?a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\+\=\{\}\[\]\|\\\:\;]*[^<\n]  {
+[\"\'\,\.\/\?a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\+\=\{\}\[\]\|\\\:\;]*[^<\n]  {        
         if(yytext[0]!=38 || yytext[yyleng-2]!=59) {
                 yylval.value=strdup(yytext);
                 return TEXT;
         }
         else{
                 yylval.value = strdup(findsymbol(yytext,yyleng,1));
+                yyless(strlen(yylval.value)+2);
                 return SYMBOL;
         }
 }
@@ -388,7 +390,9 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         yylval.value=strdup("BR");
         return BR;
 }
-. {}
+. {
+
+}
 
 %%
 
