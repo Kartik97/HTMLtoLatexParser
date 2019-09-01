@@ -20,14 +20,14 @@ void define_mapping(){
 	convertTag["SUP"]=make_pair("\\(^{","}\\)");
 	convertTag["U"]=make_pair("\\underline{","}\n");
 	convertTag["TT"]=make_pair(" \\texttt{","}\n");
-	convertTag["P"]=make_pair("\\par ","\n");
-	convertTag["H1"]=make_pair(" \\section*{","} ");
-	convertTag["H2"]=make_pair(" \\subsection*{","} ");
-	convertTag["H3"]=make_pair(" \\subsubsection*{","} ");
-	convertTag["H4"]=make_pair(" \\paragraph*{","} ");
-	convertTag["H5"]=make_pair(" \\subparagraph*{","} ");
+	convertTag["P"]=make_pair("\n\\par ","\n");
+	convertTag["H1"]=make_pair(" \n\\section*{","}\n ");
+	convertTag["H2"]=make_pair(" \n\\subsection*{","}\n ");
+	convertTag["H3"]=make_pair(" \n\\subsubsection*{","}\n ");
+	convertTag["H4"]=make_pair(" \n\\paragraph*{","}\n ");
+	convertTag["H5"]=make_pair(" \n\\subparagraph*{","}\n ");
 	convertTag["A"]=make_pair("{","}  \n");
-	convertTag["HREF"]=make_pair("\\href{","}");
+	convertTag["HREF"]=make_pair("\n\\href{","}");
 	convertTag["IMG"]=make_pair("\\includegraphics[","\n");
 	convertTag["SRC"]=make_pair("{","}");
 	convertTag["HEIGHT"]=make_pair("height=","pt");
@@ -46,7 +46,7 @@ void define_mapping(){
 	convertTag["FIGURECAPTION"]=make_pair("\\caption{","}\n");
 	convertTag["_TABLE"]=make_pair("\n \\begin{table}[!ht]\n","");
 	convertTag["CAP"]=make_pair("\\caption{\n","}\n\\centering\n");
-	convertTag["TABLE"]=make_pair("\n \\begin{tabular}\n","\n \\end{tabular}\n\\end{table}\n");
+	convertTag["TABLE"]=make_pair("\n \\begin{tabular}","\n \\end{tabular}\n\\end{table}\n");
 	convertTag["TR"]=make_pair("","\\\\ \n\\hline\n");
 	convertTag["TD"]=make_pair("","");
 	convertTag["TH"]=make_pair("\\textbf{ ","}\n");
@@ -88,7 +88,7 @@ void define_mapping(){
 	convertTag["nbsp"]=make_pair("    ","");
 	convertTag["quot"]=make_pair("\"","");
 	convertTag["apos"]=make_pair("\'","");
-	convertTag["COMMENT"]=make_pair("\\begin{comment}","\\end{comment} \\\\ \n ");
+	convertTag["COMMENT"]=make_pair("\\begin{comment}\n","\\end{comment} \\\\ \n ");
 }
 
 lexNode* add_lexNode(string type,string value){
@@ -121,7 +121,7 @@ lexNode* add_lexChild(lexNode *root,lexNode *node){
 
 lexNode* root_init(){
 	lexNode *root=add_lexNode("ROOT");
-	add_lexChild(root,"PREAMBLE","\\documentclass{article}\n\\usepackage{hyperref}\n\\usepackage{graphicx}\n\\usepackage{verbatim}\n\\hypersetup{colorlinks=true}\n \\newcommand{\\Alpha}{A} \n \\newcommand{\\Beta}{B}  \n\\newcommand{\\Epsilon}{E} \n ");
+	add_lexChild(root,"PREAMBLE","\\documentclass{article}\n\\usepackage{hyperref}\n\\usepackage{graphicx}\n\\usepackage{verbatim}\n\\hypersetup{colorlinks=true}\n\\newcommand{\\Alpha}{A}\n\\newcommand{\\Beta}{B}\n\\newcommand{\\Epsilon}{E}\n");
 	return root;
 }
 
@@ -184,7 +184,6 @@ void writeTex(lexNode *root,string s){
 	}
 }
 
-//  ==============================================================================
 
 
 string switchChar(string s,char x,string conv){
@@ -213,9 +212,7 @@ string checkText(string s){
 }
 
 
-//  ==============================================================================
-
-lexNode* handleTR(lexNode *root,treeNode *node){
+lexNode* convertTR(lexNode *root,treeNode *node){
 	int count=-1;
 	for(int i=0;i<node->children.size();i++)
 		if(node->children[i]->tagVal=="TD" || node->children[i]->tagVal=="TH")
@@ -240,7 +237,7 @@ lexNode* handleTR(lexNode *root,treeNode *node){
 	return root;
 }
 
-lexNode* handleTable(treeNode *node){
+lexNode* tableBorder(treeNode *node){
 	lexNode *root;
 	int rowFlag=0;
 	string child=convertTag["_TABLE"].first;
@@ -260,16 +257,14 @@ lexNode* handleTable(treeNode *node){
 							child=child+"c|";
 					child=child+" }\n\\hline   ";
 					lexNode *tr=add_lexNode("TR",child);
-					handleTR(tr,node->children[i]);
+					convertTR(tr,node->children[i]);
 					add_lexChild(root,tr);
 					add_lexChild(root,"TR END","\\\\ \n\\hline ");
 					rowFlag=1;
 				}
 				else{
 					lexNode *tr=add_lexNode("TR",convertTag["TR"].first);
-					// handleTR
-					handleTR(tr,node->children[i]);
-					//add_lexChild(root,convert(node->children[i],1));
+					convertTR(tr,node->children[i]);
 					add_lexChild(root,tr);
 					add_lexChild(root,"TR END","\\\\ \n\\hline ");
 				}
@@ -289,7 +284,7 @@ lexNode* handleTable(treeNode *node){
 	return root;
 }
 
-lexNode* handleTableNoBorder(treeNode *node){
+lexNode* tableNoBorder(treeNode *node){
 	lexNode *root;
 	int rowFlag=0;
 	string child=convertTag["_TABLE"].first;
@@ -309,16 +304,14 @@ lexNode* handleTableNoBorder(treeNode *node){
 							child=child+"c ";
 					child=child+" }\n   ";
 					lexNode *tr=add_lexNode("TR",child);
-					handleTR(tr,node->children[i]);
+					convertTR(tr,node->children[i]);
 					add_lexChild(root,tr);
 					add_lexChild(root,"TR END","\\\\ \n ");
 					rowFlag=1;
 				}
 				else{
 					lexNode *tr=add_lexNode("TR",convertTag["TR"].first);
-					// handleTR
-					handleTR(tr,node->children[i]);
-					//add_lexChild(root,convert(node->children[i],1));
+					convertTR(tr,node->children[i]);
 					add_lexChild(root,tr);
 					add_lexChild(root,"TR END","\\\\ \n ");
 				}
@@ -344,7 +337,7 @@ lexNode* convert(treeNode *node,int flag){
 		root=root_init();
 	}
 	else{
-		if(node->tagVal=="A" && node->att.size()>0){
+		if(node->tagVal=="A"){
 			if(!node->att.empty()){
 				if(node->att[0]=="HREF")
 					root=add_lexNode("A",convertTag["HREF"].first+node->attVal[0]+convertTag["HREF"].second+convertTag["A"].first);	
@@ -379,8 +372,8 @@ lexNode* convert(treeNode *node,int flag){
 				root=add_lexNode("IMG",child);
 			else root=add_lexNode("IMG","{}");
 		}
-		else if(node->tagVal=="FONT" && node->att.size()>0){
-			if(node->att[0]=="SIZE"){
+		else if(node->tagVal=="FONT"){
+			if(!node->att.empty() && node->att[0]=="SIZE"){
 				string s=to_string(4+4*(node->attVal[0][0]-48));
 				root=add_lexNode("FONT",convertTag["FONT"].first+s+convertTag["SIZE"].first);	
 			}
@@ -407,9 +400,9 @@ lexNode* convert(treeNode *node,int flag){
 		}
 		else if(node->tagVal=="TABLE"){
 			if(!node->att.empty() && node->attVal[0]!="0")
-				root=handleTable(node);
+				root=tableBorder(node);
 			else
-				root=handleTableNoBorder(node);
+				root=tableNoBorder(node);
 		}
 		else{
 			root=add_lexNode(node->tagVal+" START",convertTag[node->tagVal].first);

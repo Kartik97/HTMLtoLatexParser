@@ -174,7 +174,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
 	. {}
 }
 <aAtt>{
-	[=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()#\+\=\[\]\{\}\_\-]*[\"\'] {
+	[=]{space}*[\"\'][^\"\']*[\"\'] {
 		yy_pop_state();
 		yylval.value=strdup(findval(yytext,yyleng,1));
 		return ATTRIBUTEVAL;
@@ -212,14 +212,14 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         . {}
 }
 <imgAtt>{
-	 [=]{space}*[\"\'][#a-zA-Z:\/@0-9~.$%&()\_\-]*[\"\'] {
+	 [=]{space}*[\"\'][^\"\']*[\"\'] {
                 yy_pop_state();
                 yylval.value=strdup(findval(yytext,yyleng,1));
                 return ATTRIBUTEVAL;
         }
 }
 
- "<"{table}{space}+|"<"{table}  {
+"<"{table}{space}+|"<"{table}  {
         yylval.value=strdup("TABLEOP");
         yy_push_state(tableInside);
         return TABOP;
@@ -230,7 +230,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
 }  
 <tableInside>{
         "border"{space}+"="|"border=" {
-                yy_push_state(fontAtt);
+                yy_push_state(tableAtt);
                 yylval.value=strdup("BORDER");
                 yyless(yyleng-1);
                 return ATTRIBUTE;
@@ -243,7 +243,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         . {}
 }
 <tableAtt>{
-        [=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()\_\-]*[\"\'] {
+        [=]{space}*[\"\'][^\"\']*[\"\'] {
                 yy_pop_state();
                 yylval.value=strdup(findval(yytext,yyleng,1));
                 return ATTRIBUTEVAL;
@@ -274,7 +274,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         . {}
 }
 <fontAtt>{
-        [=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()\_\-]*[\"\'] {
+        [=]{space}*[\"\'][^\"\']*[\"\'] {
                 yy_pop_state();
                 yylval.value=strdup(findval(yytext,yyleng,1));
                 return ATTRIBUTEVAL;

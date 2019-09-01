@@ -1079,6 +1079,9 @@ font: ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL {
 	| FONTOOP flow FONTCL {
 			$$=add_startChild($2,$3);
 		}
+	| FONTOOP FONTCL {
+			$$=add_start($2);
+		}
 	| ATTRIBUTE ATTRIBUTEVAL FONTOOP FONTCL flow {
 			node *n=add_neighbour($4,$5);
 			add_attributes(n->v[0],$1,$2);
@@ -1108,7 +1111,7 @@ int main(int argc,char **argv){
 		}
 	}
 	define_mapping();
-	outfile="output.tex";
+	outfile=string(argv[2]);
 	yyparse();
 	return 0;
 }  
