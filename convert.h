@@ -25,6 +25,6 @@ lexNode* tableNoBorder(treeNode *node);
 lexNode* convertTR(lexNode *root,treeNode *node);
 void writeTex(lexNode *root,string s);
 void writeLex(lexNode *root);
-
+lexNode* convert_TR(treeNode *node,int flag);
 string switchChar(string s,char x,string conv);
 string checkText(string s);

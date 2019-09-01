@@ -220,7 +220,10 @@ lexNode* convertTR(lexNode *root,treeNode *node){
 
 
 	for(int i=0;i<node->children.size();i++){
-		add_lexChild(root,convert(node->children[i],1));
+		//if(node->children[i]=="H1" || node->children[i]=="H2" || node->children[i]=="H3" || node->children[i]=="H4" || node->children[i]=="H5")
+			//add_lexChild(root,convert(node->children[i],1));
+		//else 
+			add_lexChild(root,convert_TR(node->children[i],1));
 		if(convertTag.find(node->children[i]->tagVal)!=convertTag.end())
 		{
 			if((node->children[i]->tagVal=="TH" || node->children[i]->tagVal=="TD") && count>0){
@@ -419,3 +422,95 @@ lexNode* convert(treeNode *node,int flag){
 	}
 	return root;
 } 
+
+lexNode* convert_TR(treeNode *node,int flag){
+	lexNode *root;
+	if(flag==0){
+		root=root_init();
+	}
+	else{
+		if(node->tagVal=="A"){
+			if(!node->att.empty()){
+				if(node->att[0]=="HREF")
+					root=add_lexNode("A",convertTag["HREF"].first+node->attVal[0]+convertTag["HREF"].second+convertTag["A"].first);	
+			}
+			else{
+				root=add_lexNode("A",convertTag["HREF"].first+"#"+convertTag["HREF"].second+convertTag["A"].first);					
+			}
+		}
+		else if(node->tagVal=="IMG"){
+			string child=convertTag["IMG"].first;
+			int srcflag=0;
+			int pos=find(node->att.begin(),node->att.end(),"HEIGHT")-node->att.begin(),flag=0;
+			if(pos<node->att.size()){
+				child=child+"height="+node->attVal[pos]+"pt";
+				flag=1;
+			}
+			pos=find(node->att.begin(),node->att.end(),"WIDTH")-node->att.begin();
+			if(pos<node->att.size()){
+				if(flag==1)
+					child+=",";
+				child=child+"width="+node->attVal[pos]+"pt";
+				flag=1;
+			}
+			child+="]{";
+			pos=pos=find(node->att.begin(),node->att.end(),"SRC")-node->att.begin();
+			if(pos<node->att.size()){
+				child=child+node->attVal[pos];
+				srcflag=1;
+			}
+			child+="} \\\\";
+			if(srcflag!=0)
+				root=add_lexNode("IMG",child);
+			else root=add_lexNode("IMG","{}");
+		}
+		else if(node->tagVal=="FONT"){
+			if(!node->att.empty() && node->att[0]=="SIZE"){
+				string s=to_string(4+4*(node->attVal[0][0]-48));
+				root=add_lexNode("FONT",convertTag["FONT"].first+s+convertTag["SIZE"].first);	
+			}
+			else 
+				root=add_lexNode("FONT",convertTag["FONT"].first+"11"+convertTag["SIZE"].first);	
+		}
+		else if(node->tagVal=="TEXT"){
+			root=add_lexNode("TEXT",checkText(node->content));
+		}
+		else if(node->tagVal=="SYMBOL"){
+			root=add_lexNode("SYMBOL",convertTag[node->content].first);
+		}
+		else if(node->tagVal=="COMMENT"){
+			root=add_lexNode("COMMENT",convertTag["COMMENT"].first+"\n"+node->content.substr(4,node->content.length()-7));	
+		}
+		else if(node->tagVal=="TITLE"){
+			root=add_lexNode(node->tagVal+" START",convertTag[node->tagVal].first);
+			title=1;
+		}
+		else if(node->tagVal=="BODY"){
+			if(title)
+				root=add_lexNode(node->tagVal+" START",convertTag[node->tagVal].first+"\n"+"\\maketitle\n");
+			else root=add_lexNode(node->tagVal+" START",convertTag[node->tagVal].first);
+		}
+		else if(node->tagVal=="TABLE"){
+			if(!node->att.empty() && node->attVal[0]!="0")
+				root=tableBorder(node);
+			else
+				root=tableNoBorder(node);
+		}
+		else if(node->tagVal=="H1" || node->tagVal=="H2" || node->tagVal=="H3" || node->tagVal=="H4" || node->tagVal=="H5"){
+			root=add_lexNode(node->tagVal+" START",convertTag["B"].first);
+		}
+		else{
+			root=add_lexNode(node->tagVal+" START",convertTag[node->tagVal].first);
+		}
+	}
+
+
+	if(!node->children.empty() && node->tagVal!="TABLE"){
+		for(int i=0;i<node->children.size();i++){
+			add_lexChild(root,convert_TR(node->children[i],1));
+			if(convertTag.find(node->children[i]->tagVal)!=convertTag.end())
+				add_lexChild(root,node->children[i]->tagVal+" END",convertTag[node->children[i]->tagVal].second);
+		}
+	}
+	return root;
+}
