@@ -142,7 +142,7 @@
 [P END] :
 
 [A START] :{
-[A END] :} \\ 
+[A END] :}  
 
 [H1 START] : \section*{
 [TEXT] :Images
@@ -290,12 +290,12 @@ latex: \LaTeX
 [TEXT] :I study at 
 [A] :\href{http://www.mff.cuni.cz}{
 [TEXT] :UK MFF
-[A END] :} \\ 
+[A END] :}  
 
 [TEXT] :. Andwhat about 
 [A] :\href{#img}{
 [TEXT] :images
-[A END] :} \\ 
+[A END] :}  
 
 [TEXT] :?
 [P END] :

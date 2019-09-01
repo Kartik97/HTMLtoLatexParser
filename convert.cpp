@@ -26,7 +26,7 @@ void define_mapping(){
 	convertTag["H3"]=make_pair(" \\subsubsection*{","} ");
 	convertTag["H4"]=make_pair(" \\paragraph*{","} ");
 	convertTag["H5"]=make_pair(" \\subparagraph*{","} ");
-	convertTag["A"]=make_pair("{","} \\\\ \n");
+	convertTag["A"]=make_pair("{","}  \n");
 	convertTag["HREF"]=make_pair("\\href{","}");
 	convertTag["IMG"]=make_pair("\\includegraphics[","\n");
 	convertTag["SRC"]=make_pair("{","}");

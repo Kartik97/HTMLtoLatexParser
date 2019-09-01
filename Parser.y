@@ -41,19 +41,19 @@ extern void clearFile(string s);
 %%
 
 st:	DOCTYPE HTMLOP html {
-													treeNode *root = add_node("ROOT");
-													treeNode *doc = add_node("DOCTYPE HTML");
-													root->children.pb(doc);
-													add_children(root,$3->v);
+				treeNode *root = add_node("ROOT");
+				treeNode *doc = add_node("DOCTYPE HTML");
+				root->children.pb(doc);
+				add_children(root,$3->v);
 
-													clearFile("htmlAst.txt");                        //   WRITING TO FILES
-													write(root);
-													lexNode *rootLex;
-													rootLex=convert(root,0);
-													clearFile("lexAst.txt");
-													writeLex(rootLex);
-													clearFile(outfile);
-													writeTex(rootLex,outfile);	
+				clearFile("htmlAst.txt");                        //   WRITING TO FILES
+				write(root);
+				lexNode *rootLex;
+				rootLex=convert(root,0);
+				clearFile("lexAst.txt");
+				writeLex(rootLex);
+				clearFile(outfile);
+				writeTex(rootLex,outfile);	
 			}
 	| HTMLOP html {
 				treeNode *root = add_node("ROOT");
@@ -106,14 +106,14 @@ st:	DOCTYPE HTMLOP html {
 				add_children(root,$3->v);
 				add_children(root,$5->v);
 
-			clearFile("htmlAst.txt");                        //   WRITING TO FILES
-			write(root);
-			lexNode *rootLex;
-			rootLex=convert(root,0);
-			clearFile("lexAst.txt");
-			writeLex(rootLex);
-			clearFile(outfile);
-			writeTex(rootLex,outfile);	
+				clearFile("htmlAst.txt");                        //   WRITING TO FILES
+				write(root);
+				lexNode *rootLex;
+				rootLex=convert(root,0);
+				clearFile("lexAst.txt");
+				writeLex(rootLex);
+				clearFile(outfile);
+				writeTex(rootLex,outfile);	
 	}
 	;
 

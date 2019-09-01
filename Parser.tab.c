@@ -1820,19 +1820,19 @@ yyreduce:
         case 2:
 #line 43 "Parser.y" /* yacc.c:1646  */
     {
-													treeNode *root = add_node("ROOT");
-													treeNode *doc = add_node("DOCTYPE HTML");
-													root->children.pb(doc);
-													add_children(root,(yyvsp[0].object)->v);
+				treeNode *root = add_node("ROOT");
+				treeNode *doc = add_node("DOCTYPE HTML");
+				root->children.pb(doc);
+				add_children(root,(yyvsp[0].object)->v);
 
-													clearFile("htmlAst.txt");                        //   WRITING TO FILES
-													write(root);
-													lexNode *rootLex;
-													rootLex=convert(root,0);
-													clearFile("lexAst.txt");
-													writeLex(rootLex);
-													clearFile(outfile);
-													writeTex(rootLex,outfile);	
+				clearFile("htmlAst.txt");                        //   WRITING TO FILES
+				write(root);
+				lexNode *rootLex;
+				rootLex=convert(root,0);
+				clearFile("lexAst.txt");
+				writeLex(rootLex);
+				clearFile(outfile);
+				writeTex(rootLex,outfile);	
 			}
 #line 1838 "Parser.tab.c" /* yacc.c:1646  */
     break;
@@ -1905,14 +1905,14 @@ yyreduce:
 				add_children(root,(yyvsp[-2].object)->v);
 				add_children(root,(yyvsp[0].object)->v);
 
-			clearFile("htmlAst.txt");                        //   WRITING TO FILES
-			write(root);
-			lexNode *rootLex;
-			rootLex=convert(root,0);
-			clearFile("lexAst.txt");
-			writeLex(rootLex);
-			clearFile(outfile);
-			writeTex(rootLex,outfile);	
+				clearFile("htmlAst.txt");                        //   WRITING TO FILES
+				write(root);
+				lexNode *rootLex;
+				rootLex=convert(root,0);
+				clearFile("lexAst.txt");
+				writeLex(rootLex);
+				clearFile(outfile);
+				writeTex(rootLex,outfile);	
 	}
 #line 1918 "Parser.tab.c" /* yacc.c:1646  */
     break;
