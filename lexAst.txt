@@ -21,8 +21,177 @@
 
 \maketitle
 
-[IMG] :{}
+[CENTER START] :\begin{center}
+
+[TEXT] :tmkc
+[UL START] :\begin{itemize}
+
+[LI START] :\item \hspace{1pt}
+[TEXT] :hey there 
+[LI END] :
+
+[LI START] :\item \hspace{1pt}
+[OL START] :\begin{enumerate}
+
+[LI START] :\item \hspace{1pt}
+[COMMENT] :\begin{comment}
+ this i s ac omment 
+[COMMENT END] :\end{comment} \\ 
+ 
+[TOP TABLE] :
+ \begin{table}[!ht]
+
+[TR] :
+ \begin{tabular}
+{ |c|c| }
+\hline   
+[TD START] :
+[TEXT] :Sparta Praha
+[TD END] : & 
+[TD START] :
+[TEXT] :28
+[TD END] :
+[TR END] :\\ 
+\hline 
+[TR] :
+[TD START] :
+[TEXT] :Slovan Liberec
+[TD END] : & 
+[TD START] :
+[TEXT] :25
+[TD END] :
+[TR END] :\\ 
+\hline 
+[TR] :
+[TD START] :
+[TEXT] :Dukla Praha
+[TD END] : & 
+[TD START] :
+[TEXT] :24
+[TD END] :
+[TR END] :\\ 
+\hline 
+[COMMENT] :\begin{comment}
+ secind comment 
+[COMMENT END] :\end{comment} \\ 
+ 
+[TR] :
+[TD START] :
+[TEXT] :Slavia Praha 
+[COMMENT] :\begin{comment}
+thirs comment 
+[COMMENT END] :\end{comment} \\ 
+ 
+[TD END] : & 
+[COMMENT] :\begin{comment}
+fourth comment 
+[COMMENT END] :\end{comment} \\ 
+ 
+[TD START] :
+[TEXT] :20
+[TD END] :
+[TR END] :\\ 
+\hline 
+[TABLE END] :
+ \end{tabular}
+\end{table}
+
+[LI END] :
+
+[OL END] :\end{enumerate}
+
+[LI END] :
+
+[UL END] :\end{itemize}
+
+[CENTER END] :\end{center}
+
+[DL START] :\begin{description}
+
+[DT START] :\item[
+[TEXT] :Coffee
+[DT END] :] \hspace{1pt} 
+
+[DD START] :
+[TOP TABLE] :
+ \begin{table}[!ht]
+
+[CAP START] :\caption{
+
+[TEXT] :table23
+[CAP END] :}
+\centering
+
+[TR] :
+ \begin{tabular}
+{ |c|c| }
+\hline   
+[TD START] :
+[TEXT] :Sparta Praha
+[TD END] : & 
+[TD START] :
+[TEXT] :28
+[TD END] :
+[TR END] :\\ 
+\hline 
+[TR] :
+[TD START] :
+[TEXT] :Slovan Liberec
+[TD END] : & 
+[TD START] :
+[TEXT] :25
+[TD END] :
+[TR END] :\\ 
+\hline 
+[TR] :
+[TD START] :
+[TEXT] :Dukla Praha
+[TD END] : & 
+[TD START] :
+[TEXT] :24
+[TD END] :
+[TR END] :\\ 
+\hline 
+[COMMENT] :\begin{comment}
+ secind comment 
+[COMMENT END] :\end{comment} \\ 
+ 
+[TR] :
+[TD START] :
+[TEXT] :Slavia Praha 
+[COMMENT] :\begin{comment}
+thirs comment 
+[COMMENT END] :\end{comment} \\ 
+ 
+[TD END] : & 
+[COMMENT] :\begin{comment}
+fourth comment 
+[COMMENT END] :\end{comment} \\ 
+ 
+[TD START] :
+[TEXT] :20
+[TD END] :
+[TR END] :\\ 
+\hline 
+[TABLE END] :
+ \end{tabular}
+\end{table}
+
+[DD END] :
+[DT START] :\item[
+[TEXT] :Milk
+[DT END] :] \hspace{1pt} 
+
+[DD START] :
+[A] :\href{google.com}{
+[TEXT] :White cold drink 
+[A END] :} \\ 
+
+[IMG] :\includegraphics[height=50pt,width=50pt]{logo.png} \\
 [IMG END] :
+
+[DD END] :
+[DL END] :\end{description}
 
 [BODY END] :\end{document}
 

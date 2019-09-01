@@ -26,7 +26,7 @@ void define_mapping(){
 	convertTag["H3"]=make_pair(" \\subsubsection*{","} ");
 	convertTag["H4"]=make_pair(" \\paragraph*{","} ");
 	convertTag["H5"]=make_pair(" \\subparagraph*{","} ");
-	convertTag["A"]=make_pair("{","}\n");
+	convertTag["A"]=make_pair("{","} \\\\ \n");
 	convertTag["HREF"]=make_pair("\\href{","}");
 	convertTag["IMG"]=make_pair("\\includegraphics[","\n");
 	convertTag["SRC"]=make_pair("{","}");
@@ -38,15 +38,15 @@ void define_mapping(){
 	convertTag["BR"]=make_pair("\n","");
 	convertTag["OL"]=make_pair("\\begin{enumerate}\n","\\end{enumerate}\n");
 	convertTag["UL"]=make_pair("\\begin{itemize}\n","\\end{itemize}\n");
-	convertTag["LI"]=make_pair("\\item ","\n");
+	convertTag["LI"]=make_pair("\\item \\hspace{1pt}","\n");
 	convertTag["DL"]=make_pair("\\begin{description}\n","\\end{description}\n");
-	convertTag["DT"]=make_pair("\\item[","]\n");
+	convertTag["DT"]=make_pair("\\item[","] \\hspace{1pt} \n");
 	convertTag["DD"]=make_pair("","");
 	convertTag["FIGURE"]=make_pair("\\begin{figure}\n","\\end{figure}\n");
 	convertTag["FIGURECAPTION"]=make_pair("\\caption{","}\n");
-	convertTag["_TABLE"]=make_pair("\\begin{table}[!ht]\n","");
+	convertTag["_TABLE"]=make_pair("\n \\begin{table}[!ht]\n","");
 	convertTag["CAP"]=make_pair("\\caption{\n","}\n\\centering\n");
-	convertTag["TABLE"]=make_pair("\\begin{tabular}\n","\n \\end{tabular}\n\\end{table}\n");
+	convertTag["TABLE"]=make_pair("\n \\begin{tabular}\n","\n \\end{tabular}\n\\end{table}\n");
 	convertTag["TR"]=make_pair("","\\\\ \n\\hline\n");
 	convertTag["TD"]=make_pair("","");
 	convertTag["TH"]=make_pair("\\textbf{ ","}\n");
@@ -318,9 +318,8 @@ lexNode* convert(treeNode *node,int flag){
 			if(pos<node->att.size()){
 				child=child+node->attVal[pos];
 				srcflag=1;
-				cout<<"heyy";
 			}
-			child+="}";
+			child+="} \\\\";
 			if(srcflag!=0)
 				root=add_lexNode("IMG",child);
 			else root=add_lexNode("IMG","{}");

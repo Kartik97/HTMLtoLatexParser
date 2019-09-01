@@ -16,8 +16,214 @@
  }
 [BODY] 
 { 
-[IMG] 
+[CENTER] 
 { 
+[TEXT: tmkc] 
+{ 
+ }
+[UL] 
+{ 
+[LI] 
+{ 
+[TEXT: hey there ] 
+{ 
+ }
+ }
+[LI] 
+{ 
+[OL] 
+{ 
+[LI] 
+{ 
+[COMMENT: <!-- this i s ac omment -->] 
+{ 
+ }
+[TABLE] 
+{ 
+[TR] 
+{ 
+[TD] 
+{ 
+[TEXT: Sparta Praha] 
+{ 
+ }
+ }
+[TD] 
+{ 
+[TEXT: 28] 
+{ 
+ }
+ }
+ }
+[TR] 
+{ 
+[TD] 
+{ 
+[TEXT: Slovan Liberec] 
+{ 
+ }
+ }
+[TD] 
+{ 
+[TEXT: 25] 
+{ 
+ }
+ }
+ }
+[TR] 
+{ 
+[TD] 
+{ 
+[TEXT: Dukla Praha] 
+{ 
+ }
+ }
+[TD] 
+{ 
+[TEXT: 24] 
+{ 
+ }
+ }
+ }
+[COMMENT: <!-- secind comment -->] 
+{ 
+ }
+[TR] 
+{ 
+[TD] 
+{ 
+[TEXT: Slavia Praha ] 
+{ 
+ }
+[COMMENT: <!--thirs comment -->] 
+{ 
+ }
+ }
+[COMMENT: <!--fourth comment -->] 
+{ 
+ }
+[TD] 
+{ 
+[TEXT: 20] 
+{ 
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+[DL] 
+{ 
+[DT] 
+{ 
+[TEXT: Coffee] 
+{ 
+ }
+ }
+[DD] 
+{ 
+[TABLE] 
+{ 
+[CAP] 
+{ 
+[TEXT: table23] 
+{ 
+ }
+ }
+[TR] 
+{ 
+[TD] 
+{ 
+[TEXT: Sparta Praha] 
+{ 
+ }
+ }
+[TD] 
+{ 
+[TEXT: 28] 
+{ 
+ }
+ }
+ }
+[TR] 
+{ 
+[TD] 
+{ 
+[TEXT: Slovan Liberec] 
+{ 
+ }
+ }
+[TD] 
+{ 
+[TEXT: 25] 
+{ 
+ }
+ }
+ }
+[TR] 
+{ 
+[TD] 
+{ 
+[TEXT: Dukla Praha] 
+{ 
+ }
+ }
+[TD] 
+{ 
+[TEXT: 24] 
+{ 
+ }
+ }
+ }
+[COMMENT: <!-- secind comment -->] 
+{ 
+ }
+[TR] 
+{ 
+[TD] 
+{ 
+[TEXT: Slavia Praha ] 
+{ 
+ }
+[COMMENT: <!--thirs comment -->] 
+{ 
+ }
+ }
+[COMMENT: <!--fourth comment -->] 
+{ 
+ }
+[TD] 
+{ 
+[TEXT: 20] 
+{ 
+ }
+ }
+ }
+ }
+ }
+[DT] 
+{ 
+[TEXT: Milk] 
+{ 
+ }
+ }
+[DD] 
+{ 
+[A]  ( (HREF: google.com) )
+
+{ 
+[TEXT: White cold drink ] 
+{ 
+ }
+ }
+[IMG]  ( (SRC: logo.png)  (WIDTH: 50)  (HEIGHT: 50) )
+
+{ 
+ }
+ }
  }
  }
  }
