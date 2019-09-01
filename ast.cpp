@@ -155,7 +155,7 @@ void write(treeNode *node){
 			}
 			file<<")"<<endl;
 		}
-		file<<"{ "<<endl;
+		file<<"\n{ "<<endl;
 		if(!node->children.empty()){
 			for(int i=0;i<node->children.size();i++){
 				write(node->children[i]);

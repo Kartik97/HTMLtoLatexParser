@@ -8,16 +8,8 @@
  \newcommand{\Beta}{B}  
 \newcommand{\Epsilon}{E} 
  
-[COMMENT] :\begin{comment}
- TOPEST COMMENT 
-[COMMENT END] :\end{comment} \\ 
- 
 [DOCTYPE HTML START] :
 [DOCTYPE HTML END] :
-[COMMENT] :\begin{comment}
- middle comment 
-[COMMENT END] :\end{comment} \\ 
- 
 [HTML START] :
 [HEAD START] :
 [TITLE START] :\title{
@@ -29,7 +21,9 @@
 
 \maketitle
 
-[TEXT] :\textbackslash n\textbackslash n\textbackslash n\textbackslash n\textbackslash n\textbackslash n\textbackslash n \&\&\&\&\&\&\&\&\&\&\&\& \$\$\$\$\$\$\$\$\$\$\$\$\$\$ \#\#\#\#\#\#\#\#\#\#\# \~{}\~{}\~{}\~{}\~{}\~{}\~{}\~{}\~{}\~{} \{\{\{\{\{\{\{\{\{\{\{\{ \}\}\}\}\}\}\}\}\}\}\}\} \^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{} @@@@@@@@@@@@@@@@ \%\%\%\%\%\%\%\%\%\%\%\%\%
+[IMG] :{}
+[IMG END] :
+
 [BODY END] :\end{document}
 
 [HTML END] :

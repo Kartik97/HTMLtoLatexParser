@@ -290,11 +290,17 @@ lexNode* convert(treeNode *node,int flag){
 	}
 	else{
 		if(node->tagVal=="A" && node->att.size()>0){
-			if(node->att[0]=="HREF")
-				root=add_lexNode("A",convertTag["HREF"].first+node->attVal[0]+convertTag["HREF"].second+convertTag["A"].first);	
+			if(!node->att.empty()){
+				if(node->att[0]=="HREF")
+					root=add_lexNode("A",convertTag["HREF"].first+node->attVal[0]+convertTag["HREF"].second+convertTag["A"].first);	
+			}
+			else{
+				root=add_lexNode("A",convertTag["HREF"].first+"#"+convertTag["HREF"].second+convertTag["A"].first);					
+			}
 		}
-		else if(node->tagVal=="IMG" && node->att.size()>0){
+		else if(node->tagVal=="IMG"){
 			string child=convertTag["IMG"].first;
+			int srcflag=0;
 			int pos=find(node->att.begin(),node->att.end(),"HEIGHT")-node->att.begin(),flag=0;
 			if(pos<node->att.size()){
 				child=child+"height="+node->attVal[pos]+"pt";
@@ -311,9 +317,13 @@ lexNode* convert(treeNode *node,int flag){
 			pos=pos=find(node->att.begin(),node->att.end(),"SRC")-node->att.begin();
 			if(pos<node->att.size()){
 				child=child+node->attVal[pos];
+				srcflag=1;
+				cout<<"heyy";
 			}
 			child+="}";
-			root=add_lexNode("IMG",child);
+			if(srcflag!=0)
+				root=add_lexNode("IMG",child);
+			else root=add_lexNode("IMG","{}");
 		}
 		else if(node->tagVal=="FONT" && node->att.size()>0){
 			if(node->att[0]=="SIZE"){

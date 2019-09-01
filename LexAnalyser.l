@@ -20,6 +20,8 @@ int cut(char *s,int len);
 %x imgAtt
 %x fontInside
 %x fontAtt
+%x tableInside
+%x tableAtt
 
 space [ \t\r\n]
 newline \n
@@ -51,6 +53,7 @@ th "th"|"TH"
 td "td"|"TD"
 br "br"|"BR"
 comm "-->"
+close ">"|"/>"
 word \b[^{space}<]+\b
 symbol1 "alpha"|"beta"|"chi"|"delta"|"epsilon"|"eta"|"gamma"|"iota"|"kappa"|"lambda"|"mu"|"nu"|"omega"|"phi"|"pi"|"psi"|"rho"|"sigma"|"tau"
 symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"Sigma"|"Theta"|"lt"|"gt"|"nbsp"|"quot"|"apos"|"Alpha"|"Xi"
@@ -157,7 +160,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
 	return ACL;
 }
 <aInside>{
-	"href"{space}+[^=]*"="|"href=" {
+	"href"{space}+"="|"href=" {
 		yy_push_state(aAtt);
 		yylval.value=strdup("HREF");
 		yyless(yyleng-1);
@@ -183,25 +186,25 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
 	return IMGOP;
 }
 <imgInside>{
-	"src"{space}+[^=]*"="|"src=" {
+	"src"{space}+"="|"src=" {
                 yy_push_state(imgAtt);
                 yylval.value=strdup("SRC");
                 yyless(yyleng-1);
                 return ATTRIBUTE;
         }
-	"width"{space}+[^=]*"="|"width=" {
+	"width"{space}+"="|"width=" {
                 yy_push_state(imgAtt);
                 yylval.value=strdup("WIDTH");
                 yyless(yyleng-1);
                 return ATTRIBUTE;
         }
-	"height"{space}+[^=]*"="|"height=" {
+	"height"{space}+"="|"height=" {
                 yy_push_state(imgAtt);
                 yylval.value=strdup("HEIGHT");
                 yyless(yyleng-1);
                 return ATTRIBUTE;
         }
-        [^"src""width""height">]*[">""/>"] {
+        [^"src""width""height">]*{close} {
                 yy_pop_state();
                 yylval.value=strdup("IMG");
                 return IMGCL;
@@ -209,7 +212,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         . {}
 }
 <imgAtt>{
-	 [=]{space}*[\"\'][a-zA-Z:\/@0-9~.$%&()\_\-]*[\"\'] {
+	 [=]{space}*[\"\'][#a-zA-Z:\/@0-9~.$%&()\_\-]*[\"\'] {
                 yy_pop_state();
                 yylval.value=strdup(findval(yytext,yyleng,1));
                 return ATTRIBUTEVAL;
@@ -225,7 +228,7 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
 	return FONTCL;
 }
 <fontInside>{
-        "size"{space}+[^=]*"="|"size=" {
+        "size"{space}+"="|"size=" {
                 yy_push_state(fontAtt);
                 yylval.value=strdup("SIZE");
                 yyless(yyleng-1);
@@ -309,14 +312,17 @@ symbol2 "theta"|"xi"|"zeta"|"Delta"|"Gamma"|"Lambda"|"Omega"|"Phi"|"Pi"|"Psi"|"S
         yylval.value=strdup("DD");
         return DDCL;
 }
-"<"{table}{space}+[^>]*">"|"<"{table}">"  {
+
+ "<"{table}{space}+[^>]*">"|"<"{table}">"  {
         yylval.value=strdup("TABLEOP");
         return TABOP;
 }
 "</"{table}{space}+[^>]*">"|"</"{table}">"  {
         yylval.value=strdup("TABLE");
         return TABCL;
-}
+}  
+
+
 "<"{caption}{space}+[^>]*">"|"<"{caption}">"  {
         yylval.value=strdup("CAPOP");
         return CAPOP;

@@ -54,7 +54,7 @@ extern void clearFile(string s);
 %token <value> LOP LCL LIOP LICL
 %token <value> FIGOP FIGCL FIGCAPOP FIGCAPCL
 %token <value> DLOP DLCL DTOP DTCL DDOP DDCL
-%token <value> TABOP TABCL CAPOP CAPCL TROP TRCL THOP THCL TDOP TDCL BR
+%token <value> TABOP TABCL CAPOP CAPCL TROP TRCL THOP THCL TDOP TDCL BR TABOPOP
 %token <value> COMMENT SPCHAR SYMBOL CENTEROP CENTERCL
 %type <object> head title body flow phraseopen phrases listitem list misc consume gtph phr div dl dt dd table caption tr th td
 %type <object> figcap atag miscph consumeph atagph font fontph img figure center centerph misctext consumetext misctop consumetop html st

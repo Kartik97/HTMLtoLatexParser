@@ -1,19 +1,23 @@
-[ROOT] { 
-[COMMENT: <!-- TOPEST COMMENT -->] { 
+[ROOT] 
+{ 
+[DOCTYPE HTML] 
+{ 
  }
-[DOCTYPE HTML] { 
+[HTML] 
+{ 
+[HEAD] 
+{ 
+[TITLE] 
+{ 
+[TEXT: Sample document] 
+{ 
  }
-[COMMENT: <!-- middle comment -->] { 
- }
-[HTML] { 
-[HEAD] { 
-[TITLE] { 
-[TEXT: Sample document] { 
  }
  }
- }
-[BODY] { 
-[TEXT: \n\n\n\n\n\n\n &&&&&&&&&&&& $$$$$$$$$$$$$$ ########### ~~~~~~~~~~ {{{{{{{{{{{{ }}}}}}}}}}}} ^^^^^^^^^^^^ @@@@@@@@@@@@@@@@ %%%%%%%%%%%%%] { 
+[BODY] 
+{ 
+[IMG] 
+{ 
  }
  }
  }
