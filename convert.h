@@ -18,6 +18,7 @@ lexNode* add_lexChild(lexNode *root,string t);
 lexNode* add_lexChild(lexNode *root,lexNode *node);
 lexNode* root_init();
 lexNode* convert(treeNode *node,int flag);
+lexNode* convert(treeNode *node,int flag,int table);
 void printLex(lexNode *root);
 lexNode* convert(lexNode *root,treeNode *node);
 lexNode* table(treeNode *node);

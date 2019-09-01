@@ -17,6 +17,7 @@ char* concat(char *s1,char *s2);
 typedef vector<treeNode*> vn;
 extern map<string,pair<string,string>> convertTag;
 extern lexNode* convert(treeNode *node,int flag);
+extern lexNode* convert(treeNode *node,int flag,int table);
 extern void writeTex(lexNode *root,string s);
 extern void writeLex(lexNode *root);
 extern void clearFile(string s);
@@ -49,7 +50,7 @@ st:	DOCTYPE HTMLOP html {
 				clearFile("htmlAst.txt");                        //   WRITING TO FILES
 				write(root);
 				lexNode *rootLex;
-				rootLex=convert(root,0);
+				rootLex=convert(root,0,0);
 				clearFile("lexAst.txt");
 				writeLex(rootLex);
 				clearFile(outfile);
@@ -62,7 +63,7 @@ st:	DOCTYPE HTMLOP html {
 				clearFile("htmlAst.txt");                        //   WRITING TO FILES
 				write(root);
 				lexNode *rootLex;
-				rootLex=convert(root,0);
+				rootLex=convert(root,0,0);
 				clearFile("lexAst.txt");
 				writeLex(rootLex);
 				clearFile(outfile);
@@ -78,7 +79,7 @@ st:	DOCTYPE HTMLOP html {
 				clearFile("htmlAst.txt");                        //   WRITING TO FILES
 				write(root);
 				lexNode *rootLex;
-				rootLex=convert(root,0);
+				rootLex=convert(root,0,0);
 				clearFile("lexAst.txt");
 				writeLex(rootLex);
 				clearFile(outfile);
@@ -92,7 +93,7 @@ st:	DOCTYPE HTMLOP html {
 				clearFile("htmlAst.txt");                        //   WRITING TO FILES
 				write(root);
 				lexNode *rootLex;
-				rootLex=convert(root,0);
+				rootLex=convert(root,0,0);
 				clearFile("lexAst.txt");
 				writeLex(rootLex);
 				clearFile(outfile);
@@ -109,7 +110,7 @@ st:	DOCTYPE HTMLOP html {
 				clearFile("htmlAst.txt");                        //   WRITING TO FILES
 				write(root);
 				lexNode *rootLex;
-				rootLex=convert(root,0);
+				rootLex=convert(root,0,0);
 				clearFile("lexAst.txt");
 				writeLex(rootLex);
 				clearFile(outfile);
